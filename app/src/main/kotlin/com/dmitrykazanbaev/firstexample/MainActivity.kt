@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
 
             val buildings = getBuildings(resources.openRawResource(R.raw.house_fin))
             buildings.forEach {
-                //Log.w("dmka0815", (it as JsonObject).string("left"))
                 drawBuilding(it as JsonObject, canvas)
             }
         }
@@ -74,13 +73,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun drawFigureWithPath(building: String): Path {
-//            Log.w("dmka0815", building)
             val path : Path = Path()
             val coordinates = building.split(",")
+
             path.moveTo(coordinates[0].toFloat(), coordinates[1].toFloat())
-            path.lineTo(coordinates[2].toFloat(), coordinates[3].toFloat())
-            path.lineTo(coordinates[4].toFloat(), coordinates[5].toFloat())
-            path.lineTo(coordinates[6].toFloat(), coordinates[7].toFloat())
+            for (i in 2 until coordinates.size step 2) {
+                path.lineTo(coordinates[i].toFloat(), coordinates[i + 1].toFloat())
+            }
             path.close()
 
             return path
