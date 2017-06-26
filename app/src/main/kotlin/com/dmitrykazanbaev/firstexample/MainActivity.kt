@@ -8,6 +8,8 @@ import android.graphics.Path
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import com.beust.klaxon.*
+import java.io.InputStream
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,22 +19,77 @@ class MainActivity : AppCompatActivity() {
     }
 
     internal class DrawView(context : Context) : View(context) {
-        var paint : Paint = Paint()
+        override fun onDraw(canvas: Canvas?) {
+            canvas?.drawColor(Color.BLUE)
 
-        init {
-            paint.color = Color.GRAY
-            paint.style = Paint.Style.FILL
+            val buildings = getBuildings(resources.openRawResource(R.raw.house_fin))
+            buildings.forEach {
+                //Log.w("dmka0815", (it as JsonObject).string("left"))
+                drawBuilding(it as JsonObject, canvas)
+            }
         }
 
-        override fun onDraw(canvas: Canvas?) {
-            val path = Path()
-            path.moveTo(100f, 100f)
-            path.lineTo(100f, 50f)
-            path.lineTo(200f, 50f)
-            path.lineTo(150f, 150f)
+        fun getBuildings(input : InputStream) : JsonArray<*> {
+            val parser: Parser = Parser()
+            return parser.parse(input) as JsonArray<*>
+        }
+
+        fun drawBuilding(building : JsonObject, canvas: Canvas?) {
+            drawLeftSideBuilding(building, canvas)
+            drawCenterSideBuilding(building, canvas)
+            drawRoofBuilding(building, canvas)
+        }
+
+        fun drawLeftSideBuilding(building: JsonObject, canvas: Canvas?) {
+            val paint = getFillingPaint()
+            paint.color = R.color.colorLeft
+
+            var path : Path = Path()
+            building.string("left")?.let {
+                path = drawFigureWithPath(it)
+            }
+            canvas?.drawPath(path, paint)
+        }
+
+        fun drawCenterSideBuilding(building: JsonObject, canvas: Canvas?) {
+            val paint = getFillingPaint()
+            paint.color = R.color.colorCenter
+
+            var path : Path = Path()
+            building.string("center")?.let {
+                path = drawFigureWithPath(it)
+            }
+            canvas?.drawPath(path, paint)
+        }
+
+        fun drawRoofBuilding(building: JsonObject, canvas: Canvas?) {
+            val paint = getFillingPaint()
+            paint.color = Color.WHITE
+
+            var path : Path = Path()
+            building.string("roof")?.let {
+                path = drawFigureWithPath(it)
+            }
+            canvas?.drawPath(path, paint)
+        }
+
+        fun drawFigureWithPath(building: String): Path {
+//            Log.w("dmka0815", building)
+            val path : Path = Path()
+            val coordinates = building.split(",")
+            path.moveTo(coordinates[0].toFloat(), coordinates[1].toFloat())
+            path.lineTo(coordinates[2].toFloat(), coordinates[3].toFloat())
+            path.lineTo(coordinates[4].toFloat(), coordinates[5].toFloat())
+            path.lineTo(coordinates[6].toFloat(), coordinates[7].toFloat())
             path.close()
 
-            canvas?.drawPath(path, paint)
+            return path
+        }
+
+        fun getFillingPaint(): Paint {
+            val paint = Paint()
+            paint.style = Paint.Style.FILL
+            return paint
         }
     }
 }
