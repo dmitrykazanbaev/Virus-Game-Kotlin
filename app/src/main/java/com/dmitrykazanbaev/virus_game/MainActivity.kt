@@ -1,4 +1,4 @@
-package com.dmitrykazanbaev.firstexample
+package com.dmitrykazanbaev.virus_game
 
 import android.content.Context
 import android.graphics.Canvas
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     internal class DrawView(context : Context) : View(context) {
         override fun onDraw(canvas: Canvas?) {
-            canvas?.drawColor(Color.BLUE)
+            canvas?.drawColor(Color.DKGRAY)
 
             val buildings = getBuildings(resources.openRawResource(R.raw.house_fin))
             buildings.forEach {
