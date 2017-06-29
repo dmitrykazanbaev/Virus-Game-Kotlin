@@ -4,20 +4,25 @@ import android.content.Context
 import android.graphics.*
 import android.view.GestureDetector
 import android.view.MotionEvent
-import android.view.View
+import android.view.SurfaceHolder
+import android.view.SurfaceView
 import com.dmitrykazanbaev.virus_game.R
 import com.dmitrykazanbaev.virus_game.model.Building
 import com.dmitrykazanbaev.virus_game.model.level.AbstractLevel
 import com.dmitrykazanbaev.virus_game.service.ApplicationContextSingleton
 
 
-abstract class AbstractLevelView(context : Context) : View(context) {
-    protected val background : Bitmap? = BitmapFactory.decodeResource(resources, R.drawable.background)
+abstract class AbstractLevelView(context: Context) : SurfaceView(context), SurfaceHolder.Callback {
+    protected val background: Bitmap? = BitmapFactory.decodeResource(resources, R.drawable.background)
     protected val paint = Paint()
-    protected val gestureDetector : GestureDetector = GestureDetector(context, MyGestureListener())
+    protected val gestureDetector: GestureDetector = GestureDetector(context, MyGestureListener())
 
-    var xOffset = 0f
-    var yOffset = 0f
+    abstract val level: AbstractLevel
+
+    private var drawThread: DrawThread? = null
+
+    private var xOffset = 0f
+    private var yOffset = 0f
 
     inner class MyGestureListener : GestureDetector.SimpleOnGestureListener() {
         override fun onDown(e: MotionEvent?): Boolean {
@@ -40,33 +45,77 @@ abstract class AbstractLevelView(context : Context) : View(context) {
 //            if (yOffset > yBig) {
 //                yOffset = yBig
 //            }
-            invalidate()
             return true
         }
     }
 
-    abstract val level : AbstractLevel
-
     init {
+        holder.addCallback(this)
+
         ApplicationContextSingleton.instance?.initialize(context)
+
         paint.style = Paint.Style.FILL
+    }
+
+    inner class DrawThread(private val surfaceHolder: SurfaceHolder) : Thread() {
+        var runFlag = false
+
+        val buildings = level.buildings
+
+        override fun run() {
+            var canvas: Canvas? = null
+            while (runFlag) {
+                try {
+                    canvas = surfaceHolder.lockCanvas(null)
+                    synchronized(surfaceHolder) {
+                        draw(canvas)
+                    }
+                } finally {
+                    if (canvas != null) {
+                        surfaceHolder.unlockCanvasAndPost(canvas)
+                    }
+                }
+            }
+        }
+
+        fun draw(canvas: Canvas?) {
+            canvas?.translate(-xOffset, -yOffset)
+
+            canvas?.drawBitmap(background, 0f, 0f, paint)
+
+            buildings.forEach {
+                drawBuilding(it, canvas)
+            }
+        }
+    }
+
+    override fun surfaceChanged(p0: SurfaceHolder?, p1: Int, p2: Int, p3: Int) {
+    }
+
+    override fun surfaceDestroyed(p0: SurfaceHolder?) {
+        var retry = true
+        drawThread?.runFlag = false
+        while (retry) {
+            try {
+                drawThread?.join()
+                retry = false
+            } catch (e: InterruptedException) {
+                throw Exception("DrawThread stopping problem")
+            }
+        }
+    }
+
+    override fun surfaceCreated(p0: SurfaceHolder?) {
+        drawThread = DrawThread(holder)
+        drawThread?.runFlag = true
+        drawThread?.start()
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         return gestureDetector.onTouchEvent(event)
     }
 
-    override fun onDraw(canvas: Canvas?) {
-        canvas?.translate(-xOffset , -yOffset)
-
-        canvas?.drawBitmap(background, 0f, 0f, paint)
-
-        level.buildings.forEach {
-            drawBuilding(it, canvas)
-        }
-    }
-
-    fun drawBuilding(building : Building, canvas: Canvas?) {
+    fun drawBuilding(building: Building, canvas: Canvas?) {
         drawLeftSideBuilding(building, canvas)
         drawCenterSideBuilding(building, canvas)
         drawRoofBuilding(building, canvas)

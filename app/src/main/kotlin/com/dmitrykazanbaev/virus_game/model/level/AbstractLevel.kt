@@ -17,12 +17,12 @@ abstract class AbstractLevel {
 
     abstract protected fun initializeLevelWithBuildings()
 
-    protected fun getJsonBuildings(input : InputStream) : JsonArray<*> {
+    protected fun getJsonBuildings(input: InputStream): JsonArray<*> {
         val parser: Parser = Parser()
         return parser.parse(input) as JsonArray<*>
     }
 
-    protected fun getBuilding(jsonBuilding : JsonObject): Building {
+    protected fun getBuilding(jsonBuilding: JsonObject): Building {
         with(jsonBuilding) {
             val leftSide = getFigurePath(string("left"))
             val centerSide = getFigurePath(string("center"))
@@ -34,7 +34,7 @@ abstract class AbstractLevel {
     }
 
     private fun getFigurePath(building: String?): Path {
-        val path : Path = Path()
+        val path: Path = Path()
 
         if (building != null) {
             val coordinates = building.split(",")
