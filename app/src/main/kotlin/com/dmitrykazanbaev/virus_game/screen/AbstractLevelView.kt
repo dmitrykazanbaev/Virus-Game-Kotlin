@@ -2,7 +2,11 @@ package com.dmitrykazanbaev.virus_game.screen
 
 import android.content.Context
 import android.graphics.*
+import android.util.Log
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
+import android.widget.OverScroller
 import com.beust.klaxon.JsonObject
 import com.beust.klaxon.string
 import com.dmitrykazanbaev.virus_game.R
@@ -11,8 +15,39 @@ import com.dmitrykazanbaev.virus_game.service.ApplicationContextSingleton
 
 
 abstract class AbstractLevelView(context : Context) : View(context) {
-    val background : Bitmap? = BitmapFactory.decodeResource(resources, R.drawable.background)
-    val paint = Paint()
+    protected val background : Bitmap? = BitmapFactory.decodeResource(resources, R.drawable.background)
+    protected val paint = Paint()
+    protected val gestureDetector : GestureDetector = GestureDetector(context, MyGestureListener())
+
+    var xOffset = 0f
+    var yOffset = 0f
+
+    inner class MyGestureListener : GestureDetector.SimpleOnGestureListener() {
+        override fun onDown(e: MotionEvent?): Boolean {
+            return true
+        }
+
+        override fun onScroll(e1: MotionEvent?, e2: MotionEvent?, distanceX: Float, distanceY: Float): Boolean {
+            xOffset += distanceX
+            if (xOffset < 0f) {
+                xOffset = 0f
+            }
+//            if (xOffset > xBig) {
+//                xOffset = xBig
+//            }
+
+            yOffset += distanceY
+            if (yOffset < 0f) {
+                yOffset = 0f
+            }
+//            if (yOffset > yBig) {
+//                yOffset = yBig
+//            }
+            invalidate()
+            return true
+        }
+    }
+
     abstract val level : AbstractLevel
 
     init {
@@ -20,8 +55,14 @@ abstract class AbstractLevelView(context : Context) : View(context) {
         paint.style = Paint.Style.FILL
     }
 
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        return gestureDetector.onTouchEvent(event)
+    }
+
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
+
+        canvas?.translate(-xOffset , -yOffset)
 
         canvas?.drawBitmap(background, 0f, 0f, paint)
 
@@ -41,7 +82,7 @@ abstract class AbstractLevelView(context : Context) : View(context) {
 
         var path : Path = Path()
         building.string("left")?.let {
-            path = drawFigureWithPath(it)
+            path = getFigurePath(it)
         }
         canvas?.drawPath(path, paint)
     }
@@ -51,7 +92,7 @@ abstract class AbstractLevelView(context : Context) : View(context) {
 
         var path : Path = Path()
         building.string("center")?.let {
-            path = drawFigureWithPath(it)
+            path = getFigurePath(it)
         }
         canvas?.drawPath(path, paint)
     }
@@ -61,12 +102,12 @@ abstract class AbstractLevelView(context : Context) : View(context) {
 
         var path : Path = Path()
         building.string("roof")?.let {
-            path = drawFigureWithPath(it)
+            path = getFigurePath(it)
         }
         canvas?.drawPath(path, paint)
     }
 
-    fun drawFigureWithPath(building: String): Path {
+    fun getFigurePath(building: String): Path {
         val path : Path = Path()
         val coordinates = building.split(",")
 
