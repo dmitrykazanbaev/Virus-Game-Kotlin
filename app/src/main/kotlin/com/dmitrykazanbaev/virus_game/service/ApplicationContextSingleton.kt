@@ -1,11 +1,11 @@
-package com.dmitrykazanbaev.virus_game
+package com.dmitrykazanbaev.virus_game.service
 
 import android.content.Context
 
 class ApplicationContextSingleton {
     var applicationContext: Context? = null
     fun initialize(context: Context) {
-        this.applicationContext = context
+        applicationContext = context
     }
 
     companion object {

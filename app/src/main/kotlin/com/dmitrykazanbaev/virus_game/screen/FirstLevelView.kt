@@ -7,8 +7,4 @@ import com.dmitrykazanbaev.virus_game.model.level.FirstLevel
 class FirstLevelView(context: Context) : AbstractLevelView(context) {
     override val level: AbstractLevel
         get() = FirstLevel()
-
-    init {
-        level
-    }
 }
