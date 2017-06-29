@@ -6,7 +6,7 @@ import android.view.*
 import com.dmitrykazanbaev.virus_game.R
 import com.dmitrykazanbaev.virus_game.model.Building
 import com.dmitrykazanbaev.virus_game.model.level.AbstractLevel
-import com.dmitrykazanbaev.virus_game.service.ApplicationContextSingleton
+import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
 
 
 abstract class AbstractLevelView(context: Context) : SurfaceView(context), SurfaceHolder.Callback {
@@ -63,7 +63,7 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
     init {
         holder.addCallback(this)
 
-        ApplicationContextSingleton.instance?.initialize(context)
+        ApplicationContextHolder.context = context
 
         paint.style = Paint.Style.FILL
     }

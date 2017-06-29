@@ -6,12 +6,12 @@ import com.beust.klaxon.JsonObject
 import com.beust.klaxon.Parser
 import com.beust.klaxon.string
 import com.dmitrykazanbaev.virus_game.model.Building
-import com.dmitrykazanbaev.virus_game.service.ApplicationContextSingleton
+import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
 import java.io.InputStream
 
 
 abstract class AbstractLevel {
-    val applicationContext = ApplicationContextSingleton.instance?.applicationContext
+    val applicationContext = ApplicationContextHolder.context
 
     var buildings = mutableListOf<Building>()
 
