@@ -2,10 +2,7 @@ package com.dmitrykazanbaev.virus_game.screen
 
 import android.content.Context
 import android.graphics.*
-import android.view.GestureDetector
-import android.view.MotionEvent
-import android.view.SurfaceHolder
-import android.view.SurfaceView
+import android.view.*
 import com.dmitrykazanbaev.virus_game.R
 import com.dmitrykazanbaev.virus_game.model.Building
 import com.dmitrykazanbaev.virus_game.model.level.AbstractLevel
@@ -15,7 +12,8 @@ import com.dmitrykazanbaev.virus_game.service.ApplicationContextSingleton
 abstract class AbstractLevelView(context: Context) : SurfaceView(context), SurfaceHolder.Callback {
     protected val background: Bitmap? = BitmapFactory.decodeResource(resources, R.drawable.background)
     protected val paint = Paint()
-    protected val gestureDetector: GestureDetector = GestureDetector(context, MyGestureListener())
+    protected val scrollGestureDetector = GestureDetector(context, MyGestureListener())
+    protected val scaleGestureDetector = ScaleGestureDetector(context, MyGestureListener())
 
     abstract val level: AbstractLevel
 
@@ -23,8 +21,21 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
 
     private var xOffset = 0f
     private var yOffset = 0f
+    private var scaleFactor = 1f
 
-    inner class MyGestureListener : GestureDetector.SimpleOnGestureListener() {
+    inner class MyGestureListener : GestureDetector.SimpleOnGestureListener(), ScaleGestureDetector.OnScaleGestureListener {
+        override fun onScaleBegin(p0: ScaleGestureDetector?): Boolean {
+            return true
+        }
+
+        override fun onScaleEnd(p0: ScaleGestureDetector?) {
+        }
+
+        override fun onScale(detector: ScaleGestureDetector?): Boolean {
+            scaleFactor *= detector?.scaleFactor!!
+            return true
+        }
+
         override fun onDown(e: MotionEvent?): Boolean {
             return true
         }
@@ -80,6 +91,7 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
 
         fun draw(canvas: Canvas?) {
             canvas?.translate(-xOffset, -yOffset)
+            canvas?.scale(scaleFactor, scaleFactor)
 
             canvas?.drawBitmap(background, 0f, 0f, paint)
 
@@ -112,7 +124,7 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        return gestureDetector.onTouchEvent(event)
+        return scrollGestureDetector.onTouchEvent(event) && scaleGestureDetector.onTouchEvent(event)
     }
 
     fun drawBuilding(building: Building, canvas: Canvas?) {
