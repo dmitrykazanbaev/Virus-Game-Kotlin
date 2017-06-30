@@ -74,26 +74,27 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
         val buildings = level.buildings
 
         override fun run() {
-            var canvas: Canvas? = null
+            var canvas: Canvas?
             while (runFlag) {
-                try {
-                    canvas = surfaceHolder.lockCanvas(null)
-                    synchronized(surfaceHolder) {
-                        draw(canvas)
+                canvas = surfaceHolder.lockCanvas()
+
+                synchronized(surfaceHolder) {
+                    canvas?.let {
+                        draw(it)
                     }
-                } finally {
-                    if (canvas != null) {
-                        surfaceHolder.unlockCanvasAndPost(canvas)
-                    }
+                }
+
+                canvas?.let {
+                    surfaceHolder.unlockCanvasAndPost(it)
                 }
             }
         }
 
-        fun draw(canvas: Canvas?) {
-            canvas?.translate(-xOffset, -yOffset)
-            canvas?.scale(scaleFactor, scaleFactor)
+        fun draw(canvas: Canvas) {
+            canvas.scale(scaleFactor, scaleFactor, width / 2f, height / 2f)
+            canvas.translate(-xOffset, -yOffset)
 
-            canvas?.drawBitmap(background, 0f, 0f, paint)
+            canvas.drawBitmap(background, 0f, 0f, paint)
 
             buildings.forEach {
                 drawBuilding(it, canvas)
