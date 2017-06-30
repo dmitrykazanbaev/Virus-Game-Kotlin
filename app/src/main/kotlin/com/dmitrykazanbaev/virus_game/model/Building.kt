@@ -1,5 +1,15 @@
 package com.dmitrykazanbaev.virus_game.model
 
 import android.graphics.Path
+import android.graphics.Point
+import android.graphics.RectF
 
-data class Building(val leftSide : Path, val centerSide : Path, val roof : Path)
+data class Building(val leftSide: Path, val centerSide: Path, val roof: Path) {
+    val maxPoint: Point
+
+    init {
+        val bounds = RectF()
+        roof.computeBounds(bounds, false)
+        maxPoint = Point(bounds.left.toInt() + bounds.width().toInt(), bounds.top.toInt() + bounds.height().toInt())
+    }
+}

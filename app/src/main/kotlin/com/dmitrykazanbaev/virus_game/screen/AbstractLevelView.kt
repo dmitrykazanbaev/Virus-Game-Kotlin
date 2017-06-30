@@ -2,7 +2,7 @@ package com.dmitrykazanbaev.virus_game.screen
 
 import android.content.Context
 import android.graphics.*
-import android.util.Log
+import android.support.v4.content.ContextCompat
 import android.view.*
 import com.dmitrykazanbaev.virus_game.R
 import com.dmitrykazanbaev.virus_game.model.Building
@@ -25,6 +25,10 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
     private var yOffset = 0f
     private var scaleFactor = 1f
 
+    private var maxPoint = Point()
+    private var minScaleFactor = scaleFactor
+    private var maxScaleFactor = scaleFactor
+
     inner class MyGestureListener : GestureDetector.SimpleOnGestureListener(), ScaleGestureDetector.OnScaleGestureListener {
         override fun onScaleBegin(p0: ScaleGestureDetector?): Boolean {
             return true
@@ -35,11 +39,15 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
 
         override fun onScale(detector: ScaleGestureDetector?): Boolean {
             scaleFactor *= detector?.scaleFactor!!
+            if (scaleFactor < minScaleFactor)
+                scaleFactor = minScaleFactor
+            if (scaleFactor > maxScaleFactor)
+                scaleFactor = maxScaleFactor
             return true
         }
 
         override fun onDown(e: MotionEvent?): Boolean {
-            Log.w("dmka", "${e?.x} ${e?.y}")
+            //Log.w("dmka", "${e?.x} ${e?.y}")
             return true
         }
 
@@ -48,17 +56,18 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
             if (xOffset < 0f) {
                 xOffset = 0f
             }
-//            if (xOffset > xBig) {
-//                xOffset = xBig
-//            }
+            if (xOffset > maxPoint.x) {
+                xOffset = maxPoint.x.toFloat()
+            }
 
             yOffset += distanceY
             if (yOffset < 0f) {
                 yOffset = 0f
             }
-//            if (yOffset > yBig) {
-//                yOffset = yBig
-//            }
+            if (yOffset > maxPoint.y) {
+                yOffset = maxPoint.y.toFloat()
+            }
+
             return true
         }
     }
@@ -101,7 +110,8 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
             canvas.scale(scaleFactor, scaleFactor, width / 2f, height / 2f)
             canvas.translate(-xOffset, -yOffset)
 
-            canvas.drawBitmap(background, 0f, 0f, paintForFilling)
+            //canvas.drawBitmap(background, 0f, 0f, paintForFilling)
+            canvas.drawColor(ContextCompat.getColor(context, R.color.colorBackground))
 
             buildings.forEach {
                 drawBuilding(it, canvas)
@@ -126,6 +136,12 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
     }
 
     override fun surfaceCreated(p0: SurfaceHolder?) {
+        maxPoint = Point(level.maxPoint.x - (width * 0.9).toInt(), level.maxPoint.y - (height * 0.9).toInt())
+
+        scaleFactor = minOf(width.toFloat() / level.maxPoint.x, height.toFloat() / level.maxPoint.y)
+        minScaleFactor = scaleFactor * 0.9f
+        maxScaleFactor = 3 * minScaleFactor
+
         drawThread = DrawThread(holder)
         drawThread?.runFlag = true
         drawThread?.start()

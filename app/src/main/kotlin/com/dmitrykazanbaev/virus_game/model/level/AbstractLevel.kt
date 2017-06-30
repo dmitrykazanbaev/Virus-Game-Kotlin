@@ -1,6 +1,7 @@
 package com.dmitrykazanbaev.virus_game.model.level
 
 import android.graphics.Path
+import android.graphics.Point
 import com.beust.klaxon.JsonArray
 import com.beust.klaxon.JsonObject
 import com.beust.klaxon.Parser
@@ -15,6 +16,8 @@ abstract class AbstractLevel {
 
     var buildings = mutableListOf<Building>()
 
+    var maxPoint = Point()
+
     abstract protected fun initializeLevelWithBuildings()
 
     protected fun getJsonBuildings(input: InputStream): JsonArray<*> {
@@ -28,7 +31,11 @@ abstract class AbstractLevel {
             val centerSide = getFigurePath(string("center"))
             val roof = getFigurePath(string("roof"))
 
-            return Building(leftSide, centerSide, roof)
+            val building = Building(leftSide, centerSide, roof)
+            maxPoint.x = maxOf(building.maxPoint.x, maxPoint.x)
+            maxPoint.y = maxOf(building.maxPoint.y, maxPoint.y)
+
+            return building
         }
 
     }
