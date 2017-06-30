@@ -2,6 +2,7 @@ package com.dmitrykazanbaev.virus_game.screen
 
 import android.content.Context
 import android.graphics.*
+import android.util.Log
 import android.view.*
 import com.dmitrykazanbaev.virus_game.R
 import com.dmitrykazanbaev.virus_game.model.Building
@@ -11,7 +12,8 @@ import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
 
 abstract class AbstractLevelView(context: Context) : SurfaceView(context), SurfaceHolder.Callback {
     protected val background: Bitmap? = BitmapFactory.decodeResource(resources, R.drawable.background)
-    protected val paint = Paint()
+    protected val paintForFilling = Paint()
+    protected val paintForStroke = Paint()
     protected val scrollGestureDetector = GestureDetector(context, MyGestureListener())
     protected val scaleGestureDetector = ScaleGestureDetector(context, MyGestureListener())
 
@@ -37,6 +39,7 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
         }
 
         override fun onDown(e: MotionEvent?): Boolean {
+            Log.w("dmka", "${e?.x} ${e?.y}")
             return true
         }
 
@@ -65,7 +68,11 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
 
         ApplicationContextHolder.context = context
 
-        paint.style = Paint.Style.FILL
+        paintForFilling.style = Paint.Style.FILL
+
+        paintForStroke.style = Paint.Style.STROKE
+        paintForStroke.strokeWidth = resources.getString(R.string.strokeWidth).toFloat()
+        paintForStroke.color = Color.BLACK
     }
 
     inner class DrawThread(private val surfaceHolder: SurfaceHolder) : Thread() {
@@ -94,7 +101,7 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
             canvas.scale(scaleFactor, scaleFactor, width / 2f, height / 2f)
             canvas.translate(-xOffset, -yOffset)
 
-            canvas.drawBitmap(background, 0f, 0f, paint)
+            canvas.drawBitmap(background, 0f, 0f, paintForFilling)
 
             buildings.forEach {
                 drawBuilding(it, canvas)
@@ -135,20 +142,22 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
     }
 
     fun drawLeftSideBuilding(building: Building, canvas: Canvas?) {
-        paint.color = R.color.colorLeft
+        paintForFilling.color = Color.BLACK
 
-        canvas?.drawPath(building.leftSide, paint)
+        canvas?.drawPath(building.leftSide, paintForFilling)
     }
 
     fun drawCenterSideBuilding(building: Building, canvas: Canvas?) {
-        paint.color = R.color.colorCenter
+        paintForFilling.color = R.color.colorCenter
 
-        canvas?.drawPath(building.centerSide, paint)
+        canvas?.drawPath(building.centerSide, paintForFilling)
+        canvas?.drawPath(building.centerSide, paintForStroke)
     }
 
     fun drawRoofBuilding(building: Building, canvas: Canvas?) {
-        paint.color = Color.WHITE
+        paintForFilling.color = Color.WHITE
 
-        canvas?.drawPath(building.roof, paint)
+        canvas?.drawPath(building.roof, paintForFilling)
+        canvas?.drawPath(building.roof, paintForStroke)
     }
 }

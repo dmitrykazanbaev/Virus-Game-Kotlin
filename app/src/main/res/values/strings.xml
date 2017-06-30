@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Virus Game</string>
+    <string name="strokeWidth" format="float" type="dimen">1.5</string>
 </resources>
