@@ -3,6 +3,7 @@ package com.dmitrykazanbaev.virus_game.screen
 import android.content.Context
 import android.graphics.*
 import android.support.v4.content.ContextCompat
+import android.util.Log
 import android.view.*
 import com.dmitrykazanbaev.virus_game.R
 import com.dmitrykazanbaev.virus_game.model.Building
@@ -108,7 +109,7 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
 
         fun draw(canvas: Canvas) {
             canvas.scale(scaleFactor, scaleFactor, width / 2f, height / 2f)
-            canvas.translate(-xOffset, -yOffset)
+            canvas.translate(-xOffset/scaleFactor, -yOffset/scaleFactor)
 
             //canvas.drawBitmap(background, 0f, 0f, paintForFilling)
             canvas.drawColor(ContextCompat.getColor(context, R.color.colorBackground))
@@ -139,8 +140,14 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
         maxPoint = Point(level.maxPoint.x - (width * 0.9).toInt(), level.maxPoint.y - (height * 0.9).toInt())
 
         scaleFactor = minOf(width.toFloat() / level.maxPoint.x, height.toFloat() / level.maxPoint.y)
-        minScaleFactor = scaleFactor * 0.9f
+        scaleFactor *= 0.9f
+        minScaleFactor = scaleFactor
         maxScaleFactor = 3 * minScaleFactor
+
+        //TODO
+        //xOffset = -1.2f*(width / 2 - (level.maxPoint.x - level.minPoint.x) / 2) * scaleFactor
+        //yOffset = -1.2f*(height / 2 - (level.maxPoint.y - level.minPoint.y) / 2) * scaleFactor
+//        Log.w("dmka", "$xOffset $yOffset")
 
         drawThread = DrawThread(holder)
         drawThread?.runFlag = true

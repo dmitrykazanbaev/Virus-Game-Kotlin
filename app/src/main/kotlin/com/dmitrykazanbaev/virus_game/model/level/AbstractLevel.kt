@@ -17,6 +17,7 @@ abstract class AbstractLevel {
     var buildings = mutableListOf<Building>()
 
     var maxPoint = Point()
+    var minPoint = Point(Int.MAX_VALUE, Int.MAX_VALUE)
 
     abstract protected fun initializeLevelWithBuildings()
 
@@ -34,6 +35,9 @@ abstract class AbstractLevel {
             val building = Building(leftSide, centerSide, roof)
             maxPoint.x = maxOf(building.maxPoint.x, maxPoint.x)
             maxPoint.y = maxOf(building.maxPoint.y, maxPoint.y)
+
+            minPoint.x = minOf(building.minPoint.x, minPoint.x)
+            minPoint.y = minOf(building.minPoint.y, minPoint.y)
 
             return building
         }
