@@ -8,17 +8,14 @@ import android.view.*
 import com.dmitrykazanbaev.virus_game.R
 import com.dmitrykazanbaev.virus_game.model.Building
 import com.dmitrykazanbaev.virus_game.model.level.AbstractLevel
-import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
 
 
-abstract class AbstractLevelView(context: Context) : SurfaceView(context), SurfaceHolder.Callback {
+abstract class AbstractLevelView(context: Context, protected val level: AbstractLevel) : SurfaceView(context), SurfaceHolder.Callback {
     protected val background: Bitmap? = BitmapFactory.decodeResource(resources, R.drawable.background)
     protected val paintForFilling = Paint()
     protected val paintForStroke = Paint()
     protected val scrollGestureDetector = GestureDetector(context, MyGestureListener())
     protected val scaleGestureDetector = ScaleGestureDetector(context, MyGestureListener())
-
-    abstract val level: AbstractLevel
 
     private var drawThread: DrawThread? = null
 
@@ -26,7 +23,6 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
     private var yOffset = 0f
     private var scaleFactor = 1f
 
-    private var maxPoint = Point()
     private var minScaleFactor = scaleFactor
     private var maxScaleFactor = scaleFactor
 
@@ -44,40 +40,49 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
                 scaleFactor = minScaleFactor
             if (scaleFactor > maxScaleFactor)
                 scaleFactor = maxScaleFactor
+
             return true
         }
 
         override fun onDown(e: MotionEvent?): Boolean {
-            //Log.w("dmka", "${e?.x} ${e?.y}")
             return true
         }
 
         override fun onScroll(e1: MotionEvent?, e2: MotionEvent?, distanceX: Float, distanceY: Float): Boolean {
             xOffset += distanceX
-            if (xOffset < 0f) {
-                xOffset = 0f
+            if (xOffset / scaleFactor < level.minPoint.x) {
+                xOffset = level.minPoint.x * scaleFactor
             }
-            if (xOffset > maxPoint.x) {
-                xOffset = maxPoint.x.toFloat()
+            if (xOffset / scaleFactor > level.minPoint.x + (level.width - width)) {
+                xOffset = (level.minPoint.x + (level.width - width)) * scaleFactor
             }
+            /*if (xOffset < level.minPoint.x) {
+                xOffset = level.minPoint.x.toFloat()
+            }
+            if (xOffset > level.minPoint.x + (level.width - width)) {
+                xOffset = ((level.minPoint.x + (level.width - width)).toFloat())
+            }*/
 
             yOffset += distanceY
-            if (yOffset < 0f) {
-                yOffset = 0f
+            if (yOffset / scaleFactor < level.minPoint.y) {
+                yOffset = level.minPoint.y * scaleFactor
             }
-            if (yOffset > maxPoint.y) {
-                yOffset = maxPoint.y.toFloat()
+            if (yOffset / scaleFactor > level.minPoint.y + (level.height - height)) {
+                yOffset = (level.minPoint.y + (level.height - height)) * scaleFactor
             }
+            /*if (yOffset < level.minPoint.y) {
+                yOffset = level.minPoint.y.toFloat()
+            }
+            if (yOffset > level.minPoint.y + (level.height - height)) {
+                yOffset = ((level.minPoint.y + (level.height - height)).toFloat())
+            }*/
+            Log.w("dmka", "${xOffset} ${yOffset}")
 
             return true
         }
     }
 
     init {
-        holder.addCallback(this)
-
-        ApplicationContextHolder.context = context
-
         paintForFilling.style = Paint.Style.FILL
 
         paintForStroke.style = Paint.Style.STROKE
@@ -88,33 +93,27 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
     inner class DrawThread(private val surfaceHolder: SurfaceHolder) : Thread() {
         var runFlag = false
 
-        val buildings = level.buildings
-
         override fun run() {
             var canvas: Canvas?
             while (runFlag) {
                 canvas = surfaceHolder.lockCanvas()
 
                 synchronized(surfaceHolder) {
-                    canvas?.let {
-                        draw(it)
-                    }
+                    canvas?.let { draw(it) }
                 }
 
-                canvas?.let {
-                    surfaceHolder.unlockCanvasAndPost(it)
-                }
+                canvas?.let { surfaceHolder.unlockCanvasAndPost(it) }
             }
         }
 
         fun draw(canvas: Canvas) {
             canvas.scale(scaleFactor, scaleFactor, width / 2f, height / 2f)
-            canvas.translate(-xOffset/scaleFactor, -yOffset/scaleFactor)
+            canvas.translate(-xOffset / scaleFactor, -yOffset / scaleFactor)
 
             //canvas.drawBitmap(background, 0f, 0f, paintForFilling)
             canvas.drawColor(ContextCompat.getColor(context, R.color.colorBackground))
 
-            buildings.forEach {
+            level.buildings.forEach {
                 drawBuilding(it, canvas)
             }
         }
@@ -137,17 +136,16 @@ abstract class AbstractLevelView(context: Context) : SurfaceView(context), Surfa
     }
 
     override fun surfaceCreated(p0: SurfaceHolder?) {
-        maxPoint = Point(level.maxPoint.x - (width * 0.9).toInt(), level.maxPoint.y - (height * 0.9).toInt())
-
-        scaleFactor = minOf(width.toFloat() / level.maxPoint.x, height.toFloat() / level.maxPoint.y)
+        scaleFactor = minOf(width.toFloat() / level.width,height.toFloat() / level.height)
         scaleFactor *= 0.9f
         minScaleFactor = scaleFactor
         maxScaleFactor = 3 * minScaleFactor
 
         //TODO
-        //xOffset = -1.2f*(width / 2 - (level.maxPoint.x - level.minPoint.x) / 2) * scaleFactor
-        //yOffset = -1.2f*(height / 2 - (level.maxPoint.y - level.minPoint.y) / 2) * scaleFactor
-//        Log.w("dmka", "$xOffset $yOffset")
+        Log.w("dmka", "${level.minPoint} ${level.maxPoint}")
+        //xOffset = (level.minPoint.x + (level.width - width)).toFloat()//level.minPoint.x / scaleFactor
+        //yOffset = (level.minPoint.y + (level.height - height)).toFloat()//level.minPoint.y / scaleFactor
+        Log.w("dmka", "$xOffset $yOffset")
 
         drawThread = DrawThread(holder)
         drawThread?.runFlag = true

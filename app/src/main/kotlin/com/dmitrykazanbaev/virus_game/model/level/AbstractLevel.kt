@@ -18,6 +18,10 @@ abstract class AbstractLevel {
 
     var maxPoint = Point()
     var minPoint = Point(Int.MAX_VALUE, Int.MAX_VALUE)
+    var width = 0
+        get() = maxPoint.x - minPoint.x
+    var height = 0
+        get() = maxPoint.y - minPoint.y
 
     abstract protected fun initializeLevelWithBuildings()
 
