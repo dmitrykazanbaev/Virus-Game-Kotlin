@@ -50,33 +50,34 @@ abstract class AbstractLevelView(context: Context, protected val level: Abstract
 
         override fun onScroll(e1: MotionEvent?, e2: MotionEvent?, distanceX: Float, distanceY: Float): Boolean {
             xOffset += distanceX
-            if (xOffset / scaleFactor < level.minPoint.x) {
-                xOffset = level.minPoint.x * scaleFactor
-            }
-            if (xOffset / scaleFactor > level.minPoint.x + (level.width - width)) {
-                xOffset = (level.minPoint.x + (level.width - width)) * scaleFactor
-            }
-            /*if (xOffset < level.minPoint.x) {
-                xOffset = level.minPoint.x.toFloat()
-            }
-            if (xOffset > level.minPoint.x + (level.width - width)) {
-                xOffset = ((level.minPoint.x + (level.width - width)).toFloat())
+            /*if (level.width * scaleFactor > width) {
+                if (xOffset < level.minPoint.x) {
+                    xOffset = level.minPoint.x.toFloat()
+                } else if (xOffset > level.minPoint.x + (level.width - width)) {
+                    xOffset = ((level.minPoint.x + (level.width - width)).toFloat())
+                }
+            } else {
+                if (xOffset > level.minPoint.x) {
+                    xOffset = level.minPoint.x.toFloat()
+                } else if (xOffset < level.minPoint.x + (level.width - width)) {
+                    xOffset = ((level.minPoint.x + (level.width - width)).toFloat())
+                }
             }*/
 
             yOffset += distanceY
-            if (yOffset / scaleFactor < level.minPoint.y) {
-                yOffset = level.minPoint.y * scaleFactor
-            }
-            if (yOffset / scaleFactor > level.minPoint.y + (level.height - height)) {
-                yOffset = (level.minPoint.y + (level.height - height)) * scaleFactor
-            }
-            /*if (yOffset < level.minPoint.y) {
-                yOffset = level.minPoint.y.toFloat()
-            }
-            if (yOffset > level.minPoint.y + (level.height - height)) {
-                yOffset = ((level.minPoint.y + (level.height - height)).toFloat())
+            /*if (level.height * scaleFactor > height) {
+                if (yOffset < level.minPoint.y) {
+                    yOffset = level.minPoint.y.toFloat()
+                } else if (yOffset > level.minPoint.y + (level.height - height)) {
+                    yOffset = ((level.minPoint.y + (level.height - height)).toFloat())
+                }
+            } else {
+                if (yOffset > level.minPoint.y) {
+                    yOffset = level.minPoint.y.toFloat()
+                } else if (yOffset < level.minPoint.y + (level.height - height)) {
+                    yOffset = ((level.minPoint.y + (level.height - height)).toFloat())
+                }
             }*/
-            Log.w("dmka", "${xOffset} ${yOffset}")
 
             return true
         }
@@ -136,16 +137,10 @@ abstract class AbstractLevelView(context: Context, protected val level: Abstract
     }
 
     override fun surfaceCreated(p0: SurfaceHolder?) {
-        scaleFactor = minOf(width.toFloat() / level.width,height.toFloat() / level.height)
+        scaleFactor = minOf(width.toFloat() / level.width, height.toFloat() / level.height)
         scaleFactor *= 0.9f
         minScaleFactor = scaleFactor
         maxScaleFactor = 3 * minScaleFactor
-
-        //TODO
-        Log.w("dmka", "${level.minPoint} ${level.maxPoint}")
-        //xOffset = (level.minPoint.x + (level.width - width)).toFloat()//level.minPoint.x / scaleFactor
-        //yOffset = (level.minPoint.y + (level.height - height)).toFloat()//level.minPoint.y / scaleFactor
-        Log.w("dmka", "$xOffset $yOffset")
 
         drawThread = DrawThread(holder)
         drawThread?.runFlag = true
