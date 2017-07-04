@@ -8,6 +8,10 @@ import android.view.*
 import com.dmitrykazanbaev.virus_game.R
 import com.dmitrykazanbaev.virus_game.model.Building
 import com.dmitrykazanbaev.virus_game.model.level.AbstractLevel
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.runBlocking
 
 
 abstract class AbstractLevelView(context: Context, protected val level: AbstractLevel) : SurfaceView(context), SurfaceHolder.Callback {
@@ -17,14 +21,14 @@ abstract class AbstractLevelView(context: Context, protected val level: Abstract
     protected val scrollGestureDetector = GestureDetector(context, MyGestureListener())
     protected val scaleGestureDetector = ScaleGestureDetector(context, MyGestureListener())
 
-    private var drawThread: DrawThread? = null
-
     private var xOffset = 0f
     private var yOffset = 0f
     private var scaleFactor = 1f
 
     private var minScaleFactor = scaleFactor
     private var maxScaleFactor = scaleFactor
+
+    private lateinit var drawJob : Job
 
     inner class MyGestureListener : GestureDetector.SimpleOnGestureListener(), ScaleGestureDetector.OnScaleGestureListener {
         override fun onScaleBegin(p0: ScaleGestureDetector?): Boolean {
@@ -91,49 +95,12 @@ abstract class AbstractLevelView(context: Context, protected val level: Abstract
         paintForStroke.color = Color.BLACK
     }
 
-    inner class DrawThread(private val surfaceHolder: SurfaceHolder) : Thread() {
-        var runFlag = false
-
-        override fun run() {
-            var canvas: Canvas?
-            while (runFlag) {
-                canvas = surfaceHolder.lockCanvas()
-
-                synchronized(surfaceHolder) {
-                    canvas?.let { draw(it) }
-                }
-
-                canvas?.let { surfaceHolder.unlockCanvasAndPost(it) }
-            }
-        }
-
-        fun draw(canvas: Canvas) {
-            canvas.scale(scaleFactor, scaleFactor, width / 2f, height / 2f)
-            canvas.translate(-xOffset / scaleFactor, -yOffset / scaleFactor)
-
-            //canvas.drawBitmap(background, 0f, 0f, paintForFilling)
-            canvas.drawColor(ContextCompat.getColor(context, R.color.colorBackground))
-
-            level.buildings.forEach {
-                drawBuilding(it, canvas)
-            }
-        }
-    }
-
     override fun surfaceChanged(p0: SurfaceHolder?, p1: Int, p2: Int, p3: Int) {
     }
 
     override fun surfaceDestroyed(p0: SurfaceHolder?) {
-        var retry = true
-        drawThread?.runFlag = false
-        while (retry) {
-            try {
-                drawThread?.join()
-                retry = false
-            } catch (e: InterruptedException) {
-                throw Exception("DrawThread stopping problem")
-            }
-        }
+        drawJob.cancel()
+        runBlocking { drawJob.join() }
     }
 
     override fun surfaceCreated(p0: SurfaceHolder?) {
@@ -142,9 +109,30 @@ abstract class AbstractLevelView(context: Context, protected val level: Abstract
         minScaleFactor = scaleFactor
         maxScaleFactor = 3 * minScaleFactor
 
-        drawThread = DrawThread(holder)
-        drawThread?.runFlag = true
-        drawThread?.start()
+        drawJob = launch(CommonPool) {
+            var canvas : Canvas?
+            while (isActive) {
+                canvas = holder.lockCanvas()
+
+                synchronized(holder) {
+                    canvas?.let { drawLevel(it) }
+                }
+
+                canvas?.let { holder.unlockCanvasAndPost(it) }
+            }
+        }
+    }
+
+    fun drawLevel(canvas: Canvas) {
+        canvas.scale(scaleFactor, scaleFactor, width / 2f, height / 2f)
+        canvas.translate(-xOffset / scaleFactor, -yOffset / scaleFactor)
+
+        //canvas.drawBitmap(background, 0f, 0f, paintForFilling)
+        canvas.drawColor(ContextCompat.getColor(context, R.color.colorBackground))
+
+        level.buildings.forEach {
+            drawBuilding(it, canvas)
+        }
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
