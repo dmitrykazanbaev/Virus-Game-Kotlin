@@ -11,7 +11,7 @@ import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
 import java.io.InputStream
 
 
-abstract class AbstractLevel {
+abstract class AbstractLevel(private val JsonBuildingsResource: Int) {
     val applicationContext = ApplicationContextHolder.context
 
     var buildings = mutableListOf<Building>()
@@ -23,7 +23,28 @@ abstract class AbstractLevel {
     var height = 0
         get() = maxPoint.y - minPoint.y
 
-    abstract protected fun initializeLevelWithBuildings()
+    init {
+        initializeLevelWithBuildings()
+        setMinMaxPoints()
+    }
+
+    private fun setMinMaxPoints() {
+        buildings.forEach {
+            maxPoint.x = maxOf(it.maxPoint.x, maxPoint.x)
+            maxPoint.y = maxOf(it.maxPoint.y, maxPoint.y)
+
+            minPoint.x = minOf(it.minPoint.x, minPoint.x)
+            minPoint.y = minOf(it.minPoint.y, minPoint.y)
+        }
+    }
+
+    fun initializeLevelWithBuildings() {
+        val jsonBuildings = getJsonBuildings(applicationContext.resources.openRawResource(JsonBuildingsResource))
+
+        jsonBuildings.forEach {
+            buildings.add(getBuilding(it as JsonObject))
+        }
+    }
 
     protected fun getJsonBuildings(input: InputStream): JsonArray<*> {
         val parser: Parser = Parser()
@@ -36,16 +57,8 @@ abstract class AbstractLevel {
             val centerSide = getFigurePath(string("center"))
             val roof = getFigurePath(string("roof"))
 
-            val building = Building(leftSide, centerSide, roof)
-            maxPoint.x = maxOf(building.maxPoint.x, maxPoint.x)
-            maxPoint.y = maxOf(building.maxPoint.y, maxPoint.y)
-
-            minPoint.x = minOf(building.minPoint.x, minPoint.x)
-            minPoint.y = minOf(building.minPoint.y, minPoint.y)
-
-            return building
+            return Building(leftSide, centerSide, roof)
         }
-
     }
 
     private fun getFigurePath(building: String?): Path {
