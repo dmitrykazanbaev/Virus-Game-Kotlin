@@ -3,7 +3,6 @@ package com.dmitrykazanbaev.virus_game.screen
 import android.content.Context
 import android.graphics.*
 import android.support.v4.content.ContextCompat
-import android.util.Log
 import android.view.*
 import com.dmitrykazanbaev.virus_game.R
 import com.dmitrykazanbaev.virus_game.model.Building
@@ -28,7 +27,7 @@ abstract class AbstractLevelView(context: Context, protected val level: Abstract
     private var minScaleFactor = scaleFactor
     private var maxScaleFactor = scaleFactor
 
-    private lateinit var drawJob : Job
+    private lateinit var drawJob: Job
 
     inner class MyGestureListener : GestureDetector.SimpleOnGestureListener(), ScaleGestureDetector.OnScaleGestureListener {
         override fun onScaleBegin(p0: ScaleGestureDetector?): Boolean {
@@ -110,15 +109,17 @@ abstract class AbstractLevelView(context: Context, protected val level: Abstract
         maxScaleFactor = 3 * minScaleFactor
 
         drawJob = launch(CommonPool) {
-            var canvas : Canvas?
+            var canvas: Canvas?
             while (isActive) {
                 canvas = holder.lockCanvas()
 
-                synchronized(holder) {
-                    canvas?.let { drawLevel(it) }
+                try {
+                    synchronized(holder) {
+                        canvas?.let { drawLevel(it) }
+                    }
+                } finally {
+                    canvas?.let { holder.unlockCanvasAndPost(it) }
                 }
-
-                canvas?.let { holder.unlockCanvasAndPost(it) }
             }
         }
     }
