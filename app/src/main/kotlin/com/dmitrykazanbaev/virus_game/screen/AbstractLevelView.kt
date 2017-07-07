@@ -3,7 +3,6 @@ package com.dmitrykazanbaev.virus_game.screen
 import android.content.Context
 import android.graphics.*
 import android.support.v4.content.ContextCompat
-import android.util.Log
 import android.view.*
 import com.dmitrykazanbaev.virus_game.R
 import com.dmitrykazanbaev.virus_game.model.Building

@@ -6,13 +6,15 @@
     <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom">
+            android:layout_gravity="bottom"
+            android:id="@+id/control_buttons">
         <ImageButton
                 android:contentDescription="@string/virus_button_description"
                 android:background="@android:color/transparent"
                 android:src="@mipmap/virus_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="onTouch"
                 android:id="@+id/virus_button"/>
         <ImageButton
                 android:contentDescription="@string/statistics_button_description"
@@ -22,5 +24,59 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/statistics_button"/>
     </LinearLayout>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/characteristic_window"
+            android:background="@color/low_transparent"
+            android:visibility="gone">
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:translationY="@dimen/activity_horizontal_margin"
+                android:weightSum="8.85">
+            <ImageButton
+                    android:background="@android:color/transparent"
+                    android:src="@mipmap/button_non"
+                    android:scaleType="fitStart"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/skills_button"/>
+            <ImageButton
+                    android:background="@android:color/transparent"
+                    android:src="@mipmap/button_non"
+                    android:scaleType="fitStart"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/propagation_button"/>
+            <ImageButton
+                    android:background="@android:color/transparent"
+                    android:src="@mipmap/button_non"
+                    android:scaleType="fitStart"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/counteraction_button"/>
+            <ImageButton
+                    android:background="@android:color/transparent"
+                    android:src="@mipmap/button_non"
+                    android:scaleType="fitStart"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/devices_button"/>
+            <ImageButton
+                    android:background="@android:color/transparent"
+                    android:src="@mipmap/button_closed"
+                    android:scaleType="fitStart"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.85"
+                    android:layout_height="wrap_content"
+                    android:onClick="onTouch"
+                    android:id="@+id/close_characteristics_button"/>
+        </LinearLayout>
+    </RelativeLayout>
 
 </FrameLayout>
