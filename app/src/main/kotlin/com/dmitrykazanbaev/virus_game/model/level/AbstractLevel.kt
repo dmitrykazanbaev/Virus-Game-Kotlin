@@ -44,7 +44,6 @@ abstract class AbstractLevel(private val JsonBuildingsResource: Int) {
         val randomBuilding = Random().nextInt(buildings.size)
         Log.w("dmka", "buildings[$randomBuilding].computers ${buildings[randomBuilding].computers}")
         if (buildings[randomBuilding].computers > 0) {
-            buildings[randomBuilding].computers--
             buildings[randomBuilding].infectedComputers++
         }
     }
