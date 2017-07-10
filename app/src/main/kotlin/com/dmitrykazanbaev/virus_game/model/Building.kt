@@ -9,13 +9,15 @@ data class Building(val leftSide: Path, val centerSide: Path, val roof: Path) {
     val maxPoint: Point
     val minPoint: Point
     var infectedRoof = Path()
+    var isInfected = false
 
     var computers = 5
     var infectedComputers by Delegates.observable(0) {
         _, oldValue, newValue ->
         if (oldValue == newValue - 1) {
-            computers--
             computeInfectedRoof()
+            if (newValue == computers)
+                isInfected = true
         }
     }
 
