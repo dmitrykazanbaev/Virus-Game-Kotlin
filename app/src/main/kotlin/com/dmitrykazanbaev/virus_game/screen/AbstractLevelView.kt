@@ -14,7 +14,6 @@ import kotlinx.coroutines.experimental.runBlocking
 
 
 abstract class AbstractLevelView(context: Context, protected val level: AbstractLevel) : SurfaceView(context), SurfaceHolder.Callback {
-    protected val background: Bitmap? = BitmapFactory.decodeResource(resources, R.drawable.background)
     protected val paintForFilling = Paint()
     protected val paintForStroke = Paint()
     protected val scrollGestureDetector = GestureDetector(context, MyGestureListener())
@@ -126,7 +125,6 @@ abstract class AbstractLevelView(context: Context, protected val level: Abstract
         canvas.scale(scaleFactor, scaleFactor, width / 2f, height / 2f)
         canvas.translate(-xOffset / scaleFactor, -yOffset / scaleFactor)
 
-        //canvas.drawBitmap(background, 0f, 0f, paintForFilling)
         canvas.drawColor(ContextCompat.getColor(context, R.color.colorBackground))
 
         level.buildings.forEach {

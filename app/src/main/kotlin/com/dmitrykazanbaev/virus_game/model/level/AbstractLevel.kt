@@ -2,13 +2,18 @@ package com.dmitrykazanbaev.virus_game.model.level
 
 import android.graphics.Path
 import android.graphics.Point
+import android.util.Log
 import com.beust.klaxon.JsonArray
 import com.beust.klaxon.JsonObject
 import com.beust.klaxon.Parser
 import com.beust.klaxon.string
 import com.dmitrykazanbaev.virus_game.model.Building
 import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.experimental.launch
 import java.io.InputStream
+import java.util.*
 
 
 abstract class AbstractLevel(private val JsonBuildingsResource: Int) {
@@ -26,6 +31,22 @@ abstract class AbstractLevel(private val JsonBuildingsResource: Int) {
     init {
         initializeLevelWithBuildings()
         setMinMaxPoints()
+
+        launch(CommonPool) {
+            while (isActive) {
+                infectBuilding()
+                delay(500)
+            }
+        }
+    }
+
+    private fun infectBuilding() {
+        val randomBuilding = Random().nextInt(buildings.size)
+        Log.w("dmka", "buildings[$randomBuilding].computers ${buildings[randomBuilding].computers}")
+        if (buildings[randomBuilding].computers > 0) {
+            buildings[randomBuilding].computers--
+            buildings[randomBuilding].infectedComputers++
+        }
     }
 
     private fun setMinMaxPoints() {

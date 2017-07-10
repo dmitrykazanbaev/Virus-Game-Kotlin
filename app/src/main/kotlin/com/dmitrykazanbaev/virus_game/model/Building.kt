@@ -8,6 +8,9 @@ data class Building(val leftSide: Path, val centerSide: Path, val roof: Path) {
     val maxPoint: Point
     val minPoint: Point
 
+    var computers = 30
+    var infectedComputers = 0
+
     init {
         val bounds = RectF()
         roof.computeBounds(bounds, false)
