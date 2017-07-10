@@ -14,6 +14,8 @@ import kotlinx.coroutines.experimental.delay
 import kotlinx.coroutines.experimental.launch
 import java.io.InputStream
 import java.util.*
+import kotlin.Comparator
+import kotlin.collections.ArrayList
 
 
 abstract class AbstractLevel(private val JsonBuildingsResource: Int) {
@@ -34,18 +36,20 @@ abstract class AbstractLevel(private val JsonBuildingsResource: Int) {
 
         launch(CommonPool) {
             while (isActive) {
-                infectBuilding()
-                delay(500)
+                if (infectBuilding())
+                    delay(500)
             }
         }
     }
 
-    private fun infectBuilding() {
+    private fun infectBuilding(): Boolean {
         val randomBuilding = Random().nextInt(buildings.size)
-        Log.w("dmka", "buildings[$randomBuilding].infectedComputers ${buildings[randomBuilding].infectedComputers}")
         if (!buildings[randomBuilding].isInfected) {
             buildings[randomBuilding].infectedComputers++
+            return true
         }
+
+        return false
     }
 
     private fun setMinMaxPoints() {
@@ -73,23 +77,76 @@ abstract class AbstractLevel(private val JsonBuildingsResource: Int) {
 
     protected fun getBuilding(jsonBuilding: JsonObject): Building {
         with(jsonBuilding) {
-            val leftSide = getFigurePath(string("left"))
-            val centerSide = getFigurePath(string("center"))
-            val roof = getFigurePath(string("roof"))
+            val leftSidePoints = getSortedPointsByClockwiseFromLeft(
+                    getPointsList(string("left")))
+            val centerSidePoints = getSortedPointsByClockwiseFromLeft(
+                    getPointsList(string("center")))
+            val roofPoints = getSortedPointsByClockwiseFromLeft(
+                    getPointsList(string("roof")))
 
-            return Building(leftSide, centerSide, roof)
+            val leftSide = getFigurePath(leftSidePoints)
+            val centerSide = getFigurePath(centerSidePoints)
+            val roof = getFigurePath(roofPoints)
+
+            return Building(leftSide, centerSide, roof, leftSidePoints, centerSidePoints, roofPoints)
         }
     }
 
-    private fun getFigurePath(building: String?): Path {
-        val path: Path = Path()
+    private fun getSortedPointsByClockwiseFromLeft(list: List<Point>): List<Point> {
+        if (list.isNotEmpty()) {
+            val leftPoint = list.minBy(Point::x)
+
+            list.sortedWith(comparePointsByClockwiseFrom(leftPoint!!))
+        }
+
+        return list
+    }
+
+    inner class comparePointsByClockwiseFrom(val center: Point) : Comparator<Point> {
+        override fun compare(p0: Point, p1: Point): Int {
+            if (p0.x - center.x == 0 && p1.x - center.x == 0) {
+                if (p0.y - center.y >= 0 || p1.y - center.y >= 0) {
+                    return p1.y.compareTo(p0.y)
+                }
+                return p0.y.compareTo(p1.y)
+            }
+
+            // compute the cross product of vectors (center -> a) x (center -> b)
+            val det = (p0.x - center.x) * (p1.y - center.y) - (p1.x - center.x) * (p0.y - center.y)
+            if (det < 0) {
+                return -1
+            }
+            if (det > 0) {
+                return 1
+            }
+
+            // points a and b are on the same line from the center
+            // check which point is closer to the center
+            val d1 = (p0.x - center.x) * (p0.x - center.x) + (p0.y - center.y) * (p0.y - center.y)
+            val d2 = (p1.x - center.x) * (p1.x - center.x) + (p1.y - center.y) * (p1.y - center.y)
+            return d2.compareTo(d1)
+        }
+    }
+
+    private fun getPointsList(building: String?): List<Point> {
+        val list = ArrayList<Point>()
 
         if (building != null) {
             val coordinates = building.split(",")
 
-            path.moveTo(coordinates[0].toFloat(), coordinates[1].toFloat())
-            for (i in 2 until coordinates.size step 2) {
-                path.lineTo(coordinates[i].toFloat(), coordinates[i + 1].toFloat())
+            (0 until coordinates.size step 2).mapTo(list) { Point(coordinates[it].toInt(), coordinates[it + 1].toInt()) }
+        }
+
+        return list
+    }
+
+    private fun getFigurePath(points: List<Point>): Path {
+        val path: Path = Path()
+
+        if (points.isNotEmpty()) {
+            path.moveTo(points[0].x.toFloat(), points[0].y.toFloat())
+            for (i in 1 until points.size) {
+                path.lineTo(points[i].x.toFloat(), points[i].y.toFloat())
             }
             path.close()
         }

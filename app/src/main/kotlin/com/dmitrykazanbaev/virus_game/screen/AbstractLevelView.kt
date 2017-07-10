@@ -144,19 +144,19 @@ abstract class AbstractLevelView(context: Context, protected val level: Abstract
     }
 
     private fun drawInfectedRoofBuilding(building: Building, canvas: Canvas?) {
-        paintForFilling.color = R.color.colorFillingRoof
+        paintForFilling.color = ContextCompat.getColor(context, R.color.colorFillingRoof)
 
         canvas?.drawPath(building.infectedRoof, paintForFilling)
     }
 
     fun drawLeftSideBuilding(building: Building, canvas: Canvas?) {
-        paintForFilling.color = Color.BLACK
+        paintForFilling.color = ContextCompat.getColor(context, R.color.colorLeft)
 
         canvas?.drawPath(building.leftSide, paintForFilling)
     }
 
     fun drawCenterSideBuilding(building: Building, canvas: Canvas?) {
-        paintForFilling.color = R.color.colorCenter
+        paintForFilling.color = ContextCompat.getColor(context, R.color.colorCenter)
 
         canvas?.drawPath(building.centerSide, paintForFilling)
         canvas?.drawPath(building.centerSide, paintForStroke)
