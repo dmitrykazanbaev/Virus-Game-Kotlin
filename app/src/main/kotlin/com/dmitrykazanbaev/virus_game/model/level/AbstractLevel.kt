@@ -44,8 +44,10 @@ abstract class AbstractLevel(private val JsonBuildingsResource: Int) {
 
     private fun infectBuilding(): Boolean {
         val randomBuilding = Random().nextInt(buildings.size)
+//        val a = 6
         if (!buildings[randomBuilding].isInfected) {
             buildings[randomBuilding].infectedComputers++
+//            Log.w("dmka center", "${buildings[randomBuilding].centerSidePoints}")
             return true
         }
 
@@ -77,10 +79,10 @@ abstract class AbstractLevel(private val JsonBuildingsResource: Int) {
 
     protected fun getBuilding(jsonBuilding: JsonObject): Building {
         with(jsonBuilding) {
-            val leftSidePoints = getSortedPointsByClockwiseFromLeft(
-                    getPointsList(string("left")))
-            val centerSidePoints = getSortedPointsByClockwiseFromLeft(
-                    getPointsList(string("center")))
+            val leftSidePoints = //getSortedPointsByClockwiseFromLeft(
+                    getPointsList(string("left"))//)
+            val centerSidePoints = //getSortedPointsByClockwiseFromLeft(
+                    getPointsList(string("center"))//)
             val roofPoints = getSortedPointsByClockwiseFromLeft(
                     getPointsList(string("roof")))
 
@@ -94,9 +96,9 @@ abstract class AbstractLevel(private val JsonBuildingsResource: Int) {
 
     private fun getSortedPointsByClockwiseFromLeft(list: List<Point>): List<Point> {
         if (list.isNotEmpty()) {
-            val leftPoint = list.minBy(Point::x)
+            val leftPoint = list.minWith(compareBy(Point::x).thenBy(Point::y))
 
-            list.sortedWith(comparePointsByClockwiseFrom(leftPoint!!))
+            return list.sortedWith(comparePointsByClockwiseFrom(leftPoint!!))
         }
 
         return list
@@ -104,27 +106,34 @@ abstract class AbstractLevel(private val JsonBuildingsResource: Int) {
 
     inner class comparePointsByClockwiseFrom(val center: Point) : Comparator<Point> {
         override fun compare(p0: Point, p1: Point): Int {
+            if (p0.x - center.x >= 0 && p1.x - center.x < 0) {
+                return 1
+            }
+            if (p0.x - center.x < 0 && p1.x - center.x >= 0) {
+                return -1
+            }
+
             if (p0.x - center.x == 0 && p1.x - center.x == 0) {
                 if (p0.y - center.y >= 0 || p1.y - center.y >= 0) {
-                    return p1.y.compareTo(p0.y)
+                    return p0.y.compareTo(p1.y)
                 }
-                return p0.y.compareTo(p1.y)
+                return p1.y.compareTo(p0.y)
             }
 
             // compute the cross product of vectors (center -> a) x (center -> b)
             val det = (p0.x - center.x) * (p1.y - center.y) - (p1.x - center.x) * (p0.y - center.y)
             if (det < 0) {
-                return -1
+                return 1
             }
             if (det > 0) {
-                return 1
+                return -1
             }
 
             // points a and b are on the same line from the center
             // check which point is closer to the center
             val d1 = (p0.x - center.x) * (p0.x - center.x) + (p0.y - center.y) * (p0.y - center.y)
             val d2 = (p1.x - center.x) * (p1.x - center.x) + (p1.y - center.y) * (p1.y - center.y)
-            return d2.compareTo(d1)
+            return d1.compareTo(d2)
         }
     }
 
