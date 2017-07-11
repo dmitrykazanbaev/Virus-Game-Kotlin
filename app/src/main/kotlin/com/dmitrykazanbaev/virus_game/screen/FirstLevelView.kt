@@ -39,29 +39,29 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
         drawInfectedRoofBuilding(building, canvas)
     }
 
-    private fun drawInfectedRoofBuilding(building: Building, canvas: Canvas?) {
-        paintForFilling.color = ContextCompat.getColor(context, R.color.colorFillingRoof)
-
-        canvas?.drawPath(building.infectedRoof, paintForFilling)
-    }
-
-    fun drawLeftSideBuilding(building: Building, canvas: Canvas?) {
+    private fun drawLeftSideBuilding(building: Building, canvas: Canvas?) {
         paintForFilling.color = ContextCompat.getColor(context, R.color.colorLeft)
 
         canvas?.drawPath(building.leftSide, paintForFilling)
     }
 
-    fun drawCenterSideBuilding(building: Building, canvas: Canvas?) {
+    private fun drawCenterSideBuilding(building: Building, canvas: Canvas?) {
         paintForFilling.color = ContextCompat.getColor(context, R.color.colorCenter)
 
         canvas?.drawPath(building.centerSide, paintForFilling)
         canvas?.drawPath(building.centerSide, paintForStroke)
     }
 
-    fun drawRoofBuilding(building: Building, canvas: Canvas?) {
-        paintForFilling.color = Color.WHITE
+    private fun drawRoofBuilding(building: Building, canvas: Canvas?) {
+        paintForFilling.color = ContextCompat.getColor(context, R.color.colorRoof)
 
         canvas?.drawPath(building.roof, paintForFilling)
         canvas?.drawPath(building.roof, paintForStroke)
+    }
+
+    private fun drawInfectedRoofBuilding(building: Building, canvas: Canvas?) {
+        paintForFilling.color = ContextCompat.getColor(context, R.color.colorInfectedRoof)
+
+        canvas?.drawPath(building.infectedRoof, paintForFilling)
     }
 }
