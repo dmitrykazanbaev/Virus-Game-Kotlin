@@ -11,15 +11,20 @@ data class Building(val leftSide: Path, val centerSide: Path, val roof: Path,
     val minPoint: Point
     var infectedRoof = Path()
     var isInfected = false
+    var isCured = true
 
     var computers = 5
     var infectedComputers by Delegates.observable(0) {
-        _, oldValue, newValue ->
-        if (oldValue == newValue - 1) {
-            computeInfectedRoof()
-            if (newValue == computers)
-                isInfected = true
+        _, _, newValue ->
+        when (newValue) {
+            0 -> isCured = true
+            computers -> isInfected = true
+            in 1 until computers -> {
+                isCured = false
+                isInfected = false
+            }
         }
+        computeInfectedRoof()
     }
 
     init {
@@ -32,7 +37,7 @@ data class Building(val leftSide: Path, val centerSide: Path, val roof: Path,
     }
 
     private fun computeInfectedRoof() {
-        if (infectedComputers > 0) {
+        if (infectedComputers in 1..computers) {
             infectedRoof.reset()
 
             infectedRoof.moveTo(roofPoints[0].x.toFloat(), roofPoints[0].y.toFloat())
