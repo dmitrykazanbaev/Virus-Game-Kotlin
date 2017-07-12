@@ -1,4 +1,4 @@
-package com.dmitrykazanbaev.virus_game.model
+package com.dmitrykazanbaev.virus_game.model.level
 
 import android.graphics.Path
 import android.graphics.Point

@@ -6,7 +6,6 @@ import com.beust.klaxon.JsonObject
 import com.beust.klaxon.Parser
 import com.beust.klaxon.string
 import com.dmitrykazanbaev.virus_game.R
-import com.dmitrykazanbaev.virus_game.model.Building
 import com.dmitrykazanbaev.virus_game.service.getFigurePath
 import com.dmitrykazanbaev.virus_game.service.getPointsListFromJsonString
 import com.dmitrykazanbaev.virus_game.service.getSortedPointsByClockwiseFromLeft

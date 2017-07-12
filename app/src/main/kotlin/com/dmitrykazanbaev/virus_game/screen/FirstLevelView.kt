@@ -6,7 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.support.v4.content.ContextCompat
 import com.dmitrykazanbaev.virus_game.R
-import com.dmitrykazanbaev.virus_game.model.Building
+import com.dmitrykazanbaev.virus_game.model.level.Building
 import com.dmitrykazanbaev.virus_game.model.level.FirstLevel
 
 class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()) {
