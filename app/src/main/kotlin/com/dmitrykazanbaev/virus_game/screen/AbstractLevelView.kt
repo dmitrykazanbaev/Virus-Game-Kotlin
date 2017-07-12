@@ -99,6 +99,12 @@ abstract class AbstractLevelView(context: Context, protected val level: Abstract
         minScaleFactor = scaleFactor
         maxScaleFactor = 3 * minScaleFactor
 
+        initDrawJob()
+
+        level.initTickJob()
+    }
+
+    private fun initDrawJob() {
         drawJob = launch(CommonPool) {
             var canvas: Canvas?
             while (isActive) {
@@ -111,8 +117,6 @@ abstract class AbstractLevelView(context: Context, protected val level: Abstract
                 canvas?.let { holder.unlockCanvasAndPost(it) }
             }
         }
-
-        level.initTickJob()
     }
 
     abstract fun drawLevel(canvas: Canvas)
