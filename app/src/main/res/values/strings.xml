@@ -3,4 +3,5 @@
     <string name="strokeWidth" format="float" type="dimen">1.5</string>
     <string name="virus_button_description">Button to open virus characteristics</string>
     <string name="statistics_button_description">Button to open virus statistics</string>
+    <string name="start_game">Start Game</string>
 </resources>
