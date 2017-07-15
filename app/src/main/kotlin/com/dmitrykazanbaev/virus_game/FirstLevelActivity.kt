@@ -7,14 +7,14 @@ import com.dmitrykazanbaev.virus_game.screen.FirstLevelView
 import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
 import com.dmitrykazanbaev.virus_game.service.closeCharacteristicWindow
 import com.dmitrykazanbaev.virus_game.service.showCharacteristicWindow
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.first_level_activity.*
 
 
-class MainActivity : AppCompatActivity() {
+class FirstLevelActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.first_level_activity)
 
         ApplicationContextHolder.context = this
 
