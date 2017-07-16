@@ -29,6 +29,16 @@ fun startNewGame() {
     val activity = ApplicationContextHolder.context as Activity
 
     with(activity) {
+        val intent = Intent(this, FirstLevelActivity::class.java)
+        intent.putExtra("new_game", true)
+        startActivity(intent)
+    }
+}
+
+fun continueGame() {
+    val activity = ApplicationContextHolder.context as Activity
+
+    with(activity) {
         startActivity(Intent(this, FirstLevelActivity::class.java))
     }
 }

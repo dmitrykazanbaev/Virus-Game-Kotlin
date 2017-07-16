@@ -121,6 +121,10 @@ abstract class AbstractLevelView(context: Context, protected val level: Abstract
 
     abstract fun drawLevel(canvas: Canvas)
 
+    abstract fun saveLevelToRealm()
+
+    abstract fun initLevelFromRealm()
+
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         return scrollGestureDetector.onTouchEvent(event) && scaleGestureDetector.onTouchEvent(event)
     }

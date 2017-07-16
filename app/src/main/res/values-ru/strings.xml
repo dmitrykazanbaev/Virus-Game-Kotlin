@@ -1,3 +1,4 @@
 <resources>
     <string name="start_game">Начать игру</string>
+    <string name="continue_game">Продолжить игру</string>
 </resources>

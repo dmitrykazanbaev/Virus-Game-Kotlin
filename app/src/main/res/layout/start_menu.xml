@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:id="@+id/start_menu"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/start_menu"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              style="?android:attr/buttonBarStyle">
+
     <Button
             android:id="@+id/start_game_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTouch"
-            android:text="@string/start_game"/>
-</FrameLayout>
+            android:text="@string/start_game"
+            style="?android:attr/buttonBarButtonStyle"/>
+
+    <Button
+            android:id="@+id/continue_game_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onTouch"
+            android:text="@string/continue_game"
+            style="?android:attr/buttonBarButtonStyle"/>
+</LinearLayout>

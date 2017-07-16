@@ -6,10 +6,15 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.support.v4.content.ContextCompat
 import com.dmitrykazanbaev.virus_game.R
+import com.dmitrykazanbaev.virus_game.model.dao.BuildingDAO
+import com.dmitrykazanbaev.virus_game.model.dao.FirstLevelDAO
 import com.dmitrykazanbaev.virus_game.model.level.Building
 import com.dmitrykazanbaev.virus_game.model.level.FirstLevel
+import io.realm.Realm
 
 class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()) {
+    val realm = Realm.getDefaultInstance()!!
+
     private val paintForFilling = Paint()
     private val paintForStroke = Paint()
 
@@ -30,6 +35,30 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
         (level as FirstLevel).buildings.forEach {
             drawBuilding(it, canvas)
         }
+    }
+
+    override fun saveLevelToRealm() {
+        realm.executeTransaction {
+            it.where(FirstLevelDAO::class.java).findAll().deleteAllFromRealm()
+
+            val firstLevelDAO = it.createObject(FirstLevelDAO::class.java)
+
+            (level as FirstLevel).buildings
+                    .map { BuildingDAO(it.infectedComputers) }
+                    .forEach { firstLevelDAO.buildingList.add(it) }
+        }
+    }
+
+    override fun initLevelFromRealm() {
+        val firstLevelDAO = realm.where(FirstLevelDAO::class.java).findFirst()
+
+        firstLevelDAO?.buildingList?.withIndex()?.
+                forEach { (index, value) ->
+                    (level as FirstLevel).
+                            buildings[index].
+                            infectedComputers = value.infectedComputers
+                }
+
     }
 
     fun drawBuilding(building: Building, canvas: Canvas?) {

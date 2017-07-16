@@ -7,10 +7,12 @@ import com.dmitrykazanbaev.virus_game.screen.FirstLevelView
 import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
 import com.dmitrykazanbaev.virus_game.service.closeCharacteristicWindow
 import com.dmitrykazanbaev.virus_game.service.showCharacteristicWindow
+import io.realm.Realm
 import kotlinx.android.synthetic.main.first_level_activity.*
 
 
 class FirstLevelActivity : AppCompatActivity() {
+    val firstLevelView by lazy { FirstLevelView(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,10 +20,19 @@ class FirstLevelActivity : AppCompatActivity() {
 
         ApplicationContextHolder.context = this
 
-        val firstLevelView = FirstLevelView(this)
+        Realm.init(this)
+
         firstLevelView.holder.addCallback(firstLevelView)
 
         mainframe.addView(firstLevelView, 0)
+
+        if (!intent.getBooleanExtra("new_game", false))
+            firstLevelView.initLevelFromRealm()
+    }
+
+    override fun onStop() {
+        firstLevelView.saveLevelToRealm()
+        super.onStop()
     }
 
     fun onTouch(view: View) {
