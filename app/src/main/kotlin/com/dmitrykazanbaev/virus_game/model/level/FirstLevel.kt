@@ -6,6 +6,9 @@ import com.beust.klaxon.JsonObject
 import com.beust.klaxon.Parser
 import com.beust.klaxon.string
 import com.dmitrykazanbaev.virus_game.R
+import com.dmitrykazanbaev.virus_game.model.dao.AbstractLevelDAO
+import com.dmitrykazanbaev.virus_game.model.dao.BuildingDAO
+import com.dmitrykazanbaev.virus_game.model.dao.FirstLevelDAO
 import com.dmitrykazanbaev.virus_game.service.getFigurePath
 import com.dmitrykazanbaev.virus_game.service.getPointsListFromJsonString
 import com.dmitrykazanbaev.virus_game.service.getSortedPointsByClockwiseFromLeft
@@ -41,6 +44,22 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
         jsonBuildings.forEach {
             buildings.add(getBuilding(it as JsonObject))
         }
+    }
+
+    override fun getLevelState(): FirstLevelDAO {
+        val firstLevelDAO = FirstLevelDAO()
+
+        buildings.map { BuildingDAO(it.infectedComputers) }
+                .forEach { firstLevelDAO.buildingList.add(it) }
+
+        return firstLevelDAO
+    }
+
+    override fun setLevelState(levelState: AbstractLevelDAO) {
+        (levelState as FirstLevelDAO).buildingList.withIndex().
+                forEach { (index, value) ->
+                    buildings[index].infectedComputers = value.infectedComputers
+                }
     }
 
     private fun setMinMaxPoints() {

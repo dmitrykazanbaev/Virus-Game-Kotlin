@@ -41,24 +41,16 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
         realm.executeTransaction {
             it.where(FirstLevelDAO::class.java).findAll().deleteAllFromRealm()
 
-            val firstLevelDAO = it.createObject(FirstLevelDAO::class.java)
+            val firstLevelDAO = level.getLevelState()
 
-            (level as FirstLevel).buildings
-                    .map { BuildingDAO(it.infectedComputers) }
-                    .forEach { firstLevelDAO.buildingList.add(it) }
+            it.copyToRealm(firstLevelDAO as FirstLevelDAO)
         }
     }
 
     override fun initLevelFromRealm() {
         val firstLevelDAO = realm.where(FirstLevelDAO::class.java).findFirst()
 
-        firstLevelDAO?.buildingList?.withIndex()?.
-                forEach { (index, value) ->
-                    (level as FirstLevel).
-                            buildings[index].
-                            infectedComputers = value.infectedComputers
-                }
-
+        firstLevelDAO?.let { level.setLevelState(it) }
     }
 
     fun drawBuilding(building: Building, canvas: Canvas?) {
