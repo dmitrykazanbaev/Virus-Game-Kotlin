@@ -1,7 +1,7 @@
 package com.dmitrykazanbaev.virus_game.service
 
 import android.graphics.Point
-import java.util.ArrayList
+import java.util.*
 
 
 fun getPointsListFromJsonString(building: String?): List<Point> {
