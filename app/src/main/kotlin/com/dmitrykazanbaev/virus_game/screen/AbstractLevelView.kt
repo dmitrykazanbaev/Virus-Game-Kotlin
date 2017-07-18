@@ -95,7 +95,7 @@ abstract class AbstractLevelView(context: Context, protected val level: Abstract
 
     override fun surfaceCreated(p0: SurfaceHolder?) {
         scaleFactor = minOf(width.toFloat() / level.width, height.toFloat() / level.height)
-        scaleFactor *= 0.9f
+        scaleFactor *= 0.8f
         minScaleFactor = scaleFactor
         maxScaleFactor = 3 * minScaleFactor
 

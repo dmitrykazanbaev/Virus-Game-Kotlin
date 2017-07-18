@@ -37,9 +37,9 @@ data class Building(val leftSide: Path, val centerSide: Path, val roof: Path,
     }
 
     private fun computeInfectedRoof() {
-        if (infectedComputers in 1..computers) {
-            infectedRoof.reset()
+        infectedRoof.reset()
 
+        if (infectedComputers in 1..computers) {
             infectedRoof.moveTo(roofPoints[0].x.toFloat(), roofPoints[0].y.toFloat())
 
             infectedRoof.lineTo((roofPoints[1].x - roofPoints[0].x) * infectedComputers / computers + roofPoints[0].x.toFloat(),
