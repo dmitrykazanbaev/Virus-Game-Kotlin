@@ -34,49 +34,60 @@
         <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:translationY="@dimen/activity_horizontal_margin"
-                android:weightSum="8.85">
+                android:weightSum="8.85"
+                android:translationY="16dp">
             <ImageButton
                     android:background="@android:color/transparent"
                     android:src="@mipmap/button_non"
-                    android:scaleType="fitStart"
+                    android:scaleType="centerInside"
                     android:layout_width="0dp"
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
-                    android:id="@+id/skills_button"/>
+                    android:id="@+id/skills_button"
+                    android:adjustViewBounds="true"
+                    android:translationX="32dp"/>
             <ImageButton
                     android:background="@android:color/transparent"
                     android:src="@mipmap/button_non"
-                    android:scaleType="fitStart"
+                    android:scaleType="centerInside"
                     android:layout_width="0dp"
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
-                    android:id="@+id/propagation_button"/>
+                    android:id="@+id/propagation_button"
+                    android:adjustViewBounds="true"
+                    android:translationX="16dp"/>
             <ImageButton
                     android:background="@android:color/transparent"
                     android:src="@mipmap/button_non"
-                    android:scaleType="fitStart"
+                    android:scaleType="centerInside"
                     android:layout_width="0dp"
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
-                    android:id="@+id/counteraction_button"/>
+                    android:id="@+id/counteraction_button"
+                    android:adjustViewBounds="true"/>
+
             <ImageButton
                     android:background="@android:color/transparent"
                     android:src="@mipmap/button_non"
-                    android:scaleType="fitStart"
+                    android:scaleType="centerInside"
                     android:layout_width="0dp"
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
-                    android:id="@+id/devices_button"/>
+                    android:id="@+id/devices_button"
+                    android:adjustViewBounds="true"
+                    android:translationX="-16dp"/>
+
             <ImageButton
                     android:background="@android:color/transparent"
                     android:src="@mipmap/button_closed"
-                    android:scaleType="fitStart"
+                    android:scaleType="centerInside"
                     android:layout_width="0dp"
                     android:layout_weight="0.85"
                     android:layout_height="wrap_content"
                     android:onClick="onTouch"
-                    android:id="@+id/close_characteristics_button"/>
+                    android:id="@+id/close_characteristics_button"
+                    android:adjustViewBounds="true"
+                    android:translationX="-32dp"/>
         </LinearLayout>
     </RelativeLayout>
 
