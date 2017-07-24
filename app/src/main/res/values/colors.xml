@@ -8,5 +8,6 @@
     <color name="colorCenter">#555555</color>
     <color name="colorRoof">#383838</color>
     <color name="colorInfectedRoof">#AE3939</color>
+    <color name="colorOrange">#FFA000</color>
     <color name="low_transparent">#88676767</color>
 </resources>
