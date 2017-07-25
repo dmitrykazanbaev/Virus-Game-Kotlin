@@ -106,6 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="bottom"
+                android:layout_marginBottom="16dp"
                 android:baselineAligned="false"
                 android:id="@+id/balance_progress_bars">
             <LinearLayout
@@ -118,7 +119,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/propagation_text_progress_bar"
-                        app:customFont="DINPro.otf"
+                        app:customFont="DINPro/DINPro-Light.otf"
                         style="@style/CharacteristicsProgressBarTextViewStyle"/>
                 <ProgressBar
                         style="@style/CharacteristicsProgressBarStyle"
@@ -137,7 +138,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/efficiency_text_progress_bar"
-                        app:customFont="DINPro.otf"
+                        app:customFont="DINPro/DINPro-Light.otf"
                         style="@style/CharacteristicsProgressBarTextViewStyle"/>
                 <ProgressBar
                         style="@style/CharacteristicsProgressBarStyle"
@@ -156,7 +157,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/resistance_text_progress_bar"
-                        app:customFont="DINPro.otf"
+                        app:customFont="DINPro/DINPro-Light.otf"
                         style="@style/CharacteristicsProgressBarTextViewStyle"/>
                 <ProgressBar
                         style="@style/CharacteristicsProgressBarStyle"

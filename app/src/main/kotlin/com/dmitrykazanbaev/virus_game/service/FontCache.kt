@@ -14,8 +14,7 @@ object FontCache {
 
         if (typeface == null) {
             try {
-                val folder = fontName.substringBeforeLast(".")
-                val myTypeface = Typeface.createFromAsset(context.assets, "fonts/$folder/$fontName")
+                val myTypeface = Typeface.createFromAsset(context.assets, "fonts/$fontName")
                 typeface = myTypeface
             } catch (e: Exception) {
                 return null
