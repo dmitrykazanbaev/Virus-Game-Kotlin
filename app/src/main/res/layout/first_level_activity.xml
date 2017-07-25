@@ -39,7 +39,8 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="16dp" android:id="@+id/whitespace_indent">
+                android:layout_height="16dp"
+                android:id="@+id/whitespace_indent">
         </LinearLayout>
 
         <LinearLayout
@@ -104,11 +105,25 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
                 android:layout_marginBottom="16dp"
-                android:baselineAligned="false"
                 android:id="@+id/balance_progress_bars">
+            <com.dmitrykazanbaev.virus_game.service.TextViewWithCustomFont
+                    android:text="100 $"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/characteristic_window_balance"
+                    android:layout_marginStart="32dp"
+                    app:customFont="DINPro/DINPro.otf"
+                    android:layout_weight="1"/>
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
