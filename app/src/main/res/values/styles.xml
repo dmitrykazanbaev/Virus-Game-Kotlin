@@ -10,4 +10,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CharacteristicsProgressBarStyle" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:maxHeight">100dp</item>
+        <item name="android:progressDrawable">@drawable/characteristics_progress_bar_style</item>
+    </style>
+
+    <style name="CharacteristicsProgressBarTextViewStyle" parent="@android:style/TextAppearance.Holo.Widget.TextView">
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

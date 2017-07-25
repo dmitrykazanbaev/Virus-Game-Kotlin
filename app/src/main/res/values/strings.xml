@@ -1,8 +1,11 @@
 <resources>
-    <string name="app_name">Virus Game</string>
-    <string name="strokeWidth" format="float" type="dimen">1.5</string>
-    <string name="virus_button_description">Button to open virus characteristics</string>
-    <string name="statistics_button_description">Button to open virus statistics</string>
+    <string name="app_name" translatable="false">Virus Game</string>
+    <string name="strokeWidth" format="float" type="dimen" translatable="false">1.5</string>
+    <string name="virus_button_description" translatable="false">Button to open virus characteristics</string>
+    <string name="statistics_button_description" translatable="false">Button to open virus statistics</string>
     <string name="start_game">Start Game</string>
     <string name="continue_game">Continue Game</string>
+    <string name="propagation_text_progress_bar">PROPAGATION</string>
+    <string name="efficiency_text_progress_bar">EFFICIENCY</string>
+    <string name="resistance_text_progress_bar">RESISTANCE</string>
 </resources>

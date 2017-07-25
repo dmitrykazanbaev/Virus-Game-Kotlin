@@ -1,4 +1,7 @@
 <resources>
     <string name="start_game">Начать игру</string>
     <string name="continue_game">Продолжить игру</string>
+    <string name="propagation_text_progress_bar">РАСПРОСТРАНЕНИЕ</string>
+    <string name="efficiency_text_progress_bar">ЭФФЕКТИВНОСТЬ</string>
+    <string name="resistance_text_progress_bar">СКРЫТНОСТЬ</string>
 </resources>

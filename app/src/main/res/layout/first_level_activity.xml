@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
              android:id="@+id/mainframe"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
@@ -45,8 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/characteristic_buttons"
-                android:weightSum="8.85"
-        >
+                android:weightSum="8.84">
             <ImageButton
                     android:background="@android:color/transparent"
                     android:src="@mipmap/button_non"
@@ -93,7 +93,7 @@
                     android:src="@mipmap/button_closed"
                     android:scaleType="centerInside"
                     android:layout_width="0dp"
-                    android:layout_weight="0.85"
+                    android:layout_weight="0.84"
                     android:layout_height="wrap_content"
                     android:onClick="onTouch"
                     android:id="@+id/close_characteristics_button"
@@ -104,31 +104,67 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <ProgressBar
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:baselineAligned="false"
+                android:id="@+id/balance_progress_bars">
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/propagation_progress_bar"
-                    android:layout_weight="1"
-                    android:progress="20"
-                    android:progressDrawable="@drawable/characteristics_progress_bar_style"/>
-            <ProgressBar
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="wrap_content"
+                    android:layout_weight="1">
+                <com.dmitrykazanbaev.virus_game.service.TextViewWithCustomFont
+                        android:text="@string/propagation_text_progress_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/propagation_text_progress_bar"
+                        app:customFont="DINPro.otf"
+                        style="@style/CharacteristicsProgressBarTextViewStyle"/>
+                <ProgressBar
+                        style="@style/CharacteristicsProgressBarStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/propagation_progress_bar"
+                        android:progress="20"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/efficiency_progress_bar"
-                    android:progress="0"
-                    android:layout_weight="1"
-                    android:progressDrawable="@drawable/characteristics_progress_bar_style"/>
-            <ProgressBar
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="wrap_content"
+                    android:layout_weight="1">
+                <com.dmitrykazanbaev.virus_game.service.TextViewWithCustomFont
+                        android:text="@string/efficiency_text_progress_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/efficiency_text_progress_bar"
+                        app:customFont="DINPro.otf"
+                        style="@style/CharacteristicsProgressBarTextViewStyle"/>
+                <ProgressBar
+                        style="@style/CharacteristicsProgressBarStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/efficiency_progress_bar"
+                        android:progress="20"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/resistance_progress_bar"
-                    android:layout_weight="1"
-                    android:progress="50"
-                    android:progressDrawable="@drawable/characteristics_progress_bar_style"/>
+                    android:layout_weight="1">
+                <com.dmitrykazanbaev.virus_game.service.TextViewWithCustomFont
+                        android:text="@string/resistance_text_progress_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/resistance_text_progress_bar"
+                        app:customFont="DINPro.otf"
+                        style="@style/CharacteristicsProgressBarTextViewStyle"/>
+                <ProgressBar
+                        style="@style/CharacteristicsProgressBarStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/resistance_progress_bar"
+                        android:progress="20"/>
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
