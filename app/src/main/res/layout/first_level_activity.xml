@@ -47,7 +47,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/characteristic_buttons"
-                android:weightSum="8.84">
+                android:baselineAligned="false"
+                android:weightSum="8.82">
             <ImageButton
                     android:background="@android:color/transparent"
                     android:src="@mipmap/button_non"
@@ -94,8 +95,8 @@
                     android:src="@mipmap/button_closed"
                     android:scaleType="centerInside"
                     android:layout_width="0dp"
-                    android:layout_weight="0.84"
-                    android:layout_height="wrap_content"
+                    android:layout_weight="0.82"
+                    android:layout_height="match_parent"
                     android:onClick="onTouch"
                     android:id="@+id/close_characteristics_button"
                     android:adjustViewBounds="true"
