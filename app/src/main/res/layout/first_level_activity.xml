@@ -114,17 +114,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginBottom="16dp"
-                android:id="@+id/balance_progress_bars">
+                android:id="@+id/balance_progress_bars"
+                android:layout_marginBottom="16dp">
             <com.dmitrykazanbaev.virus_game.service.TextViewWithCustomFont
                     android:text="100 $"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/characteristic_window_balance"
                     android:layout_marginStart="32dp"
+                    android:textSize="18sp"
+                    android:layout_weight="1"
+                    android:id="@+id/characteristic_window_balance"
                     app:customFont="DINPro/DINPro.otf"
-                    android:layout_weight="1"/>
+                    android:background="@drawable/balance_characteristics_background"/>
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
