@@ -11,7 +11,7 @@ kotlin {
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "22.0.1"
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "com.dmitrykazanbaev.virus_game"
         minSdkVersion 19
