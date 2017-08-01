@@ -1,0 +1,9 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="text_characteristics_progress_bar">26sp</dimen>
+    <dimen name="text_characteristics_balance">34sp</dimen>
+    <dimen name="stroke_characteristics_balance">6dp</dimen>
+    <dimen name="stroke_characteristics_progress_bar">3dp</dimen>
+</resources>

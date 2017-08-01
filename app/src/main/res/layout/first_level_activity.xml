@@ -35,13 +35,7 @@
             android:layout_height="match_parent"
             android:id="@+id/characteristic_window"
             android:background="@color/low_transparent"
-            android:visibility="visible">
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="16dp"
-                android:id="@+id/whitespace_indent">
-        </LinearLayout>
+            android:visibility="visible" android:weightSum="100">
 
         <LinearLayout
                 android:layout_width="wrap_content"
@@ -107,82 +101,79 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:id="@+id/balance_progress_bars"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                android:layout_weight="10"
+                android:weightSum="7">
             <com.dmitrykazanbaev.virus_game.service.TextViewWithCustomFont
                     android:text="100 $"
                     android:gravity="center"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="32dp"
-                    android:textSize="18sp"
-                    android:layout_weight="1"
                     android:id="@+id/characteristic_window_balance"
                     app:customFont="DINPro/DINPro.otf"
-                    android:background="@drawable/balance_characteristics_background"/>
+                    android:textSize="@dimen/text_characteristics_balance"
+                    android:background="@drawable/balance_characteristics_background"
+                    android:layout_weight="1"/>
             <LinearLayout
                     android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2">
                 <com.dmitrykazanbaev.virus_game.service.TextViewWithCustomFont
                         android:text="@string/propagation_text_progress_bar"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:id="@+id/propagation_text_progress_bar"
                         app:customFont="DINPro/DINPro-Light.otf"
-                        style="@style/CharacteristicsProgressBarTextViewStyle"/>
+                        style="@style/CharacteristicsProgressBarTextViewStyle" android:layout_weight="1"
+                />
                 <ProgressBar
                         style="@style/CharacteristicsProgressBarStyle"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:id="@+id/propagation_progress_bar"
-                        android:progress="20"/>
+                        android:progress="20" android:layout_weight="1"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2">
                 <com.dmitrykazanbaev.virus_game.service.TextViewWithCustomFont
                         android:text="@string/efficiency_text_progress_bar"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:id="@+id/efficiency_text_progress_bar"
                         app:customFont="DINPro/DINPro-Light.otf"
-                        style="@style/CharacteristicsProgressBarTextViewStyle"/>
+                        style="@style/CharacteristicsProgressBarTextViewStyle" android:layout_weight="1"/>
                 <ProgressBar
                         style="@style/CharacteristicsProgressBarStyle"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:id="@+id/efficiency_progress_bar"
-                        android:progress="20"/>
+                        android:progress="20" android:layout_weight="1"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2">
                 <com.dmitrykazanbaev.virus_game.service.TextViewWithCustomFont
                         android:text="@string/resistance_text_progress_bar"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:id="@+id/resistance_text_progress_bar"
                         app:customFont="DINPro/DINPro-Light.otf"
-                        style="@style/CharacteristicsProgressBarTextViewStyle"/>
+                        style="@style/CharacteristicsProgressBarTextViewStyle" android:layout_weight="1"/>
                 <ProgressBar
                         style="@style/CharacteristicsProgressBarStyle"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:id="@+id/resistance_progress_bar"
-                        android:progress="20"/>
+                        android:progress="20" android:layout_weight="1"/>
             </LinearLayout>
         </LinearLayout>
 
