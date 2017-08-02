@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/characteristic_buttons"
                 android:baselineAligned="false"
-                android:weightSum="8.82">
+                android:weightSum="8.82" android:layout_marginTop="8dp">
             <ImageButton
                     android:background="@android:color/transparent"
                     android:src="@mipmap/button_non"
@@ -98,12 +98,24 @@
         </LinearLayout>
 
         <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp" android:layout_weight="90"
+                android:weightSum="100" android:id="@+id/modification_and_menu" android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp">
+            <view class="com.dmitrykazanbaev.virus_game.model.virus.ModificationButton"
+                  android:layout_width="0dp"
+                  android:layout_height="match_parent"
+                  android:layout_weight="50"
+                  android:background="@android:color/transparent" android:id="@+id/modification_sector_button"
+            />
+        </LinearLayout>
+        <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_gravity="bottom"
                 android:id="@+id/balance_progress_bars"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="8dp"
                 android:layout_weight="10"
                 android:weightSum="7">
             <com.dmitrykazanbaev.virus_game.service.TextViewWithCustomFont

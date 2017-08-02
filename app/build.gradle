@@ -14,7 +14,7 @@ android {
     buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "com.dmitrykazanbaev.virus_game"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"

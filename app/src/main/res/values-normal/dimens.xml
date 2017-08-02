@@ -4,4 +4,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="text_characteristics_progress_bar">12sp</dimen>
     <dimen name="text_characteristics_balance">18sp</dimen>
+    <dimen name="padding_y_characteristics_progress_bar">-3dp</dimen>
 </resources>
