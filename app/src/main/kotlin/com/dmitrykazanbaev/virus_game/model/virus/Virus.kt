@@ -42,6 +42,8 @@ class ModificationButton : Button {
     val path = Path()
     val paint = Paint()
     val center by lazy { Point(width / 2, height / 2) }
+    val innerOval by lazy { RectF(width / 2f - 50, height / 2f - 50, width / 2f + 50, height / 2f + 50) }
+    val outerOval by lazy { RectF(width / 2f - 100, height / 2f - 100, width / 2f + 100, height / 2f + 100) }
 
     init {
         paint.color = Color.GREEN
@@ -50,8 +52,8 @@ class ModificationButton : Button {
 
     override fun onDraw(canvas: Canvas?) {
         path.reset()
-        path.arcTo(width / 2f - 50, height / 2f - 50, width / 2f + 50, height / 2f + 50, 0f, 90f, true)
-        path.arcTo(width / 2f - 100, height / 2f - 100, width / 2f + 100, height / 2f + 100, 90f, -90f, true)
+        path.arcTo(innerOval, 0f, 90f)
+        path.arcTo(outerOval, 90f, -90f)
         path.close()
 
         canvas?.let {
