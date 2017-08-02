@@ -6,4 +6,5 @@
     <dimen name="text_characteristics_balance">24sp</dimen>
     <dimen name="stroke_characteristics_balance">3dp</dimen>
     <dimen name="stroke_characteristics_progress_bar">1dp</dimen>
+    <dimen name="padding_y_characteristics_progress_bar">-3dp</dimen>
 </resources>
