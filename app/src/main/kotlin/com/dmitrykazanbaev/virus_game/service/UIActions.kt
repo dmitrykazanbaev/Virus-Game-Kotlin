@@ -2,6 +2,7 @@ package com.dmitrykazanbaev.virus_game.service
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import com.dmitrykazanbaev.virus_game.FirstLevelActivity
 import kotlinx.android.synthetic.main.first_level_activity.*
@@ -41,4 +42,8 @@ fun continueGame() {
     with(activity) {
         startActivity(Intent(this, FirstLevelActivity::class.java))
     }
+}
+
+fun modbutton() {
+    Log.w("dmka", "click")
 }

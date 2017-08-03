@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/characteristic_buttons"
                 android:baselineAligned="false"
-                android:weightSum="8.82" android:layout_marginTop="8dp">
+                android:weightSum="8.82" android:layout_marginTop="@dimen/indentTopBottom">
             <ImageButton
                     android:background="@android:color/transparent"
                     android:src="@mipmap/button_non"
@@ -100,12 +100,16 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp" android:layout_weight="90"
-                android:weightSum="100" android:id="@+id/modification_and_menu" android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp">
-            <view class="com.dmitrykazanbaev.virus_game.model.virus.ModificationButton"
+                android:weightSum="100" android:id="@+id/modification_and_menu"
+                android:layout_marginStart="@dimen/indentLeftRight"
+                android:layout_marginEnd="@dimen/indentLeftRight"
+                android:layout_marginTop="@dimen/indentTopBottomModButtonAndMenu"
+                android:layout_marginBottom="@dimen/indentTopBottomModButtonAndMenu">
+            <view class="com.dmitrykazanbaev.virus_game.custom_views.ModificationButton"
                   android:layout_width="0dp"
                   android:layout_height="match_parent"
                   android:layout_weight="50"
+                  android:onClick="onTouch"
                   android:background="@android:color/transparent" android:id="@+id/modification_sector_button"
             />
         </LinearLayout>
@@ -115,15 +119,15 @@
                 android:layout_height="0dp"
                 android:layout_gravity="bottom"
                 android:id="@+id/balance_progress_bars"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/indentTopBottom"
                 android:layout_weight="10"
-                android:weightSum="7">
-            <com.dmitrykazanbaev.virus_game.service.TextViewWithCustomFont
+                android:weightSum="7" android:layout_marginStart="@dimen/indentLeftRight"
+                android:layout_marginEnd="@dimen/indentLeftRight">
+            <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
                     android:text="100 $"
                     android:gravity="center"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="32dp"
                     android:id="@+id/characteristic_window_balance"
                     app:customFont="DINPro/DINPro.otf"
                     android:textSize="@dimen/text_characteristics_balance"
@@ -134,7 +138,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2">
-                <com.dmitrykazanbaev.virus_game.service.TextViewWithCustomFont
+                <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
                         android:text="@string/propagation_text_progress_bar"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -154,7 +158,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2">
-                <com.dmitrykazanbaev.virus_game.service.TextViewWithCustomFont
+                <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
                         android:text="@string/efficiency_text_progress_bar"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -175,7 +179,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2">
-                <com.dmitrykazanbaev.virus_game.service.TextViewWithCustomFont
+                <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
                         android:text="@string/resistance_text_progress_bar"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

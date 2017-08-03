@@ -6,6 +6,7 @@ import android.view.View
 import com.dmitrykazanbaev.virus_game.screen.FirstLevelView
 import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
 import com.dmitrykazanbaev.virus_game.service.closeCharacteristicWindow
+import com.dmitrykazanbaev.virus_game.service.modbutton
 import com.dmitrykazanbaev.virus_game.service.showCharacteristicWindow
 import io.realm.Realm
 import kotlinx.android.synthetic.main.first_level_activity.*
@@ -39,6 +40,7 @@ class FirstLevelActivity : AppCompatActivity() {
         when (view.id) {
             R.id.virus_button -> showCharacteristicWindow()
             R.id.close_characteristics_button -> closeCharacteristicWindow()
+            R.id.modification_sector_button -> modbutton()
         }
     }
 }

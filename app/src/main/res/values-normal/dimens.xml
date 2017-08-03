@@ -5,4 +5,8 @@
     <dimen name="text_characteristics_progress_bar">12sp</dimen>
     <dimen name="text_characteristics_balance">18sp</dimen>
     <dimen name="padding_y_characteristics_progress_bar">-3dp</dimen>
+    <dimen name="indentTopBottom">8dp</dimen>
+    <dimen name="indentLeftRight">32dp</dimen>
+    <dimen name="indentTextAndProgressBarLeft">16dp</dimen>
+    <dimen name="indentTopBottomModButtonAndMenu">16dp</dimen>
 </resources>

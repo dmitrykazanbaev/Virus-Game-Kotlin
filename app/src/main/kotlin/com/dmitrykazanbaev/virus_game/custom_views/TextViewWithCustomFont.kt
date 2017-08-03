@@ -1,9 +1,10 @@
-package com.dmitrykazanbaev.virus_game.service
+package com.dmitrykazanbaev.virus_game.custom_views
 
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.TextView
 import com.dmitrykazanbaev.virus_game.R
+import com.dmitrykazanbaev.virus_game.service.FontCache
 
 
 class TextViewWithCustomFont : TextView {
