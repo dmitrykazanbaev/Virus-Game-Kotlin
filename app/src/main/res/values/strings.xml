@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Virus Game</string>
+    <string name="app_name" translatable="false">HACKME</string>
     <string name="strokeWidth" format="float" type="dimen" translatable="false">1.5</string>
     <string name="virus_button_description" translatable="false">Button to open virus characteristics</string>
     <string name="statistics_button_description" translatable="false">Button to open virus statistics</string>
