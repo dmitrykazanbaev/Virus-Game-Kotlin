@@ -27,7 +27,6 @@ class ModificationButton : Button {
         RectF(center.x - outerRadius.toFloat(), center.y - outerRadius.toFloat(),
                 center.x + outerRadius.toFloat(), center.y + outerRadius.toFloat())
     }
-    var r = Region()
 
     init {
         paint.color = Color.DKGRAY
@@ -46,10 +45,11 @@ class ModificationButton : Button {
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        val rectF = RectF()
-        path.computeBounds(rectF, true)
-        r.setPath(path, Region(rectF.left.toInt(), rectF.top.toInt(), rectF.right.toInt(), rectF.bottom.toInt()))
-        if (r.contains(event.x.toInt(), event.y.toInt()))
+        val buttonRegion = Region()
+        val pathBounds = RectF()
+        path.computeBounds(pathBounds, true)
+        buttonRegion.setPath(path, Region(pathBounds.left.toInt(), pathBounds.top.toInt(), pathBounds.right.toInt(), pathBounds.bottom.toInt()))
+        if (buttonRegion.contains(event.x.toInt(), event.y.toInt()))
             return super.onTouchEvent(event)
         else
             return false
