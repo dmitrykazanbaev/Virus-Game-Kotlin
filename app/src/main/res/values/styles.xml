@@ -14,12 +14,12 @@
         <item name="android:maxHeight">100dp</item>
         <item name="android:minHeight">1dp</item>
         <item name="android:progressDrawable">@drawable/characteristics_progress_bar_style</item>
-        <item name="android:layout_marginLeft">@dimen/indentTextAndProgressBarLeft</item>
+        <item name="android:layout_marginLeft">@dimen/indent_text_and_progress_bar_left</item>
     </style>
 
     <style name="CharacteristicsProgressBarTextViewStyle" parent="@android:style/TextAppearance.Holo.Widget.TextView">
         <item name="android:gravity">center</item>
-        <item name="android:layout_marginLeft">@dimen/indentTextAndProgressBarLeft</item>
+        <item name="android:layout_marginLeft">@dimen/indent_text_and_progress_bar_left</item>
         <item name="android:textSize">@dimen/text_characteristics_progress_bar</item>
         <item name="android:textColor">@android:color/white</item>
     </style>

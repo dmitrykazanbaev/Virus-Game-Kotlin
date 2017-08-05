@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/characteristic_buttons"
                 android:baselineAligned="false"
-                android:weightSum="8.82" android:layout_marginTop="@dimen/indentTopBottom">
+                android:weightSum="8.82" android:layout_marginTop="@dimen/indent_top_bottom">
             <ImageButton
                     android:background="@android:color/transparent"
                     android:src="@mipmap/button_non"
@@ -98,20 +98,22 @@
         </LinearLayout>
 
         <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="0dp" android:layout_weight="88"
-                android:weightSum="100" android:id="@+id/modification_and_menu"
-                android:layout_marginStart="@dimen/indentLeftRight"
-                android:layout_marginEnd="@dimen/indentLeftRight"
-                android:layout_marginTop="@dimen/indentTopBottomModButtonAndMenu"
-                android:layout_marginBottom="@dimen/indentTopBottomModButtonAndMenu">
-            <view class="com.dmitrykazanbaev.virus_game.custom_views.ModificationButton"
-                  android:layout_width="0dp"
-                  android:layout_height="match_parent"
-                  android:layout_weight="50"
-                  android:onClick="onTouch"
-                  android:background="@android:color/transparent" android:id="@+id/modification_sector_button"
-            />
+                android:layout_height="0dp"
+                android:layout_weight="88"
+                android:weightSum="100"
+                android:id="@+id/modification_and_menu"
+                android:layout_marginStart="@dimen/indent_left_right"
+                android:layout_marginEnd="@dimen/indent_left_right"
+                android:layout_marginTop="@dimen/indent_top_bottom_mod_button_and_menu"
+                android:layout_marginBottom="@dimen/indent_top_bottom_mod_button_and_menu">
+            <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="50"
+                    android:id="@+id/modification_sector_button">
+            </RelativeLayout>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
@@ -119,10 +121,10 @@
                 android:layout_height="0dp"
                 android:layout_gravity="bottom"
                 android:id="@+id/balance_progress_bars"
-                android:layout_marginBottom="@dimen/indentTopBottom"
+                android:layout_marginBottom="@dimen/indent_top_bottom"
                 android:layout_weight="12"
-                android:weightSum="7.2" android:layout_marginStart="@dimen/indentLeftRight"
-                android:layout_marginEnd="@dimen/indentLeftRight">
+                android:weightSum="7.2" android:layout_marginStart="@dimen/indent_left_right"
+                android:layout_marginEnd="@dimen/indent_left_right">
             <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
                     android:text="100 $"
                     android:gravity="center"

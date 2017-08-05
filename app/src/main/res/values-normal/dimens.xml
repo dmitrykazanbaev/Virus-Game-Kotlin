@@ -7,8 +7,9 @@
     <dimen name="stroke_characteristics_balance">3dp</dimen>
     <dimen name="stroke_characteristics_progress_bar">1dp</dimen>
     <dimen name="padding_y_characteristics_progress_bar">-3dp</dimen>
-    <dimen name="indentTopBottom">8dp</dimen>
-    <dimen name="indentLeftRight">32dp</dimen>
-    <dimen name="indentTextAndProgressBarLeft">16dp</dimen>
-    <dimen name="indentTopBottomModButtonAndMenu">16dp</dimen>
+    <dimen name="indent_top_bottom">8dp</dimen>
+    <dimen name="indent_left_right">32dp</dimen>
+    <dimen name="indent_text_and_progress_bar_left">16dp</dimen>
+    <dimen name="indent_top_bottom_mod_button_and_menu">16dp</dimen>
+    <item name="stroke_separator" format="float" type="dimen">2</item>
 </resources>

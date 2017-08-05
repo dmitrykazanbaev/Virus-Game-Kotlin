@@ -10,4 +10,5 @@
     <color name="colorInfectedRoof">#AE3939</color>
     <color name="colorOrange">#FFA000</color>
     <color name="low_transparent">#88676767</color>
+    <color name="modification_button_color">#757575</color>
 </resources>
