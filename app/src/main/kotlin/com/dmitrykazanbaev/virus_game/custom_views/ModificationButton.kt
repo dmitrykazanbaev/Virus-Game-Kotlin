@@ -20,48 +20,36 @@ class ModificationButton
     val sectorPath = Path()
     val sectorPaint = Paint()
 
-    val center by lazy { Point(width / 2, height / 2) }
-    val outerRadius by lazy { minOf(width, height) / 2f }
+    val center by lazy { Point(height / 2, height / 2) }
+    val outerRadius by lazy { height / 2f }
     val innerRadius by lazy { outerRadius / 2 }
 
-    val innerOval by lazy { getOvalForArc(center, innerRadius) }
-    val outerOval by lazy { getOvalForArc(center, outerRadius) }
+    var innerOval = RectF()
+        get() = getOvalForArc(center, innerRadius)
+    var outerOval = RectF()
+        get() = getOvalForArc(center, outerRadius)
 
-    val firstSeparatorOval by lazy {
-        getOvalForArc(center, (outerRadius - innerRadius) / 3 + innerRadius) // 1/3 from inner
-    }
-    val secondSeparatorOval by lazy {
-        getOvalForArc(center, (outerRadius - innerRadius) / 3 * 2 + innerRadius) // 2/3 from inner
-    }
+    var firstSeparatorOval = RectF()
+        get() = getOvalForArc(center, (outerRadius - innerRadius) / 3 + innerRadius) // 1/3 from inner
+
+    var secondSeparatorOval = RectF()
+        get() = getOvalForArc(center, (outerRadius - innerRadius) / 3 * 2 + innerRadius) // 2/3 from inner
+
     val separatorPaint = Paint()
 
-    val sectorSeparatorLine by lazy {
-        val startX = center.x + innerRadius * Math.cos((startAngle + sweepAngle) * Math.PI / 180)
-        val startY = center.y + innerRadius * Math.sin((startAngle + sweepAngle) * Math.PI / 180)
-        val stopX = center.x + outerRadius * Math.cos((startAngle + sweepAngle) * Math.PI / 180)
-        val stopY = center.y + outerRadius * Math.sin((startAngle + sweepAngle) * Math.PI / 180)
 
-        mutableListOf(Point(startX.toInt(), startY.toInt()), Point(stopX.toInt(), stopY.toInt()))
-    }
-    val sectorSeparatorPaint = Paint()
 
     private fun getOvalForArc(center: Point, radius: Float) =
             RectF(center.x - radius, center.y - radius,
                     center.x + radius, center.y + radius)
 
     init {
-        this.startAngle -= 90f // to start from the top, not from the right
-
         sectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.modification_button_color)
         sectorPaint.style = Paint.Style.FILL
 
         separatorPaint.color = Color.BLACK
         separatorPaint.style = Paint.Style.STROKE
         separatorPaint.strokeWidth = resources.getString(R.dimen.stroke_separator).toFloat()
-
-        sectorSeparatorPaint.color = Color.BLACK
-        sectorSeparatorPaint.strokeWidth = 6f
-        sectorSeparatorPaint.style = Paint.Style.STROKE
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -74,10 +62,6 @@ class ModificationButton
             canvas.drawPath(sectorPath, sectorPaint)
             canvas.drawArc(firstSeparatorOval, startAngle, sweepAngle, false, separatorPaint)
             canvas.drawArc(secondSeparatorOval, startAngle, sweepAngle, false, separatorPaint)
-            canvas.drawLine(sectorSeparatorLine[0].x.toFloat(),
-                    sectorSeparatorLine[0].y.toFloat(),
-                    sectorSeparatorLine[1].x.toFloat(),
-                    sectorSeparatorLine[1].y.toFloat(), sectorSeparatorPaint)
         }
     }
 

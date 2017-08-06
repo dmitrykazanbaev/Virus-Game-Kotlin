@@ -3,6 +3,7 @@ package com.dmitrykazanbaev.virus_game
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.widget.RelativeLayout
 import com.dmitrykazanbaev.virus_game.screen.FirstLevelView
 import com.dmitrykazanbaev.virus_game.service.*
 import io.realm.Realm
@@ -23,7 +24,12 @@ class FirstLevelActivity : AppCompatActivity() {
         firstLevelView.holder.addCallback(firstLevelView)
 
         mainframe.addView(firstLevelView, 0)
-        createDevicesButtonList().forEach { modification_sector_button.addView(it) }
+        val modificationButtonController = ModificationButtonController(this)
+        modificationButtonController.layoutParams =
+                RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.MATCH_PARENT,
+                        RelativeLayout.LayoutParams.MATCH_PARENT)
+        modification_and_menu.addView(modificationButtonController)
 
         if (!intent.getBooleanExtra("new_game", false))
             firstLevelView.initLevelFromRealm()
@@ -38,7 +44,6 @@ class FirstLevelActivity : AppCompatActivity() {
         when (view.id) {
             R.id.virus_button -> showCharacteristicWindow()
             R.id.close_characteristics_button -> closeCharacteristicWindow()
-//            R.id.modification_sector_button -> modbutton()
         }
     }
 }

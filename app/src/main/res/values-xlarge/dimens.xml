@@ -12,4 +12,5 @@
     <dimen name="indent_text_and_progress_bar_left">32dp</dimen>
     <dimen name="indent_top_bottom_mod_button_and_menu">32dp</dimen>
     <item name="stroke_separator" format="float" type="dimen">4</item>
+    <item name="stroke_separatorSector" format="float" type="dimen">8</item>
 </resources>
