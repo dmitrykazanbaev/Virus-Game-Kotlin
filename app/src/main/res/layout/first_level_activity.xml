@@ -5,11 +5,13 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:keepScreenOn="true">
+
     <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:id="@+id/control_buttons">
+
         <ImageButton
                 android:contentDescription="@string/virus_button_description"
                 android:background="@android:color/transparent"
@@ -19,6 +21,7 @@
                 android:onClick="onTouch"
                 android:layout_alignParentStart="true"
                 android:id="@+id/virus_button"/>
+
         <ImageButton
                 android:contentDescription="@string/statistics_button_description"
                 android:background="@android:color/transparent"
@@ -29,170 +32,204 @@
                 android:id="@+id/statistics_button"/>
     </RelativeLayout>
 
-    <LinearLayout
-            android:orientation="vertical"
+    <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/characteristic_window"
-            android:background="@color/low_transparent"
-            android:visibility="visible" android:weightSum="100">
+            android:visibility="visible"
+            android:id="@+id/characteristic_window">
 
-        <LinearLayout
+        <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/characteristic_buttons"
-                android:baselineAligned="false"
-                android:weightSum="8.82" android:layout_marginTop="@dimen/indent_top_bottom">
-            <ImageButton
-                    android:background="@android:color/transparent"
-                    android:src="@mipmap/button_non"
-                    android:scaleType="centerInside"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/abilities_button"
-                    android:adjustViewBounds="true"
-                    android:translationX="32dp"/>
-            <ImageButton
-                    android:background="@android:color/transparent"
-                    android:src="@mipmap/button_non"
-                    android:scaleType="centerInside"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/propagation_button"
-                    android:adjustViewBounds="true"
-                    android:translationX="16dp"/>
-            <ImageButton
-                    android:background="@android:color/transparent"
-                    android:src="@mipmap/button_non"
-                    android:scaleType="centerInside"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/resistance_button"
-                    android:adjustViewBounds="true"/>
+                android:src="@drawable/background_modif"
+                android:scaleType="matrix"
+                android:id="@+id/background_characteristic_window"/>
 
-            <ImageButton
-                    android:background="@android:color/transparent"
-                    android:src="@mipmap/button_non"
-                    android:scaleType="centerInside"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/devices_button"
-                    android:adjustViewBounds="true"
-                    android:translationX="-16dp"/>
-
-            <ImageButton
-                    android:background="@android:color/transparent"
-                    android:src="@mipmap/button_closed"
-                    android:scaleType="centerInside"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.82"
-                    android:layout_height="match_parent"
-                    android:onClick="onTouch"
-                    android:id="@+id/close_characteristics_button"
-                    android:adjustViewBounds="true"
-                    android:translationX="-32dp"/>
-        </LinearLayout>
-
-        <RelativeLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="88"
-                android:weightSum="100"
-                android:id="@+id/modification_and_menu"
-                android:layout_marginStart="@dimen/indent_left_right"
-                android:layout_marginEnd="@dimen/indent_left_right"
-                android:layout_marginTop="@dimen/indent_top_bottom_mod_button_and_menu"
-                android:layout_marginBottom="@dimen/indent_top_bottom_mod_button_and_menu">
-        </RelativeLayout>
         <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_gravity="bottom"
-                android:id="@+id/balance_progress_bars"
-                android:layout_marginBottom="@dimen/indent_top_bottom"
-                android:layout_weight="12"
-                android:weightSum="7.2" android:layout_marginStart="@dimen/indent_left_right"
-                android:layout_marginEnd="@dimen/indent_left_right">
-            <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
-                    android:text="100 $"
-                    android:gravity="center"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:id="@+id/characteristic_window_balance"
-                    app:customFont="DINPro/DINPro.otf"
-                    android:textSize="@dimen/text_characteristics_balance"
-                    android:background="@drawable/balance_characteristics_background"
-                    android:layout_weight="1.2"/>
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2">
-                <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
-                        android:text="@string/propagation_text_progress_bar"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:id="@+id/propagation_text_progress_bar"
-                        app:customFont="DINPro/DINPro-Light.otf"
-                        style="@style/CharacteristicsProgressBarTextViewStyle" android:layout_weight="1"
-                        android:translationY="@dimen/padding_y_characteristics_progress_bar"/>
-                <ProgressBar
-                        style="@style/CharacteristicsProgressBarStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:id="@+id/propagation_progress_bar"
-                        android:progress="20" android:layout_weight="1"/>
-            </LinearLayout>
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2">
-                <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
-                        android:text="@string/efficiency_text_progress_bar"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/efficiency_text_progress_bar"
-                        app:customFont="DINPro/DINPro-Light.otf"
-                        style="@style/CharacteristicsProgressBarTextViewStyle"
-                        android:layout_weight="1"
-                        android:translationY="@dimen/padding_y_characteristics_progress_bar"/>
-                <ProgressBar
-                        style="@style/CharacteristicsProgressBarStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/efficiency_progress_bar"
-                        android:progress="20" android:layout_weight="1"/>
-            </LinearLayout>
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2">
-                <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
-                        android:text="@string/resistance_text_progress_bar"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/resistance_text_progress_bar"
-                        app:customFont="DINPro/DINPro-Light.otf"
-                        style="@style/CharacteristicsProgressBarTextViewStyle"
-                        android:layout_weight="1"
-                        android:translationY="@dimen/padding_y_characteristics_progress_bar"/>
-                <ProgressBar
-                        style="@style/CharacteristicsProgressBarStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/resistance_progress_bar"
-                        android:progress="20" android:layout_weight="1"/>
-            </LinearLayout>
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:weightSum="100"
+                android:id="@+id/content_characteristic_window">
 
-    </LinearLayout>
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/characteristic_buttons"
+                    android:baselineAligned="false"
+                    android:weightSum="8.82"
+                    android:layout_marginTop="@dimen/indent_top_bottom">
+
+                <ImageButton
+                        android:background="@android:color/transparent"
+                        android:src="@mipmap/button_non"
+                        android:scaleType="centerInside"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/abilities_button"
+                        android:adjustViewBounds="true"
+                        android:translationX="32dp"/>
+
+                <ImageButton
+                        android:background="@android:color/transparent"
+                        android:src="@mipmap/button_non"
+                        android:scaleType="centerInside"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/propagation_button"
+                        android:adjustViewBounds="true"
+                        android:translationX="16dp"/>
+
+                <ImageButton
+                        android:background="@android:color/transparent"
+                        android:src="@mipmap/button_non"
+                        android:scaleType="centerInside"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/resistance_button"
+                        android:adjustViewBounds="true"/>
+
+                <ImageButton
+                        android:background="@android:color/transparent"
+                        android:src="@mipmap/button_non"
+                        android:scaleType="centerInside"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/devices_button"
+                        android:adjustViewBounds="true"
+                        android:translationX="-16dp"/>
+
+                <ImageButton
+                        android:background="@android:color/transparent"
+                        android:src="@mipmap/button_closed"
+                        android:scaleType="centerInside"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.82"
+                        android:layout_height="match_parent"
+                        android:onClick="onTouch"
+                        android:id="@+id/close_characteristics_button"
+                        android:adjustViewBounds="true"
+                        android:translationX="-32dp"/>
+            </LinearLayout>
+
+            <RelativeLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="88"
+                    android:weightSum="100"
+                    android:id="@+id/modification_and_menu"
+                    android:layout_marginStart="@dimen/indent_left_right"
+                    android:layout_marginEnd="@dimen/indent_left_right"
+                    android:layout_marginTop="@dimen/indent_top_bottom_mod_button_and_menu"
+                    android:layout_marginBottom="@dimen/indent_top_bottom_mod_button_and_menu">
+            </RelativeLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="bottom"
+                    android:id="@+id/balance_progress_bars"
+                    android:layout_marginBottom="@dimen/indent_top_bottom"
+                    android:layout_weight="12"
+                    android:weightSum="7.2"
+                    android:layout_marginStart="@dimen/indent_left_right"
+                    android:layout_marginEnd="@dimen/indent_left_right">
+
+                <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
+                        android:text="100 $"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/characteristic_window_balance"
+                        app:customFont="DINPro/DINPro.otf"
+                        android:textSize="@dimen/text_characteristics_balance"
+                        android:background="@drawable/balance_characteristics_background"
+                        android:layout_weight="1.2"/>
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2">
+
+                    <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
+                            android:text="@string/propagation_text_progress_bar"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:id="@+id/propagation_text_progress_bar"
+                            app:customFont="DINPro/DINPro-Light.otf"
+                            style="@style/CharacteristicsProgressBarTextViewStyle"
+                            android:layout_weight="1"
+                            android:translationY="@dimen/padding_y_characteristics_progress_bar"/>
+
+                    <ProgressBar
+                            style="@style/CharacteristicsProgressBarStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:id="@+id/propagation_progress_bar"
+                            android:progress="20"
+                            android:layout_weight="1"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2">
+
+                    <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
+                            android:text="@string/efficiency_text_progress_bar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/efficiency_text_progress_bar"
+                            app:customFont="DINPro/DINPro-Light.otf"
+                            style="@style/CharacteristicsProgressBarTextViewStyle"
+                            android:layout_weight="1"
+                            android:translationY="@dimen/padding_y_characteristics_progress_bar"/>
+
+                    <ProgressBar
+                            style="@style/CharacteristicsProgressBarStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/efficiency_progress_bar"
+                            android:progress="20"
+                            android:layout_weight="1"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2">
+
+                    <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
+                            android:text="@string/resistance_text_progress_bar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/resistance_text_progress_bar"
+                            app:customFont="DINPro/DINPro-Light.otf"
+                            style="@style/CharacteristicsProgressBarTextViewStyle"
+                            android:layout_weight="1"
+                            android:translationY="@dimen/padding_y_characteristics_progress_bar"/>
+
+                    <ProgressBar
+                            style="@style/CharacteristicsProgressBarStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/resistance_progress_bar"
+                            android:progress="20"
+                            android:layout_weight="1"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </FrameLayout>
+
 
 </FrameLayout>
