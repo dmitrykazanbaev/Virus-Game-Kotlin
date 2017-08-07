@@ -8,6 +8,7 @@ import com.dmitrykazanbaev.virus_game.screen.FirstLevelView
 import com.dmitrykazanbaev.virus_game.service.*
 import io.realm.Realm
 import kotlinx.android.synthetic.main.first_level_activity.*
+import kotlinx.coroutines.experimental.runBlocking
 
 
 class FirstLevelActivity : AppCompatActivity() {
@@ -42,8 +43,16 @@ class FirstLevelActivity : AppCompatActivity() {
 
     fun onTouch(view: View) {
         when (view.id) {
-            R.id.virus_button -> showCharacteristicWindow()
-            R.id.close_characteristics_button -> closeCharacteristicWindow()
+            R.id.virus_button -> {
+                runBlocking {
+                    firstLevelView.stopJobs()
+                }
+                showCharacteristicWindow()
+            }
+            R.id.close_characteristics_button -> {
+                firstLevelView.startJobs()
+                closeCharacteristicWindow()
+            }
         }
     }
 }

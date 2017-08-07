@@ -14,13 +14,15 @@ abstract class AbstractLevel(protected val jsonBuildingsResource: Int) {
     abstract var width: Int
     abstract var height: Int
 
-    lateinit var tickJob: Job
+    var tickJob: Job? = null
 
     fun initTickJob() {
-        tickJob = launch(CommonPool) {
-            while (isActive) {
-                infect()
-                delay(500)
+        if (tickJob == null || tickJob?.isCompleted!!) {
+            tickJob = launch(CommonPool) {
+                while (isActive) {
+                    infect()
+                    delay(500)
+                }
             }
         }
     }

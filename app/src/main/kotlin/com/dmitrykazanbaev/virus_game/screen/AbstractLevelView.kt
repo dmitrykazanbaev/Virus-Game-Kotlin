@@ -21,7 +21,7 @@ abstract class AbstractLevelView(context: Context, protected val level: Abstract
     protected var minScaleFactor = scaleFactor
     protected var maxScaleFactor = scaleFactor
 
-    protected lateinit var drawJob: Job
+    protected var drawJob: Job? = null
 
     inner class MyGestureListener : GestureDetector.SimpleOnGestureListener(), ScaleGestureDetector.OnScaleGestureListener {
         override fun onScaleBegin(p0: ScaleGestureDetector?): Boolean {
@@ -85,13 +85,18 @@ abstract class AbstractLevelView(context: Context, protected val level: Abstract
 
     override fun surfaceDestroyed(p0: SurfaceHolder?) {
         runBlocking {
-            drawJob.cancel()
-            level.tickJob.cancel()
-
-            drawJob.join()
-            level.tickJob.join()
+            stopJobs()
         }
     }
+
+    suspend fun stopJobs() {
+        drawJob?.cancel()
+        level.tickJob?.cancel()
+
+        drawJob?.join()
+        level.tickJob?.join()
+    }
+
 
     override fun surfaceCreated(p0: SurfaceHolder?) {
         scaleFactor = minOf(width.toFloat() / level.width, height.toFloat() / level.height)
@@ -99,22 +104,28 @@ abstract class AbstractLevelView(context: Context, protected val level: Abstract
         minScaleFactor = scaleFactor
         maxScaleFactor = 3 * minScaleFactor
 
+        startJobs()
+    }
+
+    fun startJobs() {
         initDrawJob()
 
         level.initTickJob()
     }
 
     private fun initDrawJob() {
-        drawJob = launch(CommonPool) {
-            var canvas: Canvas?
-            while (isActive) {
-                canvas = holder.lockCanvas()
+        if (drawJob == null || drawJob?.isCompleted!!) {
+            drawJob = launch(CommonPool) {
+                var canvas: Canvas?
+                while (isActive) {
+                    canvas = holder.lockCanvas()
 
-                synchronized(holder) {
-                    canvas?.let { drawLevel(it) }
+                    synchronized(holder) {
+                        canvas?.let { drawLevel(it) }
+                    }
+
+                    canvas?.let { holder.unlockCanvasAndPost(it) }
                 }
-
-                canvas?.let { holder.unlockCanvasAndPost(it) }
             }
         }
     }
