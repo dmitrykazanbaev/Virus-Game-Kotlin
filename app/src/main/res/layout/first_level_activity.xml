@@ -38,12 +38,69 @@
             android:visibility="visible"
             android:id="@+id/characteristic_window">
 
-        <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/background_modif"
-                android:scaleType="matrix"
-                android:id="@+id/background_characteristic_window"/>
+        <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <ScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    >
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/background_characteristic_window"
+                        >
+
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/background_modif"
+                                android:scaleType="matrix"
+                                />
+
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/background_modif"
+                                android:scaleType="matrix"
+                                />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/background_modif"
+                                android:scaleType="matrix"
+                                />
+
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/background_modif"
+                                android:scaleType="matrix"
+                                />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </ScrollView>
+        </HorizontalScrollView>
 
         <LinearLayout
                 android:orientation="vertical"
@@ -150,7 +207,7 @@
                         app:customFont="DINPro/DINPro.otf"
                         android:textSize="@dimen/text_characteristics_balance"
                         android:background="@drawable/balance_characteristics_background"
-                        android:layout_weight="1.2"/>
+                        />
 
                 <LinearLayout
                         android:orientation="vertical"
