@@ -40,11 +40,14 @@
 
         <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:id="@+id/horizontal_scroll_view_background"
+                >
 
             <ScrollView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/vertical_scroll_view_background"
                     >
 
                 <LinearLayout
@@ -207,6 +210,7 @@
                         app:customFont="DINPro/DINPro.otf"
                         android:textSize="@dimen/text_characteristics_balance"
                         android:background="@drawable/balance_characteristics_background"
+                        android:layout_weight="1.2"
                         />
 
                 <LinearLayout

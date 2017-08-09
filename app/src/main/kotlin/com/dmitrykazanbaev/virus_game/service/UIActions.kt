@@ -22,7 +22,7 @@ fun showCharacteristicWindow() {
                 0f, -background_characteristic_window.height / 2f)
         animation.interpolator = LinearInterpolator()
         animation.repeatCount = Animation.INFINITE
-        animation.duration = 13000L
+        animation.duration = 16000L
 
         background_characteristic_window.startAnimation(animation)
     }

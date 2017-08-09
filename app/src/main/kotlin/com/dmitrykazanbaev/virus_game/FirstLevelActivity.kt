@@ -25,12 +25,16 @@ class FirstLevelActivity : AppCompatActivity() {
         firstLevelView.holder.addCallback(firstLevelView)
 
         mainframe.addView(firstLevelView, 0)
+
         val modificationButtonController = ModificationButtonController(this)
         modificationButtonController.layoutParams =
                 RelativeLayout.LayoutParams(
                         RelativeLayout.LayoutParams.MATCH_PARENT,
                         RelativeLayout.LayoutParams.MATCH_PARENT)
         modification_and_menu.addView(modificationButtonController)
+
+        horizontal_scroll_view_background.setOnTouchListener { _, _ -> true }
+        vertical_scroll_view_background.setOnTouchListener { _, _ -> true }
 
         if (!intent.getBooleanExtra("new_game", false))
             firstLevelView.initLevelFromRealm()
