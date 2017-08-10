@@ -13,4 +13,6 @@
     <dimen name="indent_top_bottom_mod_button_and_menu">32dp</dimen>
     <item name="stroke_separator" format="float" type="dimen">4</item>
     <item name="stroke_separatorSector" format="float" type="dimen">8</item>
+    <dimen name="indent_left_right_control_button_characteristics">-16dp</dimen>
+    <dimen name="indent_left_close_button_characteristics">-32dp</dimen>
 </resources>

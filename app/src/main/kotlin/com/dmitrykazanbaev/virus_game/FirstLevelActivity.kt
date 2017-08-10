@@ -71,7 +71,8 @@ class FirstLevelActivity : AppCompatActivity() {
                 firstLevelView.startJobs()
                 closeCharacteristicWindow()
             }
-        R.id.trapezeButton, R.id.trapezeButton1 -> (view as TrapezeButton).isChecked = true
+            R.id.devices_button, R.id.propagation_button,
+            R.id.resistance_button, R.id.abilities_button -> (view as TrapezeButton).isChecked = true
         }
     }
 }

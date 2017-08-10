@@ -42,20 +42,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/horizontal_scroll_view_background"
-        >
+                >
 
             <ScrollView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/vertical_scroll_view_background"
-            >
+                    >
 
                 <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/background_characteristic_window"
-                >
+                        >
 
                     <LinearLayout
                             android:orientation="horizontal"
@@ -67,14 +67,14 @@
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/background_modif"
                                 android:scaleType="matrix"
-                        />
+                                />
 
                         <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/background_modif"
                                 android:scaleType="matrix"
-                        />
+                                />
 
                     </LinearLayout>
 
@@ -88,14 +88,14 @@
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/background_modif"
                                 android:scaleType="matrix"
-                        />
+                                />
 
                         <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/background_modif"
                                 android:scaleType="matrix"
-                        />
+                                />
 
                     </LinearLayout>
 
@@ -119,44 +119,75 @@
                     android:baselineAligned="false"
                     android:layout_marginTop="@dimen/indent_top_bottom"
                     android:layout_marginStart="@dimen/indent_left_right"
-                    android:layout_marginEnd="@dimen/indent_left_right" android:layout_weight="12">
+                    android:layout_marginEnd="@dimen/indent_left_right"
+                    android:layout_weight="12"
+                    android:weightSum="100"
+                    >
 
                 <RadioGroup
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="8"
                         android:orientation='horizontal'
                         android:id="@+id/radiogroup"
-                >
+                        android:weightSum="4"
+                        android:layout_weight="90"
+                        >
 
                     <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
                             app:indentLeftTop="true"
                             app:indentRightBottom="true"
-                            android:checked="true"
-                            android:id="@+id/trapezeButton"
-                            android:layout_weight="2" android:onClick="onTouch"/>
+                            android:id="@+id/abilities_button"
+                            android:layout_weight="1"
+                            android:onClick="onTouch"
+                            android:layout_marginEnd="@dimen/indent_left_right_control_button_characteristics"
+                            />
+
                     <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
                             app:indentLeftTop="true"
                             app:indentRightBottom="true"
-                            android:id="@+id/trapezeButton1"
-                            android:layout_weight="2" android:onClick="onTouch"/>
+                            android:id="@+id/propagation_button"
+                            android:layout_weight="1"
+                            android:onClick="onTouch"
+                            android:layout_marginEnd="@dimen/indent_left_right_control_button_characteristics"
+                            android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"/>
+
+                    <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            app:indentLeftTop="true"
+                            app:indentRightBottom="true"
+                            android:id="@+id/resistance_button"
+                            android:layout_weight="1"
+                            android:onClick="onTouch"
+                            android:layout_marginEnd="@dimen/indent_left_right_control_button_characteristics"
+                            android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"/>
+
+                    <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            app:indentLeftTop="true"
+                            app:indentRightBottom="true"
+                            android:id="@+id/devices_button"
+                            android:layout_weight="1"
+                            android:onClick="onTouch"
+                            android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"/>
+
                 </RadioGroup>
 
-                <ImageButton
-                        android:background="@android:color/transparent"
-                        android:src="@mipmap/button_closed"
-                        android:scaleType="centerInside"
+                <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                         android:layout_width="0dp"
-                        android:layout_weight="0.82"
                         android:layout_height="match_parent"
-                        android:onClick="onTouch"
+                        app:indentLeftTop="true"
+                        app:indentRightBottom="true"
                         android:id="@+id/close_characteristics_button"
-                        android:adjustViewBounds="true"
-                />
+                        android:layout_weight="10"
+                        android:onClick="onTouch"
+                        android:layout_marginStart="@dimen/indent_left_close_button_characteristics"/>
+
             </LinearLayout>
 
             <RelativeLayout
@@ -194,7 +225,7 @@
                         android:textSize="@dimen/text_characteristics_balance"
                         android:background="@drawable/balance_characteristics_background"
                         android:layout_weight="1.2"
-                />
+                        />
 
                 <LinearLayout
                         android:orientation="vertical"
