@@ -1,11 +1,16 @@
 package com.dmitrykazanbaev.virus_game
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.RelativeLayout
+import com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
 import com.dmitrykazanbaev.virus_game.screen.FirstLevelView
-import com.dmitrykazanbaev.virus_game.service.*
+import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
+import com.dmitrykazanbaev.virus_game.service.ModificationButtonController
+import com.dmitrykazanbaev.virus_game.service.closeCharacteristicWindow
+import com.dmitrykazanbaev.virus_game.service.showCharacteristicWindow
 import io.realm.Realm
 import kotlinx.android.synthetic.main.first_level_activity.*
 import kotlinx.coroutines.experimental.runBlocking
@@ -36,6 +41,15 @@ class FirstLevelActivity : AppCompatActivity() {
         horizontal_scroll_view_background.setOnTouchListener { _, _ -> true }
         vertical_scroll_view_background.setOnTouchListener { _, _ -> true }
 
+        radiogroup.setOnCheckedChangeListener { _, _ ->
+            for (i in 0 until radiogroup.childCount) {
+                val button = radiogroup.getChildAt(i) as TrapezeButton
+                if (button.isChecked) button.buttonPaint.color = Color.WHITE
+                else button.buttonPaint.color = Color.BLUE
+                button.invalidate()
+            }
+        }
+
         if (!intent.getBooleanExtra("new_game", false))
             firstLevelView.initLevelFromRealm()
     }
@@ -57,6 +71,7 @@ class FirstLevelActivity : AppCompatActivity() {
                 firstLevelView.startJobs()
                 closeCharacteristicWindow()
             }
+        R.id.trapezeButton, R.id.trapezeButton1 -> (view as TrapezeButton).isChecked = true
         }
     }
 }

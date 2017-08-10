@@ -3,4 +3,10 @@
     <declare-styleable name="TextViewWithCustomFont">
         <attr name="customFont" format="string"/>
     </declare-styleable>
+    <declare-styleable name="TrapezeButton">
+        <attr name="indentLeftTop" format="boolean"/>
+        <attr name="indentLeftBottom" format="boolean"/>
+        <attr name="indentRightTop" format="boolean"/>
+        <attr name="indentRightBottom" format="boolean"/>
+    </declare-styleable>
 </resources>
