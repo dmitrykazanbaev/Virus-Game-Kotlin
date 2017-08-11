@@ -142,7 +142,7 @@
                             android:layout_weight="1"
                             android:onClick="onTouch"
                             android:layout_marginEnd="@dimen/indent_left_right_control_button_characteristics"
-                            />
+                            app:backgroundColor="@color/control_button_color"/>
 
                     <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                             android:layout_width="0dp"
@@ -153,7 +153,8 @@
                             android:layout_weight="1"
                             android:onClick="onTouch"
                             android:layout_marginEnd="@dimen/indent_left_right_control_button_characteristics"
-                            android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"/>
+                            android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"
+                            app:backgroundColor="@color/control_button_color"/>
 
                     <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                             android:layout_width="0dp"
@@ -164,7 +165,8 @@
                             android:layout_weight="1"
                             android:onClick="onTouch"
                             android:layout_marginEnd="@dimen/indent_left_right_control_button_characteristics"
-                            android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"/>
+                            android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"
+                            app:backgroundColor="@color/control_button_color"/>
 
                     <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                             android:layout_width="0dp"
@@ -174,19 +176,36 @@
                             android:id="@+id/devices_button"
                             android:layout_weight="1"
                             android:onClick="onTouch"
-                            android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"/>
+                            android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"
+                            app:backgroundColor="@color/control_button_color"/>
 
                 </RadioGroup>
 
-                <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
+                <RelativeLayout
                         android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10"
+                        android:layout_marginStart="@dimen/indent_left_close_button_characteristics"
+                        >
+
+                    <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:indentLeftTop="true"
                         app:indentRightBottom="true"
                         android:id="@+id/close_characteristics_button"
-                        android:layout_weight="10"
                         android:onClick="onTouch"
-                        android:layout_marginStart="@dimen/indent_left_close_button_characteristics"/>
+                        app:backgroundColor="@color/colorOrange"
+                        />
+
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@mipmap/closed"
+                            android:id="@+id/imageView"
+                            android:padding="@dimen/padding_close_characteristics"/>
+
+                </RelativeLayout>
 
             </LinearLayout>
 

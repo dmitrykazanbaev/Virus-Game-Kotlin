@@ -42,9 +42,11 @@ class TrapezeButton
         path
     }
     val buttonPaint = Paint()
+    val selectedColor = Color.WHITE
+    val unselectedColor = attributes.getColor(R.styleable.TrapezeButton_backgroundColor, Color.BLUE)
 
     init {
-        buttonPaint.color = Color.BLUE
+        buttonPaint.color = unselectedColor
         buttonPaint.style = Paint.Style.FILL
     }
 

@@ -44,8 +44,8 @@ class FirstLevelActivity : AppCompatActivity() {
         radiogroup.setOnCheckedChangeListener { _, _ ->
             for (i in 0 until radiogroup.childCount) {
                 val button = radiogroup.getChildAt(i) as TrapezeButton
-                if (button.isChecked) button.buttonPaint.color = Color.WHITE
-                else button.buttonPaint.color = Color.BLUE
+                if (button.isChecked) button.buttonPaint.color = button.selectedColor
+                else button.buttonPaint.color = button.unselectedColor
                 button.invalidate()
             }
         }

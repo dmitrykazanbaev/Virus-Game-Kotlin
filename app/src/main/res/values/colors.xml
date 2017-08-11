@@ -11,4 +11,5 @@
     <color name="colorOrange">#FFA000</color>
     <color name="low_transparent">#88676767</color>
     <color name="modification_button_color">#757575</color>
+    <color name="control_button_color">#00BCD4</color>
 </resources>

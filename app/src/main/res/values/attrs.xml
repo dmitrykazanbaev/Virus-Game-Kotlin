@@ -8,5 +8,6 @@
         <attr name="indentLeftBottom" format="boolean"/>
         <attr name="indentRightTop" format="boolean"/>
         <attr name="indentRightBottom" format="boolean"/>
+        <attr name="backgroundColor" format="color"/>
     </declare-styleable>
 </resources>
