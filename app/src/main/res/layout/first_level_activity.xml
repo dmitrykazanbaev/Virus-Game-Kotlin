@@ -65,14 +65,14 @@
                         <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/background_modif"
+                                android:src="@mipmap/background_modif"
                                 android:scaleType="matrix"
                                 />
 
                         <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/background_modif"
+                                android:src="@mipmap/background_modif"
                                 android:scaleType="matrix"
                                 />
 
@@ -86,14 +86,14 @@
                         <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/background_modif"
+                                android:src="@mipmap/background_modif"
                                 android:scaleType="matrix"
                                 />
 
                         <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/background_modif"
+                                android:src="@mipmap/background_modif"
                                 android:scaleType="matrix"
                                 />
 
