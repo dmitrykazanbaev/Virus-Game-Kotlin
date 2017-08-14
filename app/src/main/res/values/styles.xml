@@ -24,4 +24,13 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="ControlButtonCharacteristicTextViewStyle" parent="@android:style/TextAppearance.Holo.Widget.TextView">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_control_button_characteristic</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="backgroundColor">@color/control_button_color</item>
+        <item name="indentLeftTop">true</item>
+        <item name="indentRightBottom">true</item>
+    </style>
+
 </resources>

@@ -136,48 +136,51 @@
                     <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            app:indentLeftTop="true"
-                            app:indentRightBottom="true"
-                            android:id="@+id/abilities_button"
-                            android:layout_weight="1"
-                            android:onClick="onTouch"
-                            android:layout_marginEnd="@dimen/indent_left_right_control_button_characteristics"
-                            app:backgroundColor="@color/control_button_color"/>
-
-                    <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            app:indentLeftTop="true"
-                            app:indentRightBottom="true"
                             android:id="@+id/propagation_button"
                             android:layout_weight="1"
                             android:onClick="onTouch"
                             android:layout_marginEnd="@dimen/indent_left_right_control_button_characteristics"
-                            android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"
-                            app:backgroundColor="@color/control_button_color"/>
+                            android:text="@string/propagation_text_control_button"
+                            app:customFont="DINPro/DINPro.otf"
+                            style="@style/ControlButtonCharacteristicTextViewStyle"
+                            />
 
                     <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            app:indentLeftTop="true"
-                            app:indentRightBottom="true"
+                            android:id="@+id/abilities_button"
+                            android:onClick="onTouch"
+                            android:layout_marginEnd="@dimen/indent_left_right_control_button_characteristics"
+                            android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"
+                            android:text="@string/abilities_text_control_button"
+                            app:customFont="DINPro/DINPro.otf"
+                            style="@style/ControlButtonCharacteristicTextViewStyle"
+                            android:layout_weight="1"/>
+
+                    <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:id="@+id/resistance_button"
                             android:layout_weight="1"
                             android:onClick="onTouch"
                             android:layout_marginEnd="@dimen/indent_left_right_control_button_characteristics"
                             android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"
-                            app:backgroundColor="@color/control_button_color"/>
+                            android:text="@string/resistance_text_control_button"
+                            app:customFont="DINPro/DINPro.otf"
+                            style="@style/ControlButtonCharacteristicTextViewStyle"
+                            />
 
                     <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            app:indentLeftTop="true"
-                            app:indentRightBottom="true"
                             android:id="@+id/devices_button"
                             android:layout_weight="1"
                             android:onClick="onTouch"
                             android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"
-                            app:backgroundColor="@color/control_button_color"/>
+                            android:text="@string/devices_text_control_button"
+                            app:customFont="DINPro/DINPro.otf"
+                            style="@style/ControlButtonCharacteristicTextViewStyle"
+                            />
 
                 </RadioGroup>
 
@@ -189,21 +192,21 @@
                         >
 
                     <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:indentLeftTop="true"
-                        app:indentRightBottom="true"
-                        android:id="@+id/close_characteristics_button"
-                        android:onClick="onTouch"
-                        app:backgroundColor="@color/colorOrange"
-                        />
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:indentLeftTop="true"
+                            app:indentRightBottom="true"
+                            android:id="@+id/close_characteristics_button"
+                            android:onClick="onTouch"
+                            app:backgroundColor="@color/colorOrange"
+                            />
 
                     <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:src="@mipmap/closed"
                             android:id="@+id/imageView"
-                            android:padding="@dimen/padding_close_characteristics"/>
+                            android:padding="@dimen/padding_image_close_characteristics"/>
 
                 </RelativeLayout>
 

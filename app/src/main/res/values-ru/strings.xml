@@ -4,4 +4,8 @@
     <string name="propagation_text_progress_bar">РАСПРОСТРАНЕНИЕ</string>
     <string name="efficiency_text_progress_bar">ЭФФЕКТИВНОСТЬ</string>
     <string name="resistance_text_progress_bar">СКРЫТНОСТЬ</string>
+    <string name="propagation_text_control_button">РАСПРОСТРАНЕНИЕ</string>
+    <string name="abilities_text_control_button">ФУНКЦИИ</string>
+    <string name="resistance_text_control_button">ПРОТИВОДЕЙСТВИЕ</string>
+    <string name="devices_text_control_button">УСТРОЙСТВА</string>
 </resources>

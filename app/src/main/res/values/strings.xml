@@ -8,4 +8,8 @@
     <string name="propagation_text_progress_bar">PROPAGATION</string>
     <string name="efficiency_text_progress_bar">EFFICIENCY</string>
     <string name="resistance_text_progress_bar">RESISTANCE</string>
+    <string name="propagation_text_control_button">PROPAGATION</string>
+    <string name="abilities_text_control_button">ABILITIES</string>
+    <string name="resistance_text_control_button">RESISTANCE</string>
+    <string name="devices_text_control_button">DEVICES</string>
 </resources>

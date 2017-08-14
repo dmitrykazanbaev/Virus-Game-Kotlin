@@ -1,8 +1,8 @@
 package com.dmitrykazanbaev.virus_game
 
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.widget.RelativeLayout
 import com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
@@ -41,13 +41,17 @@ class FirstLevelActivity : AppCompatActivity() {
         horizontal_scroll_view_background.setOnTouchListener { _, _ -> true }
         vertical_scroll_view_background.setOnTouchListener { _, _ -> true }
 
+        characteristic_window.visibility = View.INVISIBLE
+
         radiogroup.setOnCheckedChangeListener { _, _ ->
-            for (i in 0 until radiogroup.childCount) {
-                val button = radiogroup.getChildAt(i) as TrapezeButton
-                if (button.isChecked) button.buttonPaint.color = button.selectedColor
-                else button.buttonPaint.color = button.unselectedColor
-                button.invalidate()
-            }
+            (0 until radiogroup.childCount).
+                    map { i -> radiogroup.getChildAt(i) }.
+                    forEach {
+                        val button = it as TrapezeButton
+                        if (button.isChecked) button.buttonPaint.color = button.selectedColor
+                        else button.buttonPaint.color = button.unselectedColor
+                        button.invalidate()
+                    }
         }
 
         if (!intent.getBooleanExtra("new_game", false))

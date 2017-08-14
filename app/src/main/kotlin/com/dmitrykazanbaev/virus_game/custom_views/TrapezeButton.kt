@@ -1,12 +1,13 @@
 package com.dmitrykazanbaev.virus_game.custom_views
 
 import android.content.Context
-import android.content.res.TypedArray
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.RadioButton
 import com.dmitrykazanbaev.virus_game.R
+import com.dmitrykazanbaev.virus_game.service.FontCache
+import kotlin.properties.Delegates
 
 
 class TrapezeButton
@@ -14,14 +15,14 @@ class TrapezeButton
                           attrs: AttributeSet? = null,
                           defStyleAttr: Int = 0) : RadioButton(context, attrs, defStyleAttr) {
 
-    val attributes: TypedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.TrapezeButton, 0, 0)
 
-    val isIndentLeftTop = attributes.getBoolean(R.styleable.TrapezeButton_indentLeftTop, false)
-    val isIndentLeftBottom = attributes.getBoolean(R.styleable.TrapezeButton_indentLeftBottom, false)
-    val isIndentRightTop = attributes.getBoolean(R.styleable.TrapezeButton_indentRightTop, false)
-    val isIndentRightBottom = attributes.getBoolean(R.styleable.TrapezeButton_indentRightBottom, false)
+    var isIndentLeftTop by Delegates.notNull<Boolean>()
+    var isIndentLeftBottom by Delegates.notNull<Boolean>()
+    var isIndentRightTop by Delegates.notNull<Boolean>()
+    var isIndentRightBottom by Delegates.notNull<Boolean>()
 
     val indentLeftRight by lazy { height / 2f }
+
     val buttonPath by lazy {
         val path = Path()
 
@@ -43,16 +44,19 @@ class TrapezeButton
     }
     val buttonPaint = Paint()
     val selectedColor = Color.WHITE
-    val unselectedColor = attributes.getColor(R.styleable.TrapezeButton_backgroundColor, Color.BLUE)
+    var unselectedColor by Delegates.notNull<Int>()
 
     init {
+        applyCustomFont(attrs)
+        initFromAttributes(attrs)
+
         buttonPaint.color = unselectedColor
         buttonPaint.style = Paint.Style.FILL
     }
 
     override fun onDraw(canvas: Canvas?) {
-        super.onDraw(canvas)
         canvas?.let { canvas.drawPath(buttonPath, buttonPaint) }
+        super.onDraw(canvas)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -66,5 +70,30 @@ class TrapezeButton
             return super.onTouchEvent(event)
         else
             return false
+    }
+
+    private fun applyCustomFont(attrs: AttributeSet?) {
+        attrs?.let {
+            val attributes = context.obtainStyledAttributes(it, R.styleable.TrapezeButton)
+            val fontName = attributes.getString(R.styleable.TrapezeButton_customFont)
+            fontName?.let {
+                val customTypeface = FontCache.getTypeface(fontName, context)
+                customTypeface?.let { typeface = it }
+            }
+            attributes.recycle()
+        }
+    }
+
+    private fun initFromAttributes(attrs: AttributeSet?) {
+        val attributes = context.theme.obtainStyledAttributes(attrs, R.styleable.TrapezeButton, 0, 0)
+
+        isIndentLeftTop = attributes.getBoolean(R.styleable.TrapezeButton_indentLeftTop, false)
+        isIndentLeftBottom = attributes.getBoolean(R.styleable.TrapezeButton_indentLeftBottom, false)
+        isIndentRightTop = attributes.getBoolean(R.styleable.TrapezeButton_indentRightTop, false)
+        isIndentRightBottom = attributes.getBoolean(R.styleable.TrapezeButton_indentRightBottom, false)
+
+        unselectedColor = attributes.getColor(R.styleable.TrapezeButton_backgroundColor, Color.BLUE)
+
+        attributes.recycle()
     }
 }

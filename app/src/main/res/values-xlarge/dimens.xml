@@ -15,5 +15,6 @@
     <item name="stroke_separatorSector" format="float" type="dimen">8</item>
     <dimen name="indent_left_right_control_button_characteristics">-16dp</dimen>
     <dimen name="indent_left_close_button_characteristics">-32dp</dimen>
-    <dimen name="padding_close_characteristics">24dp</dimen>
+    <dimen name="padding_image_close_characteristics">24dp</dimen>
+    <dimen name="text_control_button_characteristic">24sp</dimen>
 </resources>
