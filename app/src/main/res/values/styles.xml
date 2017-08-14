@@ -31,6 +31,7 @@
         <item name="backgroundColor">@color/control_button_color</item>
         <item name="indentLeftTop">true</item>
         <item name="indentRightBottom">true</item>
+        <item name="customFont">DINPro/DINPro.otf</item>
     </style>
 
 </resources>

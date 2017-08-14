@@ -42,20 +42,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/horizontal_scroll_view_background"
-                >
+        >
 
             <ScrollView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/vertical_scroll_view_background"
-                    >
+            >
 
                 <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/background_characteristic_window"
-                        >
+                >
 
                     <LinearLayout
                             android:orientation="horizontal"
@@ -67,14 +67,14 @@
                                 android:layout_height="wrap_content"
                                 android:src="@mipmap/background_modif"
                                 android:scaleType="matrix"
-                                />
+                        />
 
                         <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@mipmap/background_modif"
                                 android:scaleType="matrix"
-                                />
+                        />
 
                     </LinearLayout>
 
@@ -88,14 +88,14 @@
                                 android:layout_height="wrap_content"
                                 android:src="@mipmap/background_modif"
                                 android:scaleType="matrix"
-                                />
+                        />
 
                         <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@mipmap/background_modif"
                                 android:scaleType="matrix"
-                                />
+                        />
 
                     </LinearLayout>
 
@@ -122,7 +122,7 @@
                     android:layout_marginEnd="@dimen/indent_left_right"
                     android:layout_weight="12"
                     android:weightSum="100"
-                    >
+            >
 
                 <RadioGroup
                         android:layout_width="0dp"
@@ -131,7 +131,7 @@
                         android:id="@+id/radiogroup"
                         android:weightSum="4"
                         android:layout_weight="90"
-                        >
+                >
 
                     <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                             android:layout_width="0dp"
@@ -141,9 +141,8 @@
                             android:onClick="onTouch"
                             android:layout_marginEnd="@dimen/indent_left_right_control_button_characteristics"
                             android:text="@string/propagation_text_control_button"
-                            app:customFont="DINPro/DINPro.otf"
                             style="@style/ControlButtonCharacteristicTextViewStyle"
-                            />
+                    />
 
                     <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                             android:layout_width="0dp"
@@ -153,7 +152,6 @@
                             android:layout_marginEnd="@dimen/indent_left_right_control_button_characteristics"
                             android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"
                             android:text="@string/abilities_text_control_button"
-                            app:customFont="DINPro/DINPro.otf"
                             style="@style/ControlButtonCharacteristicTextViewStyle"
                             android:layout_weight="1"/>
 
@@ -166,9 +164,8 @@
                             android:layout_marginEnd="@dimen/indent_left_right_control_button_characteristics"
                             android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"
                             android:text="@string/resistance_text_control_button"
-                            app:customFont="DINPro/DINPro.otf"
                             style="@style/ControlButtonCharacteristicTextViewStyle"
-                            />
+                    />
 
                     <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                             android:layout_width="0dp"
@@ -178,9 +175,8 @@
                             android:onClick="onTouch"
                             android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"
                             android:text="@string/devices_text_control_button"
-                            app:customFont="DINPro/DINPro.otf"
                             style="@style/ControlButtonCharacteristicTextViewStyle"
-                            />
+                    />
 
                 </RadioGroup>
 
@@ -189,7 +185,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="10"
                         android:layout_marginStart="@dimen/indent_left_close_button_characteristics"
-                        >
+                >
 
                     <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                             android:layout_width="match_parent"
@@ -199,7 +195,7 @@
                             android:id="@+id/close_characteristics_button"
                             android:onClick="onTouch"
                             app:backgroundColor="@color/colorOrange"
-                            />
+                    />
 
                     <ImageView
                             android:layout_width="match_parent"
@@ -247,7 +243,7 @@
                         android:textSize="@dimen/text_characteristics_balance"
                         android:background="@drawable/balance_characteristics_background"
                         android:layout_weight="1.2"
-                        />
+                />
 
                 <LinearLayout
                         android:orientation="vertical"
