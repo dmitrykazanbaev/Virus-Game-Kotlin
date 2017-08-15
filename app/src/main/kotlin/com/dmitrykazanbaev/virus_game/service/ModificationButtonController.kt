@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Point
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
@@ -79,6 +80,11 @@ private fun createDevicesButtonList(): List<ModificationButton> {
 
     buttonList[0].tag = "mobile"
     buttonList[0].setOnClickListener { onModificationButtonTouch(it) }
+    buttonList[0].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.phone)
+
+    buttonList[1].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.pc)
+
+    buttonList[2].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.smart_home)
 
     return buttonList
 }
@@ -95,9 +101,11 @@ private fun onModificationButtonTouch(view: View) {
 }
 
 private fun createModificationButton(startAngle: Float, sweepAngle: Float): ModificationButton {
-    val button = ModificationButton(ApplicationContextHolder.context, startAngle, sweepAngle)
     val params = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
             RelativeLayout.LayoutParams.MATCH_PARENT)
+
+    val button = ModificationButton(ApplicationContextHolder.context, startAngle, sweepAngle)
+
     button.setBackgroundColor(Color.TRANSPARENT)
     button.layoutParams = params
 

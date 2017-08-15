@@ -2,6 +2,7 @@ package com.dmitrykazanbaev.virus_game.custom_views
 
 import android.content.Context
 import android.graphics.*
+import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -17,10 +18,25 @@ class ModificationButton
                           attrs: AttributeSet? = null,
                           defStyleAttr: Int = 0) : Button(context, attrs, defStyleAttr) {
 
+    lateinit var icon: Drawable
+
     val sectorPath = Path()
     val sectorPaint = Paint()
 
     val center by lazy { Point(height / 2, height / 2) }
+    val iconCenter by lazy {
+        val x = center.x + (outerRadius + innerRadius) / 2 * Math.cos((startAngle + sweepAngle / 2) * Math.PI / 180)
+        val y = center.y + (outerRadius + innerRadius) / 2 * Math.sin((startAngle + sweepAngle / 2) * Math.PI / 180)
+        Point(x.toInt(), y.toInt())
+    }
+    val iconSize by lazy {
+        val widthCoef = icon.intrinsicWidth / ((outerRadius - innerRadius) / 2)
+        val heightCoef = icon.intrinsicHeight / ((outerRadius - innerRadius) / 2)
+        val maxCoef = maxOf(widthCoef, heightCoef)
+
+        Pair(icon.intrinsicWidth / maxCoef, icon.intrinsicHeight / maxCoef)
+    }
+
     val outerRadius by lazy { height / 2f }
     val innerRadius by lazy { outerRadius / 2 }
 
@@ -36,7 +52,6 @@ class ModificationButton
         get() = getOvalForArc(center, (outerRadius - innerRadius) / 3 * 2 + innerRadius) // 2/3 from inner
 
     val separatorPaint = Paint()
-
 
 
     private fun getOvalForArc(center: Point, radius: Float) =
@@ -62,6 +77,12 @@ class ModificationButton
             canvas.drawPath(sectorPath, sectorPaint)
             canvas.drawArc(firstSeparatorOval, startAngle, sweepAngle, false, separatorPaint)
             canvas.drawArc(secondSeparatorOval, startAngle, sweepAngle, false, separatorPaint)
+
+            icon.setBounds(iconCenter.x - iconSize.first.toInt() / 2,
+                    iconCenter.y - iconSize.second.toInt() / 2,
+                    iconCenter.x + iconSize.first.toInt() / 2,
+                    iconCenter.y + iconSize.second.toInt() / 2)
+            icon.draw(canvas)
         }
     }
 
