@@ -209,16 +209,54 @@
             </LinearLayout>
 
             <RelativeLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="76"
-                    android:weightSum="100"
-                    android:id="@+id/modification_and_menu"
                     android:layout_marginStart="@dimen/indent_left_right"
                     android:layout_marginEnd="@dimen/indent_left_right"
                     android:layout_marginTop="@dimen/indent_top_bottom_mod_button_and_menu"
-                    android:layout_marginBottom="@dimen/indent_top_bottom_mod_button_and_menu">
+                    android:layout_marginBottom="@dimen/indent_top_bottom_mod_button_and_menu"
+            >
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/modification_controller"
+                >
+                </RelativeLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:weightSum="100"
+                >
+                    <View android:layout_width="0dp"
+                          android:layout_height="match_parent"
+                          android:layout_weight="60"
+                          android:id="@+id/view"/>
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent" android:layout_weight="40"
+                            android:weightSum="100">
+                        <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp" app:srcCompat="@color/control_button_color"
+                                android:id="@+id/imageView3" android:layout_weight="15"/>
+                        <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp" app:srcCompat="@color/modification_button_color"
+                                android:id="@+id/imageView4" android:layout_weight="30"/>
+                        <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" app:srcCompat="@android:color/white"
+                                android:id="@+id/imageView5" android:layout_weight="15"/>
+                        <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp" app:srcCompat="@color/modification_button_color"
+                                android:id="@+id/imageView6" android:layout_weight="40"/>
+                    </LinearLayout>
+                </LinearLayout>
             </RelativeLayout>
 
             <LinearLayout

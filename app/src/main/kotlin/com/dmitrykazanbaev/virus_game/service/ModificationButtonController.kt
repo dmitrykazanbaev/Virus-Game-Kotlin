@@ -162,7 +162,7 @@ private fun createModificationButtonsWithListener(countButtons: Int): MutableLis
 
 private fun onModificationButtonTouch(view: View) {
     when (view.tag) {
-        "mobile" -> {
+        "phone" -> {
             ((view as ModificationButton).parent as ModificationButtonController).
                     updateCenterWithX(view.width / 2)
             (view.parent as ModificationButtonController).invalidate()
