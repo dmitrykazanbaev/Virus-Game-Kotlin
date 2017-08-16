@@ -14,7 +14,7 @@ import com.dmitrykazanbaev.virus_game.custom_views.ModificationButton
 
 class ModificationButtonController
 @JvmOverloads constructor(context: Context,
-                          val devices: List<ModificationButton> = createDevicesButtonList(),
+                          viewId: Int,
                           attrs: AttributeSet? = null,
                           defStyleAttr: Int = 0) : RelativeLayout(context, attrs, defStyleAttr) {
 
@@ -22,8 +22,16 @@ class ModificationButtonController
 
     val sectorSeparatorPaint = Paint()
 
+    var modificationButtons: List<ModificationButton> = when (viewId) {
+        R.id.devices_button -> createDevicesButtonList()
+        R.id.propagation_button -> createPropagationButtonList()
+        R.id.abilities_button -> createAbilitiesButtonList()
+        R.id.resistance_button -> createResistanceButtonList()
+        else -> emptyList()
+    }
+
     init {
-        devices.forEach { addView(it) }
+        modificationButtons.forEach { addView(it) }
 
         sectorSeparatorPaint.color = Color.BLACK
         sectorSeparatorPaint.strokeWidth = resources.getString(R.dimen.stroke_separatorSector).toFloat()
@@ -43,7 +51,7 @@ class ModificationButtonController
     override fun dispatchDraw(canvas: Canvas?) {
         super.dispatchDraw(canvas)
 
-        devices.forEach {
+        modificationButtons.forEach {
             val sectorSeparatorLine =
                     getSectorSeparatorLine(it.innerRadius, it.outerRadius,
                             it.startAngle, it.sweepAngle)
@@ -65,6 +73,68 @@ class ModificationButtonController
 
         return mutableListOf(Point(startX.toInt(), startY.toInt()), Point(stopX.toInt(), stopY.toInt()))
     }
+}
+
+private fun createPropagationButtonList(): List<ModificationButton> {
+    val buttonList = mutableListOf<ModificationButton>()
+
+    val countButtons = 4
+    val sectorPartDegree = 360f / countButtons
+    var startAngle = -45f - sectorPartDegree
+    repeat(countButtons) {
+        startAngle += sectorPartDegree
+        buttonList.add(createModificationButton(startAngle, sectorPartDegree))
+    }
+
+    buttonList[0].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.wifi)
+
+    buttonList[1].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.bluetooth)
+
+    buttonList[2].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.ethernet)
+
+    buttonList[3].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.stats_net)
+
+    return buttonList
+}
+
+private fun createAbilitiesButtonList(): List<ModificationButton> {
+    val buttonList = mutableListOf<ModificationButton>()
+
+    val countButtons = 3
+    val sectorPartDegree = 360f / countButtons
+    var startAngle = -90f - sectorPartDegree
+    repeat(countButtons) {
+        startAngle += sectorPartDegree
+        buttonList.add(createModificationButton(startAngle, sectorPartDegree))
+    }
+
+    buttonList[0].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.theif)
+
+    buttonList[1].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.control)
+
+    buttonList[2].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.spam)
+
+    return buttonList
+}
+
+private fun createResistanceButtonList(): List<ModificationButton> {
+    val buttonList = mutableListOf<ModificationButton>()
+
+    val countButtons = 3
+    val sectorPartDegree = 360f / countButtons
+    var startAngle = -90f - sectorPartDegree
+    repeat(countButtons) {
+        startAngle += sectorPartDegree
+        buttonList.add(createModificationButton(startAngle, sectorPartDegree))
+    }
+
+    buttonList[0].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.mask)
+
+    buttonList[1].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.invisible)
+
+    buttonList[2].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.new_virus)
+
+    return buttonList
 }
 
 private fun createDevicesButtonList(): List<ModificationButton> {

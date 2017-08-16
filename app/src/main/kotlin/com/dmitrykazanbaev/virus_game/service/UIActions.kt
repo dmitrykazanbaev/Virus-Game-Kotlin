@@ -59,7 +59,3 @@ fun continueGame() {
         startActivity(Intent(this, FirstLevelActivity::class.java))
     }
 }
-
-fun modbutton() {
-    Log.w("dmka", "click")
-}

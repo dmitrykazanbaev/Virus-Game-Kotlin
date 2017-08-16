@@ -24,11 +24,9 @@ class ModificationButton
     val sectorPaint = Paint()
 
     val center by lazy { Point(height / 2, height / 2) }
-    val iconCenter by lazy {
-        val x = center.x + (outerRadius + innerRadius) / 2 * Math.cos((startAngle + sweepAngle / 2) * Math.PI / 180)
-        val y = center.y + (outerRadius + innerRadius) / 2 * Math.sin((startAngle + sweepAngle / 2) * Math.PI / 180)
-        Point(x.toInt(), y.toInt())
-    }
+    var iconCenter = Point()
+        get() = calculateIconCenter()
+
     val iconSize by lazy {
         val widthCoef = icon.intrinsicWidth / ((outerRadius - innerRadius) / 2)
         val heightCoef = icon.intrinsicHeight / ((outerRadius - innerRadius) / 2)
@@ -41,22 +39,28 @@ class ModificationButton
     val innerRadius by lazy { outerRadius / 2 }
 
     var innerOval = RectF()
-        get() = getOvalForArc(center, innerRadius)
+        get() = calculateOvalForArc(center, innerRadius)
     var outerOval = RectF()
-        get() = getOvalForArc(center, outerRadius)
+        get() = calculateOvalForArc(center, outerRadius)
 
     var firstSeparatorOval = RectF()
-        get() = getOvalForArc(center, (outerRadius - innerRadius) / 3 + innerRadius) // 1/3 from inner
+        get() = calculateOvalForArc(center, (outerRadius - innerRadius) / 3 + innerRadius) // 1/3 from inner
 
     var secondSeparatorOval = RectF()
-        get() = getOvalForArc(center, (outerRadius - innerRadius) / 3 * 2 + innerRadius) // 2/3 from inner
+        get() = calculateOvalForArc(center, (outerRadius - innerRadius) / 3 * 2 + innerRadius) // 2/3 from inner
 
     val separatorPaint = Paint()
 
 
-    private fun getOvalForArc(center: Point, radius: Float) =
+    private fun calculateOvalForArc(center: Point, radius: Float) =
             RectF(center.x - radius, center.y - radius,
                     center.x + radius, center.y + radius)
+
+    private fun calculateIconCenter(): Point {
+        val x = center.x + (outerRadius + innerRadius) / 2 * Math.cos((startAngle + sweepAngle / 2) * Math.PI / 180)
+        val y = center.y + (outerRadius + innerRadius) / 2 * Math.sin((startAngle + sweepAngle / 2) * Math.PI / 180)
+        return Point(x.toInt(), y.toInt())
+    }
 
     init {
         sectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.modification_button_color)

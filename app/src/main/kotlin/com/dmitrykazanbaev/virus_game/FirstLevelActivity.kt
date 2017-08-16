@@ -2,8 +2,8 @@ package com.dmitrykazanbaev.virus_game
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.View
+import android.widget.RadioGroup
 import android.widget.RelativeLayout
 import com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
 import com.dmitrykazanbaev.virus_game.screen.FirstLevelView
@@ -31,27 +31,14 @@ class FirstLevelActivity : AppCompatActivity() {
 
         mainframe.addView(firstLevelView, 0)
 
-        val modificationButtonController = ModificationButtonController(this)
-        modificationButtonController.layoutParams =
-                RelativeLayout.LayoutParams(
-                        RelativeLayout.LayoutParams.MATCH_PARENT,
-                        RelativeLayout.LayoutParams.MATCH_PARENT)
-        modification_and_menu.addView(modificationButtonController)
-
         horizontal_scroll_view_background.setOnTouchListener { _, _ -> true }
         vertical_scroll_view_background.setOnTouchListener { _, _ -> true }
 
         characteristic_window.visibility = View.INVISIBLE
 
-        radiogroup.setOnCheckedChangeListener { _, _ ->
-            (0 until radiogroup.childCount).
-                    map { i -> radiogroup.getChildAt(i) }.
-                    forEach {
-                        val button = it as TrapezeButton
-                        if (button.isChecked) button.buttonPaint.color = button.selectedColor
-                        else button.buttonPaint.color = button.unselectedColor
-                        button.invalidate()
-                    }
+        radiogroup.setOnCheckedChangeListener { group, viewId ->
+            updateButtonColor(group)
+            updateModificationButtonController(viewId)
         }
 
         if (!intent.getBooleanExtra("new_game", false))
@@ -76,7 +63,31 @@ class FirstLevelActivity : AppCompatActivity() {
                 closeCharacteristicWindow()
             }
             R.id.devices_button, R.id.propagation_button,
-            R.id.resistance_button, R.id.abilities_button -> (view as TrapezeButton).isChecked = true
+            R.id.resistance_button, R.id.abilities_button -> if (!(view as TrapezeButton).isChecked) view.isChecked = true
         }
+    }
+
+    private fun updateButtonColor(group: RadioGroup) {
+        (0 until group.childCount).
+                map { i -> group.getChildAt(i) }.
+                forEach {
+                    val button = it as TrapezeButton
+                    if (button.isChecked) {
+                        button.buttonPaint.color = button.selectedColor
+                    }
+                    else button.buttonPaint.color = button.unselectedColor
+                    button.invalidate()
+                }
+    }
+
+    private fun updateModificationButtonController(viewId: Int) {
+        modification_and_menu.removeAllViews()
+
+        val modificationButtonController = ModificationButtonController(this, viewId)
+        modificationButtonController.layoutParams =
+                RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.MATCH_PARENT,
+                        RelativeLayout.LayoutParams.MATCH_PARENT)
+        modification_and_menu.addView(modificationButtonController)
     }
 }
