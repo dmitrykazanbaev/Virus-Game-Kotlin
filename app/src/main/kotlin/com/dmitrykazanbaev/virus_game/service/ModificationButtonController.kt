@@ -76,85 +76,85 @@ class ModificationButtonController
 }
 
 private fun createPropagationButtonList(): List<ModificationButton> {
-    val buttonList = mutableListOf<ModificationButton>()
+    val buttonList = createModificationButtonsWithListener(4)
 
-    val countButtons = 4
-    val sectorPartDegree = 360f / countButtons
-    var startAngle = -45f - sectorPartDegree
-    repeat(countButtons) {
-        startAngle += sectorPartDegree
-        buttonList.add(createModificationButton(startAngle, sectorPartDegree))
-    }
-
+    buttonList[0].tag = "wifi"
     buttonList[0].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.wifi)
 
+    buttonList[1].tag = "bluetooth"
     buttonList[1].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.bluetooth)
 
+    buttonList[2].tag = "ethernet"
     buttonList[2].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.ethernet)
 
+    buttonList[3].tag = "stats_net"
     buttonList[3].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.stats_net)
 
     return buttonList
 }
 
 private fun createAbilitiesButtonList(): List<ModificationButton> {
-    val buttonList = mutableListOf<ModificationButton>()
+    val buttonList = createModificationButtonsWithListener(3)
 
-    val countButtons = 3
-    val sectorPartDegree = 360f / countButtons
-    var startAngle = -90f - sectorPartDegree
-    repeat(countButtons) {
-        startAngle += sectorPartDegree
-        buttonList.add(createModificationButton(startAngle, sectorPartDegree))
-    }
-
+    buttonList[0].tag = "theif"
     buttonList[0].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.theif)
 
+    buttonList[1].tag = "control"
     buttonList[1].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.control)
 
+    buttonList[2].tag = "spam"
     buttonList[2].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.spam)
 
     return buttonList
 }
 
 private fun createResistanceButtonList(): List<ModificationButton> {
-    val buttonList = mutableListOf<ModificationButton>()
+    val buttonList = createModificationButtonsWithListener(3)
 
-    val countButtons = 3
-    val sectorPartDegree = 360f / countButtons
-    var startAngle = -90f - sectorPartDegree
-    repeat(countButtons) {
-        startAngle += sectorPartDegree
-        buttonList.add(createModificationButton(startAngle, sectorPartDegree))
-    }
-
+    buttonList[0].tag = "mask"
     buttonList[0].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.mask)
 
+    buttonList[1].tag = "invisible"
     buttonList[1].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.invisible)
 
+    buttonList[2].tag = "new_virus"
     buttonList[2].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.new_virus)
 
     return buttonList
 }
 
 private fun createDevicesButtonList(): List<ModificationButton> {
-    val buttonList = mutableListOf<ModificationButton>()
+    val buttonList = createModificationButtonsWithListener(3)
 
-    val countButtons = 3
-    val sectorPartDegree = 360f / countButtons
-    var startAngle = -90f - sectorPartDegree
-    repeat(countButtons) {
-        startAngle += sectorPartDegree
-        buttonList.add(createModificationButton(startAngle, sectorPartDegree))
-    }
-
-    buttonList[0].tag = "mobile"
-    buttonList[0].setOnClickListener { onModificationButtonTouch(it) }
+    buttonList[0].tag = "phone"
     buttonList[0].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.phone)
 
+    buttonList[1].tag = "pc"
     buttonList[1].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.pc)
 
+    buttonList[2].tag = "smart_home"
     buttonList[2].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.smart_home)
+
+    return buttonList
+}
+
+private fun createModificationButtonsWithListener(countButtons: Int): MutableList<ModificationButton> {
+    val buttonList = mutableListOf<ModificationButton>()
+
+    val sectorPartDegree = 360f / countButtons
+    var startAngle = when (countButtons) {
+        3 -> -90f
+        4 -> -45f
+        else -> 0f
+    }
+
+    repeat(countButtons) {
+        val button = createModificationButton(startAngle, sectorPartDegree)
+        button.setOnClickListener { onModificationButtonTouch(it) }
+        buttonList.add(button)
+
+        startAngle += sectorPartDegree
+    }
 
     return buttonList
 }
