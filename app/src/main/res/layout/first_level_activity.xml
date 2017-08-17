@@ -230,31 +230,71 @@
                         android:layout_height="match_parent"
                         android:weightSum="100"
                 >
-                    <View android:layout_width="0dp"
-                          android:layout_height="match_parent"
-                          android:layout_weight="60"
-                          android:id="@+id/view"/>
+
+                    <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="60"
+                            android:id="@+id/empty_view"/>
+
                     <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent" android:layout_weight="40"
-                            android:weightSum="100">
+                            android:layout_height="match_parent"
+                            android:layout_weight="40"
+                            android:weightSum="100"
+                            android:id="@+id/buy_modification_window">
+
+                        <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
+                                android:text="ПРОТИВОДЕЙСТВИЕ"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:id="@+id/modification_name"
+                                android:layout_weight="15"
+                                android:background="@color/control_button_color"
+                                style="@style/BuyWindowTextViewStyle"/>
+
+                        <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
+                                android:text="TextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:id="@+id/modification_description"
+                                android:layout_weight="35"
+                                android:background="@color/modification_button_color"
+                                style="@style/BuyWindowTextViewStyle"/>
+
+                        <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="15"
+                                android:weightSum="100">
+
+                            <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
+                                    android:text="СТОИМОСТЬ РАЗРАБОТКИ"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/modification_cost_description"
+                                    android:layout_weight="50"
+                                    android:background="@android:color/white"
+                                    style="@style/BuyWindowTextViewStyle"/>
+
+                            <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
+                                    android:text="TextView"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/modification_cost"
+                                    android:layout_weight="50"
+                                    android:background="@android:color/white"
+                                    style="@style/BuyWindowTextViewStyle"/>
+                        </LinearLayout>
+
                         <ImageView
                                 android:layout_width="match_parent"
-                                android:layout_height="0dp" app:srcCompat="@color/control_button_color"
-                                android:id="@+id/imageView3" android:layout_weight="15"/>
-                        <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp" app:srcCompat="@color/modification_button_color"
-                                android:id="@+id/imageView4" android:layout_weight="30"/>
-                        <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" app:srcCompat="@android:color/white"
-                                android:id="@+id/imageView5" android:layout_weight="15"/>
-                        <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp" app:srcCompat="@color/modification_button_color"
-                                android:id="@+id/imageView6" android:layout_weight="40"/>
+                                android:layout_height="0dp"
+                                app:srcCompat="@color/modification_button_color"
+                                android:id="@+id/imageView6"
+                                android:layout_weight="35"/>
                     </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>
