@@ -83,7 +83,7 @@ class FirstLevelActivity : AppCompatActivity() {
     private fun updateModificationButtonController(viewId: Int) {
         modification_controller.removeAllViews()
 
-        val modificationButtonController = ModificationButtonController(this, viewId)
+        val modificationButtonController = ModificationButtonController(this, viewId = viewId)
         modificationButtonController.layoutParams =
                 RelativeLayout.LayoutParams(
                         RelativeLayout.LayoutParams.MATCH_PARENT,

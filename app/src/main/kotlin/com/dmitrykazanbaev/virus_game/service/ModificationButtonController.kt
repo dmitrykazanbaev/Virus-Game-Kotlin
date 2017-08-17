@@ -1,10 +1,7 @@
 package com.dmitrykazanbaev.virus_game.service
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Point
+import android.graphics.*
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.View
@@ -14,9 +11,9 @@ import com.dmitrykazanbaev.virus_game.custom_views.ModificationButton
 
 class ModificationButtonController
 @JvmOverloads constructor(context: Context,
-                          viewId: Int,
                           attrs: AttributeSet? = null,
-                          defStyleAttr: Int = 0) : RelativeLayout(context, attrs, defStyleAttr) {
+                          defStyleAttr: Int = 0,
+                          viewId: Int = 0) : RelativeLayout(context, attrs, defStyleAttr) {
 
     val center by lazy { Point(height / 2, height / 2) }
 
@@ -30,12 +27,18 @@ class ModificationButtonController
         else -> emptyList()
     }
 
+    private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
     init {
         modificationButtons.forEach { addView(it) }
 
         sectorSeparatorPaint.color = Color.BLACK
         sectorSeparatorPaint.strokeWidth = resources.getString(R.dimen.stroke_separatorSector).toFloat()
         sectorSeparatorPaint.style = Paint.Style.STROKE
+
+        paint.textSize = 24f
+        paint.color = Color.BLACK
+        paint.style = Paint.Style.STROKE
     }
 
     fun updateCenterWithX(x: Int) {
@@ -47,6 +50,13 @@ class ModificationButtonController
                     it.invalidate()
                 }
     }
+
+    //TODO DELETE RIGHT AFTER TESTING
+    private fun calculateOvalForArc(center: Point, radius: Float) =
+            RectF(center.x - radius, center.y - radius,
+                    center.x + radius, center.y + radius)
+
+    private val path = Path()
 
     override fun dispatchDraw(canvas: Canvas?) {
         super.dispatchDraw(canvas)
@@ -62,6 +72,13 @@ class ModificationButtonController
                     sectorSeparatorLine[1].y.toFloat(), sectorSeparatorPaint)
         }
 
+        path.reset()
+        path.arcTo(calculateOvalForArc(Point(height / 2, height / 2), height / 4f), 0f, 360f)
+        path.close()
+
+        canvas?.drawPath(path, sectorSeparatorPaint)
+
+        canvas?.drawText("111", 0f, 0f, paint)
     }
 
     private fun getSectorSeparatorLine(innerRadius: Float, outerRadius: Float,
