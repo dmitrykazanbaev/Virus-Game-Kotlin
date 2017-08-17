@@ -246,22 +246,24 @@
                             android:id="@+id/buy_modification_window">
 
                         <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
-                                android:text="ПРОТИВОДЕЙСТВИЕ"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:id="@+id/modification_name"
                                 android:layout_weight="15"
                                 android:background="@color/control_button_color"
-                                style="@style/BuyWindowTextViewStyle"/>
+                                style="@style/BuyWindowTextViewStyle" android:textSize="@dimen/modification_name_text"
+                                android:text="УСТРОЙСТВА"/>
 
                         <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
-                                android:text="TextView"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:id="@+id/modification_description"
                                 android:layout_weight="35"
                                 android:background="@color/modification_button_color"
-                                style="@style/BuyWindowTextViewStyle"/>
+                                style="@style/BuyWindowTextViewStyle"
+                                android:textSize="@dimen/modification_description_text"
+                                android:text="ВИРУС ЗАРАЖАЕТ ANDROID УСТРОЙСТВА "
+                                android:textColor="@android:color/white"/>
 
                         <LinearLayout
                                 android:orientation="horizontal"
@@ -271,30 +273,47 @@
                                 android:weightSum="100">
 
                             <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
-                                    android:text="СТОИМОСТЬ РАЗРАБОТКИ"
+                                    android:text="@string/development_cost_text"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:id="@+id/modification_cost_description"
                                     android:layout_weight="50"
                                     android:background="@android:color/white"
-                                    style="@style/BuyWindowTextViewStyle"/>
+                                    style="@style/BuyWindowTextViewStyle"
+                                    android:textSize="@dimen/development_cost_description_text"/>
 
                             <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
-                                    android:text="TextView"
+                                    android:text="100"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:id="@+id/modification_cost"
                                     android:layout_weight="50"
                                     android:background="@android:color/white"
-                                    style="@style/BuyWindowTextViewStyle"/>
+                                    style="@style/BuyWindowTextViewStyle"
+                                    android:textSize="@dimen/development_cost_text"/>
                         </LinearLayout>
-
-                        <ImageView
+                        <RelativeLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                app:srcCompat="@color/modification_button_color"
-                                android:id="@+id/imageView6"
-                                android:layout_weight="35"/>
+                                android:layout_height="0dp" android:layout_weight="35"
+                                android:background="@color/modification_button_color">
+
+                            <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true">
+                                <com.dmitrykazanbaev.virus_game.custom_views.ButtonWithCustomFont
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/buy_button"
+                                        android:text="@string/buy_button"
+                                        android:background="@drawable/buy_button"
+                                        android:maxHeight="500dp"
+                                        android:minHeight="1dp" app:customFont="DINPro/DINPro.otf"
+                                        android:textSize="@dimen/buy_button_text"/>
+                            </LinearLayout>
+                        </RelativeLayout>
+
                     </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>

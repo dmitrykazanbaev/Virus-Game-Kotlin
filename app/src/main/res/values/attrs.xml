@@ -11,4 +11,7 @@
         <attr name="backgroundColor" format="color"/>
         <attr name="customFont"/>
     </declare-styleable>
+    <declare-styleable name="ButtonWithCustomFont">
+        <attr name="customFont"/>
+    </declare-styleable>
 </resources>

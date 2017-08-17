@@ -8,4 +8,6 @@
     <string name="abilities_text_control_button">ФУНКЦИИ</string>
     <string name="resistance_text_control_button">ПРОТИВОДЕЙСТВИЕ</string>
     <string name="devices_text_control_button">УСТРОЙСТВА</string>
+    <string name="development_cost_text">СТОИМОСТЬ\nРАЗРАБОТКИ</string>
+    <string name="buy_button">КУПИТЬ</string>
 </resources>

@@ -17,4 +17,12 @@
     <dimen name="indent_left_close_button_characteristics">-16dp</dimen>
     <dimen name="padding_image_close_characteristics">12dp</dimen>
     <dimen name="text_control_button_characteristic">11sp</dimen>
+    <dimen name="development_cost_description_text">12sp</dimen>
+    <dimen name="development_cost_text">16sp</dimen>
+    <dimen name="modification_description_text">14sp</dimen>
+    <dimen name="modification_name_text">16sp</dimen>
+    <dimen name="buy_button_text">16sp</dimen>
+    <dimen name="buy_button_width">100dp</dimen>
+    <dimen name="buy_button_height">30dp</dimen>
+    <dimen name="buy_button_corners">24dp</dimen>
 </resources>

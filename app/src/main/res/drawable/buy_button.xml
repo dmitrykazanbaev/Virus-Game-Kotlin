@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@android:id/background">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+               android:shape="rectangle">
+            <size
+                    android:width="@dimen/buy_button_width"
+                    android:height="@dimen/buy_button_height"
+            />
+            <solid android:color="@color/colorOrange"/>
+            <corners android:radius="@dimen/buy_button_corners"/>
+        </shape>
+    </item>
+
+</layer-list>

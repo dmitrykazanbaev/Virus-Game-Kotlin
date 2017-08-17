@@ -12,4 +12,6 @@
     <string name="abilities_text_control_button">ABILITIES</string>
     <string name="resistance_text_control_button">RESISTANCE</string>
     <string name="devices_text_control_button">DEVICES</string>
+    <string name="development_cost_text">DEVELOPMENT\nCOST</string>
+    <string name="buy_button">BUY</string>
 </resources>
