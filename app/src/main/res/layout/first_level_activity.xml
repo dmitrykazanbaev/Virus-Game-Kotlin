@@ -18,42 +18,67 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10" android:weightSum="100">
-            <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
+            <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    app:indentRightTop="true"
                     android:layout_weight="10"
-                    style="@style/ControlButtonCharacteristicTextViewStyle" android:text="1"
-                    android:layout_marginEnd="@dimen/indent_left_right_control_button_characteristics"/>
+                    android:layout_marginEnd="@dimen/indent_left_right_control_button_characteristics"
+            >
+
+                <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:indentRightTop="true"
+                        style="@style/ControlButtonCharacteristicTextViewStyle"
+                        android:id="@+id/settings_button"/>
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/settings"
+                        android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"
+                        android:padding="@dimen/padding_image_setting" android:id="@+id/settings_image"/>
+            </RelativeLayout>
             <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     app:indentLeftBottom="true"
                     android:layout_weight="15"
                     android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"
-                    style="@style/ControlButtonCharacteristicTextViewStyle" android:text="2"
-            />
+                    style="@style/ControlButtonCharacteristicTextViewStyle" android:text="WANNACRY"
+                    android:id="@+id/virus_name"/>
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="0dp"
                     android:layout_height="match_parent" android:layout_weight="50">
             </LinearLayout>
-            <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
+            <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    app:indentRightBottom="true"
                     android:layout_weight="10"
                     android:layout_marginEnd="@dimen/indent_left_right_control_button_characteristics"
-                    style="@style/ControlButtonCharacteristicTextViewStyle" android:text="3"
-            />
+            >
+
+                <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:indentRightBottom="true"
+                        style="@style/ControlButtonCharacteristicTextViewStyle"
+                        android:id="@+id/donate_button"/>
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/add"
+                        android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"
+                        android:padding="@dimen/padding_image_setting" android:id="@+id/donate_image"/>
+            </RelativeLayout>
             <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     app:indentLeftTop="true"
                     android:layout_weight="15"
                     android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"
-                    style="@style/ControlButtonCharacteristicTextViewStyle" android:text="4"
-            />
+                    style="@style/ControlButtonCharacteristicTextViewStyle" android:text="100"
+                    app:backgroundColor="@color/colorOrange" android:id="@+id/balance_button"/>
         </LinearLayout>
         <LinearLayout
                 android:layout_width="match_parent"
@@ -68,14 +93,14 @@
                     android:layout_weight="15"
                     android:layout_marginEnd="@dimen/indent_left_right_control_button_characteristics"
                     style="@style/ControlButtonCharacteristicTextViewStyle" android:text="5"
-            />
+                    android:id="@+id/antivirus_button"/>
             <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     app:indentLeftTop="true"
                     android:layout_weight="10"
                     android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"
-                    app:backgroundColor="@android:color/transparent"/>
+                    app:backgroundColor="@android:color/transparent" android:id="@+id/empty_button1"/>
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="0dp"
@@ -87,7 +112,7 @@
                     app:indentRightTop="true"
                     android:layout_weight="10"
                     android:layout_marginEnd="@dimen/indent_left_right_control_button_characteristics"
-                    app:backgroundColor="@android:color/transparent"/>
+                    app:backgroundColor="@android:color/transparent" android:id="@+id/empty_button2"/>
             <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -95,7 +120,7 @@
                     android:layout_weight="15"
                     android:layout_marginStart="@dimen/indent_left_right_control_button_characteristics"
                     style="@style/ControlButtonCharacteristicTextViewStyle" android:text="6"
-            />
+                    android:id="@+id/date_button"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="vertical"

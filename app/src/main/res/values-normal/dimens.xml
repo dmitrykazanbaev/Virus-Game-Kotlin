@@ -27,4 +27,5 @@
     <dimen name="buy_button_corners">24dp</dimen>
     <dimen name="indent_top_bottom_control_buttons">4dp</dimen>
     <dimen name="indent_left_right_control_buttons">16dp</dimen>
+    <dimen name="padding_image_setting">4dp</dimen>
 </resources>
