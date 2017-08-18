@@ -119,13 +119,6 @@ class ModificationButtonController
                 }
     }
 
-    //TODO DELETE RIGHT AFTER TESTING
-    private fun calculateOvalForArc(center: Point, radius: Float) =
-            RectF(center.x - radius, center.y - radius,
-                    center.x + radius, center.y + radius)
-
-    private val path = Path()
-
     override fun dispatchDraw(canvas: Canvas?) {
         super.dispatchDraw(canvas)
 
@@ -139,12 +132,6 @@ class ModificationButtonController
                     sectorSeparatorLine[1].x.toFloat(),
                     sectorSeparatorLine[1].y.toFloat(), sectorSeparatorPaint)
         }
-
-        path.reset()
-        path.arcTo(calculateOvalForArc(Point(height / 2, height / 2), height / 4f), 0f, 360f)
-        path.close()
-
-        canvas?.drawPath(path, sectorSeparatorPaint)
 
         drawNumbers(canvas)
     }
