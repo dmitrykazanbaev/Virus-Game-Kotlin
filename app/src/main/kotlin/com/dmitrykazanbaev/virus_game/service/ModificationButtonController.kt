@@ -8,6 +8,10 @@ import android.view.View
 import android.widget.RelativeLayout
 import com.dmitrykazanbaev.virus_game.R
 import com.dmitrykazanbaev.virus_game.custom_views.ModificationButton
+import android.text.Layout
+import android.text.StaticLayout
+import android.text.TextPaint
+
 
 class ModificationButtonController
 @JvmOverloads constructor(context: Context,
@@ -27,7 +31,58 @@ class ModificationButtonController
         else -> emptyList()
     }
 
-    private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    val numbers by lazy { Numbers() }
+
+    inner class Numbers {
+        private val textInCenterPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+        var textLayouts: MutableList<StaticLayout> = mutableListOf()
+
+        var offsets: MutableList<Point> = mutableListOf()
+            get() {
+                val resOffsets = mutableListOf<Point>()
+                (-3..2).mapTo(resOffsets) { Point((center.x + it / 4f * (height / 4)).toInt(), (center.y + it / 4f * (height / 4)).toInt()) }
+                return resOffsets
+            }
+
+        init {
+            textInCenterPaint.textSize = 45f
+            textInCenterPaint.color = Color.WHITE
+            textInCenterPaint.typeface = FontCache.getTypeface("DINPro/DINPro.otf", context)
+            textInCenterPaint.style = Paint.Style.FILL
+        }
+
+        fun getStaticLayouts(canvas: Canvas?): MutableList<StaticLayout> {
+            val textPaint = TextPaint(textInCenterPaint)
+            val layouts = mutableListOf<StaticLayout>()
+
+            layouts.add(StaticLayout("1\n1", textPaint,
+                    canvas?.width!!, Layout.Alignment.ALIGN_NORMAL,
+                    1.0f, 0.0f, false))
+
+            layouts.add(StaticLayout("1\n1", textPaint,
+                    canvas.width, Layout.Alignment.ALIGN_NORMAL,
+                    1.0f, 0.0f, false))
+
+            layouts.add(StaticLayout("1\n1", textPaint,
+                    canvas.width, Layout.Alignment.ALIGN_NORMAL,
+                    1.0f, 0.0f, false))
+
+            layouts.add(StaticLayout("1\n1", textPaint,
+                    canvas.width, Layout.Alignment.ALIGN_NORMAL,
+                    1.0f, 0.0f, false))
+
+            layouts.add(StaticLayout("1\n1", textPaint,
+                    canvas.width, Layout.Alignment.ALIGN_NORMAL,
+                    1.0f, 0.0f, false))
+
+            layouts.add(StaticLayout("1\n1", textPaint,
+                    canvas.width, Layout.Alignment.ALIGN_NORMAL,
+                    1.0f, 0.0f, false))
+
+            return layouts
+        }
+    }
 
     init {
         modificationButtons.forEach { addView(it) }
@@ -35,10 +90,6 @@ class ModificationButtonController
         sectorSeparatorPaint.color = Color.BLACK
         sectorSeparatorPaint.strokeWidth = resources.getString(R.dimen.stroke_separatorSector).toFloat()
         sectorSeparatorPaint.style = Paint.Style.STROKE
-
-        paint.textSize = 24f
-        paint.color = Color.BLACK
-        paint.style = Paint.Style.STROKE
     }
 
     fun updateCenterWithX(x: Int) {
@@ -78,7 +129,21 @@ class ModificationButtonController
 
         canvas?.drawPath(path, sectorSeparatorPaint)
 
-        canvas?.drawText("111", 0f, 0f, paint)
+        drawNumbers(canvas)
+    }
+
+    private fun drawNumbers(canvas: Canvas?) {
+        if (numbers.textLayouts.isEmpty())
+            numbers.textLayouts = numbers.getStaticLayouts(canvas)
+
+        numbers.textLayouts.forEachIndexed { index, textLayout ->
+            canvas?.save()
+
+            canvas?.translate(numbers.offsets[index].x.toFloat(), numbers.offsets[index].y.toFloat())
+            textLayout.draw(canvas)
+
+            canvas?.restore()
+        }
     }
 
     private fun getSectorSeparatorLine(innerRadius: Float, outerRadius: Float,
