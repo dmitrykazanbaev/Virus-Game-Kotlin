@@ -11,6 +11,7 @@ import com.dmitrykazanbaev.virus_game.custom_views.ModificationButton
 import android.text.Layout
 import android.text.StaticLayout
 import android.text.TextPaint
+import java.util.*
 
 
 class ModificationButtonController
@@ -34,19 +35,21 @@ class ModificationButtonController
     val numbers by lazy { Numbers() }
 
     inner class Numbers {
-        private val textInCenterPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+        val textInCenterPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
         var textLayouts: MutableList<StaticLayout> = mutableListOf()
 
         var offsets: MutableList<Point> = mutableListOf()
             get() {
                 val resOffsets = mutableListOf<Point>()
-                (-3..2).mapTo(resOffsets) { Point((center.x + it / 4f * (height / 4)).toInt(), (center.y + it / 4f * (height / 4)).toInt()) }
+                (-6..4 step 2).mapTo(resOffsets) { Point((center.x + it / 7f * (height / 4f) + height / 50f).toInt(), 0) }
+                var index = 0
+                (-4 downTo -6).forEach { resOffsets[index++].y = (center.y + it / 6f * (height / 4)).toInt() }
+                (-6..-4).forEach { resOffsets[index++].y = (center.y + it / 6f * (height / 4)).toInt() }
                 return resOffsets
             }
 
         init {
-            textInCenterPaint.textSize = 45f
             textInCenterPaint.color = Color.WHITE
             textInCenterPaint.typeface = FontCache.getTypeface("DINPro/DINPro.otf", context)
             textInCenterPaint.style = Paint.Style.FILL
@@ -56,31 +59,45 @@ class ModificationButtonController
             val textPaint = TextPaint(textInCenterPaint)
             val layouts = mutableListOf<StaticLayout>()
 
-            layouts.add(StaticLayout("1\n1", textPaint,
-                    canvas?.width!!, Layout.Alignment.ALIGN_NORMAL,
-                    1.0f, 0.0f, false))
+            canvas?.let {
+                layouts.add(StaticLayout(getRandomHexTextWithCountLetters(4), textPaint,
+                        canvas.width, Layout.Alignment.ALIGN_NORMAL,
+                        1.0f, 0.0f, false))
 
-            layouts.add(StaticLayout("1\n1", textPaint,
-                    canvas.width, Layout.Alignment.ALIGN_NORMAL,
-                    1.0f, 0.0f, false))
+                layouts.add(StaticLayout(getRandomHexTextWithCountLetters(5), textPaint,
+                        canvas.width, Layout.Alignment.ALIGN_NORMAL,
+                        1.0f, 0.0f, false))
 
-            layouts.add(StaticLayout("1\n1", textPaint,
-                    canvas.width, Layout.Alignment.ALIGN_NORMAL,
-                    1.0f, 0.0f, false))
+                layouts.add(StaticLayout(getRandomHexTextWithCountLetters(6), textPaint,
+                        canvas.width, Layout.Alignment.ALIGN_NORMAL,
+                        1.0f, 0.0f, false))
 
-            layouts.add(StaticLayout("1\n1", textPaint,
-                    canvas.width, Layout.Alignment.ALIGN_NORMAL,
-                    1.0f, 0.0f, false))
+                layouts.add(StaticLayout(getRandomHexTextWithCountLetters(6), textPaint,
+                        canvas.width, Layout.Alignment.ALIGN_NORMAL,
+                        1.0f, 0.0f, false))
 
-            layouts.add(StaticLayout("1\n1", textPaint,
-                    canvas.width, Layout.Alignment.ALIGN_NORMAL,
-                    1.0f, 0.0f, false))
+                layouts.add(StaticLayout(getRandomHexTextWithCountLetters(5), textPaint,
+                        canvas.width, Layout.Alignment.ALIGN_NORMAL,
+                        1.0f, 0.0f, false))
 
-            layouts.add(StaticLayout("1\n1", textPaint,
-                    canvas.width, Layout.Alignment.ALIGN_NORMAL,
-                    1.0f, 0.0f, false))
+                layouts.add(StaticLayout(getRandomHexTextWithCountLetters(4), textPaint,
+                        canvas.width, Layout.Alignment.ALIGN_NORMAL,
+                        1.0f, 0.0f, false))
+            }
 
             return layouts
+        }
+
+        private fun getRandomHexTextWithCountLetters(count: Int): String {
+            val source = "0123456789ABCDEF"
+            var result = ""
+            val random = Random()
+            for (i in 0 until count) {
+                if (i != 0) result += "\n"
+                result += source[random.nextInt(source.length)]
+            }
+
+            return result
         }
     }
 
@@ -133,6 +150,8 @@ class ModificationButtonController
     }
 
     private fun drawNumbers(canvas: Canvas?) {
+        numbers.textInCenterPaint.textSize = height / 15f
+
         if (numbers.textLayouts.isEmpty())
             numbers.textLayouts = numbers.getStaticLayouts(canvas)
 

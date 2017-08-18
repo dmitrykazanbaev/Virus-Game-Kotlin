@@ -223,8 +223,6 @@
                         android:layout_height="match_parent"
                         android:id="@+id/modification_controller"
                 >
-                    <view class="com.dmitrykazanbaev.virus_game.service.ModificationButtonController"
-                          android:layout_width="match_parent" android:layout_height="match_parent"/>
                 </RelativeLayout>
                 <LinearLayout
                         android:orientation="horizontal"
