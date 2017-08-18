@@ -13,7 +13,7 @@
     <dimen name="indent_top_bottom_mod_button_and_menu">16dp</dimen>
     <item name="stroke_separator" format="float" type="dimen">2</item>
     <item name="stroke_separatorSector" format="float" type="dimen">4</item>
-    <dimen name="indent_left_right_control_button_characteristics">-8dp</dimen>
+    <dimen name="indent_left_right_button_characteristics">-8dp</dimen>
     <dimen name="indent_left_close_button_characteristics">-16dp</dimen>
     <dimen name="padding_image_close_characteristics">12dp</dimen>
     <dimen name="text_control_button_characteristic">11sp</dimen>
@@ -28,4 +28,8 @@
     <dimen name="indent_top_bottom_control_buttons">4dp</dimen>
     <dimen name="indent_left_right_control_buttons">16dp</dimen>
     <dimen name="padding_image_setting">4dp</dimen>
+    <dimen name="indent_left_right_control_button">-6.5dp</dimen>
+    <dimen name="margin_image_btc">6dp</dimen>
+    <dimen name="virus_name_text_size">14sp</dimen>
+    <dimen name="balance_text_size">16sp</dimen>
 </resources>
