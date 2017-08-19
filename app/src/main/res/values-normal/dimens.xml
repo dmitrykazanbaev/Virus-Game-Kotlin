@@ -30,6 +30,11 @@
     <dimen name="padding_image_setting">4dp</dimen>
     <dimen name="indent_left_right_control_button">-6.5dp</dimen>
     <dimen name="margin_image_btc">6dp</dimen>
-    <dimen name="virus_name_text_size">14sp</dimen>
-    <dimen name="balance_text_size">16sp</dimen>
+    <dimen name="virus_name_text_size">15sp</dimen>
+    <dimen name="balance_text_size">18sp</dimen>
+    <dimen name="padding_end_antivirus_image">6dp</dimen>
+    <dimen name="margin_antivirus">4dp</dimen>
+    <dimen name="padding_end_antivirus">34dp</dimen>
+    <dimen name="antivirus_text_size">18sp</dimen>
+    <dimen name="date_text_size">18sp</dimen>
 </resources>

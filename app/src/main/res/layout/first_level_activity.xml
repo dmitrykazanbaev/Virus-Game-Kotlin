@@ -4,20 +4,24 @@
              android:id="@+id/mainframe"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:keepScreenOn="true" android:background="@android:color/darker_gray">
+             android:keepScreenOn="true"
+             android:background="@android:color/darker_gray">
 
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:weightSum="100"
+            android:layout_height="match_parent"
+            android:weightSum="100"
             android:layout_marginEnd="@dimen/indent_left_right_control_buttons"
             android:layout_marginStart="@dimen/indent_left_right_control_buttons"
             android:layout_marginTop="@dimen/indent_top_bottom_control_buttons"
             android:layout_marginBottom="@dimen/indent_top_bottom_control_buttons">
+
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="10" android:weightSum="100">
+                android:layout_weight="10"
+                android:weightSum="100">
 
             <RelativeLayout
                     android:layout_width="0dp"
@@ -49,13 +53,15 @@
                     android:layout_weight="17"
                     android:layout_marginStart="@dimen/indent_left_right_control_button"
                     style="@style/ControlButtonCharacteristicTextViewStyle"
-                    android:text="  WANNACRY4"
+                    android:text="  WANNACRY"
                     android:id="@+id/virus_name"
                     android:textSize="@dimen/virus_name_text_size"/>
+
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent" android:layout_weight="50">
+                    android:layout_height="match_parent"
+                    android:layout_weight="50">
             </LinearLayout>
 
             <RelativeLayout
@@ -93,7 +99,7 @@
                         android:layout_height="match_parent"
                         app:indentLeftTop="true"
                         style="@style/ControlButtonCharacteristicTextViewStyle"
-                        android:text="90000"
+                        android:text="100"
                         app:backgroundColor="@color/colorOrange"
                         android:id="@+id/balance_button"
                         android:textSize="@dimen/balance_text_size"/>
@@ -104,11 +110,14 @@
                         android:src="@mipmap/btc"
                         android:layout_alignParentEnd="true"
                         android:id="@+id/balance_btc_image"
-                        android:layout_margin="@dimen/margin_image_btc"
-                        android:adjustViewBounds="true"/>
+                        android:adjustViewBounds="true"
+                        android:layout_marginBottom="@dimen/margin_image_btc"
+                        android:layout_marginTop="@dimen/margin_image_btc"
+                        android:paddingEnd="@dimen/margin_antivirus"/>
 
             </RelativeLayout>
         </LinearLayout>
+
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -116,15 +125,46 @@
                 android:weightSum="100"
                 android:layout_marginTop="@dimen/indent_top_bottom_control_buttons">
 
-            <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
+            <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    app:indentRightBottom="true"
                     android:layout_weight="17"
                     android:layout_marginEnd="@dimen/indent_left_right_control_button"
-                    style="@style/ControlButtonCharacteristicTextViewStyle"
-                    android:text="5"
-                    android:id="@+id/antivirus_button"/>
+                    android:id="@+id/antivirus">
+
+                <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:indentRightBottom="true"
+                        style="@style/ControlButtonCharacteristicTextViewStyle"
+                        android:id="@+id/antivirus_background_button"
+                        app:backgroundColor="@color/control_button_color"/>
+
+                <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:indentRightBottom="true"
+                        style="@style/ControlButtonCharacteristicTextViewStyle"
+                        android:id="@+id/antivirus_button"
+
+                        android:layout_marginBottom="@dimen/margin_antivirus"
+                        android:layout_marginTop="@dimen/margin_antivirus"
+                        android:layout_marginStart="@dimen/margin_antivirus"
+                        android:layout_marginEnd="@dimen/padding_end_antivirus"
+                        android:text="78 %"
+                        android:textSize="@dimen/antivirus_text_size"/>
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/antivirus"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/antivirus_image"
+                        android:layout_margin="@dimen/margin_image_btc"
+                        android:adjustViewBounds="true"
+                        android:paddingEnd="@dimen/padding_end_antivirus_image"
+                        />
+            </RelativeLayout>
 
             <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                     android:layout_width="0dp"
@@ -134,10 +174,12 @@
                     android:layout_marginStart="@dimen/indent_left_right_control_button"
                     app:backgroundColor="@android:color/transparent"
                     android:id="@+id/empty_button1"/>
+
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent" android:layout_weight="50">
+                    android:layout_height="match_parent"
+                    android:layout_weight="50">
             </LinearLayout>
 
             <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
@@ -156,24 +198,32 @@
                     android:layout_weight="17"
                     android:layout_marginStart="@dimen/indent_left_right_control_button"
                     style="@style/ControlButtonCharacteristicTextViewStyle"
-                    android:text="6"
-                    android:id="@+id/date_button"/>
+                    android:text="  18.08.17"
+                    android:id="@+id/date_button"
+                    android:textSize="@dimen/date_text_size"/>
         </LinearLayout>
+
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="0dp" android:layout_weight="65">
+                android:layout_height="0dp"
+                android:layout_weight="65">
         </LinearLayout>
+
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:id="@+id/control_buttons" android:layout_weight="15" android:weightSum="100">
+                android:id="@+id/control_buttons"
+                android:layout_weight="15"
+                android:weightSum="100">
 
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent" android:layout_weight="25"
+                    android:layout_height="match_parent"
+                    android:layout_weight="25"
                     android:background="@color/colorOrange">
+
                 <ImageButton
                         android:contentDescription="@string/virus_button_description"
                         android:background="@android:color/transparent"
@@ -187,13 +237,17 @@
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent" android:layout_weight="50">
+                    android:layout_height="match_parent"
+                    android:layout_weight="50">
             </LinearLayout>
+
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent" android:layout_weight="25"
+                    android:layout_height="match_parent"
+                    android:layout_weight="25"
                     android:background="@color/control_button_color">
+
                 <ImageButton
                         android:contentDescription="@string/statistics_button_description"
                         android:background="@android:color/transparent"
@@ -215,20 +269,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/horizontal_scroll_view_background"
-        >
+                >
 
             <ScrollView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/vertical_scroll_view_background"
-            >
+                    >
 
                 <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/background_characteristic_window"
-                >
+                        >
 
                     <LinearLayout
                             android:orientation="horizontal"
@@ -240,14 +294,14 @@
                                 android:layout_height="wrap_content"
                                 android:src="@mipmap/background_modif"
                                 android:scaleType="matrix"
-                        />
+                                />
 
                         <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@mipmap/background_modif"
                                 android:scaleType="matrix"
-                        />
+                                />
 
                     </LinearLayout>
 
@@ -261,14 +315,14 @@
                                 android:layout_height="wrap_content"
                                 android:src="@mipmap/background_modif"
                                 android:scaleType="matrix"
-                        />
+                                />
 
                         <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@mipmap/background_modif"
                                 android:scaleType="matrix"
-                        />
+                                />
 
                     </LinearLayout>
 
@@ -295,7 +349,7 @@
                     android:layout_marginEnd="@dimen/indent_left_right"
                     android:layout_weight="12"
                     android:weightSum="100"
-            >
+                    >
 
                 <RadioGroup
                         android:layout_width="0dp"
@@ -304,7 +358,7 @@
                         android:id="@+id/radiogroup"
                         android:weightSum="4"
                         android:layout_weight="90"
-                >
+                        >
 
                     <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                             android:layout_width="0dp"
@@ -315,7 +369,7 @@
                             android:layout_marginEnd="@dimen/indent_left_right_button_characteristics"
                             android:text="@string/propagation_text_control_button"
                             style="@style/ButtonCharacteristicTextViewStyle"
-                    />
+                            />
 
                     <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                             android:layout_width="0dp"
@@ -338,7 +392,7 @@
                             android:layout_marginStart="@dimen/indent_left_right_button_characteristics"
                             android:text="@string/resistance_text_control_button"
                             style="@style/ButtonCharacteristicTextViewStyle"
-                    />
+                            />
 
                     <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                             android:layout_width="0dp"
@@ -349,7 +403,7 @@
                             android:layout_marginStart="@dimen/indent_left_right_button_characteristics"
                             android:text="@string/devices_text_control_button"
                             style="@style/ButtonCharacteristicTextViewStyle"
-                    />
+                            />
 
                 </RadioGroup>
 
@@ -358,7 +412,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="10"
                         android:layout_marginStart="@dimen/indent_left_close_button_characteristics"
-                >
+                        >
 
                     <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                             android:layout_width="match_parent"
@@ -368,7 +422,7 @@
                             android:id="@+id/close_characteristics_button"
                             android:onClick="onTouch"
                             app:backgroundColor="@color/colorOrange"
-                    />
+                            />
 
                     <ImageView
                             android:layout_width="match_parent"
@@ -389,20 +443,21 @@
                     android:layout_marginEnd="@dimen/indent_left_right"
                     android:layout_marginTop="@dimen/indent_top_bottom_mod_button_and_menu"
                     android:layout_marginBottom="@dimen/indent_top_bottom_mod_button_and_menu"
-            >
+                    >
 
                 <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:id="@+id/modification_controller"
-                >
+                        >
                 </RelativeLayout>
+
                 <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:weightSum="100"
-                >
+                        >
 
                     <View
                             android:layout_width="0dp"
@@ -424,7 +479,8 @@
                                 android:id="@+id/modification_name"
                                 android:layout_weight="15"
                                 android:background="@color/control_button_color"
-                                style="@style/BuyWindowTextViewStyle" android:textSize="@dimen/modification_name_text"
+                                style="@style/BuyWindowTextViewStyle"
+                                android:textSize="@dimen/modification_name_text"
                                 android:text="УСТРОЙСТВА"/>
 
                         <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
@@ -465,9 +521,11 @@
                                     style="@style/BuyWindowTextViewStyle"
                                     android:textSize="@dimen/development_cost_text"/>
                         </LinearLayout>
+
                         <RelativeLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="0dp" android:layout_weight="35"
+                                android:layout_height="0dp"
+                                android:layout_weight="35"
                                 android:background="@color/modification_button_color">
 
                             <LinearLayout
@@ -475,6 +533,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerInParent="true">
+
                                 <com.dmitrykazanbaev.virus_game.custom_views.ButtonWithCustomFont
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -482,7 +541,8 @@
                                         android:text="@string/buy_button"
                                         android:background="@drawable/buy_button"
                                         android:maxHeight="500dp"
-                                        android:minHeight="1dp" app:customFont="DINPro/DINPro.otf"
+                                        android:minHeight="1dp"
+                                        app:customFont="DINPro/DINPro.otf"
                                         android:textSize="@dimen/buy_button_text"/>
                             </LinearLayout>
                         </RelativeLayout>
@@ -513,7 +573,7 @@
                         android:textSize="@dimen/text_characteristics_balance"
                         android:background="@drawable/balance_characteristics_background"
                         android:layout_weight="1.2"
-                />
+                        />
 
                 <LinearLayout
                         android:orientation="vertical"
