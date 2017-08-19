@@ -37,4 +37,8 @@
     <dimen name="padding_end_antivirus">68dp</dimen>
     <dimen name="antivirus_text_size">36sp</dimen>
     <dimen name="date_text_size">36sp</dimen>
+    <dimen name="virus_statistics_text_size">32sp</dimen>
+    <dimen name="padding_end_virus">68dp</dimen>
+    <dimen name="margin_image_virus">14dp</dimen>
+    <dimen name="margin_image_statistics">20dp</dimen>
 </resources>

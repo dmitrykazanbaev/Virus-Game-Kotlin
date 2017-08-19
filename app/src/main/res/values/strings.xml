@@ -14,4 +14,6 @@
     <string name="devices_text_control_button">DEVICES</string>
     <string name="development_cost_text">DEVELOPMENT\nCOST</string>
     <string name="buy_button">BUY</string>
+    <string name="virus_button">VIRUS\u0020\u0020</string>
+    <string name="statistics_button">\u0020\u0020STATISTICS</string>
 </resources>

@@ -146,7 +146,6 @@
                         app:indentRightBottom="true"
                         style="@style/ControlButtonCharacteristicTextViewStyle"
                         android:id="@+id/antivirus_button"
-
                         android:layout_marginBottom="@dimen/margin_antivirus"
                         android:layout_marginTop="@dimen/margin_antivirus"
                         android:layout_marginStart="@dimen/margin_antivirus"
@@ -207,55 +206,89 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="65">
+                android:layout_weight="67">
         </LinearLayout>
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:id="@+id/control_buttons"
-                android:layout_weight="15"
+                android:layout_weight="13"
                 android:weightSum="100">
 
-            <LinearLayout
-                    android:orientation="horizontal"
+            <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="25"
+                    android:layout_weight="28"
                     android:background="@color/colorOrange">
 
-                <ImageButton
+                <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                         android:contentDescription="@string/virus_button_description"
-                        android:background="@android:color/transparent"
-                        android:src="@mipmap/virus_icon"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        app:indentRightBottom="true"
+                        style="@style/ControlButtonCharacteristicTextViewStyle"
+                        android:id="@+id/virus_button"
+                        android:layout_marginBottom="@dimen/margin_antivirus"
+                        android:layout_marginTop="@dimen/margin_antivirus"
+                        android:layout_marginStart="@dimen/margin_antivirus"
+                        android:layout_marginEnd="@dimen/padding_end_virus"
+                        android:textSize="@dimen/virus_statistics_text_size"
                         android:onClick="onTouch"
-                        android:id="@+id/virus_button"/>
-            </LinearLayout>
+                        android:text="@string/virus_button"/>
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/virus"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/virus_image"
+                        android:adjustViewBounds="true"
+                        android:layout_marginBottom="@dimen/margin_image_virus"
+                        android:layout_marginTop="@dimen/margin_image_virus"
+                        android:paddingEnd="@dimen/margin_antivirus"/>
+
+            </RelativeLayout>
 
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="50">
+                    android:layout_weight="44">
             </LinearLayout>
 
-            <LinearLayout
-                    android:orientation="horizontal"
+            <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="25"
+                    android:layout_weight="28"
                     android:background="@color/control_button_color">
 
-                <ImageButton
+                <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                         android:contentDescription="@string/statistics_button_description"
-                        android:background="@android:color/transparent"
-                        android:src="@mipmap/statistic_icon"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/statistics_button"/>
-            </LinearLayout>
+                        app:indentLeftTop="true"
+                        style="@style/ControlButtonCharacteristicTextViewStyle"
+                        android:id="@+id/statistics_button"
+                        android:layout_marginBottom="@dimen/margin_antivirus"
+                        android:layout_marginTop="@dimen/margin_antivirus"
+                        android:layout_marginEnd="@dimen/margin_antivirus"
+                        android:layout_marginStart="@dimen/padding_end_virus"
+                        android:textSize="@dimen/virus_statistics_text_size"
+                        android:onClick="onTouch"
+                        android:text="@string/statistics_button"/>
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/stats"
+                        android:layout_alignParentStart="true"
+                        android:id="@+id/statistics_image"
+                        android:adjustViewBounds="true"
+                        android:layout_marginBottom="@dimen/margin_image_statistics"
+                        android:layout_marginTop="@dimen/margin_image_statistics"
+                        android:paddingStart="@dimen/margin_antivirus"/>
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 

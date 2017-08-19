@@ -10,4 +10,6 @@
     <string name="devices_text_control_button">УСТРОЙСТВА</string>
     <string name="development_cost_text">СТОИМОСТЬ\nРАЗРАБОТКИ</string>
     <string name="buy_button">КУПИТЬ</string>
+    <string name="virus_button">ВИРУС\u0020\u0020</string>
+    <string name="statistics_button">\u0020\u0020СТАТИСТИКА</string>
 </resources>
