@@ -13,21 +13,21 @@ import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
 
 class ModificationButton
 @JvmOverloads constructor(context: Context,
-                          var startAngle: Float,
-                          val sweepAngle: Float,
                           attrs: AttributeSet? = null,
-                          defStyleAttr: Int = 0) : Button(context, attrs, defStyleAttr) {
+                          defStyleAttr: Int = 0,
+                          var startAngle: Float = 0f,
+                          val sweepAngle: Float = 0f) : Button(context, attrs, defStyleAttr) {
 
     lateinit var icon: Drawable
 
-    val sectorPath = Path()
-    val sectorPaint = Paint()
+    private val sectorPath = Path()
+    private val sectorPaint = Paint()
 
     val center by lazy { Point(height / 2, height / 2) }
     var iconCenter = Point()
         get() = calculateIconCenter()
 
-    val iconSize by lazy {
+    private val iconSize by lazy {
         val widthCoef = icon.intrinsicWidth / ((outerRadius - innerRadius) / 2)
         val heightCoef = icon.intrinsicHeight / ((outerRadius - innerRadius) / 2)
         val maxCoef = maxOf(widthCoef, heightCoef)
@@ -49,7 +49,7 @@ class ModificationButton
     var secondSeparatorOval = RectF()
         get() = calculateOvalForArc(center, (outerRadius - innerRadius) / 3 * 2 + innerRadius) // 2/3 from inner
 
-    val separatorPaint = Paint()
+    private val separatorPaint = Paint()
 
 
     private fun calculateOvalForArc(center: Point, radius: Float) =
@@ -97,9 +97,8 @@ class ModificationButton
         val buttonRegion = Region()
         buttonRegion.setPath(sectorPath, Region(pathBounds.left.toInt(), pathBounds.top.toInt(), pathBounds.right.toInt(), pathBounds.bottom.toInt()))
 
-        if (buttonRegion.contains(event.x.toInt(), event.y.toInt()))
-            return super.onTouchEvent(event)
-        else
-            return false
+        return if (buttonRegion.contains(event.x.toInt(), event.y.toInt()))
+            super.onTouchEvent(event)
+        else false
     }
 }

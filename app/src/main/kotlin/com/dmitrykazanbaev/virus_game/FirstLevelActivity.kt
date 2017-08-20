@@ -20,19 +20,19 @@ import java.util.*
 
 
 class FirstLevelActivity : AppCompatActivity() {
-    val firstLevelView by lazy { FirstLevelView(this) }
-    val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.US)
-    val calendar = GregorianCalendar()
+    private val firstLevelView by lazy { FirstLevelView(this) }
+    private val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.US)
+    private val calendar = GregorianCalendar()
 
-    var tickJob: Job? = null
-    protected var drawJob: Job? = null
+    private var tickJob: Job? = null
+    private var drawJob: Job? = null
 
-    fun startJobs() {
+    private fun startJobs() {
         initDrawJob()
         initTickJob()
     }
 
-    suspend fun stopJobs() {
+    private suspend fun stopJobs() {
         drawJob?.cancel()
         tickJob?.cancel()
 
@@ -57,7 +57,7 @@ class FirstLevelActivity : AppCompatActivity() {
         }
     }
 
-    fun initTickJob() {
+    private fun initTickJob() {
         if (tickJob == null || tickJob?.isCompleted!!) {
             tickJob = launch(CommonPool) {
                 while (isActive) {
@@ -103,13 +103,13 @@ class FirstLevelActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
-        super.onResume()
         startJobs()
+        super.onResume()
     }
 
     override fun onPause() {
-        super.onPause()
         runBlocking { stopJobs() }
+        super.onPause()
     }
 
     override fun onStop() {

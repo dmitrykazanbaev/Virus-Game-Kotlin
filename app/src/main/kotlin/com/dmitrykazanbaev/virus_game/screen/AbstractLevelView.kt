@@ -7,8 +7,8 @@ import com.dmitrykazanbaev.virus_game.model.level.AbstractLevel
 
 
 abstract class AbstractLevelView(context: Context, val level: AbstractLevel) : SurfaceView(context), SurfaceHolder.Callback {
-    protected val scrollGestureDetector = GestureDetector(context, MyGestureListener())
-    protected val scaleGestureDetector = ScaleGestureDetector(context, MyGestureListener())
+    private val scrollGestureDetector = GestureDetector(context, MyGestureListener())
+    private val scaleGestureDetector = ScaleGestureDetector(context, MyGestureListener())
 
     protected var xOffset = 0f
     protected var yOffset = 0f

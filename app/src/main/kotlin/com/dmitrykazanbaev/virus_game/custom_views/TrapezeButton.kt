@@ -21,9 +21,9 @@ class TrapezeButton
     var isIndentRightTop by Delegates.notNull<Boolean>()
     var isIndentRightBottom by Delegates.notNull<Boolean>()
 
-    val indentLeftRight by lazy { height / 2f }
+    private val indentLeftRight by lazy { height / 2f }
 
-    val buttonPath by lazy {
+    private val buttonPath by lazy {
         val path = Path()
 
         if (isIndentLeftTop) path.moveTo(indentLeftRight, 0f)

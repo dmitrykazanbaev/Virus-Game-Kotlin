@@ -1,16 +1,19 @@
 package com.dmitrykazanbaev.virus_game.service
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Point
 import android.support.v4.content.ContextCompat
+import android.text.Layout
+import android.text.StaticLayout
+import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
 import com.dmitrykazanbaev.virus_game.R
 import com.dmitrykazanbaev.virus_game.custom_views.ModificationButton
-import android.text.Layout
-import android.text.StaticLayout
-import android.text.TextPaint
 import java.util.*
 
 
@@ -22,9 +25,9 @@ class ModificationButtonController
 
     val center by lazy { Point(height / 2, height / 2) }
 
-    val sectorSeparatorPaint = Paint()
+    private val sectorSeparatorPaint = Paint()
 
-    var modificationButtons: List<ModificationButton> = when (sourceViewId) {
+    private var modificationButtons: List<ModificationButton> = when (sourceViewId) {
         R.id.devices_button -> createDevicesButtonList()
         R.id.propagation_button -> createPropagationButtonList()
         R.id.abilities_button -> createAbilitiesButtonList()
@@ -32,7 +35,7 @@ class ModificationButtonController
         else -> emptyList()
     }
 
-    val numbers by lazy { Numbers() }
+    private val numbers by lazy { Numbers() }
 
     inner class Numbers {
         val textInCenterPaint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -262,7 +265,8 @@ private fun createModificationButton(startAngle: Float, sweepAngle: Float): Modi
     val params = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
             RelativeLayout.LayoutParams.MATCH_PARENT)
 
-    val button = ModificationButton(ApplicationContextHolder.context, startAngle, sweepAngle)
+    val button = ModificationButton(ApplicationContextHolder.context,
+            startAngle = startAngle, sweepAngle = sweepAngle)
 
     button.setBackgroundColor(Color.TRANSPARENT)
     button.layoutParams = params
