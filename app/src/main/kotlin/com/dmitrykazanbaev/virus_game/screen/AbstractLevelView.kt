@@ -4,13 +4,9 @@ import android.content.Context
 import android.graphics.Canvas
 import android.view.*
 import com.dmitrykazanbaev.virus_game.model.level.AbstractLevel
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.runBlocking
 
 
-abstract class AbstractLevelView(context: Context, protected val level: AbstractLevel) : SurfaceView(context), SurfaceHolder.Callback {
+abstract class AbstractLevelView(context: Context, val level: AbstractLevel) : SurfaceView(context), SurfaceHolder.Callback {
     protected val scrollGestureDetector = GestureDetector(context, MyGestureListener())
     protected val scaleGestureDetector = ScaleGestureDetector(context, MyGestureListener())
 
@@ -20,8 +16,6 @@ abstract class AbstractLevelView(context: Context, protected val level: Abstract
     protected var scaleFactor = 1f
     protected var minScaleFactor = scaleFactor
     protected var maxScaleFactor = scaleFactor
-
-    protected var drawJob: Job? = null
 
     inner class MyGestureListener : GestureDetector.SimpleOnGestureListener(), ScaleGestureDetector.OnScaleGestureListener {
         override fun onScaleBegin(p0: ScaleGestureDetector?): Boolean {
@@ -80,54 +74,15 @@ abstract class AbstractLevelView(context: Context, protected val level: Abstract
         }
     }
 
-    override fun surfaceChanged(p0: SurfaceHolder?, p1: Int, p2: Int, p3: Int) {
-    }
+    override fun surfaceChanged(p0: SurfaceHolder?, p1: Int, p2: Int, p3: Int) {}
 
-    override fun surfaceDestroyed(p0: SurfaceHolder?) {
-        runBlocking {
-            stopJobs()
-        }
-    }
-
-    suspend fun stopJobs() {
-        drawJob?.cancel()
-        level.tickJob?.cancel()
-
-        drawJob?.join()
-        level.tickJob?.join()
-    }
-
+    override fun surfaceDestroyed(p0: SurfaceHolder?) {}
 
     override fun surfaceCreated(p0: SurfaceHolder?) {
         scaleFactor = minOf(width.toFloat() / level.width, height.toFloat() / level.height)
         scaleFactor *= 0.8f
         minScaleFactor = scaleFactor
         maxScaleFactor = 3 * minScaleFactor
-
-        startJobs()
-    }
-
-    fun startJobs() {
-        initDrawJob()
-
-        level.initTickJob()
-    }
-
-    private fun initDrawJob() {
-        if (drawJob == null || drawJob?.isCompleted!!) {
-            drawJob = launch(CommonPool) {
-                var canvas: Canvas?
-                while (isActive) {
-                    canvas = holder.lockCanvas()
-
-                    synchronized(holder) {
-                        canvas?.let { drawLevel(it) }
-                    }
-
-                    canvas?.let { holder.unlockCanvasAndPost(it) }
-                }
-            }
-        }
     }
 
     abstract fun drawLevel(canvas: Canvas)

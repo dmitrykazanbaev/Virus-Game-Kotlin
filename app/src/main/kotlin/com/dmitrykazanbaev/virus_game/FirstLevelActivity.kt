@@ -1,5 +1,6 @@
 package com.dmitrykazanbaev.virus_game
 
+import android.graphics.Canvas
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -13,11 +14,65 @@ import com.dmitrykazanbaev.virus_game.service.closeCharacteristicWindow
 import com.dmitrykazanbaev.virus_game.service.showCharacteristicWindow
 import io.realm.Realm
 import kotlinx.android.synthetic.main.first_level_activity.*
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.experimental.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class FirstLevelActivity : AppCompatActivity() {
     val firstLevelView by lazy { FirstLevelView(this) }
+    val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.US)
+    val calendar = GregorianCalendar()
+
+    var tickJob: Job? = null
+    protected var drawJob: Job? = null
+
+    fun startJobs() {
+        initDrawJob()
+        initTickJob()
+    }
+
+    suspend fun stopJobs() {
+        drawJob?.cancel()
+        tickJob?.cancel()
+
+        drawJob?.join()
+        tickJob?.join()
+    }
+
+    private fun initDrawJob() {
+        if (drawJob == null || drawJob?.isCompleted!!) {
+            drawJob = launch(CommonPool) {
+                var canvas: Canvas?
+                while (isActive) {
+                    canvas = firstLevelView.holder.lockCanvas()
+
+                    synchronized(firstLevelView.holder) {
+                        canvas?.let { firstLevelView.drawLevel(it) }
+                    }
+
+                    canvas?.let { firstLevelView.holder.unlockCanvasAndPost(it) }
+                }
+            }
+        }
+    }
+
+    fun initTickJob() {
+        if (tickJob == null || tickJob?.isCompleted!!) {
+            tickJob = launch(CommonPool) {
+                while (isActive) {
+                    firstLevelView.level.infect()
+                    runOnUiThread { updateDate() }
+                    delay(500)
+                }
+            }
+        }
+    }
+
+    private fun updateDate() {
+        calendar.add(Calendar.DAY_OF_YEAR, 1)
+        date_button?.text = "  ${dateFormat.format(calendar.time)}"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +96,20 @@ class FirstLevelActivity : AppCompatActivity() {
             updateModificationButtonController(viewId)
         }
 
+        date_button.text = "  ${dateFormat.format(calendar.time)}"
+
         if (!intent.getBooleanExtra("new_game", false))
             firstLevelView.initLevelFromRealm()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        startJobs()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        runBlocking { stopJobs() }
     }
 
     override fun onStop() {
@@ -54,12 +121,12 @@ class FirstLevelActivity : AppCompatActivity() {
         when (view.id) {
             R.id.virus_button -> {
                 runBlocking {
-                    firstLevelView.stopJobs()
+                    stopJobs()
                 }
                 showCharacteristicWindow()
             }
             R.id.close_characteristics_button -> {
-                firstLevelView.startJobs()
+                startJobs()
                 closeCharacteristicWindow()
             }
             R.id.devices_button, R.id.propagation_button,
@@ -74,8 +141,7 @@ class FirstLevelActivity : AppCompatActivity() {
                     val button = it as TrapezeButton
                     if (button.isChecked) {
                         button.buttonPaint.color = button.selectedColor
-                    }
-                    else button.buttonPaint.color = button.unselectedColor
+                    } else button.buttonPaint.color = button.unselectedColor
                     button.invalidate()
                 }
     }

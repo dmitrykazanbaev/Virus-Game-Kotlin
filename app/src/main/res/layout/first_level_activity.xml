@@ -197,9 +197,9 @@
                     android:layout_weight="17"
                     android:layout_marginStart="@dimen/indent_left_right_control_button"
                     style="@style/ControlButtonCharacteristicTextViewStyle"
-                    android:text="  18.08.17"
                     android:id="@+id/date_button"
-                    android:textSize="@dimen/date_text_size"/>
+                    android:textSize="@dimen/date_text_size"
+                    />
         </LinearLayout>
 
         <LinearLayout
