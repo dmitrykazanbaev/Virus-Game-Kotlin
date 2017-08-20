@@ -18,13 +18,13 @@ class ModificationButtonController
 @JvmOverloads constructor(context: Context,
                           attrs: AttributeSet? = null,
                           defStyleAttr: Int = 0,
-                          viewId: Int = 0) : RelativeLayout(context, attrs, defStyleAttr) {
+                          sourceViewId: Int = 0) : RelativeLayout(context, attrs, defStyleAttr) {
 
     val center by lazy { Point(height / 2, height / 2) }
 
     val sectorSeparatorPaint = Paint()
 
-    var modificationButtons: List<ModificationButton> = when (viewId) {
+    var modificationButtons: List<ModificationButton> = when (sourceViewId) {
         R.id.devices_button -> createDevicesButtonList()
         R.id.propagation_button -> createPropagationButtonList()
         R.id.abilities_button -> createAbilitiesButtonList()
