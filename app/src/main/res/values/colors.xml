@@ -12,4 +12,7 @@
     <color name="low_transparent">#88676767</color>
     <color name="modification_button_color">#757575</color>
     <color name="control_button_color">#00BCD4</color>
+    <color name="first_level_modification">#B2EBF2</color>
+    <color name="second_level_modification">#00BCD4</color>
+    <color name="third_level_modification">#0097A7</color>
 </resources>

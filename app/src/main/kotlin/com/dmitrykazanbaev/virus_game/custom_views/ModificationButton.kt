@@ -15,6 +15,7 @@ class ModificationButton
 @JvmOverloads constructor(context: Context,
                           attrs: AttributeSet? = null,
                           defStyleAttr: Int = 0,
+                          var modificationLevel: Int = 0,
                           var startAngle: Float = 0f,
                           val sweepAngle: Float = 0f) : Button(context, attrs, defStyleAttr) {
 
@@ -51,6 +52,36 @@ class ModificationButton
 
     private val separatorPaint = Paint()
 
+    private val firstLevelModificationSectorPaint = Paint()
+    private val firstLevelModificationSector by lazy {
+        val path = Path()
+        path.arcTo(innerOval, startAngle, sweepAngle)
+        path.arcTo(firstSeparatorOval, startAngle + sweepAngle, -sweepAngle)
+        path.close()
+
+        path
+    }
+
+    private val secondLevelModificationSectorPaint = Paint()
+    private val secondLevelModificationSector by lazy {
+        val path = Path()
+        path.arcTo(firstSeparatorOval, startAngle, sweepAngle)
+        path.arcTo(secondSeparatorOval, startAngle + sweepAngle, -sweepAngle)
+        path.close()
+
+        path
+    }
+
+    private val thirdLevelModificationSectorPaint = Paint()
+    private val thirdLevelModificationSector by lazy {
+        val path = Path()
+        path.arcTo(secondSeparatorOval, startAngle, sweepAngle)
+        path.arcTo(outerOval, startAngle + sweepAngle, -sweepAngle)
+        path.close()
+
+        path
+    }
+
 
     private fun calculateOvalForArc(center: Point, radius: Float) =
             RectF(center.x - radius, center.y - radius,
@@ -66,6 +97,15 @@ class ModificationButton
         sectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.modification_button_color)
         sectorPaint.style = Paint.Style.FILL
 
+        firstLevelModificationSectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.first_level_modification)
+        sectorPaint.style = Paint.Style.FILL
+
+        secondLevelModificationSectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.second_level_modification)
+        sectorPaint.style = Paint.Style.FILL
+
+        thirdLevelModificationSectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.third_level_modification)
+        sectorPaint.style = Paint.Style.FILL
+
         separatorPaint.color = Color.BLACK
         separatorPaint.style = Paint.Style.STROKE
         separatorPaint.strokeWidth = resources.getString(R.dimen.stroke_separator).toFloat()
@@ -79,6 +119,9 @@ class ModificationButton
 
         canvas?.let {
             canvas.drawPath(sectorPath, sectorPaint)
+
+            drawSectorAccordingToModificationLevel(canvas, modificationLevel)
+
             canvas.drawArc(firstSeparatorOval, startAngle, sweepAngle, false, separatorPaint)
             canvas.drawArc(secondSeparatorOval, startAngle, sweepAngle, false, separatorPaint)
 
@@ -87,6 +130,16 @@ class ModificationButton
                     iconCenter.x + iconSize.first.toInt() / 2,
                     iconCenter.y + iconSize.second.toInt() / 2)
             icon.draw(canvas)
+        }
+    }
+
+    private fun drawSectorAccordingToModificationLevel(canvas: Canvas, modificationLevel: Int) {
+        if (modificationLevel >= 1) {
+            canvas.drawPath(firstLevelModificationSector, firstLevelModificationSectorPaint)
+
+            if (modificationLevel >= 2) canvas.drawPath(secondLevelModificationSector, secondLevelModificationSectorPaint)
+
+            if (modificationLevel == 3) canvas.drawPath(thirdLevelModificationSector, thirdLevelModificationSectorPaint)
         }
     }
 
