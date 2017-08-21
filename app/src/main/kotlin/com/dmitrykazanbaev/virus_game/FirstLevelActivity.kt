@@ -154,6 +154,7 @@ class FirstLevelActivity : AppCompatActivity() {
                 RelativeLayout.LayoutParams(
                         RelativeLayout.LayoutParams.MATCH_PARENT,
                         RelativeLayout.LayoutParams.MATCH_PARENT)
+        modificationButtonController.setOnCheckedChangeListener { radioGroup, _ -> radioGroup.invalidate() }
         modification_controller.addView(modificationButtonController)
     }
 }

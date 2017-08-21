@@ -11,6 +11,7 @@ import android.text.StaticLayout
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
+import android.widget.RadioGroup
 import android.widget.RelativeLayout
 import com.dmitrykazanbaev.virus_game.R
 import com.dmitrykazanbaev.virus_game.custom_views.ModificationButton
@@ -20,8 +21,7 @@ import java.util.*
 class ModificationButtonController
 @JvmOverloads constructor(context: Context,
                           attrs: AttributeSet? = null,
-                          defStyleAttr: Int = 0,
-                          sourceViewId: Int = 0) : RelativeLayout(context, attrs, defStyleAttr) {
+                          sourceViewId: Int = 0) : RadioGroup(context, attrs) {
 
     val center by lazy { Point(height / 2, height / 2) }
 
@@ -123,7 +123,10 @@ class ModificationButtonController
     }
 
     override fun dispatchDraw(canvas: Canvas?) {
-        super.dispatchDraw(canvas)
+        modificationButtons.forEach {
+            it.layout(0, 0, width, height)
+            it.draw(canvas)
+        }
 
         modificationButtons.forEach {
             val sectorSeparatorLine =

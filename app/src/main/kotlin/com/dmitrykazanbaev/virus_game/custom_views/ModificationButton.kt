@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.MotionEvent
-import android.widget.Button
+import android.widget.RadioButton
 import com.dmitrykazanbaev.virus_game.R
 import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
 
@@ -17,7 +17,7 @@ class ModificationButton
                           defStyleAttr: Int = 0,
                           var modificationLevel: Int = 0,
                           var startAngle: Float = 0f,
-                          val sweepAngle: Float = 0f) : Button(context, attrs, defStyleAttr) {
+                          val sweepAngle: Float = 0f) : RadioButton(context, attrs, defStyleAttr) {
 
     lateinit var icon: Drawable
 
@@ -51,6 +51,8 @@ class ModificationButton
         get() = calculateOvalForArc(center, (outerRadius - innerRadius) / 3 * 2 + innerRadius) // 2/3 from inner
 
     private val separatorPaint = Paint()
+
+    private val checkedSectorPaint = Paint()
 
     private val firstLevelModificationSectorPaint = Paint()
     private val firstLevelModificationSector by lazy {
@@ -95,16 +97,15 @@ class ModificationButton
 
     init {
         sectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.modification_button_color)
-        sectorPaint.style = Paint.Style.FILL
 
         firstLevelModificationSectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.first_level_modification)
-        sectorPaint.style = Paint.Style.FILL
 
         secondLevelModificationSectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.second_level_modification)
-        sectorPaint.style = Paint.Style.FILL
 
         thirdLevelModificationSectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.third_level_modification)
-        sectorPaint.style = Paint.Style.FILL
+
+        checkedSectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.colorOrange)
+        checkedSectorPaint.style = Paint.Style.STROKE
 
         separatorPaint.color = Color.BLACK
         separatorPaint.style = Paint.Style.STROKE
@@ -130,6 +131,8 @@ class ModificationButton
                     iconCenter.x + iconSize.first.toInt() / 2,
                     iconCenter.y + iconSize.second.toInt() / 2)
             icon.draw(canvas)
+
+            if (isChecked) canvas.drawPath(sectorPath, checkedSectorPaint)
         }
     }
 
