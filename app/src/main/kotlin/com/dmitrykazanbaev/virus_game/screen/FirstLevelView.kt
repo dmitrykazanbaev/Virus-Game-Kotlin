@@ -17,10 +17,17 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
     private val paintForFilling = Paint()
     private val paintForStroke = Paint()
 
+    private val colorLeft = ContextCompat.getColor(context, R.color.colorLeft)
+    private val colorCenter = ContextCompat.getColor(context, R.color.colorCenter)
+    private val colorRoof = ContextCompat.getColor(context, R.color.colorRoof)
+    private val colorInfectedRoof = ContextCompat.getColor(context, R.color.colorInfectedRoof)
+    private val colorBackground = ContextCompat.getColor(context, R.color.colorBackground)
+
     init {
         paintForFilling.style = Paint.Style.FILL
 
         paintForStroke.style = Paint.Style.STROKE
+        paintForStroke.isAntiAlias = true
         paintForStroke.strokeWidth = resources.getString(R.string.strokeWidth).toFloat()
         paintForStroke.color = Color.BLACK
     }
@@ -29,7 +36,7 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
         canvas.scale(scaleFactor, scaleFactor, width / 2f, height / 2f)
         canvas.translate(-xOffset / scaleFactor, -yOffset / scaleFactor)
 
-        canvas.drawColor(ContextCompat.getColor(context, R.color.colorBackground))
+        canvas.drawColor(colorBackground)
 
         (level as FirstLevel).buildings.forEach {
             drawBuilding(it, canvas)
@@ -57,30 +64,32 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
         drawCenterSideBuilding(building, canvas)
         drawRoofBuilding(building, canvas)
         drawInfectedRoofBuilding(building, canvas)
+
+        canvas?.drawPath(building.roof, paintForStroke)
     }
 
     private fun drawLeftSideBuilding(building: Building, canvas: Canvas?) {
-        paintForFilling.color = ContextCompat.getColor(context, R.color.colorLeft)
+        paintForFilling.color = colorLeft
 
         canvas?.drawPath(building.leftSide, paintForFilling)
+        canvas?.drawPath(building.leftSide, paintForStroke)
     }
 
     private fun drawCenterSideBuilding(building: Building, canvas: Canvas?) {
-        paintForFilling.color = ContextCompat.getColor(context, R.color.colorCenter)
+        paintForFilling.color = colorCenter
 
         canvas?.drawPath(building.centerSide, paintForFilling)
         canvas?.drawPath(building.centerSide, paintForStroke)
     }
 
     private fun drawRoofBuilding(building: Building, canvas: Canvas?) {
-        paintForFilling.color = ContextCompat.getColor(context, R.color.colorRoof)
+        paintForFilling.color = colorRoof
 
         canvas?.drawPath(building.roof, paintForFilling)
-        canvas?.drawPath(building.roof, paintForStroke)
     }
 
     private fun drawInfectedRoofBuilding(building: Building, canvas: Canvas?) {
-        paintForFilling.color = ContextCompat.getColor(context, R.color.colorInfectedRoof)
+        paintForFilling.color = colorInfectedRoof
 
         canvas?.drawPath(building.infectedRoof, paintForFilling)
     }
