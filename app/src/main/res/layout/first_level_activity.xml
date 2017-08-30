@@ -99,7 +99,6 @@
                         android:layout_height="match_parent"
                         app:indentLeftTop="true"
                         style="@style/ControlButtonCharacteristicTextViewStyle"
-                        android:text="100"
                         app:backgroundColor="@color/colorOrange"
                         android:id="@+id/balance_button"
                         android:textSize="@dimen/balance_text_size"/>

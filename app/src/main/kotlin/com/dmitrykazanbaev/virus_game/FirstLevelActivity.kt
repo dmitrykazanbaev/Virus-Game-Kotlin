@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.RadioGroup
 import android.widget.RelativeLayout
 import com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
+import com.dmitrykazanbaev.virus_game.model.User
 import com.dmitrykazanbaev.virus_game.screen.FirstLevelView
 import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
 import com.dmitrykazanbaev.virus_game.service.ModificationButtonController
@@ -26,6 +27,8 @@ class FirstLevelActivity : AppCompatActivity() {
 
     private var tickJob: Job? = null
     private var drawJob: Job? = null
+
+    val user by lazy { User() }
 
     private fun startJobs() {
         initDrawJob()
@@ -74,12 +77,17 @@ class FirstLevelActivity : AppCompatActivity() {
         date_button?.text = "  ${dateFormat.format(calendar.time)}"
     }
 
+    fun updateBalance(newBalance: Int) {
+        balance_button.text = newBalance.toString()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.first_level_activity)
 
         ApplicationContextHolder.context = this
 
+        user.balance = 333
         Realm.init(this)
 
         firstLevelView.holder.addCallback(firstLevelView)
