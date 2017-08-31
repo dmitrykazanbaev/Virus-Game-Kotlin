@@ -76,25 +76,14 @@ abstract class VirusComponent {
     abstract fun synchronize()
 }
 
-class VirusManager(val propagation: PropagationComponent = PropagationComponent()
-        /*val abilities: AbilityComponent = AbilityComponent(),
-        val resistance: ResistanceComponent = ResistanceComponent(),
-        val devices: DeviceComponent = DeviceComponent()*/) {
+class VirusManager(val propagation: PropagationComponent = PropagationComponent(),
+                   val abilities: AbilityComponent = AbilityComponent(),
+                   val resistance: ResistanceComponent = ResistanceComponent(),
+                   val devices: DeviceComponent = DeviceComponent()) {
     fun synchronize() {
         propagation.synchronize()
+        abilities.synchronize()
+        resistance.synchronize()
+        devices.synchronize()
     }
 }
-
-//class AbilityComponent() : VirusComponent()
-
-/*
-class ResistanceComponent(title: String,
-                          val antivirusDetecting: Modification = Modification(),
-                          val masking: Modification = Modification(),
-                          val partKernel: Modification = Modification()) : VirusComponent(title)
-
-class DeviceComponent(title: String,
-                      val smartphones: Modification = Modification(),
-                      val computers: Modification = Modification(),
-                      val smartHouses: Modification = Modification()) : VirusComponent(title)
-*/

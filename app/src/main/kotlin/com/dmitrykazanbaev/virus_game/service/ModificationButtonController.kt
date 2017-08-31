@@ -180,57 +180,72 @@ private fun createPropagationButtonList(): List<ModificationButton> {
 
     buttonList[1].tag = "bluetooth"
     buttonList[1].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.bluetooth)
+    buttonList[1].modificationLevel = firstLevelActivity.user.virus.propagation.bluetooth.currentLevel
 
     buttonList[2].tag = "ethernet"
     buttonList[2].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.ethernet)
+    buttonList[2].modificationLevel = firstLevelActivity.user.virus.propagation.ethernet.currentLevel
 
-    buttonList[3].tag = "stats_net"
+    buttonList[3].tag = "mobile"
     buttonList[3].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.stats_net)
+    buttonList[3].modificationLevel = firstLevelActivity.user.virus.propagation.mobile.currentLevel
 
     return buttonList
 }
 
 private fun createAbilitiesButtonList(): List<ModificationButton> {
+    val firstLevelActivity = ApplicationContextHolder.context as FirstLevelActivity
     val buttonList = createModificationButtonsWithListener(3)
 
-    buttonList[0].tag = "theif"
-    buttonList[0].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.theif)
+    buttonList[0].tag = "thief"
+    buttonList[0].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.thief)
+    buttonList[0].modificationLevel = firstLevelActivity.user.virus.abilities.thief.currentLevel
 
     buttonList[1].tag = "control"
     buttonList[1].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.control)
+    buttonList[1].modificationLevel = firstLevelActivity.user.virus.abilities.control.currentLevel
 
     buttonList[2].tag = "spam"
     buttonList[2].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.spam)
+    buttonList[2].modificationLevel = firstLevelActivity.user.virus.abilities.spam.currentLevel
 
     return buttonList
 }
 
 private fun createResistanceButtonList(): List<ModificationButton> {
+    val firstLevelActivity = ApplicationContextHolder.context as FirstLevelActivity
     val buttonList = createModificationButtonsWithListener(3)
 
     buttonList[0].tag = "mask"
     buttonList[0].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.mask)
+    buttonList[0].modificationLevel = firstLevelActivity.user.virus.resistance.mask.currentLevel
 
     buttonList[1].tag = "invisible"
     buttonList[1].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.invisible)
+    buttonList[1].modificationLevel = firstLevelActivity.user.virus.resistance.invisible.currentLevel
 
     buttonList[2].tag = "new_virus"
     buttonList[2].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.new_virus)
+    buttonList[2].modificationLevel = firstLevelActivity.user.virus.resistance.newVirus.currentLevel
 
     return buttonList
 }
 
 private fun createDevicesButtonList(): List<ModificationButton> {
+    val firstLevelActivity = ApplicationContextHolder.context as FirstLevelActivity
     val buttonList = createModificationButtonsWithListener(3)
 
     buttonList[0].tag = "phone"
     buttonList[0].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.phone)
+    buttonList[0].modificationLevel = firstLevelActivity.user.virus.devices.phone.currentLevel
 
     buttonList[1].tag = "pc"
     buttonList[1].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.pc)
+    buttonList[1].modificationLevel = firstLevelActivity.user.virus.devices.pc.currentLevel
 
     buttonList[2].tag = "smart_home"
     buttonList[2].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.smart_home)
+    buttonList[2].modificationLevel = firstLevelActivity.user.virus.devices.smartHome.currentLevel
 
     return buttonList
 }
@@ -262,6 +277,18 @@ private fun onModificationButtonTouch(view: View) {
     with(firstLevelActivity) {
         when (view.tag) {
             "wifi" -> updateModificationWindow(user.virus.propagation.wifi)
+            "bluetooth" -> updateModificationWindow(user.virus.propagation.bluetooth)
+            "ethernet" -> updateModificationWindow(user.virus.propagation.ethernet)
+            "mobile" -> updateModificationWindow(user.virus.propagation.mobile)
+            "thief" -> updateModificationWindow(user.virus.abilities.thief)
+            "control" -> updateModificationWindow(user.virus.abilities.control)
+            "spam" -> updateModificationWindow(user.virus.abilities.spam)
+            "invisible" -> updateModificationWindow(user.virus.resistance.invisible)
+            "mask" -> updateModificationWindow(user.virus.resistance.mask)
+            "new_virus" -> updateModificationWindow(user.virus.resistance.newVirus)
+            "phone" -> updateModificationWindow(user.virus.devices.phone)
+            "pc" -> updateModificationWindow(user.virus.devices.pc)
+            "smart_home" -> updateModificationWindow(user.virus.devices.smartHome)
 
             else -> return
         }

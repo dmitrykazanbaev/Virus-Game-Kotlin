@@ -150,7 +150,18 @@ class FirstLevelActivity : AppCompatActivity() {
         val userDAO = realm.where(UserDAO::class.java).findFirst()
         user.balance = userDAO.balance
         user.virus.propagation.wifi.currentLevel = userDAO.wifiLevel
-
+        user.virus.propagation.bluetooth.currentLevel = userDAO.bluetoothLevel
+        user.virus.propagation.ethernet.currentLevel = userDAO.ethernetLevel
+        user.virus.propagation.mobile.currentLevel = userDAO.mobileLevel
+        user.virus.abilities.thief.currentLevel = userDAO.thiefLevel
+        user.virus.abilities.control.currentLevel = userDAO.controlLevel
+        user.virus.abilities.spam.currentLevel = userDAO.spamLevel
+        user.virus.resistance.invisible.currentLevel = userDAO.invisibleLevel
+        user.virus.resistance.mask.currentLevel = userDAO.maskLevel
+        user.virus.resistance.newVirus.currentLevel = userDAO.newVirusLevel
+        user.virus.devices.phone.currentLevel = userDAO.phoneLevel
+        user.virus.devices.pc.currentLevel = userDAO.pcLevel
+        user.virus.devices.smartHome.currentLevel = userDAO.smartHomeLevel
 
         user.virus.synchronize()
     }
@@ -175,7 +186,19 @@ class FirstLevelActivity : AppCompatActivity() {
             it.where(UserDAO::class.java).findAll().deleteAllFromRealm()
 
             val userDAO = UserDAO(user.balance,
-                    user.virus.propagation.wifi.currentLevel)
+                    user.virus.propagation.wifi.currentLevel,
+                    user.virus.propagation.bluetooth.currentLevel,
+                    user.virus.propagation.ethernet.currentLevel,
+                    user.virus.propagation.mobile.currentLevel,
+                    user.virus.abilities.thief.currentLevel,
+                    user.virus.abilities.control.currentLevel,
+                    user.virus.abilities.spam.currentLevel,
+                    user.virus.resistance.invisible.currentLevel,
+                    user.virus.resistance.mask.currentLevel,
+                    user.virus.resistance.newVirus.currentLevel,
+                    user.virus.devices.phone.currentLevel,
+                    user.virus.devices.pc.currentLevel,
+                    user.virus.devices.smartHome.currentLevel)
 
             it.copyToRealm(userDAO)
         }

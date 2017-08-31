@@ -12,4 +12,127 @@
     <item name="wifi_first_level_upgrade_cost" format="integer" type="dimen">300</item>
     <item name="wifi_second_level_upgrade_cost" format="integer" type="dimen">500</item>
 
+    <item name="bluetooth_zero_level_value" format="integer" type="dimen">1</item>
+    <item name="bluetooth_first_level_value" format="integer" type="dimen">3</item>
+    <item name="bluetooth_second_level_value" format="integer" type="dimen">7</item>
+    <item name="bluetooth_third_level_value" format="integer" type="dimen">10</item>
+
+    <item name="bluetooth_zero_level_upgrade_cost" format="integer" type="dimen">50</item>
+    <item name="bluetooth_first_level_upgrade_cost" format="integer" type="dimen">100</item>
+    <item name="bluetooth_second_level_upgrade_cost" format="integer" type="dimen">300</item>
+
+    <item name="ethernet_zero_level_value" format="integer" type="dimen">1</item>
+    <item name="ethernet_first_level_value" format="integer" type="dimen">15</item>
+    <item name="ethernet_second_level_value" format="integer" type="dimen">27</item>
+    <item name="ethernet_third_level_value" format="integer" type="dimen">38</item>
+
+    <item name="ethernet_zero_level_upgrade_cost" format="integer" type="dimen">500</item>
+    <item name="ethernet_first_level_upgrade_cost" format="integer" type="dimen">900</item>
+    <item name="ethernet_second_level_upgrade_cost" format="integer" type="dimen">1200</item>
+
+    <item name="mobile_zero_level_value" format="integer" type="dimen">1</item>
+    <item name="mobile_first_level_value" format="integer" type="dimen">17</item>
+    <item name="mobile_second_level_value" format="integer" type="dimen">28</item>
+    <item name="mobile_third_level_value" format="integer" type="dimen">40</item>
+
+    <item name="mobile_zero_level_upgrade_cost" format="integer" type="dimen">400</item>
+    <item name="mobile_first_level_upgrade_cost" format="integer" type="dimen">700</item>
+    <item name="mobile_second_level_upgrade_cost" format="integer" type="dimen">1000</item>
+
+    <item name="thief_zero_level_value" format="integer" type="dimen">3</item>
+    <item name="thief_first_level_value" format="integer" type="dimen">5</item>
+    <item name="thief_second_level_value" format="integer" type="dimen">15</item>
+    <item name="thief_third_level_value" format="integer" type="dimen">25</item>
+
+    <item name="thief_zero_level_detection" format="integer" type="dimen">1</item>
+    <item name="thief_first_level_detection" format="integer" type="dimen">5</item>
+    <item name="thief_second_level_detection" format="integer" type="dimen">8</item>
+    <item name="thief_third_level_detection" format="integer" type="dimen">10</item>
+
+    <item name="thief_zero_level_upgrade_cost" format="integer" type="dimen">60</item>
+    <item name="thief_first_level_upgrade_cost" format="integer" type="dimen">150</item>
+    <item name="thief_second_level_upgrade_cost" format="integer" type="dimen">250</item>
+
+    <item name="control_zero_level_value" format="integer" type="dimen">3</item>
+    <item name="control_first_level_value" format="integer" type="dimen">20</item>
+    <item name="control_second_level_value" format="integer" type="dimen">35</item>
+    <item name="control_third_level_value" format="integer" type="dimen">45</item>
+
+    <item name="control_zero_level_detection" format="integer" type="dimen">1</item>
+    <item name="control_first_level_detection" format="integer" type="dimen">6</item>
+    <item name="control_second_level_detection" format="integer" type="dimen">12</item>
+    <item name="control_third_level_detection" format="integer" type="dimen">15</item>
+
+    <item name="control_zero_level_upgrade_cost" format="integer" type="dimen">200</item>
+    <item name="control_first_level_upgrade_cost" format="integer" type="dimen">350</item>
+    <item name="control_second_level_upgrade_cost" format="integer" type="dimen">500</item>
+
+    <item name="spam_zero_level_value" format="integer" type="dimen">3</item>
+    <item name="spam_first_level_value" format="integer" type="dimen">11</item>
+    <item name="spam_second_level_value" format="integer" type="dimen">22</item>
+    <item name="spam_third_level_value" format="integer" type="dimen">30</item>
+
+    <item name="spam_zero_level_detection" format="integer" type="dimen">1</item>
+    <item name="spam_first_level_detection" format="integer" type="dimen">4</item>
+    <item name="spam_second_level_detection" format="integer" type="dimen">9</item>
+    <item name="spam_third_level_detection" format="integer" type="dimen">12</item>
+
+    <item name="spam_zero_level_upgrade_cost" format="integer" type="dimen">100</item>
+    <item name="spam_first_level_upgrade_cost" format="integer" type="dimen">190</item>
+    <item name="spam_second_level_upgrade_cost" format="integer" type="dimen">300</item>
+
+    <item name="invisible_zero_level_value" format="integer" type="dimen">0</item>
+    <item name="invisible_first_level_value" format="integer" type="dimen">0</item>
+    <item name="invisible_second_level_value" format="integer" type="dimen">0</item>
+    <item name="invisible_third_level_value" format="integer" type="dimen">0</item>
+
+    <item name="invisible_zero_level_upgrade_cost" format="integer" type="dimen">2000</item>
+    <item name="invisible_first_level_upgrade_cost" format="integer" type="dimen">2000</item>
+    <item name="invisible_second_level_upgrade_cost" format="integer" type="dimen">2000</item>
+
+    <item name="mask_zero_level_value" format="integer" type="dimen">1</item>
+    <item name="mask_first_level_value" format="integer" type="dimen">15</item>
+    <item name="mask_second_level_value" format="integer" type="dimen">30</item>
+    <item name="mask_third_level_value" format="integer" type="dimen">40</item>
+
+    <item name="mask_zero_level_upgrade_cost" format="integer" type="dimen">600</item>
+    <item name="mask_first_level_upgrade_cost" format="integer" type="dimen">850</item>
+    <item name="mask_second_level_upgrade_cost" format="integer" type="dimen">1200</item>
+
+    <item name="new_virus_zero_level_value" format="integer" type="dimen">0</item>
+    <item name="new_virus_first_level_value" format="integer" type="dimen">0</item>
+    <item name="new_virus_second_level_value" format="integer" type="dimen">0</item>
+    <item name="new_virus_third_level_value" format="integer" type="dimen">0</item>
+
+    <item name="new_virus_zero_level_upgrade_cost" format="integer" type="dimen">5000</item>
+    <item name="new_virus_first_level_upgrade_cost" format="integer" type="dimen">5000</item>
+    <item name="new_virus_second_level_upgrade_cost" format="integer" type="dimen">5000</item>
+
+    <item name="phone_zero_level_value" format="integer" type="dimen">0</item>
+    <item name="phone_first_level_value" format="integer" type="dimen">5</item>
+    <item name="phone_second_level_value" format="integer" type="dimen">25</item>
+    <item name="phone_third_level_value" format="integer" type="dimen">100</item>
+
+    <item name="phone_zero_level_upgrade_cost" format="integer" type="dimen">50</item>
+    <item name="phone_first_level_upgrade_cost" format="integer" type="dimen">120</item>
+    <item name="phone_second_level_upgrade_cost" format="integer" type="dimen">140</item>
+
+    <item name="pc_zero_level_value" format="integer" type="dimen">0</item>
+    <item name="pc_first_level_value" format="integer" type="dimen">10</item>
+    <item name="pc_second_level_value" format="integer" type="dimen">30</item>
+    <item name="pc_third_level_value" format="integer" type="dimen">100</item>
+
+    <item name="pc_zero_level_upgrade_cost" format="integer" type="dimen">150</item>
+    <item name="pc_first_level_upgrade_cost" format="integer" type="dimen">250</item>
+    <item name="pc_second_level_upgrade_cost" format="integer" type="dimen">400</item>
+
+    <item name="smart_home_zero_level_value" format="integer" type="dimen">0</item>
+    <item name="smart_home_first_level_value" format="integer" type="dimen">25</item>
+    <item name="smart_home_second_level_value" format="integer" type="dimen">60</item>
+    <item name="smart_home_third_level_value" format="integer" type="dimen">100</item>
+
+    <item name="smart_home_zero_level_upgrade_cost" format="integer" type="dimen">450</item>
+    <item name="smart_home_first_level_upgrade_cost" format="integer" type="dimen">630</item>
+    <item name="smart_home_second_level_upgrade_cost" format="integer" type="dimen">900</item>
+
 </resources>

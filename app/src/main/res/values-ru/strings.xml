@@ -13,9 +13,81 @@
     <string name="virus_button">ВИРУС\u0020\u0020</string>
     <string name="statistics_button">\u0020\u0020СТАТИСТИКА</string>
 
-    <string name="wifi_title">Wi-Fi</string>
+    <string name="wifi_title">WIFI</string>
 
     <string name="wifi_zero_level_upgrade_description">ВИРУС СПОСОБЕН ВЗЛАМЫВАТЬ СЕТИ С WEP ШИФРОВАНИЕМ</string>
     <string name="wifi_first_level_upgrade_description">ВИРУС СПОСОБЕН ВЗЛАМЫВАТЬ СЕТИ С WPA\\WPA-2 ШИФРОВАНИЕМ</string>
     <string name="wifi_second_level_upgrade_description">ВИРУС СПОСОБЕН ВЗЛАМЫВАТЬ СЕТИ С WPS ШИФРОВАНИЕМ</string>
+
+    <string name="bluetooth_title">BLUETOOTH</string>
+
+    <string name="bluetooth_zero_level_upgrade_description">ВИРУС СПОСОБЕН ПЕРЕХВАТЫВАТЬ КОНТРОЛЬ НАД BLUETOOTH 2.0 АДАПТЕРАМИ</string>
+    <string name="bluetooth_first_level_upgrade_description">ВИРУС СПОСОБЕН ПЕРЕХВАТЫВАТЬ КОНТРОЛЬ НАД BLUETOOTH 3.0 АДАПТЕРАМИ</string>
+    <string name="bluetooth_second_level_upgrade_description">ВИРУС СПОСОБЕН ПЕРЕХВАТЫВАТЬ КОНТРОЛЬ НАД BLUETOOTH 4.0 АДАПТЕРАМИ</string>
+
+    <string name="ethernet_title">ВНЕШНИЕ УСТРОЙСТВА</string>
+
+    <string name="ethernet_zero_level_upgrade_description">ВИРУС СПОСОБЕН РАСПРОСТРАНЯТЬСЯ ЧЕРЕЗ CD\\DVD</string>
+    <string name="ethernet_first_level_upgrade_description">ВИРУС СПОСОБЕН РАСПРОСТРАНЯТЬСЯ ПО ЛОКАЛЬНОЙ СЕТИ</string>
+    <string name="ethernet_second_level_upgrade_description">ВИРУС СПОСОБЕН РАСПРОСТРАНЯТЬСЯ ЧЕРЕЗ USB УСТРОЙСТВА</string>
+
+    <string name="mobile_title">МОБИЛЬНЫЕ СЕТИ</string>
+
+    <string name="mobile_zero_level_upgrade_description">ВИРУС СПОСОБЕН ПЕРЕХВАТЫВАТЬ И ВНЕДРЯТЬСЯ В 2G ТРАФИК</string>
+    <string name="mobile_first_level_upgrade_description">ВИРУС СПОСОБЕН ПЕРЕХВАТЫВАТЬ И ВНЕДРЯТЬСЯ В 3G ТРАФИК</string>
+    <string name="mobile_second_level_upgrade_description">ВИРУС СПОСОБЕН ПЕРЕХВАТЫВАТЬ И ВНЕДРЯТЬСЯ В 4G ТРАФИК</string>
+
+    <string name="thief_title">КРАЖА</string>
+
+    <string name="thief_zero_level_upgrade_description">КРАЖА КОНТАКТОВ ИЗ ТЕЛЕФОННОЙ КНИЖКИ</string>
+    <string name="thief_first_level_upgrade_description">КРАЖА ИНТЕРНЕТ-АККАУНТОВ</string>
+    <string name="thief_second_level_upgrade_description">КРАЖА БАНКОВСКИХ ДАННЫХ</string>
+
+    <string name="control_title">УДАЛЕННЫЙ ДОСТУП</string>
+
+    <string name="control_zero_level_upgrade_description">ИСПОЛЬЗОВАНИЕ УСТРОЙСТВ ДЛЯ СПАМ РАССЫЛКИ</string>
+    <string name="control_first_level_upgrade_description">ИСПОЛЬЗОВАНИЕ УСТРОЙСТВ ДЛЯ DDOS АТАКИ</string>
+    <string name="control_second_level_upgrade_description">ИСПОЛЬЗОВАНИЕ УСТРОЙСТВ ДЛЯ МАЙНИНГА КРИПТОВАЛЮТЫ</string>
+
+    <string name="spam_title">ВЫМОГАТЕЛЬСТВО</string>
+
+    <string name="spam_zero_level_upgrade_description">НАВЯЗЧИВАЯ РЕКЛАМА НА ЭКРАНЕ</string>
+    <string name="spam_first_level_upgrade_description">ВСПЛЫВАЮЩИЙ БАННЕР С УКАЗАНИЕМ ПЕРЕВОДА ДЕНЕГ</string>
+    <string name="spam_second_level_upgrade_description">ПОРНО БАННЕР С УКАЗАНИЕМ ПЕРЕВОДА ДЕНЕГ</string>
+
+    <string name="invisible_title">НЕВИДИМОСТЬ</string>
+
+    <string name="invisible_zero_level_upgrade_description">ПРОГРЕСС РАЗРАБОТКИ АНТИВИРУСА ОСТАНАВЛИВАЕТСЯ НА ОПРЕДЕЛЕННОЕ ВРЕМЯ</string>
+    <string name="invisible_first_level_upgrade_description">ПРОГРЕСС РАЗРАБОТКИ АНТИВИРУСА ОСТАНАВЛИВАЕТСЯ НА ОПРЕДЕЛЕННОЕ ВРЕМЯ</string>
+    <string name="invisible_second_level_upgrade_description">ПРОГРЕСС РАЗРАБОТКИ АНТИВИРУСА ОСТАНАВЛИВАЕТСЯ НА ОПРЕДЕЛЕННОЕ ВРЕМЯ</string>
+
+    <string name="mask_title">МАСКИРОВКА</string>
+
+    <string name="mask_zero_level_upgrade_description">ПРОВЕДЕНИЕ ОПЕРАЦИЙ НА УРОВНЕ API ОПЕРАЦИОННОЙ СИСТЕМЫ</string>
+    <string name="mask_first_level_upgrade_description">ПРОВЕДЕНИЕ ОПЕРАЦИЙ НА УРОВНЕ ПРЕРЫВАНИЙ ОС</string>
+    <string name="mask_second_level_upgrade_description">ПРОВЕДЕНИЕ ОПЕРАЦИЙ НА УРОВНЕ МАШИННОГО КОДА</string>
+
+    <string name="new_virus_title">ЯДРО СИСТЕМЫ</string>
+
+    <string name="new_virus_zero_level_upgrade_description">ПРОГРЕСС РАЗРАБОТКИ АНТИВИРУСА ОТКАТЫВАЕТСЯ</string>
+    <string name="new_virus_first_level_upgrade_description">ПРОГРЕСС РАЗРАБОТКИ АНТИВИРУСА ОТКАТЫВАЕТСЯ</string>
+    <string name="new_virus_second_level_upgrade_description">ПРОГРЕСС РАЗРАБОТКИ АНТИВИРУСА ОТКАТЫВАЕТСЯ</string>
+
+    <string name="phone_title">СМАРТФОНЫ</string>
+
+    <string name="phone_zero_level_upgrade_description">ВИРУС СПОСОБЕН ЗАРАЖАТЬ WINDOWS PHONE УСТРОЙСТВА</string>
+    <string name="phone_first_level_upgrade_description">ВИРУС СПОСОБЕН ЗАРАЖАТЬ iOS УСТРОЙСТВА</string>
+    <string name="phone_second_level_upgrade_description">ВИРУС СПОСОБЕН ЗАРАЖАТЬ ANDROID УСТРОЙСТВА</string>
+
+    <string name="pc_title">КОМПЬЮТЕРЫ</string>
+
+    <string name="pc_zero_level_upgrade_description">ВИРУС СПОСОБЕН ЗАРАЖАТЬ КОМПЬЮТЕРЫ С ОС LINUX</string>
+    <string name="pc_first_level_upgrade_description">ВИРУС СПОСОБЕН ЗАРАЖАТЬ КОМПЬЮТЕРЫ С ОС MAC OS</string>
+    <string name="pc_second_level_upgrade_description">ВИРУС СПОСОБЕН ЗАРАЖАТЬ КОМПЬЮТЕРЫ С ОС WINDOWS</string>
+
+    <string name="smart_home_title">УМНЫЕ СИСТЕМЫ</string>
+
+    <string name="smart_home_zero_level_upgrade_description">ВИРУС СПОСОБЕН ЗАРАЖАТЬ SMART TV</string>
+    <string name="smart_home_first_level_upgrade_description">ВИРУС СПОСОБЕН ЗАРАЖАТЬ SMART ПРИБОРЫ</string>
+    <string name="smart_home_second_level_upgrade_description">ВИРУС СПОСОБЕН ЗАРАЖАТЬ СИСТЕМЫ УМНОГО ДОМА</string>
 </resources>

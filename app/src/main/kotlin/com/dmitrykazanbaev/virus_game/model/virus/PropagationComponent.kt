@@ -21,11 +21,65 @@ class WiFiModification : Modification(
     override val title: String = ApplicationContextHolder.context.resources.getString(R.string.wifi_title)
 }
 
-class PropagationComponent(val wifi: Modification = WiFiModification()
-        /*val bluetooth: Modification = Modification(),
-        val ethernet: Modification = Modification(),
-        val mobile: Modification = Modification()*/) : VirusComponent() {
+class BluetoothModification : Modification(
+        zeroLevelValueResource = R.dimen.bluetooth_zero_level_value,
+        firstLevelValueResource = R.dimen.bluetooth_first_level_value,
+        secondLevelValueResource = R.dimen.bluetooth_second_level_value,
+        thirdLevelValueResource = R.dimen.bluetooth_third_level_value,
+
+        zeroLevelUpgradeCostResource = R.dimen.bluetooth_zero_level_upgrade_cost,
+        firstLevelUpgradeCostResource = R.dimen.bluetooth_first_level_upgrade_cost,
+        secondLevelUpgradeCostResource = R.dimen.bluetooth_second_level_upgrade_cost,
+
+        zeroLevelUpgradeDescriptionResource = R.string.bluetooth_zero_level_upgrade_description,
+        firstLevelUpgradeDescriptionResource = R.string.bluetooth_first_level_upgrade_description,
+        secondLevelUpgradeDescriptionResource = R.string.bluetooth_second_level_upgrade_description) {
+
+    override val title: String = ApplicationContextHolder.context.resources.getString(R.string.bluetooth_title)
+}
+
+class EthernetModification : Modification(
+        zeroLevelValueResource = R.dimen.ethernet_zero_level_value,
+        firstLevelValueResource = R.dimen.ethernet_first_level_value,
+        secondLevelValueResource = R.dimen.ethernet_second_level_value,
+        thirdLevelValueResource = R.dimen.ethernet_third_level_value,
+
+        zeroLevelUpgradeCostResource = R.dimen.ethernet_zero_level_upgrade_cost,
+        firstLevelUpgradeCostResource = R.dimen.ethernet_first_level_upgrade_cost,
+        secondLevelUpgradeCostResource = R.dimen.ethernet_second_level_upgrade_cost,
+
+        zeroLevelUpgradeDescriptionResource = R.string.ethernet_zero_level_upgrade_description,
+        firstLevelUpgradeDescriptionResource = R.string.ethernet_first_level_upgrade_description,
+        secondLevelUpgradeDescriptionResource = R.string.ethernet_second_level_upgrade_description) {
+
+    override val title: String = ApplicationContextHolder.context.resources.getString(R.string.ethernet_title)
+}
+
+class MobileModification : Modification(
+        zeroLevelValueResource = R.dimen.mobile_zero_level_value,
+        firstLevelValueResource = R.dimen.mobile_first_level_value,
+        secondLevelValueResource = R.dimen.mobile_second_level_value,
+        thirdLevelValueResource = R.dimen.mobile_third_level_value,
+
+        zeroLevelUpgradeCostResource = R.dimen.mobile_zero_level_upgrade_cost,
+        firstLevelUpgradeCostResource = R.dimen.mobile_first_level_upgrade_cost,
+        secondLevelUpgradeCostResource = R.dimen.mobile_second_level_upgrade_cost,
+
+        zeroLevelUpgradeDescriptionResource = R.string.mobile_zero_level_upgrade_description,
+        firstLevelUpgradeDescriptionResource = R.string.mobile_first_level_upgrade_description,
+        secondLevelUpgradeDescriptionResource = R.string.mobile_second_level_upgrade_description) {
+
+    override val title: String = ApplicationContextHolder.context.resources.getString(R.string.mobile_title)
+}
+
+class PropagationComponent(val wifi: Modification = WiFiModification(),
+                           val bluetooth: Modification = BluetoothModification(),
+                           val ethernet: Modification = EthernetModification(),
+                           val mobile: Modification = MobileModification()) : VirusComponent() {
     override fun synchronize() {
         wifi.synchronize()
+        bluetooth.synchronize()
+        ethernet.synchronize()
+        mobile.synchronize()
     }
 }

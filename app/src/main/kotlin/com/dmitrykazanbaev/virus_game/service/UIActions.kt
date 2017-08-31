@@ -83,6 +83,18 @@ fun buyModification() {
         val modificationButton = findViewById(modificationButtonController.checkedRadioButtonId) as ModificationButton
         when (modificationButton.tag) {
             "wifi" -> upgradeAndInvalidate(user.virus.propagation.wifi, modificationButton, modificationButtonController)
+            "bluetooth" -> upgradeAndInvalidate(user.virus.propagation.bluetooth, modificationButton, modificationButtonController)
+            "ethernet" -> upgradeAndInvalidate(user.virus.propagation.ethernet, modificationButton, modificationButtonController)
+            "mobile" -> upgradeAndInvalidate(user.virus.propagation.mobile, modificationButton, modificationButtonController)
+            "thief" -> upgradeAndInvalidate(user.virus.abilities.thief, modificationButton, modificationButtonController)
+            "control" -> upgradeAndInvalidate(user.virus.abilities.control, modificationButton, modificationButtonController)
+            "spam" -> upgradeAndInvalidate(user.virus.abilities.spam, modificationButton, modificationButtonController)
+            "invisible" -> upgradeAndInvalidate(user.virus.resistance.invisible, modificationButton, modificationButtonController)
+            "mask" -> upgradeAndInvalidate(user.virus.resistance.mask, modificationButton, modificationButtonController)
+            "new_virus" -> upgradeAndInvalidate(user.virus.resistance.newVirus, modificationButton, modificationButtonController)
+            "phone" -> upgradeAndInvalidate(user.virus.devices.phone, modificationButton, modificationButtonController)
+            "pc" -> upgradeAndInvalidate(user.virus.devices.pc, modificationButton, modificationButtonController)
+            "smart_home" -> upgradeAndInvalidate(user.virus.devices.smartHome, modificationButton, modificationButtonController)
 
             else -> return
         }
