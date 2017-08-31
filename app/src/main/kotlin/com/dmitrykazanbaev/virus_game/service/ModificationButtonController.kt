@@ -13,6 +13,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.RadioGroup
 import android.widget.RelativeLayout
+import com.dmitrykazanbaev.virus_game.FirstLevelActivity
 import com.dmitrykazanbaev.virus_game.R
 import com.dmitrykazanbaev.virus_game.custom_views.ModificationButton
 import java.util.*
@@ -170,10 +171,12 @@ class ModificationButtonController
 }
 
 private fun createPropagationButtonList(): List<ModificationButton> {
+    val firstLevelActivity = ApplicationContextHolder.context as FirstLevelActivity
     val buttonList = createModificationButtonsWithListener(4)
 
     buttonList[0].tag = "wifi"
     buttonList[0].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.wifi)
+    buttonList[0].modificationLevel = firstLevelActivity.user.virus.propagation.wifi.currentLevel
 
     buttonList[1].tag = "bluetooth"
     buttonList[1].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.bluetooth)
@@ -255,11 +258,12 @@ private fun createModificationButtonsWithListener(countButtons: Int): MutableLis
 
 
 private fun onModificationButtonTouch(view: View) {
-    when (view.tag) {
-        "phone" -> {
-            ((view as ModificationButton).parent as ModificationButtonController).
-                    updateCenterWithX(view.width / 2)
-            (view.parent as ModificationButtonController).invalidate()
+    val firstLevelActivity = ApplicationContextHolder.context as FirstLevelActivity
+    with(firstLevelActivity) {
+        when (view.tag) {
+            "wifi" -> updateModificationWindow(user.virus.propagation.wifi)
+
+            else -> return
         }
     }
 }

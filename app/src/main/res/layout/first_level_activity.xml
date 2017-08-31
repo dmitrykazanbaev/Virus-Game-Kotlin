@@ -87,34 +87,18 @@
                         android:id="@+id/donate_image"/>
             </RelativeLayout>
 
-            <RelativeLayout
+            <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="17"
                     android:layout_marginStart="@dimen/indent_left_right_control_button"
-                    >
+                    app:indentLeftTop="true"
+                    style="@style/ControlButtonCharacteristicTextViewStyle"
+                    app:backgroundColor="@color/colorOrange"
+                    android:id="@+id/balance_button"
+                    android:textSize="@dimen/balance_text_size"
+                    />
 
-                <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:indentLeftTop="true"
-                        style="@style/ControlButtonCharacteristicTextViewStyle"
-                        app:backgroundColor="@color/colorOrange"
-                        android:id="@+id/balance_button"
-                        android:textSize="@dimen/balance_text_size"/>
-
-                <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@mipmap/btc"
-                        android:layout_alignParentEnd="true"
-                        android:id="@+id/balance_btc_image"
-                        android:adjustViewBounds="true"
-                        android:layout_marginBottom="@dimen/margin_image_btc"
-                        android:layout_marginTop="@dimen/margin_image_btc"
-                        android:paddingEnd="@dimen/margin_antivirus"/>
-
-            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -503,6 +487,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="40"
                             android:weightSum="100"
+                            android:visibility="invisible"
                             android:id="@+id/buy_modification_window">
 
                         <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
@@ -513,7 +498,7 @@
                                 android:background="@color/control_button_color"
                                 style="@style/BuyWindowTextViewStyle"
                                 android:textSize="@dimen/modification_name_text"
-                                android:text="УСТРОЙСТВА"/>
+                                />
 
                         <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
                                 android:layout_width="match_parent"
@@ -523,7 +508,6 @@
                                 android:background="@color/modification_button_color"
                                 style="@style/BuyWindowTextViewStyle"
                                 android:textSize="@dimen/modification_description_text"
-                                android:text="ВИРУС ЗАРАЖАЕТ ANDROID УСТРОЙСТВА "
                                 android:textColor="@android:color/white"/>
 
                         <LinearLayout
@@ -575,6 +559,7 @@
                                         android:maxHeight="500dp"
                                         android:minHeight="1dp"
                                         app:customFont="DINPro/DINPro.otf"
+                                        android:onClick="onTouch"
                                         android:textSize="@dimen/buy_button_text"/>
                             </LinearLayout>
                         </RelativeLayout>

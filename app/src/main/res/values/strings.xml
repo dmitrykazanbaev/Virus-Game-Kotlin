@@ -16,4 +16,10 @@
     <string name="buy_button">BUY</string>
     <string name="virus_button">VIRUS\u0020\u0020</string>
     <string name="statistics_button">\u0020\u0020STATISTICS</string>
+
+    <string name="wifi_title">Wi-Fi</string>
+
+    <string name="wifi_zero_level_upgrade_description">VIRUS CAN HACK WEP-DECRYPTED NETWORKS</string>
+    <string name="wifi_first_level_upgrade_description">VIRUS CAN HACK WPA\\WPA2-DECRYPTED NETWORKS</string>
+    <string name="wifi_second_level_upgrade_description">VIRUS CAN HACK WPS-DECRYPTED NETWORKS</string>
 </resources>

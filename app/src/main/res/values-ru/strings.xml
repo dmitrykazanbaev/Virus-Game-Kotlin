@@ -12,4 +12,10 @@
     <string name="buy_button">КУПИТЬ</string>
     <string name="virus_button">ВИРУС\u0020\u0020</string>
     <string name="statistics_button">\u0020\u0020СТАТИСТИКА</string>
+
+    <string name="wifi_title">Wi-Fi</string>
+
+    <string name="wifi_zero_level_upgrade_description">ВИРУС СПОСОБЕН ВЗЛАМЫВАТЬ СЕТИ С WEP ШИФРОВАНИЕМ</string>
+    <string name="wifi_first_level_upgrade_description">ВИРУС СПОСОБЕН ВЗЛАМЫВАТЬ СЕТИ С WPA\\WPA-2 ШИФРОВАНИЕМ</string>
+    <string name="wifi_second_level_upgrade_description">ВИРУС СПОСОБЕН ВЗЛАМЫВАТЬ СЕТИ С WPS ШИФРОВАНИЕМ</string>
 </resources>

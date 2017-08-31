@@ -8,11 +8,10 @@ import android.widget.RadioGroup
 import android.widget.RelativeLayout
 import com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
 import com.dmitrykazanbaev.virus_game.model.User
+import com.dmitrykazanbaev.virus_game.model.dao.ServiceInformationDAO
+import com.dmitrykazanbaev.virus_game.model.dao.UserDAO
 import com.dmitrykazanbaev.virus_game.screen.FirstLevelView
-import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
-import com.dmitrykazanbaev.virus_game.service.ModificationButtonController
-import com.dmitrykazanbaev.virus_game.service.closeCharacteristicWindow
-import com.dmitrykazanbaev.virus_game.service.showCharacteristicWindow
+import com.dmitrykazanbaev.virus_game.service.*
 import io.realm.Realm
 import kotlinx.android.synthetic.main.first_level_activity.*
 import kotlinx.coroutines.experimental.*
@@ -78,7 +77,20 @@ class FirstLevelActivity : AppCompatActivity() {
     }
 
     fun updateBalance(newBalance: Int) {
-        balance_button.text = newBalance.toString()
+        balance_button.text = "  $newBalance$"
+        characteristic_window_balance.text = "$newBalance$"
+    }
+
+    fun updateModificationTitle(title: String) {
+        modification_name.text = title
+    }
+
+    fun updateModificationDescription(description: String) {
+        modification_description.text = description
+    }
+
+    fun updateModificationUpgradeCost(cost: Int) {
+        modification_cost.text = cost.toString()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,7 +99,7 @@ class FirstLevelActivity : AppCompatActivity() {
 
         ApplicationContextHolder.context = this
 
-        user.balance = 333
+        user.balance = 1000000
         Realm.init(this)
 
         firstLevelView.holder.addCallback(firstLevelView)
@@ -100,6 +112,7 @@ class FirstLevelActivity : AppCompatActivity() {
         characteristic_window.visibility = View.INVISIBLE
 
         radiogroup.setOnCheckedChangeListener { group, viewId ->
+            buy_modification_window.visibility = View.INVISIBLE
             updateButtonColor(group)
             updateModificationButtonController(viewId)
         }
@@ -107,7 +120,7 @@ class FirstLevelActivity : AppCompatActivity() {
         date_button.text = "  ${dateFormat.format(calendar.time)}"
 
         if (!intent.getBooleanExtra("new_game", false))
-            firstLevelView.initLevelFromRealm()
+            initFromRealm()
     }
 
     override fun onResume() {
@@ -121,8 +134,63 @@ class FirstLevelActivity : AppCompatActivity() {
     }
 
     override fun onStop() {
-        firstLevelView.saveLevelToRealm()
+        saveToRealm()
         super.onStop()
+    }
+
+    private fun initFromRealm() {
+        firstLevelView.initLevelFromRealm()
+        initUserFromRealm()
+        initServiceInfoFromRealm()
+    }
+
+    private fun initUserFromRealm() {
+        val realm = Realm.getDefaultInstance()
+
+        val userDAO = realm.where(UserDAO::class.java).findFirst()
+        user.balance = userDAO.balance
+        user.virus.propagation.wifi.currentLevel = userDAO.wifiLevel
+
+
+        user.virus.synchronize()
+    }
+
+    private fun initServiceInfoFromRealm() {
+        val realm = Realm.getDefaultInstance()
+
+        val serviceInfo = realm.where(ServiceInformationDAO::class.java).findFirst()
+        calendar.time = serviceInfo.date
+    }
+
+    private fun saveToRealm() {
+        firstLevelView.saveLevelToRealm()
+        saveUserToRealm()
+        saveServiceInfoToRealm()
+    }
+
+    private fun saveUserToRealm() {
+        val realm = Realm.getDefaultInstance()
+
+        realm.executeTransaction {
+            it.where(UserDAO::class.java).findAll().deleteAllFromRealm()
+
+            val userDAO = UserDAO(user.balance,
+                    user.virus.propagation.wifi.currentLevel)
+
+            it.copyToRealm(userDAO)
+        }
+    }
+
+    private fun saveServiceInfoToRealm() {
+        val realm = Realm.getDefaultInstance()
+
+        realm.executeTransaction {
+            it.where(ServiceInformationDAO::class.java).findAll().deleteAllFromRealm()
+
+            val serviceInfo = ServiceInformationDAO(calendar.time)
+
+            it.copyToRealm(serviceInfo)
+        }
     }
 
     fun onTouch(view: View) {
@@ -139,6 +207,7 @@ class FirstLevelActivity : AppCompatActivity() {
             }
             R.id.devices_button, R.id.propagation_button,
             R.id.resistance_button, R.id.abilities_button -> if (!(view as TrapezeButton).isChecked) view.isChecked = true
+            R.id.buy_button -> buyModification()
         }
     }
 
