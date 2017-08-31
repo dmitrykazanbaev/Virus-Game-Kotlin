@@ -100,6 +100,8 @@ class FirstLevelActivity : AppCompatActivity() {
         ApplicationContextHolder.context = this
 
         user.balance = 1000000
+        user.virus.synchronize()
+
         Realm.init(this)
 
         firstLevelView.holder.addCallback(firstLevelView)

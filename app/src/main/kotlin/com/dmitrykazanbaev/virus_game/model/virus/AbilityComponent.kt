@@ -3,8 +3,56 @@ package com.dmitrykazanbaev.virus_game.model.virus
 import com.dmitrykazanbaev.virus_game.R
 import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
 
+abstract class AbilityModification(zeroLevelValueResource: Int,
+                                   firstLevelValueResource: Int,
+                                   secondLevelValueResource: Int,
+                                   thirdLevelValueResource: Int,
 
-class ThiefModification : Modification(
+                                   zeroLevelUpgradeCostResource: Int,
+                                   firstLevelUpgradeCostResource: Int,
+                                   secondLevelUpgradeCostResource: Int,
+
+                                   zeroLevelUpgradeDescriptionResource: Int,
+                                   firstLevelUpgradeDescriptionResource: Int,
+                                   secondLevelUpgradeDescriptionResource: Int,
+
+                                   private var detection: Int = 0,
+
+                                   private val zeroLevelDetectionResource: Int,
+                                   private val firstLevelDetectionResource: Int,
+                                   private val secondLevelDetectionResource: Int,
+                                   private val thirdLevelDetectionResource: Int) : Modification(
+        zeroLevelValueResource = zeroLevelValueResource,
+        firstLevelValueResource = firstLevelValueResource,
+        secondLevelValueResource = secondLevelValueResource,
+        thirdLevelValueResource = thirdLevelValueResource,
+
+        zeroLevelUpgradeCostResource = zeroLevelUpgradeCostResource,
+        firstLevelUpgradeCostResource = firstLevelUpgradeCostResource,
+        secondLevelUpgradeCostResource = secondLevelUpgradeCostResource,
+
+        zeroLevelUpgradeDescriptionResource = zeroLevelUpgradeDescriptionResource,
+        firstLevelUpgradeDescriptionResource = firstLevelUpgradeDescriptionResource,
+        secondLevelUpgradeDescriptionResource = secondLevelUpgradeDescriptionResource) {
+
+    override fun synchronize() {
+        super.synchronize()
+        detection = getDetectionWithLevel(currentLevel)
+    }
+
+    private fun getDetectionWithLevel(level: Int): Int {
+        return when (level) {
+            0 -> ApplicationContextHolder.context.resources.getInteger(zeroLevelDetectionResource)
+            1 -> ApplicationContextHolder.context.resources.getInteger(firstLevelDetectionResource)
+            2 -> ApplicationContextHolder.context.resources.getInteger(secondLevelDetectionResource)
+            3 -> ApplicationContextHolder.context.resources.getInteger(thirdLevelDetectionResource)
+
+            else -> 0
+        }
+    }
+}
+
+class ThiefModification : AbilityModification(
         zeroLevelValueResource = R.dimen.thief_zero_level_value,
         firstLevelValueResource = R.dimen.thief_first_level_value,
         secondLevelValueResource = R.dimen.thief_second_level_value,
@@ -16,13 +64,18 @@ class ThiefModification : Modification(
 
         zeroLevelUpgradeDescriptionResource = R.string.thief_zero_level_upgrade_description,
         firstLevelUpgradeDescriptionResource = R.string.thief_first_level_upgrade_description,
-        secondLevelUpgradeDescriptionResource = R.string.thief_second_level_upgrade_description) {
+        secondLevelUpgradeDescriptionResource = R.string.thief_second_level_upgrade_description,
+
+        zeroLevelDetectionResource = R.dimen.thief_zero_level_detection,
+        firstLevelDetectionResource = R.dimen.thief_first_level_detection,
+        secondLevelDetectionResource = R.dimen.thief_second_level_detection,
+        thirdLevelDetectionResource = R.dimen.thief_third_level_detection) {
 
     override val title: String = ApplicationContextHolder.context.resources.getString(R.string.thief_title)
 
 }
 
-class ControlModification : Modification(
+class ControlModification : AbilityModification(
         zeroLevelValueResource = R.dimen.control_zero_level_value,
         firstLevelValueResource = R.dimen.control_first_level_value,
         secondLevelValueResource = R.dimen.control_second_level_value,
@@ -34,13 +87,18 @@ class ControlModification : Modification(
 
         zeroLevelUpgradeDescriptionResource = R.string.control_zero_level_upgrade_description,
         firstLevelUpgradeDescriptionResource = R.string.control_first_level_upgrade_description,
-        secondLevelUpgradeDescriptionResource = R.string.control_second_level_upgrade_description) {
+        secondLevelUpgradeDescriptionResource = R.string.control_second_level_upgrade_description,
+
+        zeroLevelDetectionResource = R.dimen.control_zero_level_detection,
+        firstLevelDetectionResource = R.dimen.control_first_level_detection,
+        secondLevelDetectionResource = R.dimen.control_second_level_detection,
+        thirdLevelDetectionResource = R.dimen.control_third_level_detection) {
 
     override val title: String = ApplicationContextHolder.context.resources.getString(R.string.control_title)
 
 }
 
-class SpamModification : Modification(
+class SpamModification : AbilityModification(
         zeroLevelValueResource = R.dimen.spam_zero_level_value,
         firstLevelValueResource = R.dimen.spam_first_level_value,
         secondLevelValueResource = R.dimen.spam_second_level_value,
@@ -52,7 +110,12 @@ class SpamModification : Modification(
 
         zeroLevelUpgradeDescriptionResource = R.string.spam_zero_level_upgrade_description,
         firstLevelUpgradeDescriptionResource = R.string.spam_first_level_upgrade_description,
-        secondLevelUpgradeDescriptionResource = R.string.spam_second_level_upgrade_description) {
+        secondLevelUpgradeDescriptionResource = R.string.spam_second_level_upgrade_description,
+
+        zeroLevelDetectionResource = R.dimen.spam_zero_level_detection,
+        firstLevelDetectionResource = R.dimen.spam_first_level_detection,
+        secondLevelDetectionResource = R.dimen.spam_second_level_detection,
+        thirdLevelDetectionResource = R.dimen.spam_third_level_detection) {
 
     override val title: String = ApplicationContextHolder.context.resources.getString(R.string.spam_title)
 
@@ -66,5 +129,4 @@ class AbilityComponent(val thief: ThiefModification = ThiefModification(),
         control.synchronize()
         spam.synchronize()
     }
-
 }

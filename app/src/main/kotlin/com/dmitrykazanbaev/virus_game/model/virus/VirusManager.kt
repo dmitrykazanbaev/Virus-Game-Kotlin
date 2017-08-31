@@ -23,10 +23,6 @@ abstract class Modification(val maxLevel: Int = 3,
 
     abstract val title: String
 
-    init {
-        synchronize()
-    }
-
     fun upgrade() {
         if (currentLevel < maxLevel) {
             currentLevel++
@@ -34,7 +30,7 @@ abstract class Modification(val maxLevel: Int = 3,
         }
     }
 
-    fun synchronize() {
+    open fun synchronize() {
         value = getValueWithLevel(currentLevel)
         upgradeCost = getUpgradeCostWithLevel(currentLevel)
         upgradeDescription = getDescriptionWithLevel(currentLevel)
