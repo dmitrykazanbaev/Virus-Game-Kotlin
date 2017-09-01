@@ -12,8 +12,6 @@ abstract class AbstractLevel(protected val jsonBuildingsResource: Int) {
 
     abstract fun constructLevel()
 
-    abstract fun infect()
-
     abstract fun getLevelState(): AbstractLevelDAO
 
     abstract fun setLevelState(levelState: AbstractLevelDAO)

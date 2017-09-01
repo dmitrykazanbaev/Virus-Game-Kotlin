@@ -23,11 +23,11 @@ data class Building(val leftSide: Path, val centerSide: Path, val roof: Path,
     var canCureSmartHome = false
         get() = infectedSmartHome > 0
 
-    var computers = 5
+    var computers = 6
     var curedComputers = 0
     var infectedComputers by Delegates.observable(0) { _, _, _ -> computeInfectedRoof() }
 
-    var smartHome = 5
+    var smartHome = 4
     var curedSmartHome = 0
     var infectedSmartHome by Delegates.observable(0) { _, _, _ -> computeInfectedRoof() }
 

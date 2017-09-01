@@ -10,6 +10,7 @@ import com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
 import com.dmitrykazanbaev.virus_game.model.User
 import com.dmitrykazanbaev.virus_game.model.dao.ServiceInformationDAO
 import com.dmitrykazanbaev.virus_game.model.dao.UserDAO
+import com.dmitrykazanbaev.virus_game.model.level.FirstLevel
 import com.dmitrykazanbaev.virus_game.screen.FirstLevelView
 import com.dmitrykazanbaev.virus_game.service.*
 import io.realm.Realm
@@ -63,7 +64,9 @@ class FirstLevelActivity : AppCompatActivity() {
         if (tickJob == null || tickJob?.isCompleted!!) {
             tickJob = launch(CommonPool) {
                 while (isActive) {
-                    firstLevelView.level.infect()
+                    tryToInfectPhone(firstLevelView.level as FirstLevel)
+                    tryToInfectComputer(firstLevelView.level as FirstLevel)
+                    tryToInfectSmartHome(firstLevelView.level as FirstLevel)
                     runOnUiThread { updateDate() }
                     delay(500)
                 }

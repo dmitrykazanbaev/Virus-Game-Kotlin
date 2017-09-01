@@ -18,6 +18,24 @@ import java.util.*
 class FirstLevel : AbstractLevel(R.raw.house_fin) {
     var buildings = mutableListOf<Building>()
 
+    val phones = 600
+    var infectedPhones = 0
+    var curedPhones = 0
+
+    var computers = 0
+        private set
+    var curedComputers = 0
+        private set
+    var infectedComputers = 0
+        private set
+
+    var smartHome = 0
+        private set
+    var curedSmartHome = 0
+        private set
+    var infectedSmartHome = 0
+        private set
+
     var maxPoint = Point()
     var minPoint = Point(Int.MAX_VALUE, Int.MAX_VALUE)
     override var width = 0
@@ -31,10 +49,25 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
         setMinMaxPoints()
     }
 
-    override fun infect() {
-        val randomBuilding = Random().nextInt(buildings.size)
-        if (buildings[randomBuilding].canInfectComputer) {
-            buildings[randomBuilding].infectedComputers++
+    fun infectPhone() {
+        infectedPhones++
+    }
+
+    fun infectComputer() {
+        val filteredBuildings = buildings.filter { it.canInfectComputer }
+        if (filteredBuildings.isNotEmpty()) {
+            val randomBuilding = Random().nextInt(filteredBuildings.size)
+            filteredBuildings[randomBuilding].infectedComputers++
+            infectedComputers++
+        }
+    }
+
+    fun infectSmartHome() {
+        val filteredBuildings = buildings.filter { it.canInfectSmartHome }
+        if (filteredBuildings.isNotEmpty()) {
+            val randomBuilding = Random().nextInt(filteredBuildings.size)
+            filteredBuildings[randomBuilding].infectedSmartHome++
+            infectedSmartHome++
         }
     }
 
@@ -42,7 +75,11 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
         val jsonBuildings = getJsonBuildings(applicationContext.resources.openRawResource(jsonBuildingsResource))
 
         jsonBuildings.forEach {
-            buildings.add(getBuilding(it as JsonObject))
+            val building = getBuilding(it as JsonObject)
+            computers += building.computers
+            smartHome += building.smartHome
+
+            buildings.add(building)
         }
     }
 
