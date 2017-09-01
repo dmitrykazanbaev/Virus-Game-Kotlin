@@ -187,7 +187,7 @@ private fun createPropagationButtonList(): List<ModificationButton> {
     buttonList[2].modificationLevel = firstLevelActivity.user.virus.propagation.ethernet.currentLevel
 
     buttonList[3].tag = "mobile"
-    buttonList[3].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.stats_net)
+    buttonList[3].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.mobile)
     buttonList[3].modificationLevel = firstLevelActivity.user.virus.propagation.mobile.currentLevel
 
     return buttonList

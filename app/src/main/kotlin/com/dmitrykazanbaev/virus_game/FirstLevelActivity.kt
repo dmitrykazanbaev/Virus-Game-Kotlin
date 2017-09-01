@@ -90,7 +90,7 @@ class FirstLevelActivity : AppCompatActivity() {
     }
 
     fun updateModificationUpgradeCost(cost: Int) {
-        modification_cost.text = cost.toString()
+        modification_cost.text = "$cost$"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -31,7 +31,7 @@
 
     <string name="ethernet_title">EXTERNAL DEVICES</string>
 
-    <string name="ethernet_zero_level_upgrade_description">VIRUS CAN SPREAD OVER CD\\DVD DEVICES</string>
+    <string name="ethernet_zero_level_upgrade_description">VIRUS CAN SPREAD OVER CD&#8288;\\&#8288;DVD DEVICES</string>
     <string name="ethernet_first_level_upgrade_description">VIRUS CAN SPREAD OVER LOCAL NETWORK</string>
     <string name="ethernet_second_level_upgrade_description">VIRUS CAN SPREAD OVER USB DEVICES</string>
 

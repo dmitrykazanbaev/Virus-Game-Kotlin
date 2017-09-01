@@ -104,8 +104,8 @@ class ModificationButton
 
         thirdLevelModificationSectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.third_level_modification)
 
-        checkedSectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.colorOrange)
-        checkedSectorPaint.style = Paint.Style.STROKE
+        /*checkedSectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.colorOrange)
+        checkedSectorPaint.style = Paint.Style.STROKE*/
 
         separatorPaint.color = Color.BLACK
         separatorPaint.style = Paint.Style.STROKE
@@ -132,7 +132,7 @@ class ModificationButton
                     iconCenter.y + iconSize.second.toInt() / 2)
             icon.draw(canvas)
 
-            if (isChecked) canvas.drawPath(sectorPath, checkedSectorPaint)
+            //if (isChecked) canvas.drawPath(sectorPath, checkedSectorPaint)
         }
     }
 

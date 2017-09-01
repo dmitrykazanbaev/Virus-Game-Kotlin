@@ -27,7 +27,7 @@
 
     <string name="ethernet_title">ВНЕШНИЕ УСТРОЙСТВА</string>
 
-    <string name="ethernet_zero_level_upgrade_description">ВИРУС СПОСОБЕН РАСПРОСТРАНЯТЬСЯ ЧЕРЕЗ CD\\DVD</string>
+    <string name="ethernet_zero_level_upgrade_description">ВИРУС СПОСОБЕН РАСПРОСТРАНЯТЬСЯ ЧЕРЕЗ CD&#8288;\\&#8288;DVD</string>
     <string name="ethernet_first_level_upgrade_description">ВИРУС СПОСОБЕН РАСПРОСТРАНЯТЬСЯ ПО ЛОКАЛЬНОЙ СЕТИ</string>
     <string name="ethernet_second_level_upgrade_description">ВИРУС СПОСОБЕН РАСПРОСТРАНЯТЬСЯ ЧЕРЕЗ USB УСТРОЙСТВА</string>
 

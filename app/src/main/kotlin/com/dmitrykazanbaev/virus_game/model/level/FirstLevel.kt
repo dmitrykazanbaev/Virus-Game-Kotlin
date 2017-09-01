@@ -33,7 +33,7 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
 
     override fun infect() {
         val randomBuilding = Random().nextInt(buildings.size)
-        if (!buildings[randomBuilding].isInfected) {
+        if (buildings[randomBuilding].canInfectComputer) {
             buildings[randomBuilding].infectedComputers++
         }
     }
@@ -74,7 +74,7 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
 
 
     private fun getJsonBuildings(input: InputStream): JsonArray<*> {
-        val parser: Parser = Parser()
+        val parser = Parser()
         return parser.parse(input) as JsonArray<*>
     }
 
