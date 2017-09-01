@@ -108,6 +108,7 @@ class ModificationButton
         checkedSectorPaint.style = Paint.Style.STROKE*/
 
         separatorPaint.color = Color.BLACK
+        separatorPaint.isAntiAlias = true
         separatorPaint.style = Paint.Style.STROKE
         separatorPaint.strokeWidth = resources.getString(R.dimen.stroke_separator).toFloat()
     }

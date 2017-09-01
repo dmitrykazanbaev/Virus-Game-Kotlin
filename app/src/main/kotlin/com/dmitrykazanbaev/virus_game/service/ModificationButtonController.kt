@@ -109,6 +109,7 @@ class ModificationButtonController
         modificationButtons.forEach { addView(it) }
 
         sectorSeparatorPaint.color = Color.BLACK
+        sectorSeparatorPaint.isAntiAlias = true
         sectorSeparatorPaint.strokeWidth = resources.getString(R.dimen.stroke_separatorSector).toFloat()
         sectorSeparatorPaint.style = Paint.Style.STROKE
     }
