@@ -43,6 +43,10 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
 
     var antivirusProgress = 0
 
+    val countPhonesToCure = 20
+    val countComputersToCure = 12
+    val countSmartHomeToCure = 8
+
     var maxPoint = Point()
     var minPoint = Point(Int.MAX_VALUE, Int.MAX_VALUE)
     override var width = 0
@@ -136,6 +140,74 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
             val roof = getFigurePath(roofPoints)
 
             return Building(leftSide, centerSide, roof, leftSidePoints, centerSidePoints, roofPoints)
+        }
+    }
+
+    fun curePhone() {
+        if (infectedPhones >= countPhonesToCure) {
+            infectedPhones -= countPhonesToCure
+            curedPhones += countPhonesToCure
+        } else {
+            curedPhones += infectedPhones
+            infectedPhones = 0
+        }
+    }
+
+    fun cureComputer() {
+        var computersToCure = countComputersToCure
+        val filteredBuildings = buildings.filter { it.canCureComputer }
+
+        while (computersToCure > 0 && filteredBuildings.isNotEmpty()) {
+            val randomBuilding = Random().nextInt(filteredBuildings.size)
+
+            if (filteredBuildings[randomBuilding].infectedComputers >= computersToCure) {
+                infectedComputers -= computersToCure
+                curedComputers += computersToCure
+
+                filteredBuildings[randomBuilding].infectedComputers -= computersToCure
+                filteredBuildings[randomBuilding].curedComputers += computersToCure
+
+                break
+            } else {
+                infectedComputers -= filteredBuildings[randomBuilding].infectedComputers
+                curedComputers += filteredBuildings[randomBuilding].infectedComputers
+
+                computersToCure -= filteredBuildings[randomBuilding].infectedComputers
+
+                filteredBuildings[randomBuilding].curedComputers += filteredBuildings[randomBuilding].infectedComputers
+                filteredBuildings[randomBuilding].infectedComputers -= filteredBuildings[randomBuilding].infectedComputers
+
+                filteredBuildings.drop(randomBuilding)
+            }
+        }
+    }
+
+    fun cureSmartHome() {
+        var smartHomeToCure = countSmartHomeToCure
+        val filteredBuildings = buildings.filter { it.canCureSmartHome }
+
+        while (smartHomeToCure > 0 && filteredBuildings.isNotEmpty()) {
+            val randomBuilding = Random().nextInt(filteredBuildings.size)
+
+            if (filteredBuildings[randomBuilding].infectedSmartHome >= smartHomeToCure) {
+                infectedSmartHome -= smartHomeToCure
+                curedSmartHome += smartHomeToCure
+
+                filteredBuildings[randomBuilding].infectedSmartHome -= smartHomeToCure
+                filteredBuildings[randomBuilding].curedSmartHome += smartHomeToCure
+
+                break
+            } else {
+                infectedSmartHome -= filteredBuildings[randomBuilding].infectedSmartHome
+                curedSmartHome += filteredBuildings[randomBuilding].infectedSmartHome
+
+                smartHomeToCure -= filteredBuildings[randomBuilding].infectedSmartHome
+
+                filteredBuildings[randomBuilding].curedSmartHome += filteredBuildings[randomBuilding].infectedSmartHome
+                filteredBuildings[randomBuilding].infectedSmartHome -= filteredBuildings[randomBuilding].infectedSmartHome
+
+                filteredBuildings.drop(randomBuilding)
+            }
         }
     }
 }

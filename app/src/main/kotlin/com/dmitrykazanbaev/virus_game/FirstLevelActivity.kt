@@ -69,6 +69,7 @@ class FirstLevelActivity : AppCompatActivity() {
                     tryToInfectSmartHome(firstLevelView.level as FirstLevel)
                     tryToDetectVirus(firstLevelView.level as FirstLevel)
                     tryToProgressAntivirus(firstLevelView.level as FirstLevel)
+                    tryToCureDevices(firstLevelView.level as FirstLevel)
                     runOnUiThread { updateDate() }
                     delay(500)
                 }

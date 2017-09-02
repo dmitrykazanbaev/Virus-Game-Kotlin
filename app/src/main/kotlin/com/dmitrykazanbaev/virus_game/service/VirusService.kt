@@ -107,3 +107,17 @@ fun tryToProgressAntivirus(level: FirstLevel) {
         }
     }
 }
+
+fun tryToCureDevices(level: FirstLevel) {
+    val firstLevelActivity = ApplicationContextHolder.context as FirstLevelActivity
+
+    with(firstLevelActivity) {
+
+        if (level.antivirusProgress == 100) {
+
+            level.curePhone()
+            level.cureComputer()
+            level.cureSmartHome()
+        }
+    }
+}
