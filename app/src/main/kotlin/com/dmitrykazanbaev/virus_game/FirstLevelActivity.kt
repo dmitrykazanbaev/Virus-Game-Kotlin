@@ -64,22 +64,39 @@ class FirstLevelActivity : AppCompatActivity() {
         if (tickJob == null || tickJob?.isCompleted!!) {
             tickJob = launch(CommonPool) {
                 while (isActive) {
+                    checkWinOrLose()
                     tryToInfectPhone(firstLevelView.level as FirstLevel)
                     tryToInfectComputer(firstLevelView.level as FirstLevel)
                     tryToInfectSmartHome(firstLevelView.level as FirstLevel)
                     tryToDetectVirus(firstLevelView.level as FirstLevel)
                     tryToProgressAntivirus(firstLevelView.level as FirstLevel)
                     tryToCureDevices(firstLevelView.level as FirstLevel)
-                    runOnUiThread { updateDate() }
+                    updateDate()
                     delay(500)
                 }
             }
         }
     }
 
+    private fun checkWinOrLose() {
+        val firstLevel = firstLevelView.level as FirstLevel
+
+        if (firstLevel.infectedPhones == firstLevel.phones &&
+                firstLevel.infectedComputers == firstLevel.computers &&
+                firstLevel.infectedSmartHome == firstLevel.infectedSmartHome)
+
+            runOnUiThread { statistics_button.text = "  WIN" }
+
+        if (firstLevel.antivirusProgress == 100 && firstLevel.infectedPhones == 0 &&
+                firstLevel.infectedComputers == 0 && firstLevel.infectedSmartHome == 0)
+
+            runOnUiThread { statistics_button.text = "  LOSE" }
+
+    }
+
     private fun updateDate() {
         calendar.add(Calendar.DAY_OF_YEAR, 1)
-        date_button?.text = "  ${dateFormat.format(calendar.time)}"
+        runOnUiThread { date_button?.text = "  ${dateFormat.format(calendar.time)}" }
     }
 
     fun updateBalance(newBalance: Int) {

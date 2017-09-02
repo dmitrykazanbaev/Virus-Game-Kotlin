@@ -7,10 +7,17 @@ import java.util.*
 interface AbstractLevelDAO
 
 open class FirstLevelDAO : AbstractLevelDAO, RealmObject() {
+    var infectedPhones: Int = 0
+    var curedPhones: Int = 0
+    var detectedDevices: Int = 0
+    var antivirusProgress: Int = 0
     var buildingList = RealmList<BuildingDAO>()
 }
 
-open class BuildingDAO(var infectedComputers: Int = 0) : RealmObject()
+open class BuildingDAO(var infectedComputers: Int = 0,
+                       var infectedSmartHome: Int = 0,
+                       var curedComputers: Int = 0,
+                       var curedSmartHome: Int = 0) : RealmObject()
 
 open class ServiceInformationDAO(var date: Date = Date()) : RealmObject()
 

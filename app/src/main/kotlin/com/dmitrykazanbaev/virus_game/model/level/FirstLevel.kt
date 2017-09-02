@@ -97,7 +97,12 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
     override fun getLevelState(): FirstLevelDAO {
         val firstLevelDAO = FirstLevelDAO()
 
-        buildings.map { BuildingDAO(it.infectedComputers) }
+        firstLevelDAO.antivirusProgress = antivirusProgress
+        firstLevelDAO.infectedPhones = infectedPhones
+        firstLevelDAO.curedPhones = curedPhones
+        firstLevelDAO.detectedDevices = detectedDevices
+
+        buildings.map { BuildingDAO(it.infectedComputers, it.infectedSmartHome, it.curedComputers, it.curedSmartHome) }
                 .forEach { firstLevelDAO.buildingList.add(it) }
 
         return firstLevelDAO
@@ -107,7 +112,20 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
         (levelState as FirstLevelDAO).buildingList.withIndex().
                 forEach { (index, value) ->
                     buildings[index].infectedComputers = value.infectedComputers
+                    buildings[index].infectedSmartHome = value.infectedSmartHome
+                    buildings[index].curedComputers = value.curedComputers
+                    buildings[index].curedSmartHome = value.curedSmartHome
+
+                    infectedComputers += buildings[index].infectedComputers
+                    infectedSmartHome += buildings[index].infectedSmartHome
+                    curedComputers += buildings[index].curedComputers
+                    curedSmartHome += buildings[index].curedSmartHome
                 }
+
+        antivirusProgress = levelState.antivirusProgress
+        infectedPhones = levelState.infectedPhones
+        curedPhones = levelState.curedPhones
+        detectedDevices = levelState.detectedDevices
     }
 
     private fun setMinMaxPoints() {
@@ -149,13 +167,13 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
             curedPhones += countPhonesToCure
         } else {
             curedPhones += infectedPhones
-            infectedPhones = 0
+            infectedPhones -= infectedPhones
         }
     }
 
     fun cureComputer() {
         var computersToCure = countComputersToCure
-        val filteredBuildings = buildings.filter { it.canCureComputer }
+        val filteredBuildings = buildings.filter { it.canCureComputer } as ArrayList
 
         while (computersToCure > 0 && filteredBuildings.isNotEmpty()) {
             val randomBuilding = Random().nextInt(filteredBuildings.size)
@@ -177,14 +195,14 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
                 filteredBuildings[randomBuilding].curedComputers += filteredBuildings[randomBuilding].infectedComputers
                 filteredBuildings[randomBuilding].infectedComputers -= filteredBuildings[randomBuilding].infectedComputers
 
-                filteredBuildings.drop(randomBuilding)
+                filteredBuildings.removeAt(randomBuilding)
             }
         }
     }
 
     fun cureSmartHome() {
         var smartHomeToCure = countSmartHomeToCure
-        val filteredBuildings = buildings.filter { it.canCureSmartHome }
+        val filteredBuildings = buildings.filter { it.canCureSmartHome } as ArrayList
 
         while (smartHomeToCure > 0 && filteredBuildings.isNotEmpty()) {
             val randomBuilding = Random().nextInt(filteredBuildings.size)
@@ -206,7 +224,7 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
                 filteredBuildings[randomBuilding].curedSmartHome += filteredBuildings[randomBuilding].infectedSmartHome
                 filteredBuildings[randomBuilding].infectedSmartHome -= filteredBuildings[randomBuilding].infectedSmartHome
 
-                filteredBuildings.drop(randomBuilding)
+                filteredBuildings.removeAt(randomBuilding)
             }
         }
     }
