@@ -1,5 +1,6 @@
 package com.dmitrykazanbaev.virus_game.service
 
+import android.view.View
 import com.dmitrykazanbaev.virus_game.FirstLevelActivity
 import com.dmitrykazanbaev.virus_game.model.level.FirstLevel
 import kotlinx.android.synthetic.main.first_level_activity.*
@@ -79,6 +80,30 @@ fun tryToDetectVirus(level: FirstLevel) {
                 level.detectedDevices++
                 runOnUiThread { virus_button.text = "${level.detectedDevices}" }
             }
+        }
+    }
+}
+
+fun tryToProgressAntivirus(level: FirstLevel) {
+    val firstLevelActivity = ApplicationContextHolder.context as FirstLevelActivity
+
+    with(firstLevelActivity) {
+
+        if (level.detectedDevices == level.countDetectedDevicesForStartAntivirusDevelopment &&
+                level.antivirusProgress < 100) {
+
+            val allDevices = level.computers + level.smartHome + level.phones
+            val infectedDevices = level.infectedComputers + level.infectedSmartHome + level.infectedPhones
+            val resistance = user.virus.resistance.mask.value
+            val detection = user.virus.abilities.detection()
+            val random = Random().nextInt(allDevices * resistance)
+
+            if (random < detection * infectedDevices * level.levelCoefficient) {
+                level.antivirusProgress++
+                runOnUiThread { antivirus_button.text = "${level.antivirusProgress}%  " }
+            }
+
+            runOnUiThread { antivirus.visibility = View.VISIBLE }
         }
     }
 }

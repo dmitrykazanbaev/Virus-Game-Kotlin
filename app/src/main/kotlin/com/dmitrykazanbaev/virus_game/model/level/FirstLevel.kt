@@ -41,6 +41,8 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
     var detectedDevices = 0
     val countDetectedDevicesForStartAntivirusDevelopment = 450
 
+    var antivirusProgress = 0
+
     var maxPoint = Point()
     var minPoint = Point(Int.MAX_VALUE, Int.MAX_VALUE)
     override var width = 0

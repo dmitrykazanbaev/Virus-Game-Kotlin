@@ -113,7 +113,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="17"
                     android:layout_marginEnd="@dimen/indent_left_right_control_button"
-                    android:id="@+id/antivirus">
+                    android:id="@+id/antivirus"
+                    android:visibility="invisible">
 
                 <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                         android:layout_width="match_parent"
