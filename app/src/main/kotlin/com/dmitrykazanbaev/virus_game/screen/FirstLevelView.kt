@@ -12,7 +12,7 @@ import com.dmitrykazanbaev.virus_game.model.level.FirstLevel
 import io.realm.Realm
 
 class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()) {
-    val realm = Realm.getDefaultInstance()!!
+    private val realm = Realm.getDefaultInstance()!!
 
     private val paintForFilling = Paint()
     private val paintForStroke = Paint()

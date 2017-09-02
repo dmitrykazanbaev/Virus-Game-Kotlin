@@ -36,6 +36,11 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
     var infectedSmartHome = 0
         private set
 
+    var levelCoefficient = 0.5
+
+    var detectedDevices = 0
+    val countDetectedDevicesForStartAntivirusDevelopment = 450
+
     var maxPoint = Point()
     var minPoint = Point(Int.MAX_VALUE, Int.MAX_VALUE)
     override var width = 0

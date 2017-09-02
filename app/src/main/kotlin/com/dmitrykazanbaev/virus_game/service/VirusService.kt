@@ -62,3 +62,23 @@ fun tryToInfectSmartHome(level: FirstLevel) {
         }
     }
 }
+
+fun tryToDetectVirus(level: FirstLevel) {
+    val firstLevelActivity = ApplicationContextHolder.context as FirstLevelActivity
+
+    with(firstLevelActivity) {
+        if (level.detectedDevices < level.countDetectedDevicesForStartAntivirusDevelopment) {
+
+            val allDevices = level.computers + level.smartHome + level.phones
+            val infectedDevices = level.infectedComputers + level.infectedSmartHome + level.infectedPhones
+            val resistance = user.virus.resistance.mask.value
+            val detection = user.virus.abilities.detection()
+            val random = Random().nextInt(allDevices * resistance)
+
+            if (random < detection * infectedDevices * level.levelCoefficient) {
+                level.detectedDevices++
+                runOnUiThread { virus_button.text = "${level.detectedDevices}" }
+            }
+        }
+    }
+}

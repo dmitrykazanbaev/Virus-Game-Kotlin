@@ -16,7 +16,7 @@ abstract class AbilityModification(zeroLevelValueResource: Int,
                                    firstLevelUpgradeDescriptionResource: Int,
                                    secondLevelUpgradeDescriptionResource: Int,
 
-                                   private var detection: Int = 0,
+                                   var detection: Int = 0,
 
                                    private val zeroLevelDetectionResource: Int,
                                    private val firstLevelDetectionResource: Int,
@@ -128,5 +128,9 @@ class AbilityComponent(val thief: ThiefModification = ThiefModification(),
         thief.synchronize()
         control.synchronize()
         spam.synchronize()
+    }
+
+    fun detection(): Int {
+        return thief.detection + control.detection + spam.detection
     }
 }
