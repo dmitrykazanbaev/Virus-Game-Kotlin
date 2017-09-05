@@ -20,6 +20,7 @@ fun tryToInfectPhone(level: FirstLevel) {
                     user.virus.propagation.wifi.value) {
 
                 level.infectPhone()
+                user.getProfit(level.profitPhone)
                 runOnUiThread { virus_name.text = "${level.infectedPhones}" }
             }
         }
@@ -40,6 +41,7 @@ fun tryToInfectComputer(level: FirstLevel) {
                     user.virus.propagation.wifi.value) {
 
                 level.infectComputer()
+                user.getProfit(level.profitComputer)
             }
         }
     }
@@ -59,6 +61,7 @@ fun tryToInfectSmartHome(level: FirstLevel) {
                     user.virus.propagation.wifi.value) {
 
                 level.infectSmartHome()
+                user.getProfit(level.profitSmartHome)
             }
         }
     }

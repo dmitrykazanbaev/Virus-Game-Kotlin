@@ -12,4 +12,8 @@ class User {
         firstLevelActivity.updateBalance(newValue)
     }
     val virus = VirusManager()
+
+    fun getProfit(profit: Int) {
+        balance += (profit * virus.abilities.value()).toInt()
+    }
 }

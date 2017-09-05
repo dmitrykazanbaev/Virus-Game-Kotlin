@@ -100,8 +100,10 @@ class FirstLevelActivity : AppCompatActivity() {
     }
 
     fun updateBalance(newBalance: Int) {
-        balance_button.text = "  $newBalance$"
-        characteristic_window_balance.text = "$newBalance$"
+        runOnUiThread {
+            balance_button.text = "  $newBalance$"
+            characteristic_window_balance.text = "$newBalance$"
+        }
     }
 
     fun updateModificationTitle(title: String) {

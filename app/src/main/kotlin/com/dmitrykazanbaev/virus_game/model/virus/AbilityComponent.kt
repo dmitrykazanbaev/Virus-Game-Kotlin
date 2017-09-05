@@ -133,4 +133,9 @@ class AbilityComponent(val thief: ThiefModification = ThiefModification(),
     fun detection(): Int {
         return thief.detection + control.detection + spam.detection
     }
+
+    fun value(): Float {
+        val percent = (thief.value + control.value + spam.value) / 100f
+        return if (percent < 1) percent else 1f
+    }
 }

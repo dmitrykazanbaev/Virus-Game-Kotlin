@@ -20,10 +20,10 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
     private val colorLeft = ContextCompat.getColor(context, R.color.colorLeft)
     private val colorCenter = ContextCompat.getColor(context, R.color.colorCenter)
     private val colorRoof = ContextCompat.getColor(context, R.color.colorRoof)
-    private val colorInfectedRoof = ContextCompat.getColor(context, R.color.colorInfectedRoof)
+    private val colorInfectedRoof = ContextCompat.getColor(context, R.color.control_button_color)
     private val colorBackground = ContextCompat.getColor(context, R.color.colorBackground)
 
-    val paint = Paint()
+    private val paint = Paint()
 
     init {
         paintForFilling.style = Paint.Style.FILL

@@ -40,6 +40,10 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
     var infectedSmartHome = 0
         private set
 
+    val profitComputer = 20
+    val profitPhone = 20
+    val profitSmartHome = 20
+
     var levelCoefficient = 0.5
 
     var detectedDevices = 0
