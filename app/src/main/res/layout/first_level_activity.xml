@@ -143,7 +143,7 @@
                         android:src="@mipmap/antivirus"
                         android:layout_alignParentEnd="true"
                         android:id="@+id/antivirus_image"
-                        android:layout_margin="@dimen/margin_image_btc"
+                        android:layout_margin="@dimen/margin_image_antivirus"
                         android:adjustViewBounds="true"
                         android:paddingEnd="@dimen/padding_end_antivirus_image"
                         />
@@ -230,7 +230,7 @@
                         android:adjustViewBounds="true"
                         android:layout_marginBottom="@dimen/margin_image_virus"
                         android:layout_marginTop="@dimen/margin_image_virus"
-                        android:paddingEnd="@dimen/margin_antivirus"/>
+                        android:paddingEnd="@dimen/padding_virus_statistics"/>
 
             </RelativeLayout>
 
@@ -271,7 +271,7 @@
                         android:adjustViewBounds="true"
                         android:layout_marginBottom="@dimen/margin_image_statistics"
                         android:layout_marginTop="@dimen/margin_image_statistics"
-                        android:paddingStart="@dimen/margin_antivirus"/>
+                        android:paddingStart="@dimen/padding_virus_statistics"/>
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

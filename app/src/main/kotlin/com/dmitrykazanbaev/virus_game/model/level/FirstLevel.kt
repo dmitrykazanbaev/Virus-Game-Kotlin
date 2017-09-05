@@ -47,9 +47,9 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
 
     var antivirusProgress = 0
 
-    val countPhonesToCure = 20
-    val countComputersToCure = 12
-    val countSmartHomeToCure = 8
+    private val countPhonesToCure = 20
+    private val countComputersToCure = 12
+    private val countSmartHomeToCure = 8
 
     val random = Random()
     val infectedPhonesToDraw = ConcurrentLinkedQueue<InfectedPhone>()
@@ -84,25 +84,7 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
     }
 
     val infectedPhoneThread = InfectedPhoneThread("InfectedPhoneThread")
-    val percentInfectedPhoneToDraw = 4
-
-    fun addInfectedPhoneToDrawing(count: Int = 1) {
-        repeat(count) {
-            infectedPhoneThread.mHandler.sendEmptyMessage(infectedPhoneThread.ADD_PHONE)
-        }
-    }
-
-    fun removeInfectedPhoneFromDrawing(count: Int = 1) {
-        repeat(count) {
-            if (infectedPhonesToDraw.isNotEmpty()) {
-                infectedPhoneThread.mHandler.sendEmptyMessage(infectedPhoneThread.REMOVE_PHONE)
-            }
-        }
-    }
-
-    fun synchronizeInfectedPhoneToDraw() {
-        addInfectedPhoneToDrawing(infectedPhones / percentInfectedPhoneToDraw)
-    }
+    private val percentInfectedPhoneToDraw = 4
 
     var maxPoint = Point()
     var minPoint = Point(Int.MAX_VALUE, Int.MAX_VALUE)
@@ -118,29 +100,6 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
 
         infectedPhoneThread.start()
         infectedPhoneThread.prepareHandler()
-    }
-
-    fun infectPhone() {
-        infectedPhones++
-        if (infectedPhones % percentInfectedPhoneToDraw == 0) addInfectedPhoneToDrawing()
-    }
-
-    fun infectComputer() {
-        val filteredBuildings = buildings.filter { it.canInfectComputer }
-        if (filteredBuildings.isNotEmpty()) {
-            val randomBuilding = Random().nextInt(filteredBuildings.size)
-            filteredBuildings[randomBuilding].infectedComputers++
-            infectedComputers++
-        }
-    }
-
-    fun infectSmartHome() {
-        val filteredBuildings = buildings.filter { it.canInfectSmartHome }
-        if (filteredBuildings.isNotEmpty()) {
-            val randomBuilding = Random().nextInt(filteredBuildings.size)
-            filteredBuildings[randomBuilding].infectedSmartHome++
-            infectedSmartHome++
-        }
     }
 
     override fun constructLevel() {
@@ -191,36 +150,26 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
         synchronizeInfectedPhoneToDraw()
     }
 
-    private fun setMinMaxPoints() {
-        buildings.forEach {
-            maxPoint.x = maxOf(it.maxPoint.x, maxPoint.x)
-            maxPoint.y = maxOf(it.maxPoint.y, maxPoint.y)
+    fun infectPhone() {
+        infectedPhones++
+        if (infectedPhones % percentInfectedPhoneToDraw == 1) addInfectedPhoneToDrawing()
+    }
 
-            minPoint.x = minOf(it.minPoint.x, minPoint.x)
-            minPoint.y = minOf(it.minPoint.y, minPoint.y)
+    fun infectComputer() {
+        val filteredBuildings = buildings.filter { it.canInfectComputer }
+        if (filteredBuildings.isNotEmpty()) {
+            val randomBuilding = Random().nextInt(filteredBuildings.size)
+            filteredBuildings[randomBuilding].infectedComputers++
+            infectedComputers++
         }
     }
 
-
-    private fun getJsonBuildings(input: InputStream): JsonArray<*> {
-        val parser = Parser()
-        return parser.parse(input) as JsonArray<*>
-    }
-
-    private fun getBuilding(jsonBuilding: JsonObject): Building {
-        with(jsonBuilding) {
-            val leftSidePoints = //getSortedPointsByClockwiseFromLeft(
-                    getPointsListFromJsonString(string("left"))//)
-            val centerSidePoints = //getSortedPointsByClockwiseFromLeft(
-                    getPointsListFromJsonString(string("center"))//)
-            val roofPoints = getSortedPointsByClockwiseFromLeft(
-                    getPointsListFromJsonString(string("roof")))
-
-            val leftSide = getFigurePath(leftSidePoints)
-            val centerSide = getFigurePath(centerSidePoints)
-            val roof = getFigurePath(roofPoints)
-
-            return Building(leftSide, centerSide, roof, leftSidePoints, centerSidePoints, roofPoints)
+    fun infectSmartHome() {
+        val filteredBuildings = buildings.filter { it.canInfectSmartHome }
+        if (filteredBuildings.isNotEmpty()) {
+            val randomBuilding = Random().nextInt(filteredBuildings.size)
+            filteredBuildings[randomBuilding].infectedSmartHome++
+            infectedSmartHome++
         }
     }
 
@@ -293,6 +242,56 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
 
                 filteredBuildings.removeAt(randomBuilding)
             }
+        }
+    }
+
+    private fun addInfectedPhoneToDrawing(count: Int = 1) {
+        repeat(count) {
+            infectedPhoneThread.mHandler.sendEmptyMessage(infectedPhoneThread.ADD_PHONE)
+        }
+    }
+
+    private fun removeInfectedPhoneFromDrawing(count: Int = 1) {
+        repeat(count) {
+            if (infectedPhonesToDraw.isNotEmpty()) {
+                infectedPhoneThread.mHandler.sendEmptyMessage(infectedPhoneThread.REMOVE_PHONE)
+            }
+        }
+    }
+
+    private fun synchronizeInfectedPhoneToDraw() {
+        addInfectedPhoneToDrawing(infectedPhones / percentInfectedPhoneToDraw)
+    }
+
+    private fun setMinMaxPoints() {
+        buildings.forEach {
+            maxPoint.x = maxOf(it.maxPoint.x, maxPoint.x)
+            maxPoint.y = maxOf(it.maxPoint.y, maxPoint.y)
+
+            minPoint.x = minOf(it.minPoint.x, minPoint.x)
+            minPoint.y = minOf(it.minPoint.y, minPoint.y)
+        }
+    }
+
+    private fun getJsonBuildings(input: InputStream): JsonArray<*> {
+        val parser = Parser()
+        return parser.parse(input) as JsonArray<*>
+    }
+
+    private fun getBuilding(jsonBuilding: JsonObject): Building {
+        with(jsonBuilding) {
+            val leftSidePoints = //getSortedPointsByClockwiseFromLeft(
+                    getPointsListFromJsonString(string("left"))//)
+            val centerSidePoints = //getSortedPointsByClockwiseFromLeft(
+                    getPointsListFromJsonString(string("center"))//)
+            val roofPoints = getSortedPointsByClockwiseFromLeft(
+                    getPointsListFromJsonString(string("roof")))
+
+            val leftSide = getFigurePath(leftSidePoints)
+            val centerSide = getFigurePath(centerSidePoints)
+            val roof = getFigurePath(roofPoints)
+
+            return Building(leftSide, centerSide, roof, leftSidePoints, centerSidePoints, roofPoints)
         }
     }
 }

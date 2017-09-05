@@ -29,16 +29,17 @@
     <dimen name="indent_left_right_control_buttons">32dp</dimen>
     <dimen name="padding_image_setting">16dp</dimen>
     <dimen name="indent_left_right_control_button">-13dp</dimen>
-    <dimen name="margin_image_btc">12dp</dimen>
+    <dimen name="margin_image_antivirus">14dp</dimen>
     <dimen name="virus_name_text_size">30sp</dimen>
     <dimen name="balance_text_size">36sp</dimen>
-    <dimen name="padding_end_antivirus_image">12dp</dimen>
+    <dimen name="padding_end_antivirus_image">14dp</dimen>
     <dimen name="margin_antivirus">8dp</dimen>
     <dimen name="padding_end_antivirus">68dp</dimen>
     <dimen name="antivirus_text_size">36sp</dimen>
     <dimen name="date_text_size">36sp</dimen>
     <dimen name="virus_statistics_text_size">32sp</dimen>
     <dimen name="padding_end_virus">68dp</dimen>
-    <dimen name="margin_image_virus">14dp</dimen>
-    <dimen name="margin_image_statistics">20dp</dimen>
+    <dimen name="margin_image_virus">18dp</dimen>
+    <dimen name="margin_image_statistics">24dp</dimen>
+    <dimen name="padding_virus_statistics">14dp</dimen>
 </resources>

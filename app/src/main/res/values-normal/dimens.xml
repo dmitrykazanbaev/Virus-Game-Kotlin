@@ -27,18 +27,19 @@
     <dimen name="buy_button_corners">24dp</dimen>
     <dimen name="indent_top_bottom_control_buttons">4dp</dimen>
     <dimen name="indent_left_right_control_buttons">16dp</dimen>
-    <dimen name="padding_image_setting">4dp</dimen>
+    <dimen name="padding_image_setting">8dp</dimen>
     <dimen name="indent_left_right_control_button">-6.5dp</dimen>
-    <dimen name="margin_image_btc">6dp</dimen>
+    <dimen name="margin_image_antivirus">7dp</dimen>
     <dimen name="virus_name_text_size">15sp</dimen>
     <dimen name="balance_text_size">18sp</dimen>
-    <dimen name="padding_end_antivirus_image">6dp</dimen>
+    <dimen name="padding_end_antivirus_image">7dp</dimen>
     <dimen name="margin_antivirus">4dp</dimen>
     <dimen name="padding_end_antivirus">34dp</dimen>
     <dimen name="antivirus_text_size">18sp</dimen>
     <dimen name="date_text_size">18sp</dimen>
     <dimen name="virus_statistics_text_size">16sp</dimen>
     <dimen name="padding_end_virus">34dp</dimen>
-    <dimen name="margin_image_virus">7dp</dimen>
-    <dimen name="margin_image_statistics">10dp</dimen>
+    <dimen name="margin_image_virus">9dp</dimen>
+    <dimen name="margin_image_statistics">12dp</dimen>
+    <dimen name="padding_virus_statistics">7dp</dimen>
 </resources>
