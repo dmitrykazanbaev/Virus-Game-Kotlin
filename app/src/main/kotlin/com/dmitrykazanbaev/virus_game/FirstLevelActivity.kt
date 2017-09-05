@@ -163,6 +163,11 @@ class FirstLevelActivity : AppCompatActivity() {
         super.onStop()
     }
 
+    override fun onDestroy() {
+        (firstLevelView.level as FirstLevel).infectedPhoneThread.quit()
+        super.onDestroy()
+    }
+
     private fun initFromRealm() {
         firstLevelView.initLevelFromRealm()
         initUserFromRealm()

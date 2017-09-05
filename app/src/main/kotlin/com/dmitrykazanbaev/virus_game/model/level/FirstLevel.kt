@@ -1,6 +1,9 @@
 package com.dmitrykazanbaev.virus_game.model.level
 
 import android.graphics.Point
+import android.os.Handler
+import android.os.HandlerThread
+import android.os.Message
 import com.beust.klaxon.JsonArray
 import com.beust.klaxon.JsonObject
 import com.beust.klaxon.Parser
@@ -14,6 +17,7 @@ import com.dmitrykazanbaev.virus_game.service.getPointsListFromJsonString
 import com.dmitrykazanbaev.virus_game.service.getSortedPointsByClockwiseFromLeft
 import java.io.InputStream
 import java.util.*
+import java.util.concurrent.ConcurrentLinkedQueue
 
 class FirstLevel : AbstractLevel(R.raw.house_fin) {
     var buildings = mutableListOf<Building>()
@@ -47,6 +51,59 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
     val countComputersToCure = 12
     val countSmartHomeToCure = 8
 
+    val random = Random()
+    val infectedPhonesToDraw = ConcurrentLinkedQueue<InfectedPhone>()
+
+    inner class InfectedPhoneThread(name: String) : HandlerThread(name) {
+        val ADD_PHONE = 0
+        val REMOVE_PHONE = 1
+        lateinit var mHandler: Handler
+
+        fun prepareHandler() {
+            mHandler = object : Handler(looper) {
+                override fun handleMessage(msg: Message) {
+                    when (msg.what) {
+                        ADD_PHONE -> {
+                            val infectedPhone = InfectedPhone(
+                                    center = Point(random.nextInt(maxPoint.x - minPoint.x) + minPoint.x,
+                                            random.nextInt(maxPoint.y - minPoint.y) + minPoint.y),
+                                    outerRadius = height / 80f,
+                                    minX = minPoint.x, minY = minPoint.y,
+                                    maxX = maxPoint.x, maxY = maxPoint.y)
+                            infectedPhonesToDraw.add(infectedPhone)
+                            infectedPhone.animation.start()
+                        }
+                        REMOVE_PHONE -> {
+                            infectedPhonesToDraw.last().animation.end()
+                            infectedPhonesToDraw.remove()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    val infectedPhoneThread = InfectedPhoneThread("InfectedPhoneThread")
+    val percentInfectedPhoneToDraw = 4
+
+    fun addInfectedPhoneToDrawing(count: Int = 1) {
+        repeat(count) {
+            infectedPhoneThread.mHandler.sendEmptyMessage(infectedPhoneThread.ADD_PHONE)
+        }
+    }
+
+    fun removeInfectedPhoneFromDrawing(count: Int = 1) {
+        repeat(count) {
+            if (infectedPhonesToDraw.isNotEmpty()) {
+                infectedPhoneThread.mHandler.sendEmptyMessage(infectedPhoneThread.REMOVE_PHONE)
+            }
+        }
+    }
+
+    fun synchronizeInfectedPhoneToDraw() {
+        addInfectedPhoneToDrawing(infectedPhones / percentInfectedPhoneToDraw)
+    }
+
     var maxPoint = Point()
     var minPoint = Point(Int.MAX_VALUE, Int.MAX_VALUE)
     override var width = 0
@@ -58,10 +115,14 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
         constructLevel()
 
         setMinMaxPoints()
+
+        infectedPhoneThread.start()
+        infectedPhoneThread.prepareHandler()
     }
 
     fun infectPhone() {
         infectedPhones++
+        if (infectedPhones % percentInfectedPhoneToDraw == 0) addInfectedPhoneToDrawing()
     }
 
     fun infectComputer() {
@@ -126,6 +187,8 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
         infectedPhones = levelState.infectedPhones
         curedPhones = levelState.curedPhones
         detectedDevices = levelState.detectedDevices
+
+        synchronizeInfectedPhoneToDraw()
     }
 
     private fun setMinMaxPoints() {
@@ -165,9 +228,13 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
         if (infectedPhones >= countPhonesToCure) {
             infectedPhones -= countPhonesToCure
             curedPhones += countPhonesToCure
+
+            removeInfectedPhoneFromDrawing(countPhonesToCure / percentInfectedPhoneToDraw)
         } else {
             curedPhones += infectedPhones
             infectedPhones -= infectedPhones
+
+            removeInfectedPhoneFromDrawing(infectedPhonesToDraw.size)
         }
     }
 

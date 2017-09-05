@@ -23,6 +23,8 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
     private val colorInfectedRoof = ContextCompat.getColor(context, R.color.colorInfectedRoof)
     private val colorBackground = ContextCompat.getColor(context, R.color.colorBackground)
 
+    val paint = Paint()
+
     init {
         paintForFilling.style = Paint.Style.FILL
 
@@ -30,6 +32,9 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
         paintForStroke.isAntiAlias = true
         paintForStroke.strokeWidth = resources.getString(R.string.strokeWidth).toFloat()
         paintForStroke.color = Color.BLACK
+
+        paint.isAntiAlias = true
+        paint.color = ContextCompat.getColor(context, R.color.control_button_color)
     }
 
     override fun drawLevel(canvas: Canvas) {
@@ -38,7 +43,11 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
 
         canvas.drawColor(colorBackground)
 
-        (level as FirstLevel).buildings.forEach {
+        (level as FirstLevel).infectedPhonesToDraw.forEach {
+            synchronized(it.path) { canvas.drawPath(it.path, paint) }
+        }
+
+        level.buildings.forEach {
             drawBuilding(it, canvas)
         }
     }
