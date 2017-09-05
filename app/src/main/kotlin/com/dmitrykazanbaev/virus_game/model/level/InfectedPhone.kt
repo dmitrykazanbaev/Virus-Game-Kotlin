@@ -32,7 +32,7 @@ class InfectedPhone(val center: Point = Point(),
         animation.interpolator = LinearInterpolator()
         animation.repeatMode = ValueAnimator.REVERSE
         animation.repeatCount = ValueAnimator.INFINITE
-        animation.duration = 10000L
+        animation.duration = 20000L
 
         animation.addUpdateListener(object : ValueAnimator.AnimatorUpdateListener {
             internal var point = FloatArray(2)
@@ -54,19 +54,19 @@ class InfectedPhone(val center: Point = Point(),
 
         animationPath.reset()
         animationPath.moveTo(center.x.toFloat(), center.y.toFloat())
-        val counts = random.nextInt(100) + 10
+        val counts = 100
         var x1: Float = center.x.toFloat()
         var y1: Float = center.y.toFloat()
         var randX = if (random.nextBoolean()) -1 else 1
         var randY = if (random.nextBoolean()) -1 else 1
         for (i in 0 until counts) {
-            val speed = 7
+            val speed = 20
             var x2 = x1 + randX * speed * 0.5f
             val y2 = y1 + randY * speed * 0.5f
             if (i % 2 == 0) {
-                x2 += 4
+                x2 += 10
             } else {
-                x2 -= 4
+                x2 -= 10
             }
             x1 += randX * speed
             y1 += randY * speed

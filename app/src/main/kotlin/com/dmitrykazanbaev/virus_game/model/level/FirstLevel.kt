@@ -67,7 +67,7 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
                             val infectedPhone = InfectedPhone(
                                     center = Point(random.nextInt(maxPoint.x - minPoint.x) + minPoint.x,
                                             random.nextInt(maxPoint.y - minPoint.y) + minPoint.y),
-                                    outerRadius = height / 80f,
+                                    outerRadius = height / 100f,
                                     minX = minPoint.x, minY = minPoint.y,
                                     maxX = maxPoint.x, maxY = maxPoint.y)
                             infectedPhonesToDraw.add(infectedPhone)
