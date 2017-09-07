@@ -21,7 +21,7 @@ import java.util.*
 
 
 class FirstLevelActivity : AppCompatActivity() {
-    private val firstLevelView by lazy { FirstLevelView(this) }
+    val firstLevelView by lazy { FirstLevelView(this) }
     private val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.US)
     private val calendar = GregorianCalendar()
 
@@ -71,11 +71,18 @@ class FirstLevelActivity : AppCompatActivity() {
                     tryToDetectVirus(firstLevelView.level as FirstLevel)
                     tryToProgressAntivirus(firstLevelView.level as FirstLevel)
                     tryToCureDevices(firstLevelView.level as FirstLevel)
+                    tryToAddCoin()
                     updateDate()
                     delay(500)
                 }
             }
         }
+    }
+
+    private fun tryToAddCoin() {
+        val random = Random()
+        if (random.nextInt(1000) < 10)
+            firstLevelView.coinButtonView.showCoin(random.nextInt(50) + 20)
     }
 
     private fun checkWinOrLose() {
@@ -124,7 +131,7 @@ class FirstLevelActivity : AppCompatActivity() {
 
         ApplicationContextHolder.context = this
 
-        user.balance = 1000000
+        user.balance = 100
         user.virus.synchronize()
 
         Realm.init(this)

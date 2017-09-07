@@ -20,6 +20,8 @@ fun tryToInfectPhone(level: FirstLevel) {
                     user.virus.propagation.wifi.value) {
 
                 level.infectPhone()
+                if (level.infectedPhones == 1)
+                    firstLevelActivity.firstLevelView.coinButtonView.showCoin(115)
                 user.getProfit(level.profitPhone)
                 runOnUiThread { virus_name.text = "${level.infectedPhones}" }
             }
