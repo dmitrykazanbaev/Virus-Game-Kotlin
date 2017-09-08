@@ -52,7 +52,7 @@ class ModificationButton
 
     private val separatorPaint = Paint()
 
-    private val checkedSectorPaint = Paint()
+    //private val checkedSectorPaint = Paint()
 
     private val firstLevelModificationSectorPaint = Paint()
     private val firstLevelModificationSector by lazy {
@@ -97,12 +97,16 @@ class ModificationButton
 
     init {
         sectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.modification_button_color)
+        sectorPaint.isAntiAlias = true
 
         firstLevelModificationSectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.first_level_modification)
+        firstLevelModificationSectorPaint.isAntiAlias = true
 
         secondLevelModificationSectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.second_level_modification)
+        secondLevelModificationSectorPaint.isAntiAlias = true
 
         thirdLevelModificationSectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.third_level_modification)
+        thirdLevelModificationSectorPaint.isAntiAlias = true
 
         /*checkedSectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.colorOrange)
         checkedSectorPaint.style = Paint.Style.STROKE*/

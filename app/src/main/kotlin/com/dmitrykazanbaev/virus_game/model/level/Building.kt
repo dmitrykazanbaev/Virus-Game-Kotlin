@@ -31,6 +31,8 @@ data class Building(val leftSide: Path, val centerSide: Path, val roof: Path,
     var curedSmartHome = 0
     var infectedSmartHome by Delegates.observable(0) { _, _, _ -> computeInfectedRoof() }
 
+    val centerForMessage: Point
+
     init {
         val bounds = RectF()
         roof.computeBounds(bounds, false)
@@ -38,6 +40,8 @@ data class Building(val leftSide: Path, val centerSide: Path, val roof: Path,
 
         centerSide.computeBounds(bounds, false)
         maxPoint = Point(bounds.right.toInt(), bounds.bottom.toInt())
+        centerForMessage = Point((bounds.left + (bounds.right - bounds.left) / 2).toInt(),
+                (bounds.top + (bounds.bottom - bounds.top) / 2).toInt())
     }
 
     private fun computeInfectedRoof() {

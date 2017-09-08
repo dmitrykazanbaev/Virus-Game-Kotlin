@@ -15,4 +15,5 @@
     <color name="first_level_modification">#B2EBF2</color>
     <color name="second_level_modification">#00BCD4</color>
     <color name="third_level_modification">#0097A7</color>
+    <color name="message_color">#212121</color>
 </resources>

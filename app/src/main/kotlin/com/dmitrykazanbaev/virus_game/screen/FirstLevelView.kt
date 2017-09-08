@@ -2,17 +2,22 @@ package com.dmitrykazanbaev.virus_game.screen
 
 import android.content.Context
 import android.graphics.*
+import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
+import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import com.dmitrykazanbaev.virus_game.FirstLevelActivity
 import com.dmitrykazanbaev.virus_game.R
+import com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
 import com.dmitrykazanbaev.virus_game.model.dao.FirstLevelDAO
 import com.dmitrykazanbaev.virus_game.model.level.Building
 import com.dmitrykazanbaev.virus_game.model.level.FirstLevel
 import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
+import com.dmitrykazanbaev.virus_game.service.FontCache
 import io.realm.Realm
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.Job
@@ -36,6 +41,13 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
     private val paint = Paint()
 
     val coinButtonView = CoinButtonView()
+    val messageList by lazy {
+        val list = mutableListOf<BubbleMessage>()
+        repeat(5) {
+            list.add(BubbleMessage(context))
+        }
+        list
+    }
 
     init {
         paintForFilling.style = Paint.Style.FILL
@@ -88,6 +100,8 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
         }
 
         coinButtonView.drawCoin(canvas)
+
+        messageList.forEach { it.draw(canvas) }
     }
 
     override fun saveLevelToRealm() {
@@ -224,6 +238,196 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
                 coin.draw(canvas)
                 canvas.restore()
             }
+        }
+    }
+
+    inner class BubbleMessage(context: Context) {
+        val textLayout = LinearLayout(context)
+        val textView = TextViewWithCustomFont(context)
+        var isShown = false
+        var x = 0
+        var y = 0
+        val backgroundBubble = BubbleDrawable(context/*, BubbleDrawable.LEFT*/)
+
+        init {
+            textView.typeface = FontCache.getTypeface("DINPro/DINPro.otf", context)
+            textView.textSize = height / 45f
+            textView.maxWidth = width / 3
+            textView.gravity = Gravity.CENTER
+            textView.setTextColor(ContextCompat.getColor(context, R.color.message_color))
+            textView.background = backgroundBubble
+
+            val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+            textLayout.layoutParams = layoutParams
+            textLayout.addView(textView)
+        }
+
+        fun showAtRandom(text: String) {
+            updateXYByCenterRandomBuilding((level as FirstLevel).buildings)
+            show(text)
+        }
+
+        fun showAtInfected(text: String) {
+            updateXYByCenterInfectedBuilding()
+            show(text)
+        }
+
+        private fun show(text: String) {
+            if (!isShown) {
+                textView.text = text.toUpperCase()
+                textView.measure(0, 0)
+                updateXYToRealCenter()
+                isShown = true
+                launch(CommonPool) {
+                    delay(2000L)
+                    isShown = false
+                }
+            }
+        }
+
+        private fun updateXYByCenterInfectedBuilding(): Boolean {
+            val infected = (level as FirstLevel).buildings.filter { it.infectedComputers > 0 || it.infectedSmartHome > 0 }
+            if (infected.isNotEmpty()) {
+                updateXYByCenterRandomBuilding(infected)
+
+                return true
+            }
+            return false
+        }
+
+        private fun updateXYByCenterRandomBuilding(buildings: List<Building>) {
+            val randomBuilding = buildings[Random().nextInt(buildings.size)]
+            val center = randomBuilding.centerForMessage
+            x = center.x
+            y = center.y
+        }
+
+        private fun updateXYToRealCenter() {
+            x += backgroundBubble.mPointerWidth
+            y -= textView.measuredHeight - backgroundBubble.mPointerHeight / 2 - backgroundBubble.mCornerRad.toInt()
+        }
+
+        fun draw(canvas: Canvas) {
+            if (isShown) {
+                textLayout.measure(canvas.width, canvas.height)
+                textLayout.layout(0, 0, canvas.width, canvas.height)
+
+                canvas.save()
+                canvas.translate(x.toFloat(), y.toFloat())
+
+                textLayout.draw(canvas)
+
+                canvas.restore()
+            }
+        }
+    }
+
+    class BubbleDrawable(val context: Context/*, pointerAlignment: Int*/) : Drawable() {
+
+        // Private Instance Variables
+        ////////////////////////////////////////////////////////////
+
+        companion object {
+            val LEFT = 0
+            val CENTER = 1
+            val RIGHT = 2
+        }
+
+        private var mPaint: Paint? = null
+        private var mColor: Int = 0
+
+        private var mBoxRect: RectF? = null
+        var mBoxWidth: Int = 0
+        var mBoxHeight: Int = 0
+        var mCornerRad: Float = 0f
+        private val mBoxPadding = Rect()
+
+        private var mPointer: Path? = null
+        var mPointerWidth: Int = 0
+        var mPointerHeight: Int = 0
+        //private var mPointerAlignment: Int = 0
+
+        init {
+            //mPointerAlignment = pointerAlignment
+            initBubble()
+            setPadding(40, 0, 40, 0)
+        }
+
+        // Setters
+        ////////////////////////////////////////////////////////////
+
+        fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
+            mBoxPadding.left = left
+            mBoxPadding.top = top
+            mBoxPadding.right = right
+            mBoxPadding.bottom = bottom
+        }
+
+        private fun initBubble() {
+            mPaint = Paint()
+            mPaint!!.isAntiAlias = true
+            mColor = Color.WHITE
+            mPaint!!.color = mColor
+            mCornerRad = 0f
+            mPointerWidth = 20
+            mPointerHeight = 20
+        }
+
+        private fun updatePointerPath() {
+            mPointer = Path()
+            mPointer!!.fillType = Path.FillType.EVEN_ODD
+
+            // Set the starting point
+            mPointer!!.moveTo(mPointerWidth.toFloat()/*pointerHorizontalStart()*/, mBoxHeight.toFloat() - mCornerRad)
+
+            // Define the lines
+            mPointer!!.rLineTo(0f, -mPointerHeight.toFloat())
+            mPointer!!.rLineTo(-mPointerWidth.toFloat(), mPointerHeight / 2f)
+            mPointer!!.rLineTo(mPointerWidth.toFloat(), mPointerHeight / 2f)
+            mPointer!!.close()
+        }
+
+        /*private fun pointerHorizontalStart(): Float {
+            var x = 0f
+            when (mPointerAlignment) {
+                LEFT -> x = mCornerRad
+                CENTER -> x = (mBoxWidth / 2 - mPointerWidth / 2).toFloat()
+                RIGHT -> x = mBoxWidth.toFloat() - mCornerRad - mPointerWidth.toFloat()
+            }
+            return x
+        }
+*/
+        // Superclass Override Methods
+        ////////////////////////////////////////////////////////////
+
+        override fun draw(canvas: Canvas) {
+            mBoxRect = RectF(mPointerWidth.toFloat(), 0.0f, mBoxWidth.toFloat(), mBoxHeight.toFloat())
+            canvas.drawRoundRect(mBoxRect, mCornerRad, mCornerRad, mPaint)
+            updatePointerPath()
+            canvas.drawPath(mPointer, mPaint)
+        }
+
+        override fun getOpacity(): Int {
+            return 255
+        }
+
+        override fun setAlpha(alpha: Int) {}
+
+        override fun setColorFilter(cf: ColorFilter) {}
+
+        override fun getPadding(padding: Rect): Boolean {
+            padding.set(mBoxPadding)
+
+            // Adjust the padding to include the height of the pointer
+            //padding.left += mPointerWidth
+            return true
+        }
+
+        override fun onBoundsChange(bounds: Rect) {
+            mBoxWidth = bounds.width() - mPointerWidth
+            mBoxHeight = getBounds().height()
+            mCornerRad = mBoxHeight / 5f
+            super.onBoundsChange(bounds)
         }
     }
 }

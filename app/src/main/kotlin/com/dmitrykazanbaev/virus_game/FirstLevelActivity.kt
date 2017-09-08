@@ -72,6 +72,7 @@ class FirstLevelActivity : AppCompatActivity() {
                     tryToProgressAntivirus(firstLevelView.level as FirstLevel)
                     tryToCureDevices(firstLevelView.level as FirstLevel)
                     tryToAddCoin()
+                    tryToAddMessage()
                     updateDate()
                     delay(500)
                 }
@@ -79,9 +80,43 @@ class FirstLevelActivity : AppCompatActivity() {
         }
     }
 
+    private fun tryToAddMessage() {
+        val random = Random()
+        if (random.nextInt(100) < 20) {
+            val notShownMessages = firstLevelView.messageList.filter { !it.isShown }
+            if (notShownMessages.isNotEmpty()) {
+                val message = notShownMessages.first()
+
+                val firstLevel = firstLevelView.level as FirstLevel
+                if ((firstLevel.infectedSmartHome > 0 || firstLevel.infectedComputers > 0) && random.nextBoolean()) {
+                    val listPossibleMessages = mutableListOf<String>()
+                    listPossibleMessages.add(getStartVirusMessage())
+
+                    if (user.virus.abilities.thief.value == 3)
+                        listPossibleMessages.add(getTheftBankMessage())
+                    if (user.virus.abilities.control.value == 1)
+                        listPossibleMessages.add(getAppAccessMessage())
+                    if (user.virus.abilities.control.value == 2)
+                        listPossibleMessages.add(getSMSMessage())
+                    if (user.virus.abilities.control.value == 3)
+                        listPossibleMessages.add(getMoneyTransferMessage())
+                    if (user.virus.abilities.spam.value == 1)
+                        listPossibleMessages.add(getBlockAdMessage())
+                    if (user.virus.abilities.spam.value == 2)
+                        listPossibleMessages.add(getBannerMessage())
+                    if (user.virus.abilities.spam.value == 3)
+                        listPossibleMessages.add(getPornoBannerMessage())
+
+                    val randomIndex = random.nextInt(listPossibleMessages.size)
+                    message.showAtInfected(listPossibleMessages[randomIndex])
+                } else message.showAtRandom(getNormalMessage())
+            }
+        }
+    }
+
     private fun tryToAddCoin() {
         val random = Random()
-        if (random.nextInt(1000) < 10)
+        if (random.nextInt(1000) < 10 && (firstLevelView.level as FirstLevel).infectedPhones > 1)
             firstLevelView.coinButtonView.showCoin(random.nextInt(50) + 20)
     }
 
@@ -131,7 +166,7 @@ class FirstLevelActivity : AppCompatActivity() {
 
         ApplicationContextHolder.context = this
 
-        user.balance = 100
+        user.balance = 10000
         user.virus.synchronize()
 
         Realm.init(this)

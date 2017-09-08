@@ -2,13 +2,44 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="text_characteristics_progress_bar">18sp</dimen>
-    <dimen name="text_characteristics_balance">26sp</dimen>
-    <dimen name="stroke_characteristics_balance">4dp</dimen>
-    <dimen name="stroke_characteristics_progress_bar">2dp</dimen>
-    <dimen name="padding_y_characteristics_progress_bar">-4dp</dimen>
+    <dimen name="text_characteristics_progress_bar">20.5sp</dimen>
+    <dimen name="text_characteristics_balance">25sp</dimen>
+    <dimen name="stroke_characteristics_balance">4.5dp</dimen>
+    <dimen name="stroke_characteristics_progress_bar">1.5dp</dimen>
+    <dimen name="padding_y_characteristics_progress_bar">-3.5dp</dimen>
     <dimen name="indent_top_bottom">12dp</dimen>
     <dimen name="indent_left_right">48dp</dimen>
     <dimen name="indent_text_and_progress_bar_left">24dp</dimen>
     <dimen name="indent_top_bottom_mod_button_and_menu">24dp</dimen>
+    <item name="stroke_separator" format="float" type="dimen">3</item>
+    <item name="stroke_separatorSector" format="float" type="dimen">6</item>
+    <dimen name="indent_left_right_button_characteristics">-12dp</dimen>
+    <dimen name="indent_left_close_button_characteristics">-24dp</dimen>
+    <dimen name="padding_image_close_characteristics">18dp</dimen>
+    <dimen name="text_control_button_characteristic">17.5sp</dimen>
+    <dimen name="development_cost_description_text">18sp</dimen>
+    <dimen name="development_cost_text">24sp</dimen>
+    <dimen name="modification_description_text">21sp</dimen>
+    <dimen name="modification_name_text">24sp</dimen>
+    <dimen name="buy_button_text">24sp</dimen>
+    <dimen name="buy_button_width">150dp</dimen>
+    <dimen name="buy_button_height">45dp</dimen>
+    <dimen name="buy_button_corners">36dp</dimen>
+    <dimen name="indent_top_bottom_control_buttons">6dp</dimen>
+    <dimen name="indent_left_right_control_buttons">24dp</dimen>
+    <dimen name="padding_image_setting">12dp</dimen>
+    <dimen name="indent_left_right_control_button">-9.75dp</dimen>
+    <dimen name="margin_image_antivirus">10.5dp</dimen>
+    <dimen name="virus_name_text_size">22.5sp</dimen>
+    <dimen name="balance_text_size">27sp</dimen>
+    <dimen name="padding_end_antivirus_image">10.5dp</dimen>
+    <dimen name="margin_antivirus">6dp</dimen>
+    <dimen name="padding_end_antivirus">51dp</dimen>
+    <dimen name="antivirus_text_size">27sp</dimen>
+    <dimen name="date_text_size">27sp</dimen>
+    <dimen name="virus_statistics_text_size">24sp</dimen>
+    <dimen name="padding_end_virus">51dp</dimen>
+    <dimen name="margin_image_virus">13.5dp</dimen>
+    <dimen name="margin_image_statistics">18dp</dimen>
+    <dimen name="padding_virus_statistics">10.5dp</dimen>
 </resources>

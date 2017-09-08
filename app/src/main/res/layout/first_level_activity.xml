@@ -57,12 +57,12 @@
                     android:id="@+id/virus_name"
                     android:textSize="@dimen/virus_name_text_size"/>
 
-            <LinearLayout
+            <View
                     android:orientation="horizontal"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="50">
-            </LinearLayout>
+            </View>
 
             <RelativeLayout
                     android:layout_width="0dp"
@@ -134,7 +134,6 @@
                         android:layout_marginTop="@dimen/margin_antivirus"
                         android:layout_marginStart="@dimen/margin_antivirus"
                         android:layout_marginEnd="@dimen/padding_end_antivirus"
-                        android:text="78 %"
                         android:textSize="@dimen/antivirus_text_size"/>
 
                 <ImageView
@@ -158,12 +157,12 @@
                     app:backgroundColor="@android:color/transparent"
                     android:id="@+id/empty_button1"/>
 
-            <LinearLayout
+            <View
                     android:orientation="horizontal"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="50">
-            </LinearLayout>
+            </View>
 
             <com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
                     android:layout_width="0dp"
@@ -186,12 +185,12 @@
                     />
         </LinearLayout>
 
-        <LinearLayout
+        <View
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="67">
-        </LinearLayout>
+        </View>
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -234,12 +233,12 @@
 
             </RelativeLayout>
 
-            <LinearLayout
+            <View
                     android:orientation="horizontal"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="44">
-            </LinearLayout>
+            </View>
 
             <RelativeLayout
                     android:layout_width="0dp"
@@ -529,7 +528,6 @@
                                     android:textSize="@dimen/development_cost_description_text"/>
 
                             <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
-                                    android:text="100"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:id="@+id/modification_cost"
@@ -582,7 +580,6 @@
                     android:layout_marginEnd="@dimen/indent_left_right">
 
                 <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
-                        android:text="100 $"
                         android:gravity="center"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
