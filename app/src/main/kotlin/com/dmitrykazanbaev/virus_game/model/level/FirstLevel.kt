@@ -97,6 +97,11 @@ class FirstLevel : AbstractLevel(R.raw.house_fin) {
     override var height = 0
         get() = maxPoint.y - minPoint.y
 
+    override var centerX: Int = 0
+        get() = minPoint.x + (maxPoint.x - minPoint.x) / 2
+    override var centerY: Int = 0
+        get() = minPoint.y + (maxPoint.y - minPoint.y) / 2
+
     init {
         constructLevel()
 

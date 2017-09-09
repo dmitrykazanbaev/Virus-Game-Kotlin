@@ -22,8 +22,7 @@ abstract class AbstractLevelView(context: Context, val level: AbstractLevel) : S
             return true
         }
 
-        override fun onScaleEnd(p0: ScaleGestureDetector?) {
-        }
+        override fun onScaleEnd(p0: ScaleGestureDetector?) {}
 
         override fun onScale(detector: ScaleGestureDetector?): Boolean {
             scaleFactor *= detector?.scaleFactor!!

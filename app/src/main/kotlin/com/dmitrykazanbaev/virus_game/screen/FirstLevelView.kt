@@ -70,7 +70,7 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
         val matrix = Matrix()
         matrix.set(getMatrix())
 
-        matrix.preScale(scaleFactor, scaleFactor, width / 2f, height / 2f)
+        matrix.preScale(scaleFactor, scaleFactor, level.centerX.toFloat(), level.centerY.toFloat())
         matrix.preTranslate(-xOffset / scaleFactor, -yOffset / scaleFactor)
 
         matrix.invert(matrix)
@@ -86,7 +86,7 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
     }
 
     override fun drawLevel(canvas: Canvas) {
-        canvas.scale(scaleFactor, scaleFactor, width / 2f, height / 2f)
+        canvas.scale(scaleFactor, scaleFactor, level.centerX.toFloat(), level.centerY.toFloat())
         canvas.translate(-xOffset / scaleFactor, -yOffset / scaleFactor)
 
         canvas.drawColor(colorBackground)
@@ -99,9 +99,9 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
             drawBuilding(it, canvas)
         }
 
-        coinButtonView.drawCoin(canvas)
-
         messageList.forEach { it.draw(canvas) }
+
+        coinButtonView.drawCoin(canvas)
     }
 
     override fun saveLevelToRealm() {
@@ -322,33 +322,21 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
         }
     }
 
-    class BubbleDrawable(val context: Context/*, pointerAlignment: Int*/) : Drawable() {
+    class BubbleDrawable(val context: Context) : Drawable() {
 
-        // Private Instance Variables
-        ////////////////////////////////////////////////////////////
+        private val mPaint: Paint = Paint()
 
-        companion object {
-            val LEFT = 0
-            val CENTER = 1
-            val RIGHT = 2
-        }
-
-        private var mPaint: Paint? = null
-        private var mColor: Int = 0
-
-        private var mBoxRect: RectF? = null
+        private var mBoxRect = RectF()
         var mBoxWidth: Int = 0
         var mBoxHeight: Int = 0
         var mCornerRad: Float = 0f
         private val mBoxPadding = Rect()
 
-        private var mPointer: Path? = null
+        private val mPointer: Path = Path()
         var mPointerWidth: Int = 0
         var mPointerHeight: Int = 0
-        //private var mPointerAlignment: Int = 0
 
         init {
-            //mPointerAlignment = pointerAlignment
             initBubble()
             setPadding(40, 0, 40, 0)
         }
@@ -364,44 +352,35 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
         }
 
         private fun initBubble() {
-            mPaint = Paint()
-            mPaint!!.isAntiAlias = true
-            mColor = Color.WHITE
-            mPaint!!.color = mColor
+            mPaint.isAntiAlias = true
+            mPaint.color = Color.WHITE
             mCornerRad = 0f
             mPointerWidth = 20
             mPointerHeight = 20
         }
 
         private fun updatePointerPath() {
-            mPointer = Path()
-            mPointer!!.fillType = Path.FillType.EVEN_ODD
+            mPointer.reset()
+            //mPointer.fillType = Path.FillType.EVEN_ODD
 
             // Set the starting point
-            mPointer!!.moveTo(mPointerWidth.toFloat()/*pointerHorizontalStart()*/, mBoxHeight.toFloat() - mCornerRad)
+            mPointer.moveTo(mPointerWidth.toFloat(), mBoxHeight.toFloat() - mCornerRad)
 
             // Define the lines
-            mPointer!!.rLineTo(0f, -mPointerHeight.toFloat())
-            mPointer!!.rLineTo(-mPointerWidth.toFloat(), mPointerHeight / 2f)
-            mPointer!!.rLineTo(mPointerWidth.toFloat(), mPointerHeight / 2f)
-            mPointer!!.close()
+            mPointer.rLineTo(0f, -mPointerHeight.toFloat())
+            mPointer.rLineTo(-mPointerWidth.toFloat(), mPointerHeight / 2f)
+            mPointer.rLineTo(mPointerWidth.toFloat(), mPointerHeight / 2f)
+            mPointer.close()
         }
 
-        /*private fun pointerHorizontalStart(): Float {
-            var x = 0f
-            when (mPointerAlignment) {
-                LEFT -> x = mCornerRad
-                CENTER -> x = (mBoxWidth / 2 - mPointerWidth / 2).toFloat()
-                RIGHT -> x = mBoxWidth.toFloat() - mCornerRad - mPointerWidth.toFloat()
-            }
-            return x
-        }
-*/
         // Superclass Override Methods
         ////////////////////////////////////////////////////////////
 
         override fun draw(canvas: Canvas) {
-            mBoxRect = RectF(mPointerWidth.toFloat(), 0.0f, mBoxWidth.toFloat(), mBoxHeight.toFloat())
+            mBoxRect.left = mPointerWidth.toFloat()
+            mBoxRect.top = 0f
+            mBoxRect.right = mBoxWidth.toFloat()
+            mBoxRect.bottom = mBoxHeight.toFloat()
             canvas.drawRoundRect(mBoxRect, mCornerRad, mCornerRad, mPaint)
             updatePointerPath()
             canvas.drawPath(mPointer, mPaint)
@@ -417,9 +396,6 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
 
         override fun getPadding(padding: Rect): Boolean {
             padding.set(mBoxPadding)
-
-            // Adjust the padding to include the height of the pointer
-            //padding.left += mPointerWidth
             return true
         }
 
