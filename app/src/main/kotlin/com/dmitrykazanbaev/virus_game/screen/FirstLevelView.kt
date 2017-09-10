@@ -279,7 +279,7 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
                 updateXYToRealCenter()
                 isShown = true
                 launch(CommonPool) {
-                    delay(2000L)
+                    delay(4000L)
                     isShown = false
                 }
             }

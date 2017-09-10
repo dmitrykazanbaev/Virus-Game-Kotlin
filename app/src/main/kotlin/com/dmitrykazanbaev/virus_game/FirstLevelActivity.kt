@@ -88,28 +88,33 @@ class FirstLevelActivity : AppCompatActivity() {
                 val message = notShownMessages.first()
 
                 val firstLevel = firstLevelView.level as FirstLevel
-                if ((firstLevel.infectedSmartHome > 0 || firstLevel.infectedComputers > 0) && random.nextBoolean()) {
-                    val listPossibleMessages = mutableListOf<String>()
+
+                val listPossibleMessages = mutableListOf<String>()
+                listPossibleMessages.add(getNormalMessage())
+
+                if (firstLevel.infectedSmartHome > 0 || firstLevel.infectedComputers > 0) {
                     listPossibleMessages.add(getStartVirusMessage())
 
-                    if (user.virus.abilities.thief.value == 3)
+                    if (user.virus.abilities.thief.currentLevel == 3)
                         listPossibleMessages.add(getTheftBankMessage())
-                    if (user.virus.abilities.control.value == 1)
+                    if (user.virus.abilities.control.currentLevel >= 1)
                         listPossibleMessages.add(getAppAccessMessage())
-                    if (user.virus.abilities.control.value == 2)
+                    if (user.virus.abilities.control.currentLevel >= 2)
                         listPossibleMessages.add(getSMSMessage())
-                    if (user.virus.abilities.control.value == 3)
+                    if (user.virus.abilities.control.currentLevel == 3)
                         listPossibleMessages.add(getMoneyTransferMessage())
-                    if (user.virus.abilities.spam.value == 1)
+                    if (user.virus.abilities.spam.currentLevel >= 1)
                         listPossibleMessages.add(getBlockAdMessage())
-                    if (user.virus.abilities.spam.value == 2)
+                    if (user.virus.abilities.spam.currentLevel >= 2)
                         listPossibleMessages.add(getBannerMessage())
-                    if (user.virus.abilities.spam.value == 3)
+                    if (user.virus.abilities.spam.currentLevel == 3)
                         listPossibleMessages.add(getPornoBannerMessage())
+                }
 
-                    val randomIndex = random.nextInt(listPossibleMessages.size)
+                val randomIndex = random.nextInt(listPossibleMessages.size)
+                if (randomIndex != 0)
                     message.showAtInfected(listPossibleMessages[randomIndex])
-                } else message.showAtRandom(getNormalMessage())
+                else message.showAtRandom(listPossibleMessages[randomIndex])
             }
         }
     }
