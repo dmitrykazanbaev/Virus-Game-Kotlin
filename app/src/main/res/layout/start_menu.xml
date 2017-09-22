@@ -10,7 +10,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTouch"
-            android:text="@string/start_game"
+            android:text="@string/mainmenu.newgame"
             style="?android:attr/buttonBarButtonStyle"/>
 
     <Button
@@ -18,6 +18,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTouch"
-            android:text="@string/continue_game"
+            android:text="@string/mainmenu.continuegame"
             style="?android:attr/buttonBarButtonStyle"/>
 </LinearLayout>

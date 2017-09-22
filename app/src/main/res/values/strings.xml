@@ -3,13 +3,54 @@
     <string name="strokeWidth" format="float" type="dimen" translatable="false">1.5</string>
     <string name="virus_button_description" translatable="false">Button to open virus characteristics</string>
     <string name="statistics_button_description" translatable="false">Button to open virus statistics</string>
-    <string name="start_game">Start Game</string>
-    <string name="continue_game">Continue Game</string>
+
+    <string name="mainmenu.newgame">START GAME</string>
+    <string name="mainmenu.continuegame">CONTINUE</string>
+    <string name="mainmenu.loadgame">LOAD GAME</string>
+    <string name="mainmenu.restartgame">RESTART GAME</string>
+    <string name="mainmenu.exit">EXIT</string>
+    <string name="mainmenu.namevirus">NAME YOUR VIRUS</string>
+    <string name="mainmenu.records">RECORDS</string>
+    <string name="mainmenu.easy">EASY</string>
+    <string name="mainmenu.medium">MEDIUM</string>
+    <string name="mainmenu.hard">HARD</string>
+
+    <string name="statscreen.hacked">HACKED</string>
+    <string name="statscreen.ios">iOS</string>
+    <string name="statscreen.android">ANDROID</string>
+    <string name="statscreen.windowsphone">WINDOWS PHONE</string>
+    <string name="statscreen.linux">LINUX</string>
+    <string name="statscreen.macos">MAC OS</string>
+    <string name="statscreen.windows">WINDOWS</string>
+    <string name="statscreen.smarttv">SMART TV</string>
+    <string name="statscreen.iot">SMART DEVICES</string>
+    <string name="statscreen.smarthouse">SMART HOME</string>
+
+    <string name="tutorials.welcome">WELCOME TO \"HACKME\"!\nYOUR TASK IS TO INFECT DEVICES AND DESTROY CITY INFRASTRUCTURE</string>
+    <string name="tutorials.first">ENTER THE MODIFICATION WINDOW TO START INFECTION</string>
+    <string name="tutorials.second">UPGRADE PROPAGATION IN THE MODIFICATION WINDOW TO BOOST INFECTION SPEED</string>
+    <string name="tutorials.third">UPGRADE PROFIT VIRUS ABILITIES AND USE PERKS TO GET MORE MONEY</string>
+    <string name="tutorials.firstminigame">BUILDINGS ARE MARKED RED IF THERE IS TECH WORKS. CONDUCT DDOS ATTACK BY TAPPING AT THIS BUILDING OTHERWISE VIRUS WILL BE DETECTED!</string>
+    <string name="tutorials.startantivirus">ANTIVIRUS DEVELOPMENT IS STARTED.\nRESISTANCE CAN HELP YOU</string>
+    <string name="tutorials.antiviruswarning">IF YOU WANNA ANTIVIRUS START TO DEVELOP AS LATE AS POSSIBLE, CHECK FOR \"VISIBILITY\" IN THE MODIFICATION WINDOW</string>
+    <string name="tutorials.mediumantivirusprogress">INFECTION LEVEL - MEDIUM\nUSE SHOP TO BUY PERKS AND RESOURCES</string>
+    <string name="tutorials.highantivirusprogress">INFECTION LEVEL - CRITICAL!\nUSE SHOP TO BUY PERKS AND RESOURCES</string>
+
+    <string name="winlosescreen.win.title">you made it</string>
+    <string name="winlosescreen.share.title">share your result - \nyou get %d$ in next game</string>
+    <string name="winlosescreen.win.textformat">you hacked all devices in %d days</string>
+    <string name="winlosescreen.lose.title">your virus is destroyed</string>
+    <string name="winlosescreen.lose.text">develop the new one and beware of fbi</string>
+    <string name="winlosescreen.tryagain">TRY AGAIN</string>
+    <string name="winlosescreen.gotomenu">GO TO MENU</string>
+
+    <string name="shopscreen.title">SHOP</string>
+
     <string name="propagation_text_progress_bar">PROPAGATION</string>
     <string name="efficiency_text_progress_bar">EFFICIENCY</string>
-    <string name="resistance_text_progress_bar">RESISTANCE</string>
+    <string name="resistance_text_progress_bar">VISIBILITY</string>
     <string name="propagation_text_control_button">PROPAGATION</string>
-    <string name="abilities_text_control_button">ABILITIES</string>
+    <string name="abilities_text_control_button">PROFIT</string>
     <string name="resistance_text_control_button">RESISTANCE</string>
     <string name="devices_text_control_button">DEVICES</string>
     <string name="development_cost_text">DEVELOPMENT\nCOST</string>
@@ -94,4 +135,87 @@
     <string name="smart_home_zero_level_upgrade_description">VIRUS CAN INFECT SMART TV</string>
     <string name="smart_home_first_level_upgrade_description">VIRUS CAN INFECT SMART DEVICES</string>
     <string name="smart_home_second_level_upgrade_description">VIRUS CAN INFECT SMART HOME</string>
+
+    <string-array name="msgs_without_virus">
+        <item>What's up bro?</item>
+        <item>Finally the good weather</item>
+        <item>Somebody get these noisy neighbors off of me</item>
+        <item>Yesterday watched Game of Thrones, hope it's gonna keep it up</item>
+        <item>Yo I bought a new laptop. Now choosing games to play</item>
+        <item>Looking forward to upcoming Champions League match</item>
+        <item>Woohoo! Vacation time, going to Ireland</item>
+        <item>What to do with computer, it can't manage with 4k video</item>
+        <item>So nice to relax with cup of tea in Hookah Bar</item>
+        <item>Went to yoga with my wife, I'm so happy :(</item>
+        <item>My cat is so annoying, he's screaming all night long. What to do with him?</item>
+        <item>Y'all guys checked new masks in Instagram?</item>
+        <item>They increased prices again!!..</item>
+        <item>Weather, what is your problem?</item>
+        <item>Where can I go with incomplete higher education?</item>
+        <item>When is autumn conscription?</item>
+        <item>Heard about government procurement for information security increasing?</item>
+        <item>Want home</item>
+        <item>LEEEEEROY JENKINSSSSSS</item>
+        <item>Chicken or the egg?</item>
+        <item>I'm thinking #me #thinking #thoughts</item>
+        <item>Oceania had always been at war with Eastasia!</item>
+        <item>Oceania had never been at war with Eastasia!</item>
+        <item>Youtube, you are disappointing me</item>
+    </string-array>
+    <string-array name="msgs_start_virus">
+        <item>Phone started to lag</item>
+        <item>I have some weird loading screen</item>
+        <item>My computer is so laggy at loading stage</item>
+        <item>Damn I think I got a virus somewhere</item>
+        <item>Somebody heard about new virus?</item>
+        <item>Antivirus stopped updating. Am I the one?</item>
+        <item>My computer is brand new but RAM is already not enough</item>
+        <item>How much is the antivirus?</item>
+        <item>Give me advice about antivirus please</item>
+        <item>Phone says that it has been rooted…</item>
+        <item>I've never had any virus</item>
+        <item>What the! Saw a text on the phone screen: %@</item>
+        <item>Read about new virus: %@. Thank God I have an antivirus!</item>
+    </string-array>
+    <string-array name="msgs_theft_bank">
+        <item>Weird, some contacts from Contact List disappeared</item>
+        <item>Somebody knows why some contacts are showed incorrectly?</item>
+        <item>Phone sends calls by itself..</item>
+        <item>Grandma, I didn't call!</item>
+    </string-array>
+    <string-array name="msgs_app_access">
+        <item>Guys I have a problem, apps are downloading by themselves (</item>
+        <item>Weird I got a second app store icon</item>
+        <item>Damn according to logs there is too much calls to the same URL</item>
+        <item>Battery is dying too fast!</item>
+        <item>Need to fix phone at service center(</item>
+    </string-array>
+    <string-array name="msgs_sms">
+        <item>Checked today, 2 messages were sent to unknown numbers</item>
+    </string-array>
+    <string-array name="msgs_money_transfer">
+        <item>My bank notified me about money transfer 100$ to unknown person!</item>
+        <item>How to block a card?</item>
+        <item>Can I run a negative balance on my card?</item>
+        <item>Thank God I keep money under pillow</item>
+        <item>Thank God I keep money in bitcoins</item>
+        <item>I don't have money anyway</item>
+        <item>Where is the nearest ATM?</item>
+        <item>Gonna file a lawsuit against bank</item>
+        <item>Where is my money?</item>
+    </string-array>
+    <string-array name="msgs_block_ad">
+        <item>Why is there ads on the lock screen?</item>
+        <item>Ads everywhere</item>
+        <item>Guys how to remove ads?</item>
+    </string-array>
+    <string-array name="msgs_banner">
+        <item>Damned virus, there is banner with payment requirement</item>
+    </string-array>
+    <string-array name="msgs_porno_banner">
+        <item>GODDAMN I'm writing from wife phone! I got a porno banner and I can't hide it!</item>
+        <item>Extortionists! But I have no other choice but to pay(</item>
+        <item>I hope my mom didn't see it!</item>
+    </string-array>
+
 </resources>

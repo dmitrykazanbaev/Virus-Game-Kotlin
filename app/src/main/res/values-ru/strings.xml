@@ -1,11 +1,58 @@
 <resources>
-    <string name="start_game">Начать игру</string>
-    <string name="continue_game">Продолжить игру</string>
+    <string name="mainmenu.newgame">НАЧАТЬ ИГРУ</string>
+    <string name="mainmenu.continuegame">ПРОДОЛЖИТЬ</string>
+    <string name="mainmenu.loadgame">ЗАГРУЗИТЬ ИГРУ</string>
+    <string name="mainmenu.restartgame">НАЧАТЬ ЗАНОВО</string>
+    <string name="mainmenu.exit">ВЫХОД</string>
+    <string name="mainmenu.namevirus">ВВЕДИТЕ НАЗВАНИЕ ВИРУСА</string>
+    <string name="mainmenu.records">РЕКОРДЫ</string>
+    <string name="mainmenu.easy">ПРОСТОЙ</string>
+    <string name="mainmenu.medium">СРЕДНИЙ</string>
+    <string name="mainmenu.hard">СЛОЖНЫЙ</string>
+
+    <string name="statscreen.hacked">ВЗЛОМАНО</string>
+    <string name="statscreen.ios">iOS</string>
+    <string name="statscreen.android">ANDROID</string>
+    <string name="statscreen.windowsphone">WINDOWS PHONE</string>
+    <string name="statscreen.linux">LINUX</string>
+    <string name="statscreen.macos">MAC OS</string>
+    <string name="statscreen.windows">WINDOWS</string>
+    <string name="statscreen.smarttv">SMART TV</string>
+    <string name="statscreen.iot">SMART ПРИБОРЫ</string>
+    <string name="statscreen.smarthouse">УМНЫЙ ДОМ</string>
+
+    <string name="tutorials.welcome">ДОБРО ПОЖАЛОВАТЬ В \"HACKME\"!\nВАША ЗАДАЧА - ЗАРАЗИТЬ УСТРОЙСТВА И ОБРУШИТЬ ИНФРАСТРУКТУРУ</string>
+    <string name="tutorials.first">ЗАЙДИТЕ В ОКНО МОДИФИКАЦИЙ, ЧТОБЫ НАЧАТЬ ЗАРАЖЕНИЕ</string>
+    <string name="tutorials.second">ДЛЯ БОЛЕЕ БЫСТРОГО ЗАРАЖЕНИЯ ПРОКАЧАЙТЕ РАСПРОСТРАНЕНИЕ В ОКНЕ МОДИФИКАЦИЙ</string>
+    <string name="tutorials.third">ЧТОБЫ ПОЛУЧАТЬ БОЛЬШЕ ДЕНЕГ, КАЧАЙТЕ ФУНКЦИОНАЛ ИЛИ ИСПОЛЬЗУЙТЕ ПЕРКИ</string>
+    <string name="tutorials.firstminigame">КРАСНЫМ ОБОЗНАЧЕНЫ ДОМА, В КОТОРЫХ ПРОВОДЯТСЯ ТЕХНИЧЕСКИЕ РАБОТЫ В СЕТИ. УСТРОЙТЕ DDOS-АТАКУ, НАЖАВ НА ДОМ, ИЛИ ВИРУС БУДЕТ ОБНАРУЖЕН!</string>
+    <string name="tutorials.startantivirus">НАЧАЛАСЬ РАЗРАБОТКА АНТИВИРУСА.\nПРОТИВОДЕЙСТВИЕ МОЖЕТ ПОМОЧЬ В БОРЬБЕ С НИМ</string>
+    <string name="tutorials.antiviruswarning">ЧТОБЫ АНТИВИРУС НАЧАЛ РАЗРАБАТЫВАТЬСЯ КАК МОЖНО ПОЗЖЕ, СЛЕДИТЕ ЗА \"ЗАМЕТНОСТЬ\" В ЭКРАНЕ МОДИФИКАЦИЙ</string>
+    <string name="tutorials.mediumantivirusprogress">УРОВЕНЬ ЗАРАЖЕНИЯ - СРЕДНИЙ\nИСПОЛЬЗУЙТЕ МАГАЗИН ДЛЯ ПОКУПОК ПЕРКОВ И СРЕДСТВ</string>
+    <string name="tutorials.highantivirusprogress">УРОВЕНЬ ЗАРАЖЕНИЯ - КРИТИЧЕСКИЙ!\nИСПОЛЬЗУЙТЕ МАГАЗИН ДЛЯ ПОКУПОК ПЕРКОВ И СРЕДСТВ</string>
+
+    <string name="winlosescreen.win.title">у вас получилось</string>
+    <string name="winlosescreen.share.title">поделитесь результатом - \nполучите %d$ в следующей игре</string>
+    <string name="winlosescreen.win.textformat">вы взломали все устройства за %d дней</string>
+    <string name="winlosescreen.lose.title">ваш вирус уничтожен</string>
+    <string name="winlosescreen.lose.text">разработайте новый и берегитесь фсб</string>
+    <string name="winlosescreen.tryagain">ЕЩЕ РАЗ</string>
+    <string name="winlosescreen.gotomenu">ПЕРЕЙТИ В МЕНЮ</string>
+
+    <string name="taphouse.ddostitle">CONDUCT DDOS ATTACK</string>
+    <string name="taphouse.ddostitlewin">DDOS HAS BEEN SUCCESSFUL</string>
+    <string name="taphouse.ddostitlelose">YOU\'VE BEEN DETECTED</string>
+    <string name="taphouse.ddosconfirmexit">YOU SURE?\nATTACK WILL BE FAILED</string>
+    <string name="taphouse.yes">YES</string>
+    <string name="taphouse.no">NO</string>
+
+    <string name="shopscreen.title">МАГАЗИН</string>
+
     <string name="propagation_text_progress_bar">РАСПРОСТРАНЕНИЕ</string>
     <string name="efficiency_text_progress_bar">ЭФФЕКТИВНОСТЬ</string>
-    <string name="resistance_text_progress_bar">СКРЫТНОСТЬ</string>
+    <string name="resistance_text_progress_bar">ЗАМЕТНОСТЬ</string>
     <string name="propagation_text_control_button">РАСПРОСТРАНЕНИЕ</string>
-    <string name="abilities_text_control_button">ФУНКЦИИ</string>
+    <string name="abilities_text_control_button">ПРИБЫЛЬ</string>
     <string name="resistance_text_control_button">ПРОТИВОДЕЙСТВИЕ</string>
     <string name="devices_text_control_button">УСТРОЙСТВА</string>
     <string name="development_cost_text">СТОИМОСТЬ\nРАЗРАБОТКИ</string>
@@ -115,6 +162,7 @@
         <item>Я думаю #я #задумчивость #мысли</item>
         <item>Океания всегда воевала с Остазией!</item>
         <item>Океания никогда не воевала с Остазией!</item>
+        <item>Опять в Youtube нечего посмотреть</item>
     </string-array>
     <string-array name="msgs_start_virus">
         <item>Телефон подлагивать начал</item>
@@ -128,15 +176,21 @@
         <item>Посоветуйте антивирус, пожалуйста</item>
         <item>Телефон говорит, что сделан какой-то рут…</item>
         <item>У меня еще никогда не было вирусов</item>
+        <item>Что за! Маленький текст увидел на экране: %@</item>
+        <item>В гугле увидел про новый вирус: %@. Как хорошо, что у меня антивирусник стоит!</item>
     </string-array>
     <string-array name="msgs_theft_bank">
         <item>Странно, че то в списке контактов, некоторые контакты пропали</item>
         <item>Никто не знает, почему некоторые контакты некорректно отображаются</item>
+        <item>Телефон звонит сам..</item>
+        <item>Бабушка, я тебе не звонил!</item>
     </string-array>
     <string-array name="msgs_app_access">
         <item>Друзья, столкнулся с проблемой, сами качаются программы (</item>
         <item>Странно, вторая иконка магазина приложений появилась</item>
         <item>Блин, по логам слишком много запросов на один url</item>
+        <item>Батарейка быстро садится!</item>
+        <item>Придется нести в сервис телефон(</item>
     </string-array>
     <string-array name="msgs_sms">
         <item>Сегодня посмотрел, было отправлены 2 смс на неизвестные номера</item>
@@ -149,15 +203,21 @@
         <item>Хорошо, что я держу деньги в биткоинах</item>
         <item>У меня и так нет денег</item>
         <item>Где ближайший банкомат?</item>
+        <item>Подаю в суд на банк</item>
+        <item>Где деньги?</item>
     </string-array>
     <string-array name="msgs_block_ad">
-        <item>Пздц, откуда на экране блокировке реклама взялась</item>
+        <item>Откуда на экране блокировке реклама взялась</item>
+        <item>Одна реклама везде</item>
+        <item>Люди, как убрать рекламу?</item>
     </string-array>
     <string-array name="msgs_banner">
         <item>Видимо вирусня завелась, баннер иногда показывается с указанием заплатить</item>
     </string-array>
     <string-array name="msgs_porno_banner">
-        <item>Пздц, пишу с телефона жены! У меня порно баннер, который не скрыть нихрена</item>
+        <item>Жесть, пишу с телефона жены! У меня порно баннер, который не скрыть!</item>
+        <item>Вымогатели! Но придется заплатить(</item>
+        <item>Лишь бы мамка не увидела!</item>
     </string-array>
 
 </resources>
