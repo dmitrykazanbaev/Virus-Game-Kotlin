@@ -9,6 +9,7 @@
     <string name="mainmenu.easy">ПРОСТОЙ</string>
     <string name="mainmenu.medium">СРЕДНИЙ</string>
     <string name="mainmenu.hard">СЛОЖНЫЙ</string>
+    <string name="mainmenu.showtutorial">ПОКАЗАТЬ ОБУЧЕНИЕ</string>
 
     <string name="statscreen.hacked">ВЗЛОМАНО</string>
     <string name="statscreen.ios">iOS</string>
@@ -22,14 +23,18 @@
     <string name="statscreen.smarthouse">УМНЫЙ ДОМ</string>
 
     <string name="tutorials.welcome">ДОБРО ПОЖАЛОВАТЬ В \"HACKME\"!\nВАША ЗАДАЧА - ЗАРАЗИТЬ УСТРОЙСТВА И ОБРУШИТЬ ИНФРАСТРУКТУРУ</string>
-    <string name="tutorials.first">ЗАЙДИТЕ В ОКНО МОДИФИКАЦИЙ, ЧТОБЫ НАЧАТЬ ЗАРАЖЕНИЕ</string>
-    <string name="tutorials.second">ДЛЯ БОЛЕЕ БЫСТРОГО ЗАРАЖЕНИЯ ПРОКАЧАЙТЕ РАСПРОСТРАНЕНИЕ В ОКНЕ МОДИФИКАЦИЙ</string>
-    <string name="tutorials.third">ЧТОБЫ ПОЛУЧАТЬ БОЛЬШЕ ДЕНЕГ, КАЧАЙТЕ ФУНКЦИОНАЛ ИЛИ ИСПОЛЬЗУЙТЕ ПЕРКИ</string>
+    <string name="tutorials.first">НАЖМИТЕ НА КНОПКУ ВИРУС, ЧТОБЫ ПЕРЕЙТИ В ОКНО МОДИФИКАЦИЙ</string>
+    <string name="tutorials.firstModification">КУПИТЕ МОДИФИКАЦИЮ СМАРТФОНЫ, ЧТОБЫ НАЧАТЬ ЗАРАЖЕНИЕ</string>
+    <string name="tutorials.second">ПРОКАЧИВАЙТЕ РАСПРОСТРАНЕНИЕ, ЧТОБЫ УВЕЛИЧИТЬ СКОРОСТЬ ЗАРАЖЕНИЯ</string>
+    <string name="tutorials.third">ПРОКАЧИВАЙТЕ ПРИБЫЛЬ ИЛИ ИСПОЛЬЗУЙТЕ S-СКРИПТЫ, ЧТОБЫ ПОЛУЧАТЬ БОЛЬШЕ ДЕНЕГ</string>
     <string name="tutorials.firstminigame">КРАСНЫМ ОБОЗНАЧЕНЫ ДОМА, В КОТОРЫХ ПРОВОДЯТСЯ ТЕХНИЧЕСКИЕ РАБОТЫ В СЕТИ. УСТРОЙТЕ DDOS-АТАКУ, НАЖАВ НА ДОМ, ИЛИ ВИРУС БУДЕТ ОБНАРУЖЕН!</string>
-    <string name="tutorials.startantivirus">НАЧАЛАСЬ РАЗРАБОТКА АНТИВИРУСА.\nПРОТИВОДЕЙСТВИЕ МОЖЕТ ПОМОЧЬ В БОРЬБЕ С НИМ</string>
-    <string name="tutorials.antiviruswarning">ЧТОБЫ АНТИВИРУС НАЧАЛ РАЗРАБАТЫВАТЬСЯ КАК МОЖНО ПОЗЖЕ, СЛЕДИТЕ ЗА \"ЗАМЕТНОСТЬ\" В ЭКРАНЕ МОДИФИКАЦИЙ</string>
-    <string name="tutorials.mediumantivirusprogress">УРОВЕНЬ ЗАРАЖЕНИЯ - СРЕДНИЙ\nИСПОЛЬЗУЙТЕ МАГАЗИН ДЛЯ ПОКУПОК ПЕРКОВ И СРЕДСТВ</string>
-    <string name="tutorials.highantivirusprogress">УРОВЕНЬ ЗАРАЖЕНИЯ - КРИТИЧЕСКИЙ!\nИСПОЛЬЗУЙТЕ МАГАЗИН ДЛЯ ПОКУПОК ПЕРКОВ И СРЕДСТВ</string>
+    <string name="tutorials.startantivirus">НАЧАЛАСЬ РАЗРАБОТКА АНТИВИРУСА\nПРОТИВОДЕЙСТВИЕ И S-СКРИПТ ПОМОГУТ В БОРЬБЕ С НИМ</string>
+    <string name="tutorials.antiviruswarning">СЛЕДИТЕ ЗА ЗАМЕТНОСТЬЮ, ЧТОБЫ АНТИВИРУС НЕ НАЧАЛ РАЗРАБАТЫВАТЬСЯ</string>
+    <string name="tutorials.mediumantivirusprogress">УРОВЕНЬ ОБНАРУЖЕНИЯ - СРЕДНИЙ\nИСПОЛЬЗУЙТЕ МАГАЗИН ДЛЯ ПОКУПОК S-СКРИПТОВ И СРЕДСТВ</string>
+    <string name="tutorials.highantivirusprogress">УРОВЕНЬ ОБНАРУЖЕНИЯ - КРИТИЧЕСКИЙ!\nИСПОЛЬЗУЙТЕ МАГАЗИН ДЛЯ ПОКУПОК S-СКРИПТОВ И СРЕДСТВ</string>
+
+    <string name="sharingscreen.win">Теперь я настоящий хакер! Заразил весь город за %d дней в игре Hackme. Попробуй сделать это быстрее меня!</string>
+    <string name="sharingscreen.lose">Я держал город под контролем в течении %d дней. Сможешь больше?</string>
 
     <string name="winlosescreen.win.title">у вас получилось</string>
     <string name="winlosescreen.share.title">поделитесь результатом - \nполучите %d$ в следующей игре</string>
@@ -39,14 +44,15 @@
     <string name="winlosescreen.tryagain">ЕЩЕ РАЗ</string>
     <string name="winlosescreen.gotomenu">ПЕРЕЙТИ В МЕНЮ</string>
 
-    <string name="taphouse.ddostitle">CONDUCT DDOS ATTACK</string>
-    <string name="taphouse.ddostitlewin">DDOS HAS BEEN SUCCESSFUL</string>
-    <string name="taphouse.ddostitlelose">YOU\'VE BEEN DETECTED</string>
-    <string name="taphouse.ddosconfirmexit">YOU SURE?\nATTACK WILL BE FAILED</string>
-    <string name="taphouse.yes">YES</string>
-    <string name="taphouse.no">NO</string>
+    <string name="taphouse.ddostitle">УСТРОЙТЕ ДДОС АТАКУ</string>
+    <string name="taphouse.ddostitlewin">DDOS АТАКА УСПЕШНА</string>
+    <string name="taphouse.ddostitlelose">ВАС ОБНАРУЖИЛИ</string>
+    <string name="taphouse.ddosconfirmexit">УВЕРЕНЫ?\nАТАКА БУДЕТ ПРОВАЛЕНА</string>
+    <string name="taphouse.yes">ДА</string>
+    <string name="taphouse.no">НЕТ</string>
 
     <string name="shopscreen.title">МАГАЗИН</string>
+    <string name="shopscreen.restore">ВОССТАНОВИТЬ ПОКУПКИ</string>
 
     <string name="propagation_text_progress_bar">РАСПРОСТРАНЕНИЕ</string>
     <string name="efficiency_text_progress_bar">ЭФФЕКТИВНОСТЬ</string>

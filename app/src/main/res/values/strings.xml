@@ -14,6 +14,7 @@
     <string name="mainmenu.easy">EASY</string>
     <string name="mainmenu.medium">MEDIUM</string>
     <string name="mainmenu.hard">HARD</string>
+    <string name="mainmenu.showtutorial">SHOW TUTORIAL</string>
 
     <string name="statscreen.hacked">HACKED</string>
     <string name="statscreen.ios">iOS</string>
@@ -27,14 +28,18 @@
     <string name="statscreen.smarthouse">SMART HOME</string>
 
     <string name="tutorials.welcome">WELCOME TO \"HACKME\"!\nYOUR TASK IS TO INFECT DEVICES AND DESTROY CITY INFRASTRUCTURE</string>
-    <string name="tutorials.first">ENTER THE MODIFICATION WINDOW TO START INFECTION</string>
+    <string name="tutorials.first">TAP THE VIRUS BUTTON TO ENTER THE MODIFICATION WINDOW</string>
+    <string name="tutorials.firstModification">BUY SMARTPHONES MODIFICATION TO START THE INFECTION</string>
     <string name="tutorials.second">UPGRADE PROPAGATION IN THE MODIFICATION WINDOW TO BOOST INFECTION SPEED</string>
-    <string name="tutorials.third">UPGRADE PROFIT VIRUS ABILITIES AND USE PERKS TO GET MORE MONEY</string>
+    <string name="tutorials.third">UPGRADE PROFIT VIRUS ABILITIES AND USE S-SCRIPTS TO GET MORE MONEY</string>
     <string name="tutorials.firstminigame">BUILDINGS ARE MARKED RED IF THERE IS TECH WORKS. CONDUCT DDOS ATTACK BY TAPPING AT THIS BUILDING OTHERWISE VIRUS WILL BE DETECTED!</string>
-    <string name="tutorials.startantivirus">ANTIVIRUS DEVELOPMENT IS STARTED.\nRESISTANCE CAN HELP YOU</string>
+    <string name="tutorials.startantivirus">ANTIVIRUS DEVELOPMENT IS STARTED.\nRESISTANCE AND S-SCRIPTS CAN HELP YOU</string>
     <string name="tutorials.antiviruswarning">IF YOU WANNA ANTIVIRUS START TO DEVELOP AS LATE AS POSSIBLE, CHECK FOR \"VISIBILITY\" IN THE MODIFICATION WINDOW</string>
-    <string name="tutorials.mediumantivirusprogress">INFECTION LEVEL - MEDIUM\nUSE SHOP TO BUY PERKS AND RESOURCES</string>
-    <string name="tutorials.highantivirusprogress">INFECTION LEVEL - CRITICAL!\nUSE SHOP TO BUY PERKS AND RESOURCES</string>
+    <string name="tutorials.mediumantivirusprogress">VISIBILITY LEVEL - MEDIUM\nUSE SHOP TO BUY S-SCRIPTS AND RESOURCES</string>
+    <string name="tutorials.highantivirusprogress">VISIBILITY LEVEL - CRITICAL!\nUSE SHOP TO BUY S-SCRIPTS AND RESOURCES</string>
+
+    <string name="sharingscreen.win">Now I\'m a hacker for real! Infected city in %d days in the Hackme Game. Try to beat me and do it faster!</string>
+    <string name="sharingscreen.lose">I managed to keep the city under control for %d days in the Hackme Game. Can you do it longer?</string>
 
     <string name="winlosescreen.win.title">you made it</string>
     <string name="winlosescreen.share.title">share your result - \nyou get %d$ in next game</string>
@@ -44,7 +49,15 @@
     <string name="winlosescreen.tryagain">TRY AGAIN</string>
     <string name="winlosescreen.gotomenu">GO TO MENU</string>
 
+    <string name="taphouse.ddostitle">CONDUCT DDOS ATTACK</string>
+    <string name="taphouse.ddostitlewin">DDOS HAS BEEN SUCCESSFUL</string>
+    <string name="taphouse.ddostitlelose">YOU\'VE BEEN DETECTED</string>
+    <string name="taphouse.ddosconfirmexit">YOU SURE?\nATTACK WILL BE FAILED</string>
+    <string name="taphouse.yes">YES</string>
+    <string name="taphouse.no">NO</string>
+
     <string name="shopscreen.title">SHOP</string>
+    <string name="shopscreen.restore">RESTORE PURCHASES</string>
 
     <string name="propagation_text_progress_bar">PROPAGATION</string>
     <string name="efficiency_text_progress_bar">EFFICIENCY</string>
