@@ -131,7 +131,8 @@ class AbilityComponent(val thief: ThiefModification = ThiefModification(),
     }
 
     fun detection(): Int {
-        return thief.detection + control.detection + spam.detection
+        return if (thief.detection + control.detection + spam.detection == 3) 0
+        else thief.detection + control.detection + spam.detection
     }
 
     fun value(): Float {

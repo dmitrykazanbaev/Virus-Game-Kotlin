@@ -34,7 +34,7 @@
     <string name="tutorials.third">UPGRADE PROFIT VIRUS ABILITIES AND USE S-SCRIPTS TO GET MORE MONEY</string>
     <string name="tutorials.firstminigame">BUILDINGS ARE MARKED RED IF THERE IS TECH WORKS. CONDUCT DDOS ATTACK BY TAPPING AT THIS BUILDING OTHERWISE VIRUS WILL BE DETECTED!</string>
     <string name="tutorials.startantivirus">ANTIVIRUS DEVELOPMENT IS STARTED.\nRESISTANCE AND S-SCRIPTS CAN HELP YOU</string>
-    <string name="tutorials.antiviruswarning">IF YOU WANNA ANTIVIRUS START TO DEVELOP AS LATE AS POSSIBLE, CHECK FOR \"VISIBILITY\" IN THE MODIFICATION WINDOW</string>
+    <string name="tutorials.antiviruswarning">IF YOU WANT ANTIVIRUS START TO DEVELOP AS LATE AS POSSIBLE, CHECK FOR \"VISIBILITY\" IN THE MODIFICATION WINDOW</string>
     <string name="tutorials.mediumantivirusprogress">VISIBILITY LEVEL - MEDIUM\nUSE SHOP TO BUY S-SCRIPTS AND RESOURCES</string>
     <string name="tutorials.highantivirusprogress">VISIBILITY LEVEL - CRITICAL!\nUSE SHOP TO BUY S-SCRIPTS AND RESOURCES</string>
 
@@ -150,27 +150,27 @@
     <string name="smart_home_second_level_upgrade_description">VIRUS CAN INFECT SMART HOME</string>
 
     <string-array name="msgs_without_virus">
-        <item>What's up bro?</item>
+        <item>What\'s up bro?</item>
         <item>Finally the good weather</item>
         <item>Somebody get these noisy neighbors off of me</item>
-        <item>Yesterday watched Game of Thrones, hope it's gonna keep it up</item>
+        <item>Yesterday watched Game of Thrones, hope it\'s gonna keep it up</item>
         <item>Yo I bought a new laptop. Now choosing games to play</item>
         <item>Looking forward to upcoming Champions League match</item>
         <item>Woohoo! Vacation time, going to Ireland</item>
-        <item>What to do with computer, it can't manage with 4k video</item>
+        <item>What to do with computer, it can\'t manage with 4k video</item>
         <item>So nice to relax with cup of tea in Hookah Bar</item>
-        <item>Went to yoga with my wife, I'm so happy :(</item>
-        <item>My cat is so annoying, he's screaming all night long. What to do with him?</item>
-        <item>Y'all guys checked new masks in Instagram?</item>
+        <item>Went to yoga with my wife, I\'m so happy :(</item>
+        <item>My cat is so annoying, he\'s screaming all night long. What to do with him?</item>
+        <item>Y\'all guys checked new masks in Instagram?</item>
         <item>They increased prices again!!..</item>
         <item>Weather, what is your problem?</item>
         <item>Where can I go with incomplete higher education?</item>
         <item>When is autumn conscription?</item>
         <item>Heard about government procurement for information security increasing?</item>
-        <item>Want home</item>
+        <item>Wanna go home</item>
         <item>LEEEEEROY JENKINSSSSSS</item>
         <item>Chicken or the egg?</item>
-        <item>I'm thinking #me #thinking #thoughts</item>
+        <item>I\'m thinking #me #thinking #thoughts</item>
         <item>Oceania had always been at war with Eastasia!</item>
         <item>Oceania had never been at war with Eastasia!</item>
         <item>Youtube, you are disappointing me</item>
@@ -186,7 +186,7 @@
         <item>How much is the antivirus?</item>
         <item>Give me advice about antivirus please</item>
         <item>Phone says that it has been rooted…</item>
-        <item>I've never had any virus</item>
+        <item>I\'ve never had any virus</item>
         <item>What the! Saw a text on the phone screen: %@</item>
         <item>Read about new virus: %@. Thank God I have an antivirus!</item>
     </string-array>
@@ -194,7 +194,7 @@
         <item>Weird, some contacts from Contact List disappeared</item>
         <item>Somebody knows why some contacts are showed incorrectly?</item>
         <item>Phone sends calls by itself..</item>
-        <item>Grandma, I didn't call!</item>
+        <item>Grandma, I didn\'t call!</item>
     </string-array>
     <string-array name="msgs_app_access">
         <item>Guys I have a problem, apps are downloading by themselves (</item>
@@ -212,7 +212,7 @@
         <item>Can I run a negative balance on my card?</item>
         <item>Thank God I keep money under pillow</item>
         <item>Thank God I keep money in bitcoins</item>
-        <item>I don't have money anyway</item>
+        <item>I don\'t have money anyway</item>
         <item>Where is the nearest ATM?</item>
         <item>Gonna file a lawsuit against bank</item>
         <item>Where is my money?</item>
@@ -226,9 +226,9 @@
         <item>Damned virus, there is banner with payment requirement</item>
     </string-array>
     <string-array name="msgs_porno_banner">
-        <item>GODDAMN I'm writing from wife phone! I got a porno banner and I can't hide it!</item>
+        <item>GODDAMN I\'m writing from wife phone! I got a porno banner and I can\'t hide it!</item>
         <item>Extortionists! But I have no other choice but to pay(</item>
-        <item>I hope my mom didn't see it!</item>
+        <item>I hope my mom didn\'t see it!</item>
     </string-array>
 
 </resources>
