@@ -325,6 +325,11 @@ class FirstLevelActivity : AppCompatActivity() {
                 }
     }
 
+    override fun onBackPressed() {
+        if (characteristic_window.visibility == View.VISIBLE)
+            closeCharacteristicWindow()
+    }
+
     private fun updateModificationButtonController(viewId: Int) {
         modification_controller.removeAllViews()
 
