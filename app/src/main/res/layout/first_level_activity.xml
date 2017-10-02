@@ -647,10 +647,10 @@
                         android:layout_weight="2">
 
                     <com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
-                            android:text="@string/resistance_text_progress_bar"
+                            android:text="@string/visibility_text_progress_bar"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/resistance_text_progress_bar"
+                            android:id="@+id/visibility_text_progress_bar"
                             app:customFont="DINPro/DINPro-Light.otf"
                             style="@style/CharacteristicsProgressBarTextViewStyle"
                             android:layout_weight="1"
@@ -660,7 +660,7 @@
                             style="@style/CharacteristicsProgressBarStyle"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/resistance_progress_bar"
+                            android:id="@+id/visibility_progress_bar"
                             android:progress="20"
                             android:layout_weight="1"/>
                 </LinearLayout>

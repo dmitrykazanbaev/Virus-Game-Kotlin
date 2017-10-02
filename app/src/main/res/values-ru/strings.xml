@@ -56,7 +56,7 @@
 
     <string name="propagation_text_progress_bar">РАСПРОСТРАНЕНИЕ</string>
     <string name="efficiency_text_progress_bar">ЭФФЕКТИВНОСТЬ</string>
-    <string name="resistance_text_progress_bar">ЗАМЕТНОСТЬ</string>
+    <string name="visibility_text_progress_bar">ЗАМЕТНОСТЬ</string>
     <string name="propagation_text_control_button">РАСПРОСТРАНЕНИЕ</string>
     <string name="abilities_text_control_button">ПРИБЫЛЬ</string>
     <string name="resistance_text_control_button">ПРОТИВОДЕЙСТВИЕ</string>
