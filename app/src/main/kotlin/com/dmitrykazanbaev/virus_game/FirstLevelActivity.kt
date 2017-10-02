@@ -86,7 +86,9 @@ class FirstLevelActivity : AppCompatActivity() {
         val firstLevel = firstLevelView.level as FirstLevel
         if (random.nextInt(100) < 3 && !firstLevel.hasTechWorks && firstLevel.antivirusProgress < 100) {
             val infectedBuildings = firstLevel.buildings.filter { it.infectedComputers > 0 || it.infectedSmartHome > 0 }
-            infectedBuildings[random.nextInt(infectedBuildings.size)].addTechWork()
+            if (infectedBuildings.isNotEmpty()) {
+                infectedBuildings[random.nextInt(infectedBuildings.size)].addTechWork()
+            }
         }
     }
 

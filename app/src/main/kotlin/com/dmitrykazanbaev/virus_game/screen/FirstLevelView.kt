@@ -353,10 +353,9 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
 
         private fun updatePointerPath() {
             mPointer.reset()
-            //mPointer.fillType = Path.FillType.EVEN_ODD
 
             // Set the starting point
-            mPointer.moveTo(mPointerWidth.toFloat(), mBoxHeight.toFloat() - mCornerRad)
+            mPointer.moveTo(mPointerWidth.toFloat() + 1, mBoxHeight.toFloat() - mCornerRad) // plus 1 for hiding border
 
             // Define the lines
             mPointer.rLineTo(0f, -mPointerHeight.toFloat())
