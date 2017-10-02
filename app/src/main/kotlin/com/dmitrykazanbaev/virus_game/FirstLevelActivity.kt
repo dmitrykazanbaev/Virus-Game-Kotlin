@@ -73,10 +73,20 @@ class FirstLevelActivity : AppCompatActivity() {
                     tryToCureDevices(firstLevelView.level as FirstLevel)
                     tryToAddCoin()
                     tryToAddMessage()
+                    tryToAddDDoSAttackMinigame()
                     updateDate()
                     delay(500)
                 }
             }
+        }
+    }
+
+    private fun tryToAddDDoSAttackMinigame() {
+        val random = Random()
+        val firstLevel = firstLevelView.level as FirstLevel
+        if (random.nextInt(100) < 3 && !firstLevel.hasTechWorks && firstLevel.antivirusProgress < 100) {
+            val infectedBuildings = firstLevel.buildings.filter { it.infectedComputers > 0 || it.infectedSmartHome > 0 }
+            infectedBuildings[random.nextInt(infectedBuildings.size)].addTechWork()
         }
     }
 

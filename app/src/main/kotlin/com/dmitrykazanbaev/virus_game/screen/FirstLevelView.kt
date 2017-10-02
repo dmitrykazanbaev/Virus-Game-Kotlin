@@ -168,16 +168,6 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
             coin.x = 0f
             coin.y = 0f
             coin.visibility = View.GONE
-            coin.setOnTouchListener { _, motionEvent ->
-                if (motionEvent.action == MotionEvent.ACTION_UP) {
-                    val touchPoint = translateXYToLocalCoordinates(motionEvent.x, motionEvent.y)
-                    if (touchPoint.x < coin.x + coin.right && touchPoint.x > coin.x &&
-                            touchPoint.y < coin.bottom + coin.y && touchPoint.y > coin.y)
-
-                        coin.performClick()
-                }
-                true
-            }
             coin.setOnTouchListener(object : View.OnTouchListener {
                 var x: Float = 0f
                 var y: Float = 0f
@@ -203,7 +193,10 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
                 }
 
             })
-            coin.setOnClickListener { increaseUserBalance() }
+            coin.setOnClickListener {
+                increaseUserBalance()
+                showTimeJob?.cancel()
+            }
         }
 
         fun showCoin(increasingMoney: Int) {
@@ -224,7 +217,6 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
             coin.visibility = View.GONE
             val firstLevelActivity = ApplicationContextHolder.context as FirstLevelActivity
             firstLevelActivity.user.balance += money
-            showTimeJob?.cancel()
         }
 
         fun dispatchTouchEvent(event: MotionEvent?) {
