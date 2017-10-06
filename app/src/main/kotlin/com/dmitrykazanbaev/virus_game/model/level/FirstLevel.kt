@@ -23,40 +23,20 @@ import java.util.concurrent.ConcurrentLinkedQueue
 class FirstLevel(applicationContext: Context) : AbstractLevel(applicationContext, R.raw.house_fin) {
     var buildings = mutableListOf<Building>()
 
-    val phones = 600
-    var infectedPhones = 0
-    var curedPhones = 0
+    override val phones = 600
 
-    var computers = 0
-        private set
-    var curedComputers = 0
-        private set
-    var infectedComputers = 0
-        private set
+    override val profitComputer = 20
+    override val profitPhone = 20
+    override val profitSmartHome = 20
 
-    var smartHome = 0
-        private set
-    var curedSmartHome = 0
-        private set
-    var infectedSmartHome = 0
-        private set
+    override var levelCoefficient = 0.5f
 
-    val profitComputer = 20
-    val profitPhone = 20
-    val profitSmartHome = 20
+    override val countDetectedDevicesForStartAntivirusDevelopment = 450
 
-    var levelCoefficient = 0.5
+    override val countPhonesToCure = 20
+    override val countComputersToCure = 12
+    override val countSmartHomeToCure = 8
 
-    var detectedDevices = 0
-    val countDetectedDevicesForStartAntivirusDevelopment = 450
-
-    var antivirusProgress = 0
-
-    private val countPhonesToCure = 20
-    private val countComputersToCure = 12
-    private val countSmartHomeToCure = 8
-
-    val random = Random()
     val infectedPhonesToDraw = ConcurrentLinkedQueue<InfectedPhone>()
 
     inner class InfectedPhoneThread(name: String) : HandlerThread(name) {
@@ -90,18 +70,6 @@ class FirstLevel(applicationContext: Context) : AbstractLevel(applicationContext
 
     val infectedPhoneThread = InfectedPhoneThread("InfectedPhoneThread")
     private val percentInfectedPhoneToDraw = 4
-
-    var maxPoint = Point()
-    var minPoint = Point(Int.MAX_VALUE, Int.MAX_VALUE)
-    override var width = 0
-        get() = maxPoint.x - minPoint.x
-    override var height = 0
-        get() = maxPoint.y - minPoint.y
-
-    override var centerX: Int = 0
-        get() = minPoint.x + (maxPoint.x - minPoint.x) / 2
-    override var centerY: Int = 0
-        get() = minPoint.y + (maxPoint.y - minPoint.y) / 2
 
     var hasTechWorks = false
         get() = buildings.any { it.hasTechWorks }
@@ -163,44 +131,45 @@ class FirstLevel(applicationContext: Context) : AbstractLevel(applicationContext
         synchronizeInfectedPhoneToDraw()
     }
 
-    fun infectPhone() {
-        infectedPhones++
+    override fun infectPhone() {
+        super.infectPhone()
+
         if (infectedPhones % percentInfectedPhoneToDraw == 1) addInfectedPhoneToDrawing()
     }
 
-    fun infectComputer() {
+    override fun infectComputer() {
+        super.infectComputer()
+
         val filteredBuildings = buildings.filter { it.canInfectComputer }
         if (filteredBuildings.isNotEmpty()) {
             val randomBuilding = Random().nextInt(filteredBuildings.size)
             filteredBuildings[randomBuilding].infectedComputers++
-            infectedComputers++
         }
     }
 
-    fun infectSmartHome() {
+    override fun infectSmartHome() {
+        super.infectSmartHome()
+
         val filteredBuildings = buildings.filter { it.canInfectSmartHome }
         if (filteredBuildings.isNotEmpty()) {
             val randomBuilding = Random().nextInt(filteredBuildings.size)
             filteredBuildings[randomBuilding].infectedSmartHome++
-            infectedSmartHome++
         }
     }
 
-    fun curePhone() {
-        if (infectedPhones >= countPhonesToCure) {
-            infectedPhones -= countPhonesToCure
-            curedPhones += countPhonesToCure
+    override fun curePhone() {
+        super.curePhone()
 
+        if (infectedPhones >= countPhonesToCure) {
             removeInfectedPhoneFromDrawing(countPhonesToCure / percentInfectedPhoneToDraw)
         } else {
-            curedPhones += infectedPhones
-            infectedPhones -= infectedPhones
-
             removeInfectedPhoneFromDrawing(infectedPhonesToDraw.size)
         }
     }
 
-    fun cureComputer() {
+    override fun cureComputer() {
+        super.cureComputer()
+
         var computersToCure = countComputersToCure
         val filteredBuildings = buildings.filter { it.canCureComputer } as ArrayList
 
@@ -208,16 +177,12 @@ class FirstLevel(applicationContext: Context) : AbstractLevel(applicationContext
             val randomBuilding = Random().nextInt(filteredBuildings.size)
 
             if (filteredBuildings[randomBuilding].infectedComputers >= computersToCure) {
-                infectedComputers -= computersToCure
-                curedComputers += computersToCure
 
                 filteredBuildings[randomBuilding].infectedComputers -= computersToCure
                 filteredBuildings[randomBuilding].curedComputers += computersToCure
 
                 break
             } else {
-                infectedComputers -= filteredBuildings[randomBuilding].infectedComputers
-                curedComputers += filteredBuildings[randomBuilding].infectedComputers
 
                 computersToCure -= filteredBuildings[randomBuilding].infectedComputers
 
@@ -229,7 +194,9 @@ class FirstLevel(applicationContext: Context) : AbstractLevel(applicationContext
         }
     }
 
-    fun cureSmartHome() {
+    override fun cureSmartHome() {
+        super.cureSmartHome()
+
         var smartHomeToCure = countSmartHomeToCure
         val filteredBuildings = buildings.filter { it.canCureSmartHome } as ArrayList
 
@@ -237,16 +204,12 @@ class FirstLevel(applicationContext: Context) : AbstractLevel(applicationContext
             val randomBuilding = Random().nextInt(filteredBuildings.size)
 
             if (filteredBuildings[randomBuilding].infectedSmartHome >= smartHomeToCure) {
-                infectedSmartHome -= smartHomeToCure
-                curedSmartHome += smartHomeToCure
 
                 filteredBuildings[randomBuilding].infectedSmartHome -= smartHomeToCure
                 filteredBuildings[randomBuilding].curedSmartHome += smartHomeToCure
 
                 break
             } else {
-                infectedSmartHome -= filteredBuildings[randomBuilding].infectedSmartHome
-                curedSmartHome += filteredBuildings[randomBuilding].infectedSmartHome
 
                 smartHomeToCure -= filteredBuildings[randomBuilding].infectedSmartHome
 
