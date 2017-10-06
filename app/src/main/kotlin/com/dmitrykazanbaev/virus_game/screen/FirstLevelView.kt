@@ -26,7 +26,7 @@ import kotlinx.coroutines.experimental.launch
 import java.util.*
 
 
-class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()) {
+class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel(context)) {
     private val realm = Realm.getDefaultInstance()!!
 
     private val paintForFilling = Paint()
@@ -239,7 +239,7 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel()
         var isShown = false
         var x = 0
         var y = 0
-        val backgroundBubble = BubbleDrawable(context/*, BubbleDrawable.LEFT*/)
+        val backgroundBubble = BubbleDrawable(context)
 
         init {
             textView.typeface = FontCache.getTypeface("DINPro/DINPro.otf", context)

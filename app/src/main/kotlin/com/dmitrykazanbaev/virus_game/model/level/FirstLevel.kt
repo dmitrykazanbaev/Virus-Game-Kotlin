@@ -1,5 +1,6 @@
 package com.dmitrykazanbaev.virus_game.model.level
 
+import android.content.Context
 import android.graphics.Point
 import android.os.Handler
 import android.os.HandlerThread
@@ -19,7 +20,7 @@ import java.io.InputStream
 import java.util.*
 import java.util.concurrent.ConcurrentLinkedQueue
 
-class FirstLevel : AbstractLevel(R.raw.house_fin) {
+class FirstLevel(applicationContext: Context) : AbstractLevel(applicationContext, R.raw.house_fin) {
     var buildings = mutableListOf<Building>()
 
     val phones = 600
