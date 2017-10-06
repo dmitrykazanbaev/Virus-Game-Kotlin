@@ -27,8 +27,6 @@ import java.util.*
 
 
 class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel(context)) {
-    private val realm = Realm.getDefaultInstance()!!
-
     private val paintForFilling = Paint()
     private val paintForStroke = Paint()
 
@@ -59,25 +57,6 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel(c
 
         paint.isAntiAlias = true
         paint.color = ContextCompat.getColor(context, R.color.control_button_color)
-    }
-
-    private fun translateXYToLocalCoordinates(x: Float, y: Float): Point {
-        val mClickCoords = FloatArray(2)
-
-        mClickCoords[0] = x
-        mClickCoords[1] = y
-
-        val matrix = Matrix()
-        matrix.set(getMatrix())
-
-        matrix.preScale(scaleFactor, scaleFactor, level.centerX.toFloat(), level.centerY.toFloat())
-        matrix.preTranslate(-xOffset / scaleFactor, -yOffset / scaleFactor)
-
-        matrix.invert(matrix)
-
-        matrix.mapPoints(mClickCoords)
-
-        return Point(mClickCoords[0].toInt(), mClickCoords[1].toInt())
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
@@ -120,7 +99,7 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel(c
         firstLevelDAO?.let { level.setLevelState(it) }
     }
 
-    fun drawBuilding(building: Building, canvas: Canvas?) {
+    private fun drawBuilding(building: Building, canvas: Canvas?) {
         drawLeftSideBuilding(building, canvas)
         drawCenterSideBuilding(building, canvas)
         drawRoofBuilding(building, canvas)
@@ -157,8 +136,8 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel(c
 
     inner class CoinButtonView {
         val coin = ImageButton(context)
-        var showTimeJob: Job? = null
-        var money: Int = 0
+        private var showTimeJob: Job? = null
+        private var money: Int = 0
 
         init {
             coin.setImageDrawable(ContextCompat.getDrawable(context, R.mipmap.plusmoney))
@@ -213,7 +192,7 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel(c
             }
         }
 
-        fun increaseUserBalance() {
+        private fun increaseUserBalance() {
             coin.visibility = View.GONE
             val firstLevelActivity = ApplicationContextHolder.context as FirstLevelActivity
             firstLevelActivity.user.balance += money
@@ -234,12 +213,12 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel(c
     }
 
     inner class BubbleMessage(context: Context) {
-        val textLayout = LinearLayout(context)
-        val textView = TextViewWithCustomFont(context)
+        private val textLayout = LinearLayout(context)
+        private val textView = TextViewWithCustomFont(context)
         var isShown = false
         var x = 0
         var y = 0
-        val backgroundBubble = BubbleDrawable(context)
+        private val backgroundBubble = BubbleDrawable(context)
 
         init {
             textView.typeface = FontCache.getTypeface("DINPro/DINPro.otf", context)
@@ -319,8 +298,8 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel(c
         private val mPaint: Paint = Paint()
 
         private var mBoxRect = RectF()
-        var mBoxWidth: Int = 0
-        var mBoxHeight: Int = 0
+        private var mBoxWidth: Int = 0
+        private var mBoxHeight: Int = 0
         var mCornerRad: Float = 0f
         private val mBoxPadding = Rect()
 
@@ -336,7 +315,7 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel(c
         // Setters
         ////////////////////////////////////////////////////////////
 
-        fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
+        private fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
             mBoxPadding.left = left
             mBoxPadding.top = top
             mBoxPadding.right = right

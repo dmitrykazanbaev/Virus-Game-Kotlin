@@ -2,11 +2,16 @@ package com.dmitrykazanbaev.virus_game.screen
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Matrix
+import android.graphics.Point
 import android.view.*
 import com.dmitrykazanbaev.virus_game.model.level.AbstractLevel
+import io.realm.Realm
 
 
 abstract class AbstractLevelView(context: Context, val level: AbstractLevel) : SurfaceView(context), SurfaceHolder.Callback {
+    protected val realm = Realm.getDefaultInstance()!!
+
     private val scrollGestureDetector = GestureDetector(context, MyGestureListener())
     private val scaleGestureDetector = ScaleGestureDetector(context, MyGestureListener())
 
@@ -16,6 +21,25 @@ abstract class AbstractLevelView(context: Context, val level: AbstractLevel) : S
     protected var scaleFactor = 1f
     protected var minScaleFactor = scaleFactor
     protected var maxScaleFactor = scaleFactor
+
+    protected fun translateXYToLocalCoordinates(x: Float, y: Float): Point {
+        val mClickCoords = FloatArray(2)
+
+        mClickCoords[0] = x
+        mClickCoords[1] = y
+
+        val matrix = Matrix()
+        matrix.set(getMatrix())
+
+        matrix.preScale(scaleFactor, scaleFactor, level.centerX.toFloat(), level.centerY.toFloat())
+        matrix.preTranslate(-xOffset / scaleFactor, -yOffset / scaleFactor)
+
+        matrix.invert(matrix)
+
+        matrix.mapPoints(mClickCoords)
+
+        return Point(mClickCoords[0].toInt(), mClickCoords[1].toInt())
+    }
 
     inner class MyGestureListener : GestureDetector.SimpleOnGestureListener(), ScaleGestureDetector.OnScaleGestureListener {
         override fun onScaleBegin(p0: ScaleGestureDetector?): Boolean {
