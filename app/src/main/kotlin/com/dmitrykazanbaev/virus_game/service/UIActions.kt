@@ -1,6 +1,7 @@
 package com.dmitrykazanbaev.virus_game.service
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.view.animation.Animation
@@ -10,7 +11,7 @@ import com.dmitrykazanbaev.virus_game.FirstLevelActivity
 import com.dmitrykazanbaev.virus_game.R
 import com.dmitrykazanbaev.virus_game.custom_views.ModificationButton
 import com.dmitrykazanbaev.virus_game.model.virus.Modification
-import kotlinx.android.synthetic.main.first_level_activity.*
+import kotlinx.android.synthetic.main.level_activity.*
 
 
 fun showCharacteristicWindow() {
@@ -43,20 +44,16 @@ fun closeCharacteristicWindow() {
     }
 }
 
-fun startNewGame() {
-    val activity = ApplicationContextHolder.context as Activity
-
-    with(activity) {
+fun startNewGame(context: Context) {
+    with(context) {
         val intent = Intent(this, FirstLevelActivity::class.java)
         intent.putExtra("new_game", true)
         startActivity(intent)
     }
 }
 
-fun continueGame() {
-    val activity = ApplicationContextHolder.context as Activity
-
-    with(activity) {
+fun continueGame(context: Context) {
+    with(context) {
         startActivity(Intent(this, FirstLevelActivity::class.java))
     }
 }

@@ -9,7 +9,8 @@ import com.dmitrykazanbaev.virus_game.model.level.AbstractLevel
 import io.realm.Realm
 
 
-abstract class AbstractLevelView(context: Context, val level: AbstractLevel) : SurfaceView(context), SurfaceHolder.Callback {
+abstract class AbstractLevelView(context: Context) : SurfaceView(context), SurfaceHolder.Callback {
+    abstract val level: AbstractLevel
     protected val realm = Realm.getDefaultInstance()!!
 
     private val scrollGestureDetector = GestureDetector(context, MyGestureListener())

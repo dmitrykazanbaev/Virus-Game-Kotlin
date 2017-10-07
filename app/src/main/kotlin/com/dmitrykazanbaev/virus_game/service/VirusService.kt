@@ -3,7 +3,7 @@ package com.dmitrykazanbaev.virus_game.service
 import android.view.View
 import com.dmitrykazanbaev.virus_game.FirstLevelActivity
 import com.dmitrykazanbaev.virus_game.model.level.FirstLevel
-import kotlinx.android.synthetic.main.first_level_activity.*
+import kotlinx.android.synthetic.main.level_activity.*
 import java.util.*
 
 fun tryToInfectPhone(level: FirstLevel) {
@@ -21,7 +21,7 @@ fun tryToInfectPhone(level: FirstLevel) {
 
                 level.infectPhone()
                 if (level.infectedPhones == 1)
-                    firstLevelActivity.firstLevelView.coinButtonView.showCoin(115)
+                    firstLevelActivity.levelView.coinButtonView.showCoin(115)
                 user.getProfit(level.profitPhone)
                 runOnUiThread { virus_name.text = "${level.infectedPhones}" }
             }

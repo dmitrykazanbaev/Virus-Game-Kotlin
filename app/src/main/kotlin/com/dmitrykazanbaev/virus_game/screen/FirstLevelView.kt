@@ -18,7 +18,6 @@ import com.dmitrykazanbaev.virus_game.model.level.Building
 import com.dmitrykazanbaev.virus_game.model.level.FirstLevel
 import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
 import com.dmitrykazanbaev.virus_game.service.FontCache
-import io.realm.Realm
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.delay
@@ -26,7 +25,8 @@ import kotlinx.coroutines.experimental.launch
 import java.util.*
 
 
-class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel(context)) {
+class FirstLevelView(context: Context) : AbstractLevelView(context) {
+    override val level by lazy { FirstLevel(context) }
     private val paintForFilling = Paint()
     private val paintForStroke = Paint()
 
@@ -70,7 +70,7 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel(c
 
         canvas.drawColor(colorBackground)
 
-        (level as FirstLevel).infectedPhonesToDraw.forEach {
+        level.infectedPhonesToDraw.forEach {
             synchronized(it.path) { canvas.drawPath(it.path, paint) }
         }
 
@@ -89,7 +89,7 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel(c
 
             val firstLevelDAO = level.getLevelState()
 
-            it.copyToRealm(firstLevelDAO as FirstLevelDAO)
+            it.copyToRealm(firstLevelDAO)
         }
     }
 
@@ -182,7 +182,7 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel(c
             if (coin.visibility == View.GONE) {
                 money = increasingMoney
                 val random = Random()
-                coin.x = random.nextInt(((level as FirstLevel).maxPoint.x * 0.8f - level.minPoint.x * 1.2f).toInt()) + level.minPoint.x * 1.2f
+                coin.x = random.nextInt((level.maxPoint.x * 0.8f - level.minPoint.x * 1.2f).toInt()) + level.minPoint.x * 1.2f
                 coin.y = random.nextInt((level.maxPoint.y * 0.8f - level.minPoint.y * 1.2f).toInt()) + level.minPoint.y * 1.2f
                 coin.visibility = View.VISIBLE
                 showTimeJob = launch(CommonPool) {
@@ -234,7 +234,7 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel(c
         }
 
         fun showAtRandom(text: String) {
-            updateXYByCenterRandomBuilding((level as FirstLevel).buildings)
+            updateXYByCenterRandomBuilding(level.buildings)
             show(text)
         }
 
@@ -257,7 +257,7 @@ class FirstLevelView(context: Context) : AbstractLevelView(context, FirstLevel(c
         }
 
         private fun updateXYByCenterInfectedBuilding(): Boolean {
-            val infected = (level as FirstLevel).buildings.filter { it.infectedComputers > 0 || it.infectedSmartHome > 0 }
+            val infected = level.buildings.filter { it.infectedComputers > 0 || it.infectedSmartHome > 0 }
             if (infected.isNotEmpty()) {
                 updateXYByCenterRandomBuilding(infected)
 

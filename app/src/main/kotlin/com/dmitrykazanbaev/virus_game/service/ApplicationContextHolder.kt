@@ -1,7 +1,7 @@
 package com.dmitrykazanbaev.virus_game.service
 
-import android.content.Context
+import com.dmitrykazanbaev.virus_game.AbstractLevelActivity
 
 object ApplicationContextHolder {
-    lateinit var context: Context
+    lateinit var context: AbstractLevelActivity
 }
