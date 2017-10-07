@@ -101,12 +101,12 @@ abstract class AbstractLevelActivity : AppCompatActivity() {
             tickJob = launch(CommonPool) {
                 while (isActive) {
                     checkWinOrLose()
-                    tryToInfectPhone(levelView.level)
-                    tryToInfectComputer(levelView.level)
-                    tryToInfectSmartHome(levelView.level)
-                    tryToDetectVirus(levelView.level)
-                    tryToProgressAntivirus(levelView.level)
-                    tryToCureDevices(levelView.level)
+                    tryToInfectPhone()
+                    tryToInfectComputer()
+                    tryToInfectSmartHome()
+                    tryToDetectVirus()
+                    tryToProgressAntivirus()
+                    tryToCureDevices()
                     updateDate()
                     doSpecificLevelActions()
                     delay(500)
@@ -116,22 +116,24 @@ abstract class AbstractLevelActivity : AppCompatActivity() {
     }
 
     private fun checkWinOrLose() {
-        val firstLevel = levelView.level as FirstLevel
+        val level = levelView.level
 
-        if (firstLevel.infectedPhones == firstLevel.phones &&
-                firstLevel.infectedComputers == firstLevel.computers &&
-                firstLevel.infectedSmartHome == firstLevel.infectedSmartHome)
+        if (level.infectedPhones == level.phones &&
+                level.infectedComputers == level.computers &&
+                level.infectedSmartHome == level.infectedSmartHome)
 
             runOnUiThread { statistics_button.text = "  WIN" }
 
-        if (firstLevel.antivirusProgress == 100 && firstLevel.infectedPhones == 0 &&
-                firstLevel.infectedComputers == 0 && firstLevel.infectedSmartHome == 0)
+        if (level.antivirusProgress == 100 && level.infectedPhones == 0 &&
+                level.infectedComputers == 0 && level.infectedSmartHome == 0)
 
             runOnUiThread { statistics_button.text = "  LOSE" }
 
     }
 
-    open fun tryToInfectPhone(level: AbstractLevel): Boolean {
+    open fun tryToInfectPhone(): Boolean {
+        val level = levelView.level
+
         val maxPhonesCanBeInfected: Int = user.virus.devices.phone.value * (level.phones - level.curedPhones) / 100
         if (level.infectedPhones < maxPhonesCanBeInfected) {
 
@@ -149,7 +151,9 @@ abstract class AbstractLevelActivity : AppCompatActivity() {
         return false
     }
 
-    fun tryToInfectComputer(level: AbstractLevel) {
+    fun tryToInfectComputer() {
+        val level = levelView.level
+
         val maxComputersCanBeInfected: Int = user.virus.devices.pc.value * (level.computers - level.curedComputers) / 100
         if (level.infectedComputers < maxComputersCanBeInfected) {
 
@@ -164,7 +168,9 @@ abstract class AbstractLevelActivity : AppCompatActivity() {
         }
     }
 
-    fun tryToInfectSmartHome(level: AbstractLevel) {
+    fun tryToInfectSmartHome() {
+        val level = levelView.level
+
         val maxSmartHomeCanBeInfected: Int = user.virus.devices.smartHome.value * (level.smartHome - level.curedSmartHome) / 100
         if (level.infectedSmartHome < maxSmartHomeCanBeInfected) {
 
@@ -179,7 +185,9 @@ abstract class AbstractLevelActivity : AppCompatActivity() {
         }
     }
 
-    fun tryToDetectVirus(level: AbstractLevel) {
+    fun tryToDetectVirus() {
+        val level = levelView.level
+
         if (level.detectedDevices < level.countDetectedDevicesForStartAntivirusDevelopment) {
 
             val allDevices = level.computers + level.smartHome + level.phones
@@ -195,7 +203,9 @@ abstract class AbstractLevelActivity : AppCompatActivity() {
         }
     }
 
-    fun tryToProgressAntivirus(level: AbstractLevel) {
+    fun tryToProgressAntivirus() {
+        val level = levelView.level
+
         if (level.detectedDevices == level.countDetectedDevicesForStartAntivirusDevelopment &&
                 level.antivirusProgress < 100) {
 
@@ -214,7 +224,9 @@ abstract class AbstractLevelActivity : AppCompatActivity() {
         }
     }
 
-    fun tryToCureDevices(level: AbstractLevel) {
+    fun tryToCureDevices() {
+        val level = levelView.level
+
         if (level.antivirusProgress == 100) {
 
             level.curePhone()

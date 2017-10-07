@@ -1,6 +1,5 @@
 package com.dmitrykazanbaev.virus_game
 
-import com.dmitrykazanbaev.virus_game.model.level.AbstractLevel
 import com.dmitrykazanbaev.virus_game.screen.FirstLevelView
 import com.dmitrykazanbaev.virus_game.service.*
 import java.util.*
@@ -9,9 +8,9 @@ import java.util.*
 class FirstLevelActivity : AbstractLevelActivity() {
     override val levelView by lazy { FirstLevelView(this) }
 
-    override fun tryToInfectPhone(level: AbstractLevel): Boolean {
-        if (super.tryToInfectPhone(level))
-            if (level.infectedPhones == 1) {
+    override fun tryToInfectPhone(): Boolean {
+        if (super.tryToInfectPhone())
+            if (levelView.level.infectedPhones == 1) {
                 levelView.coinButtonView.showCoin(115)
                 return true
             }
