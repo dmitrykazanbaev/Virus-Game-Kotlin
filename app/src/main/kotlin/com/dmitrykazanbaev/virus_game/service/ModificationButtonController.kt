@@ -13,7 +13,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.RadioGroup
 import android.widget.RelativeLayout
-import com.dmitrykazanbaev.virus_game.FirstLevelActivity
+import com.dmitrykazanbaev.virus_game.AbstractLevelActivity
 import com.dmitrykazanbaev.virus_game.R
 import com.dmitrykazanbaev.virus_game.custom_views.ModificationButton
 import java.util.*
@@ -169,142 +169,143 @@ class ModificationButtonController
 
         return mutableListOf(Point(startX.toInt(), startY.toInt()), Point(stopX.toInt(), stopY.toInt()))
     }
-}
 
-private fun createPropagationButtonList(): List<ModificationButton> {
-    val firstLevelActivity = ApplicationContextHolder.context as FirstLevelActivity
-    val buttonList = createModificationButtonsWithListener(4)
 
-    buttonList[0].tag = "wifi"
-    buttonList[0].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.wifi)
-    buttonList[0].modificationLevel = firstLevelActivity.user.virus.propagation.wifi.currentLevel
+    private fun createPropagationButtonList(): List<ModificationButton> {
+        val levelActivity = context as AbstractLevelActivity
+        val buttonList = createModificationButtonsWithListener(4)
 
-    buttonList[1].tag = "bluetooth"
-    buttonList[1].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.bluetooth)
-    buttonList[1].modificationLevel = firstLevelActivity.user.virus.propagation.bluetooth.currentLevel
+        buttonList[0].tag = "wifi"
+        buttonList[0].icon = ContextCompat.getDrawable(context, R.mipmap.wifi)
+        buttonList[0].modificationLevel = levelActivity.user.virus.propagation.wifi.currentLevel
 
-    buttonList[2].tag = "ethernet"
-    buttonList[2].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.ethernet)
-    buttonList[2].modificationLevel = firstLevelActivity.user.virus.propagation.ethernet.currentLevel
+        buttonList[1].tag = "bluetooth"
+        buttonList[1].icon = ContextCompat.getDrawable(context, R.mipmap.bluetooth)
+        buttonList[1].modificationLevel = levelActivity.user.virus.propagation.bluetooth.currentLevel
 
-    buttonList[3].tag = "mobile"
-    buttonList[3].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.mobile)
-    buttonList[3].modificationLevel = firstLevelActivity.user.virus.propagation.mobile.currentLevel
+        buttonList[2].tag = "ethernet"
+        buttonList[2].icon = ContextCompat.getDrawable(context, R.mipmap.ethernet)
+        buttonList[2].modificationLevel = levelActivity.user.virus.propagation.ethernet.currentLevel
 
-    return buttonList
-}
+        buttonList[3].tag = "mobile"
+        buttonList[3].icon = ContextCompat.getDrawable(context, R.mipmap.mobile)
+        buttonList[3].modificationLevel = levelActivity.user.virus.propagation.mobile.currentLevel
 
-private fun createAbilitiesButtonList(): List<ModificationButton> {
-    val firstLevelActivity = ApplicationContextHolder.context as FirstLevelActivity
-    val buttonList = createModificationButtonsWithListener(3)
-
-    buttonList[0].tag = "thief"
-    buttonList[0].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.thief)
-    buttonList[0].modificationLevel = firstLevelActivity.user.virus.abilities.thief.currentLevel
-
-    buttonList[1].tag = "control"
-    buttonList[1].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.control)
-    buttonList[1].modificationLevel = firstLevelActivity.user.virus.abilities.control.currentLevel
-
-    buttonList[2].tag = "spam"
-    buttonList[2].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.spam)
-    buttonList[2].modificationLevel = firstLevelActivity.user.virus.abilities.spam.currentLevel
-
-    return buttonList
-}
-
-private fun createResistanceButtonList(): List<ModificationButton> {
-    val firstLevelActivity = ApplicationContextHolder.context as FirstLevelActivity
-    val buttonList = createModificationButtonsWithListener(3)
-
-    buttonList[0].tag = "mask"
-    buttonList[0].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.mask)
-    buttonList[0].modificationLevel = firstLevelActivity.user.virus.resistance.mask.currentLevel
-
-    buttonList[1].tag = "invisible"
-    buttonList[1].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.invisible)
-    buttonList[1].modificationLevel = firstLevelActivity.user.virus.resistance.invisible.currentLevel
-
-    buttonList[2].tag = "new_virus"
-    buttonList[2].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.new_virus)
-    buttonList[2].modificationLevel = firstLevelActivity.user.virus.resistance.newVirus.currentLevel
-
-    return buttonList
-}
-
-private fun createDevicesButtonList(): List<ModificationButton> {
-    val firstLevelActivity = ApplicationContextHolder.context as FirstLevelActivity
-    val buttonList = createModificationButtonsWithListener(3)
-
-    buttonList[0].tag = "phone"
-    buttonList[0].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.phone)
-    buttonList[0].modificationLevel = firstLevelActivity.user.virus.devices.phone.currentLevel
-
-    buttonList[1].tag = "pc"
-    buttonList[1].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.pc)
-    buttonList[1].modificationLevel = firstLevelActivity.user.virus.devices.pc.currentLevel
-
-    buttonList[2].tag = "smart_home"
-    buttonList[2].icon = ContextCompat.getDrawable(ApplicationContextHolder.context, R.mipmap.smart_home)
-    buttonList[2].modificationLevel = firstLevelActivity.user.virus.devices.smartHome.currentLevel
-
-    return buttonList
-}
-
-private fun createModificationButtonsWithListener(countButtons: Int): MutableList<ModificationButton> {
-    val buttonList = mutableListOf<ModificationButton>()
-
-    val sectorPartDegree = 360f / countButtons
-    var startAngle = when (countButtons) {
-        3 -> -90f
-        4 -> -45f
-        else -> 0f
+        return buttonList
     }
 
-    repeat(countButtons) {
-        val button = createModificationButton(startAngle, sectorPartDegree)
-        button.setOnClickListener { onModificationButtonTouch(it) }
-        buttonList.add(button)
+    private fun createAbilitiesButtonList(): List<ModificationButton> {
+        val levelActivity = context as AbstractLevelActivity
+        val buttonList = createModificationButtonsWithListener(3)
 
-        startAngle += sectorPartDegree
+        buttonList[0].tag = "thief"
+        buttonList[0].icon = ContextCompat.getDrawable(context, R.mipmap.thief)
+        buttonList[0].modificationLevel = levelActivity.user.virus.abilities.thief.currentLevel
+
+        buttonList[1].tag = "control"
+        buttonList[1].icon = ContextCompat.getDrawable(context, R.mipmap.control)
+        buttonList[1].modificationLevel = levelActivity.user.virus.abilities.control.currentLevel
+
+        buttonList[2].tag = "spam"
+        buttonList[2].icon = ContextCompat.getDrawable(context, R.mipmap.spam)
+        buttonList[2].modificationLevel = levelActivity.user.virus.abilities.spam.currentLevel
+
+        return buttonList
     }
 
-    return buttonList
-}
+    private fun createResistanceButtonList(): List<ModificationButton> {
+        val levelActivity = context as AbstractLevelActivity
+        val buttonList = createModificationButtonsWithListener(3)
+
+        buttonList[0].tag = "mask"
+        buttonList[0].icon = ContextCompat.getDrawable(context, R.mipmap.mask)
+        buttonList[0].modificationLevel = levelActivity.user.virus.resistance.mask.currentLevel
+
+        buttonList[1].tag = "invisible"
+        buttonList[1].icon = ContextCompat.getDrawable(context, R.mipmap.invisible)
+        buttonList[1].modificationLevel = levelActivity.user.virus.resistance.invisible.currentLevel
+
+        buttonList[2].tag = "new_virus"
+        buttonList[2].icon = ContextCompat.getDrawable(context, R.mipmap.new_virus)
+        buttonList[2].modificationLevel = levelActivity.user.virus.resistance.newVirus.currentLevel
+
+        return buttonList
+    }
+
+    private fun createDevicesButtonList(): List<ModificationButton> {
+        val levelActivity = context as AbstractLevelActivity
+        val buttonList = createModificationButtonsWithListener(3)
+
+        buttonList[0].tag = "phone"
+        buttonList[0].icon = ContextCompat.getDrawable(context, R.mipmap.phone)
+        buttonList[0].modificationLevel = levelActivity.user.virus.devices.phone.currentLevel
+
+        buttonList[1].tag = "pc"
+        buttonList[1].icon = ContextCompat.getDrawable(context, R.mipmap.pc)
+        buttonList[1].modificationLevel = levelActivity.user.virus.devices.pc.currentLevel
+
+        buttonList[2].tag = "smart_home"
+        buttonList[2].icon = ContextCompat.getDrawable(context, R.mipmap.smart_home)
+        buttonList[2].modificationLevel = levelActivity.user.virus.devices.smartHome.currentLevel
+
+        return buttonList
+    }
+
+    private fun createModificationButtonsWithListener(countButtons: Int): MutableList<ModificationButton> {
+        val buttonList = mutableListOf<ModificationButton>()
+
+        val sectorPartDegree = 360f / countButtons
+        var startAngle = when (countButtons) {
+            3 -> -90f
+            4 -> -45f
+            else -> 0f
+        }
+
+        repeat(countButtons) {
+            val button = createModificationButton(startAngle, sectorPartDegree)
+            button.setOnClickListener { onModificationButtonTouch(it) }
+            buttonList.add(button)
+
+            startAngle += sectorPartDegree
+        }
+
+        return buttonList
+    }
 
 
-private fun onModificationButtonTouch(view: View) {
-    val firstLevelActivity = ApplicationContextHolder.context as FirstLevelActivity
-    with(firstLevelActivity) {
-        when (view.tag) {
-            "wifi" -> updateModificationWindow(user.virus.propagation.wifi)
-            "bluetooth" -> updateModificationWindow(user.virus.propagation.bluetooth)
-            "ethernet" -> updateModificationWindow(user.virus.propagation.ethernet)
-            "mobile" -> updateModificationWindow(user.virus.propagation.mobile)
-            "thief" -> updateModificationWindow(user.virus.abilities.thief)
-            "control" -> updateModificationWindow(user.virus.abilities.control)
-            "spam" -> updateModificationWindow(user.virus.abilities.spam)
-            "invisible" -> updateModificationWindow(user.virus.resistance.invisible)
-            "mask" -> updateModificationWindow(user.virus.resistance.mask)
-            "new_virus" -> updateModificationWindow(user.virus.resistance.newVirus)
-            "phone" -> updateModificationWindow(user.virus.devices.phone)
-            "pc" -> updateModificationWindow(user.virus.devices.pc)
-            "smart_home" -> updateModificationWindow(user.virus.devices.smartHome)
+    private fun onModificationButtonTouch(view: View) {
+        val firstLevelActivity = context as AbstractLevelActivity
+        with(firstLevelActivity) {
+            when (view.tag) {
+                "wifi" -> updateModificationWindow(user.virus.propagation.wifi)
+                "bluetooth" -> updateModificationWindow(user.virus.propagation.bluetooth)
+                "ethernet" -> updateModificationWindow(user.virus.propagation.ethernet)
+                "mobile" -> updateModificationWindow(user.virus.propagation.mobile)
+                "thief" -> updateModificationWindow(user.virus.abilities.thief)
+                "control" -> updateModificationWindow(user.virus.abilities.control)
+                "spam" -> updateModificationWindow(user.virus.abilities.spam)
+                "invisible" -> updateModificationWindow(user.virus.resistance.invisible)
+                "mask" -> updateModificationWindow(user.virus.resistance.mask)
+                "new_virus" -> updateModificationWindow(user.virus.resistance.newVirus)
+                "phone" -> updateModificationWindow(user.virus.devices.phone)
+                "pc" -> updateModificationWindow(user.virus.devices.pc)
+                "smart_home" -> updateModificationWindow(user.virus.devices.smartHome)
 
-            else -> return
+                else -> return
+            }
         }
     }
-}
 
-private fun createModificationButton(startAngle: Float, sweepAngle: Float): ModificationButton {
-    val params = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-            RelativeLayout.LayoutParams.MATCH_PARENT)
+    private fun createModificationButton(startAngle: Float, sweepAngle: Float): ModificationButton {
+        val params = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT)
 
-    val button = ModificationButton(ApplicationContextHolder.context,
-            startAngle = startAngle, sweepAngle = sweepAngle)
+        val button = ModificationButton(context,
+                startAngle = startAngle, sweepAngle = sweepAngle)
 
-    button.setBackgroundColor(Color.TRANSPARENT)
-    button.layoutParams = params
+        button.setBackgroundColor(Color.TRANSPARENT)
+        button.layoutParams = params
 
-    return button
+        return button
+    }
 }

@@ -1,9 +1,11 @@
 package com.dmitrykazanbaev.virus_game.model.virus
 
+import com.dmitrykazanbaev.virus_game.AbstractLevelActivity
 import com.dmitrykazanbaev.virus_game.R
-import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
 
-abstract class AbilityModification(zeroLevelValueResource: Int,
+abstract class AbilityModification(context: AbstractLevelActivity,
+
+                                   zeroLevelValueResource: Int,
                                    firstLevelValueResource: Int,
                                    secondLevelValueResource: Int,
                                    thirdLevelValueResource: Int,
@@ -22,6 +24,8 @@ abstract class AbilityModification(zeroLevelValueResource: Int,
                                    private val firstLevelDetectionResource: Int,
                                    private val secondLevelDetectionResource: Int,
                                    private val thirdLevelDetectionResource: Int) : Modification(
+        context = context,
+
         zeroLevelValueResource = zeroLevelValueResource,
         firstLevelValueResource = firstLevelValueResource,
         secondLevelValueResource = secondLevelValueResource,
@@ -42,17 +46,19 @@ abstract class AbilityModification(zeroLevelValueResource: Int,
 
     private fun getDetectionWithLevel(level: Int): Int {
         return when (level) {
-            0 -> ApplicationContextHolder.context.resources.getInteger(zeroLevelDetectionResource)
-            1 -> ApplicationContextHolder.context.resources.getInteger(firstLevelDetectionResource)
-            2 -> ApplicationContextHolder.context.resources.getInteger(secondLevelDetectionResource)
-            3 -> ApplicationContextHolder.context.resources.getInteger(thirdLevelDetectionResource)
+            0 -> context.resources.getInteger(zeroLevelDetectionResource)
+            1 -> context.resources.getInteger(firstLevelDetectionResource)
+            2 -> context.resources.getInteger(secondLevelDetectionResource)
+            3 -> context.resources.getInteger(thirdLevelDetectionResource)
 
             else -> 0
         }
     }
 }
 
-class ThiefModification : AbilityModification(
+class ThiefModification(context: AbstractLevelActivity) : AbilityModification(
+        context = context,
+
         zeroLevelValueResource = R.dimen.thief_zero_level_value,
         firstLevelValueResource = R.dimen.thief_first_level_value,
         secondLevelValueResource = R.dimen.thief_second_level_value,
@@ -71,11 +77,13 @@ class ThiefModification : AbilityModification(
         secondLevelDetectionResource = R.dimen.thief_second_level_detection,
         thirdLevelDetectionResource = R.dimen.thief_third_level_detection) {
 
-    override val title: String = ApplicationContextHolder.context.resources.getString(R.string.thief_title)
+    override val title: String = context.resources.getString(R.string.thief_title)
 
 }
 
-class ControlModification : AbilityModification(
+class ControlModification(context: AbstractLevelActivity) : AbilityModification(
+        context = context,
+
         zeroLevelValueResource = R.dimen.control_zero_level_value,
         firstLevelValueResource = R.dimen.control_first_level_value,
         secondLevelValueResource = R.dimen.control_second_level_value,
@@ -94,11 +102,13 @@ class ControlModification : AbilityModification(
         secondLevelDetectionResource = R.dimen.control_second_level_detection,
         thirdLevelDetectionResource = R.dimen.control_third_level_detection) {
 
-    override val title: String = ApplicationContextHolder.context.resources.getString(R.string.control_title)
+    override val title: String = context.resources.getString(R.string.control_title)
 
 }
 
-class SpamModification : AbilityModification(
+class SpamModification(context: AbstractLevelActivity) : AbilityModification(
+        context = context,
+
         zeroLevelValueResource = R.dimen.spam_zero_level_value,
         firstLevelValueResource = R.dimen.spam_first_level_value,
         secondLevelValueResource = R.dimen.spam_second_level_value,
@@ -117,13 +127,14 @@ class SpamModification : AbilityModification(
         secondLevelDetectionResource = R.dimen.spam_second_level_detection,
         thirdLevelDetectionResource = R.dimen.spam_third_level_detection) {
 
-    override val title: String = ApplicationContextHolder.context.resources.getString(R.string.spam_title)
+    override val title: String = context.resources.getString(R.string.spam_title)
 
 }
 
-class AbilityComponent(val thief: ThiefModification = ThiefModification(),
-                       val control: ControlModification = ControlModification(),
-                       val spam: SpamModification = SpamModification()) : VirusComponent() {
+class AbilityComponent(val context: AbstractLevelActivity,
+                       val thief: ThiefModification = ThiefModification(context),
+                       val control: ControlModification = ControlModification(context),
+                       val spam: SpamModification = SpamModification(context)) : VirusComponent() {
     override fun synchronize() {
         thief.synchronize()
         control.synchronize()

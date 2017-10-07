@@ -1,5 +1,6 @@
 package com.dmitrykazanbaev.virus_game
 
+import com.dmitrykazanbaev.virus_game.model.level.AbstractLevel
 import com.dmitrykazanbaev.virus_game.screen.FirstLevelView
 import com.dmitrykazanbaev.virus_game.service.*
 import java.util.*
@@ -7,6 +8,16 @@ import java.util.*
 
 class FirstLevelActivity : AbstractLevelActivity() {
     override val levelView by lazy { FirstLevelView(this) }
+
+    override fun tryToInfectPhone(level: AbstractLevel): Boolean {
+        if (super.tryToInfectPhone(level))
+            if (level.infectedPhones == 1) {
+                levelView.coinButtonView.showCoin(115)
+                return true
+            }
+
+        return false
+    }
 
     override fun doSpecificLevelActions() {
         tryToAddCoin()
@@ -35,25 +46,25 @@ class FirstLevelActivity : AbstractLevelActivity() {
                 val firstLevel = levelView.level
 
                 val listPossibleMessages = mutableListOf<String>()
-                listPossibleMessages.add(getNormalMessage())
+                listPossibleMessages.add(getNormalMessage(this))
 
                 if (firstLevel.infectedSmartHome > 0 || firstLevel.infectedComputers > 0) {
-                    listPossibleMessages.add(getStartVirusMessage())
+                    listPossibleMessages.add(getStartVirusMessage(this))
 
                     if (user.virus.abilities.thief.currentLevel == 3)
-                        listPossibleMessages.add(getTheftBankMessage())
+                        listPossibleMessages.add(getTheftBankMessage(this))
                     if (user.virus.abilities.control.currentLevel >= 1)
-                        listPossibleMessages.add(getAppAccessMessage())
+                        listPossibleMessages.add(getAppAccessMessage(this))
                     if (user.virus.abilities.control.currentLevel >= 2)
-                        listPossibleMessages.add(getSMSMessage())
+                        listPossibleMessages.add(getSMSMessage(this))
                     if (user.virus.abilities.control.currentLevel == 3)
-                        listPossibleMessages.add(getMoneyTransferMessage())
+                        listPossibleMessages.add(getMoneyTransferMessage(this))
                     if (user.virus.abilities.spam.currentLevel >= 1)
-                        listPossibleMessages.add(getBlockAdMessage())
+                        listPossibleMessages.add(getBlockAdMessage(this))
                     if (user.virus.abilities.spam.currentLevel >= 2)
-                        listPossibleMessages.add(getBannerMessage())
+                        listPossibleMessages.add(getBannerMessage(this))
                     if (user.virus.abilities.spam.currentLevel == 3)
-                        listPossibleMessages.add(getPornoBannerMessage())
+                        listPossibleMessages.add(getPornoBannerMessage(this))
                 }
 
                 val randomIndex = random.nextInt(listPossibleMessages.size)

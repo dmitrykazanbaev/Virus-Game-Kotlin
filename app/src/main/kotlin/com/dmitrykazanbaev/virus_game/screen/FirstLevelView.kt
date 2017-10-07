@@ -16,7 +16,6 @@ import com.dmitrykazanbaev.virus_game.custom_views.TextViewWithCustomFont
 import com.dmitrykazanbaev.virus_game.model.dao.FirstLevelDAO
 import com.dmitrykazanbaev.virus_game.model.level.Building
 import com.dmitrykazanbaev.virus_game.model.level.FirstLevel
-import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
 import com.dmitrykazanbaev.virus_game.service.FontCache
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.Job
@@ -194,7 +193,7 @@ class FirstLevelView(context: Context) : AbstractLevelView(context) {
 
         private fun increaseUserBalance() {
             coin.visibility = View.GONE
-            val firstLevelActivity = ApplicationContextHolder.context as FirstLevelActivity
+            val firstLevelActivity = context as FirstLevelActivity
             firstLevelActivity.user.balance += money
         }
 

@@ -1,10 +1,12 @@
 package com.dmitrykazanbaev.virus_game.model.virus
 
+import com.dmitrykazanbaev.virus_game.AbstractLevelActivity
 import com.dmitrykazanbaev.virus_game.R
-import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
 
 
-class PhoneModification : Modification(
+class PhoneModification(context: AbstractLevelActivity) : Modification(
+        context = context,
+
         zeroLevelValueResource = R.dimen.phone_zero_level_value,
         firstLevelValueResource = R.dimen.phone_first_level_value,
         secondLevelValueResource = R.dimen.phone_second_level_value,
@@ -18,10 +20,12 @@ class PhoneModification : Modification(
         firstLevelUpgradeDescriptionResource = R.string.phone_first_level_upgrade_description,
         secondLevelUpgradeDescriptionResource = R.string.phone_second_level_upgrade_description) {
 
-    override val title: String = ApplicationContextHolder.context.resources.getString(R.string.phone_title)
+    override val title: String = context.resources.getString(R.string.phone_title)
 }
 
-class PCModification : Modification(
+class PCModification(context: AbstractLevelActivity) : Modification(
+        context = context,
+
         zeroLevelValueResource = R.dimen.pc_zero_level_value,
         firstLevelValueResource = R.dimen.pc_first_level_value,
         secondLevelValueResource = R.dimen.pc_second_level_value,
@@ -35,10 +39,12 @@ class PCModification : Modification(
         firstLevelUpgradeDescriptionResource = R.string.pc_first_level_upgrade_description,
         secondLevelUpgradeDescriptionResource = R.string.pc_second_level_upgrade_description) {
 
-    override val title: String = ApplicationContextHolder.context.resources.getString(R.string.pc_title)
+    override val title: String = context.resources.getString(R.string.pc_title)
 }
 
-class SmartHomeModification : Modification(
+class SmartHomeModification(context: AbstractLevelActivity) : Modification(
+        context = context,
+
         zeroLevelValueResource = R.dimen.smart_home_zero_level_value,
         firstLevelValueResource = R.dimen.smart_home_first_level_value,
         secondLevelValueResource = R.dimen.smart_home_second_level_value,
@@ -52,12 +58,13 @@ class SmartHomeModification : Modification(
         firstLevelUpgradeDescriptionResource = R.string.smart_home_first_level_upgrade_description,
         secondLevelUpgradeDescriptionResource = R.string.smart_home_second_level_upgrade_description) {
 
-    override val title: String = ApplicationContextHolder.context.resources.getString(R.string.smart_home_title)
+    override val title: String = context.resources.getString(R.string.smart_home_title)
 }
 
-class DeviceComponent(val phone: Modification = PhoneModification(),
-                      val pc: Modification = PCModification(),
-                      val smartHome: Modification = SmartHomeModification()) : VirusComponent() {
+class DeviceComponent(val context: AbstractLevelActivity,
+                      val phone: Modification = PhoneModification(context),
+                      val pc: Modification = PCModification(context),
+                      val smartHome: Modification = SmartHomeModification(context)) : VirusComponent() {
     override fun synchronize() {
         phone.synchronize()
         pc.synchronize()

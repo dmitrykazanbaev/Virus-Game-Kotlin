@@ -6,11 +6,14 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.RadioGroup
 import android.widget.RelativeLayout
+import com.dmitrykazanbaev.virus_game.custom_views.ModificationButton
 import com.dmitrykazanbaev.virus_game.custom_views.TrapezeButton
 import com.dmitrykazanbaev.virus_game.model.User
 import com.dmitrykazanbaev.virus_game.model.dao.ServiceInformationDAO
 import com.dmitrykazanbaev.virus_game.model.dao.UserDAO
+import com.dmitrykazanbaev.virus_game.model.level.AbstractLevel
 import com.dmitrykazanbaev.virus_game.model.level.FirstLevel
+import com.dmitrykazanbaev.virus_game.model.virus.Modification
 import com.dmitrykazanbaev.virus_game.screen.AbstractLevelView
 import com.dmitrykazanbaev.virus_game.service.*
 import io.realm.Realm
@@ -31,13 +34,11 @@ abstract class AbstractLevelActivity : AppCompatActivity() {
 
     abstract fun doSpecificLevelActions()
 
-    val user by lazy { User() }
+    val user by lazy { User(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.level_activity)
-
-        ApplicationContextHolder.context = this
 
         user.balance = 10000
         user.virus.synchronize()
@@ -100,12 +101,12 @@ abstract class AbstractLevelActivity : AppCompatActivity() {
             tickJob = launch(CommonPool) {
                 while (isActive) {
                     checkWinOrLose()
-                    tryToInfectPhone(levelView.level as FirstLevel)
-                    tryToInfectComputer(levelView.level as FirstLevel)
-                    tryToInfectSmartHome(levelView.level as FirstLevel)
-                    tryToDetectVirus(levelView.level as FirstLevel)
-                    tryToProgressAntivirus(levelView.level as FirstLevel)
-                    tryToCureDevices(levelView.level as FirstLevel)
+                    tryToInfectPhone(levelView.level)
+                    tryToInfectComputer(levelView.level)
+                    tryToInfectSmartHome(levelView.level)
+                    tryToDetectVirus(levelView.level)
+                    tryToProgressAntivirus(levelView.level)
+                    tryToCureDevices(levelView.level)
                     updateDate()
                     doSpecificLevelActions()
                     delay(500)
@@ -128,6 +129,98 @@ abstract class AbstractLevelActivity : AppCompatActivity() {
 
             runOnUiThread { statistics_button.text = "  LOSE" }
 
+    }
+
+    open fun tryToInfectPhone(level: AbstractLevel): Boolean {
+        val maxPhonesCanBeInfected: Int = user.virus.devices.phone.value * (level.phones - level.curedPhones) / 100
+        if (level.infectedPhones < maxPhonesCanBeInfected) {
+
+            val random = Random().nextInt(100)
+            if (random <= user.virus.propagation.mobile.value +
+                    user.virus.propagation.bluetooth.value +
+                    user.virus.propagation.wifi.value) {
+
+                level.infectPhone()
+                user.getProfit(level.profitPhone)
+                runOnUiThread { virus_name.text = "${level.infectedPhones}" }
+                return true
+            }
+        }
+        return false
+    }
+
+    fun tryToInfectComputer(level: AbstractLevel) {
+        val maxComputersCanBeInfected: Int = user.virus.devices.pc.value * (level.computers - level.curedComputers) / 100
+        if (level.infectedComputers < maxComputersCanBeInfected) {
+
+            val random = Random().nextInt(100)
+            if (random <= user.virus.propagation.ethernet.value +
+                    user.virus.propagation.bluetooth.value +
+                    user.virus.propagation.wifi.value) {
+
+                level.infectComputer()
+                user.getProfit(level.profitComputer)
+            }
+        }
+    }
+
+    fun tryToInfectSmartHome(level: AbstractLevel) {
+        val maxSmartHomeCanBeInfected: Int = user.virus.devices.smartHome.value * (level.smartHome - level.curedSmartHome) / 100
+        if (level.infectedSmartHome < maxSmartHomeCanBeInfected) {
+
+            val random = Random().nextInt(100)
+            if (random <= user.virus.propagation.ethernet.value +
+                    user.virus.propagation.mobile.value +
+                    user.virus.propagation.wifi.value) {
+
+                level.infectSmartHome()
+                user.getProfit(level.profitSmartHome)
+            }
+        }
+    }
+
+    fun tryToDetectVirus(level: AbstractLevel) {
+        if (level.detectedDevices < level.countDetectedDevicesForStartAntivirusDevelopment) {
+
+            val allDevices = level.computers + level.smartHome + level.phones
+            val infectedDevices = level.infectedComputers + level.infectedSmartHome + level.infectedPhones
+            val resistance = user.virus.resistance.mask.value
+            val detection = user.virus.abilities.detection()
+            val random = Random().nextInt(allDevices * resistance)
+
+            if (random < detection * infectedDevices * level.levelCoefficient) {
+                level.detectedDevices++
+                runOnUiThread { virus_button.text = "${level.detectedDevices}" }
+            }
+        }
+    }
+
+    fun tryToProgressAntivirus(level: AbstractLevel) {
+        if (level.detectedDevices == level.countDetectedDevicesForStartAntivirusDevelopment &&
+                level.antivirusProgress < 100) {
+
+            val allDevices = level.computers + level.smartHome + level.phones
+            val infectedDevices = level.infectedComputers + level.infectedSmartHome + level.infectedPhones
+            val resistance = user.virus.resistance.mask.value
+            val detection = user.virus.abilities.detection()
+            val random = Random().nextInt(allDevices * resistance)
+
+            if (random < detection * infectedDevices * level.levelCoefficient) {
+                level.antivirusProgress++
+                runOnUiThread { antivirus_button.text = "${level.antivirusProgress}%  " }
+            }
+
+            runOnUiThread { antivirus.visibility = View.VISIBLE }
+        }
+    }
+
+    fun tryToCureDevices(level: AbstractLevel) {
+        if (level.antivirusProgress == 100) {
+
+            level.curePhone()
+            level.cureComputer()
+            level.cureSmartHome()
+        }
     }
 
     private fun updateDate() {
@@ -243,21 +336,43 @@ abstract class AbstractLevelActivity : AppCompatActivity() {
                 runBlocking {
                     stopJobs()
                 }
-                showCharacteristicWindow()
+                showCharacteristicWindow(this)
             }
             R.id.close_characteristics_button -> {
                 startJobs()
-                closeCharacteristicWindow()
+                closeCharacteristicWindow(this)
             }
             R.id.devices_button, R.id.propagation_button,
             R.id.resistance_button, R.id.abilities_button -> if (!(view as TrapezeButton).isChecked) view.isChecked = true
-            R.id.buy_button -> buyModification()
+            R.id.buy_button -> buyModification(this)
         }
+    }
+
+    fun upgradeAndInvalidate(modification: Modification,
+                             modificationButton: ModificationButton,
+                             modificationButtonController: ModificationButtonController) {
+        if (user.balance >= modification.upgradeCost) {
+            user.balance -= modification.upgradeCost
+            modification.upgrade()
+            updateModificationWindow(modification)
+            modificationButton.modificationLevel = modification.currentLevel
+            modificationButtonController.invalidate()
+        }
+    }
+
+    fun updateModificationWindow(modification: Modification) {
+        if (modification.currentLevel != modification.maxLevel) {
+            updateModificationTitle(modification.title)
+            updateModificationDescription(modification.upgradeDescription)
+            updateModificationUpgradeCost(modification.upgradeCost)
+
+            buy_modification_window.visibility = View.VISIBLE
+        } else buy_modification_window.visibility = View.INVISIBLE
     }
 
     override fun onBackPressed() {
         if (characteristic_window.visibility == View.VISIBLE)
-            closeCharacteristicWindow()
+            closeCharacteristicWindow(this)
     }
 
     override fun onResume() {

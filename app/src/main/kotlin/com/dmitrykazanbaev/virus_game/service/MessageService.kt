@@ -1,47 +1,48 @@
 package com.dmitrykazanbaev.virus_game.service
 
+import android.content.Context
 import com.dmitrykazanbaev.virus_game.R
 import java.util.*
 
 
-fun getNormalMessage(): String {
-    return getMessage(R.array.msgs_without_virus)
+fun getNormalMessage(context: Context): String {
+    return getMessage(R.array.msgs_without_virus, context)
 }
 
-fun getStartVirusMessage(): String {
-    return getMessage(R.array.msgs_start_virus)
+fun getStartVirusMessage(context: Context): String {
+    return getMessage(R.array.msgs_start_virus, context)
 }
 
-fun getTheftBankMessage(): String {
-    return getMessage(R.array.msgs_theft_bank)
+fun getTheftBankMessage(context: Context): String {
+    return getMessage(R.array.msgs_theft_bank, context)
 }
 
-fun getAppAccessMessage(): String {
-    return getMessage(R.array.msgs_app_access)
+fun getAppAccessMessage(context: Context): String {
+    return getMessage(R.array.msgs_app_access, context)
 }
 
-fun getSMSMessage(): String {
-    return getMessage(R.array.msgs_sms)
+fun getSMSMessage(context: Context): String {
+    return getMessage(R.array.msgs_sms, context)
 }
 
-fun getMoneyTransferMessage(): String {
-    return getMessage(R.array.msgs_money_transfer)
+fun getMoneyTransferMessage(context: Context): String {
+    return getMessage(R.array.msgs_money_transfer, context)
 }
 
-fun getBlockAdMessage(): String {
-    return getMessage(R.array.msgs_block_ad)
+fun getBlockAdMessage(context: Context): String {
+    return getMessage(R.array.msgs_block_ad, context)
 }
 
-fun getBannerMessage(): String {
-    return getMessage(R.array.msgs_banner)
+fun getBannerMessage(context: Context): String {
+    return getMessage(R.array.msgs_banner, context)
 }
 
-fun getPornoBannerMessage(): String {
-    return getMessage(R.array.msgs_porno_banner)
+fun getPornoBannerMessage(context: Context): String {
+    return getMessage(R.array.msgs_porno_banner, context)
 }
 
-private fun getMessage(resource: Int): String {
-    with(ApplicationContextHolder.context) {
+private fun getMessage(resource: Int, context: Context): String {
+    with(context) {
         val messages = resources.getStringArray(resource)
         return messages[Random().nextInt(messages.size)]
     }

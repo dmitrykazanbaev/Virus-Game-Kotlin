@@ -1,10 +1,12 @@
 package com.dmitrykazanbaev.virus_game.model.virus
 
+import com.dmitrykazanbaev.virus_game.AbstractLevelActivity
 import com.dmitrykazanbaev.virus_game.R
-import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
 
 
-class InvisibleModification : Modification(
+class InvisibleModification(context: AbstractLevelActivity) : Modification(
+        context = context,
+
         zeroLevelValueResource = R.dimen.invisible_zero_level_value,
         firstLevelValueResource = R.dimen.invisible_first_level_value,
         secondLevelValueResource = R.dimen.invisible_second_level_value,
@@ -18,10 +20,12 @@ class InvisibleModification : Modification(
         firstLevelUpgradeDescriptionResource = R.string.invisible_first_level_upgrade_description,
         secondLevelUpgradeDescriptionResource = R.string.invisible_second_level_upgrade_description) {
 
-    override val title: String = ApplicationContextHolder.context.resources.getString(R.string.invisible_title)
+    override val title: String = context.resources.getString(R.string.invisible_title)
 }
 
-class MaskModification : Modification(
+class MaskModification(context: AbstractLevelActivity) : Modification(
+        context = context,
+
         zeroLevelValueResource = R.dimen.mask_zero_level_value,
         firstLevelValueResource = R.dimen.mask_first_level_value,
         secondLevelValueResource = R.dimen.mask_second_level_value,
@@ -35,10 +39,12 @@ class MaskModification : Modification(
         firstLevelUpgradeDescriptionResource = R.string.mask_first_level_upgrade_description,
         secondLevelUpgradeDescriptionResource = R.string.mask_second_level_upgrade_description) {
 
-    override val title: String = ApplicationContextHolder.context.resources.getString(R.string.mask_title)
+    override val title: String = context.resources.getString(R.string.mask_title)
 }
 
-class NewVirusModification : Modification(
+class NewVirusModification(context: AbstractLevelActivity) : Modification(
+        context = context,
+
         zeroLevelValueResource = R.dimen.new_virus_zero_level_value,
         firstLevelValueResource = R.dimen.new_virus_first_level_value,
         secondLevelValueResource = R.dimen.new_virus_second_level_value,
@@ -52,12 +58,13 @@ class NewVirusModification : Modification(
         firstLevelUpgradeDescriptionResource = R.string.new_virus_first_level_upgrade_description,
         secondLevelUpgradeDescriptionResource = R.string.new_virus_second_level_upgrade_description) {
 
-    override val title: String = ApplicationContextHolder.context.resources.getString(R.string.new_virus_title)
+    override val title: String = context.resources.getString(R.string.new_virus_title)
 }
 
-class ResistanceComponent(val invisible: Modification = InvisibleModification(),
-                          val mask: Modification = MaskModification(),
-                          val newVirus: Modification = NewVirusModification()) : VirusComponent() {
+class ResistanceComponent(val context: AbstractLevelActivity,
+                          val invisible: Modification = InvisibleModification(context),
+                          val mask: Modification = MaskModification(context),
+                          val newVirus: Modification = NewVirusModification(context)) : VirusComponent() {
     override fun synchronize() {
         invisible.synchronize()
         mask.synchronize()

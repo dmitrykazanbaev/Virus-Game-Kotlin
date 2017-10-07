@@ -8,7 +8,6 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.RadioButton
 import com.dmitrykazanbaev.virus_game.R
-import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
 
 
 class ModificationButton
@@ -96,16 +95,16 @@ class ModificationButton
     }
 
     init {
-        sectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.modification_button_color)
+        sectorPaint.color = ContextCompat.getColor(context, R.color.modification_button_color)
         sectorPaint.isAntiAlias = true
 
-        firstLevelModificationSectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.first_level_modification)
+        firstLevelModificationSectorPaint.color = ContextCompat.getColor(context, R.color.first_level_modification)
         firstLevelModificationSectorPaint.isAntiAlias = true
 
-        secondLevelModificationSectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.second_level_modification)
+        secondLevelModificationSectorPaint.color = ContextCompat.getColor(context, R.color.second_level_modification)
         secondLevelModificationSectorPaint.isAntiAlias = true
 
-        thirdLevelModificationSectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.third_level_modification)
+        thirdLevelModificationSectorPaint.color = ContextCompat.getColor(context, R.color.third_level_modification)
         thirdLevelModificationSectorPaint.isAntiAlias = true
 
         /*checkedSectorPaint.color = ContextCompat.getColor(ApplicationContextHolder.context, R.color.colorOrange)

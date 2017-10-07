@@ -1,8 +1,10 @@
 package com.dmitrykazanbaev.virus_game.model.virus
 
-import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
+import com.dmitrykazanbaev.virus_game.AbstractLevelActivity
 
-abstract class Modification(val maxLevel: Int = 3,
+abstract class Modification(val context: AbstractLevelActivity,
+
+                            val maxLevel: Int = 3,
                             var currentLevel: Int = 0,
                             var value: Int = 0,
                             var upgradeCost: Int = 0,
@@ -38,10 +40,10 @@ abstract class Modification(val maxLevel: Int = 3,
 
     private fun getValueWithLevel(level: Int): Int {
         return when (level) {
-            0 -> ApplicationContextHolder.context.resources.getInteger(zeroLevelValueResource)
-            1 -> ApplicationContextHolder.context.resources.getInteger(firstLevelValueResource)
-            2 -> ApplicationContextHolder.context.resources.getInteger(secondLevelValueResource)
-            3 -> ApplicationContextHolder.context.resources.getInteger(thirdLevelValueResource)
+            0 -> context.resources.getInteger(zeroLevelValueResource)
+            1 -> context.resources.getInteger(firstLevelValueResource)
+            2 -> context.resources.getInteger(secondLevelValueResource)
+            3 -> context.resources.getInteger(thirdLevelValueResource)
 
             else -> 0
         }
@@ -49,9 +51,9 @@ abstract class Modification(val maxLevel: Int = 3,
 
     private fun getUpgradeCostWithLevel(level: Int): Int {
         return when (level) {
-            0 -> ApplicationContextHolder.context.resources.getInteger(zeroLevelUpgradeCostResource)
-            1 -> ApplicationContextHolder.context.resources.getInteger(firstLevelUpgradeCostResource)
-            2 -> ApplicationContextHolder.context.resources.getInteger(secondLevelUpgradeCostResource)
+            0 -> context.resources.getInteger(zeroLevelUpgradeCostResource)
+            1 -> context.resources.getInteger(firstLevelUpgradeCostResource)
+            2 -> context.resources.getInteger(secondLevelUpgradeCostResource)
 
             else -> 0
         }
@@ -59,9 +61,9 @@ abstract class Modification(val maxLevel: Int = 3,
 
     private fun getDescriptionWithLevel(level: Int): String {
         return when (level) {
-            0 -> ApplicationContextHolder.context.resources.getString(zeroLevelUpgradeDescriptionResource)
-            1 -> ApplicationContextHolder.context.resources.getString(firstLevelUpgradeDescriptionResource)
-            2 -> ApplicationContextHolder.context.resources.getString(secondLevelUpgradeDescriptionResource)
+            0 -> context.resources.getString(zeroLevelUpgradeDescriptionResource)
+            1 -> context.resources.getString(firstLevelUpgradeDescriptionResource)
+            2 -> context.resources.getString(secondLevelUpgradeDescriptionResource)
 
             else -> ""
         }
@@ -72,10 +74,11 @@ abstract class VirusComponent {
     abstract fun synchronize()
 }
 
-class VirusManager(val propagation: PropagationComponent = PropagationComponent(),
-                   val abilities: AbilityComponent = AbilityComponent(),
-                   val resistance: ResistanceComponent = ResistanceComponent(),
-                   val devices: DeviceComponent = DeviceComponent()) {
+class VirusManager(val context: AbstractLevelActivity,
+                   val propagation: PropagationComponent = PropagationComponent(context),
+                   val abilities: AbilityComponent = AbilityComponent(context),
+                   val resistance: ResistanceComponent = ResistanceComponent(context),
+                   val devices: DeviceComponent = DeviceComponent(context)) {
     fun synchronize() {
         propagation.synchronize()
         abilities.synchronize()

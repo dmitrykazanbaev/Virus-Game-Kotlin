@@ -1,10 +1,12 @@
 package com.dmitrykazanbaev.virus_game.model.virus
 
+import com.dmitrykazanbaev.virus_game.AbstractLevelActivity
 import com.dmitrykazanbaev.virus_game.R
-import com.dmitrykazanbaev.virus_game.service.ApplicationContextHolder
 
 
-class WiFiModification : Modification(
+class WiFiModification(context: AbstractLevelActivity) : Modification(
+        context = context,
+
         zeroLevelValueResource = R.dimen.wifi_zero_level_value,
         firstLevelValueResource = R.dimen.wifi_first_level_value,
         secondLevelValueResource = R.dimen.wifi_second_level_value,
@@ -18,10 +20,12 @@ class WiFiModification : Modification(
         firstLevelUpgradeDescriptionResource = R.string.wifi_first_level_upgrade_description,
         secondLevelUpgradeDescriptionResource = R.string.wifi_second_level_upgrade_description) {
 
-    override val title: String = ApplicationContextHolder.context.resources.getString(R.string.wifi_title)
+    override val title: String = context.resources.getString(R.string.wifi_title)
 }
 
-class BluetoothModification : Modification(
+class BluetoothModification(context: AbstractLevelActivity) : Modification(
+        context = context,
+
         zeroLevelValueResource = R.dimen.bluetooth_zero_level_value,
         firstLevelValueResource = R.dimen.bluetooth_first_level_value,
         secondLevelValueResource = R.dimen.bluetooth_second_level_value,
@@ -35,10 +39,12 @@ class BluetoothModification : Modification(
         firstLevelUpgradeDescriptionResource = R.string.bluetooth_first_level_upgrade_description,
         secondLevelUpgradeDescriptionResource = R.string.bluetooth_second_level_upgrade_description) {
 
-    override val title: String = ApplicationContextHolder.context.resources.getString(R.string.bluetooth_title)
+    override val title: String = context.resources.getString(R.string.bluetooth_title)
 }
 
-class EthernetModification : Modification(
+class EthernetModification(context: AbstractLevelActivity) : Modification(
+        context = context,
+
         zeroLevelValueResource = R.dimen.ethernet_zero_level_value,
         firstLevelValueResource = R.dimen.ethernet_first_level_value,
         secondLevelValueResource = R.dimen.ethernet_second_level_value,
@@ -52,10 +58,12 @@ class EthernetModification : Modification(
         firstLevelUpgradeDescriptionResource = R.string.ethernet_first_level_upgrade_description,
         secondLevelUpgradeDescriptionResource = R.string.ethernet_second_level_upgrade_description) {
 
-    override val title: String = ApplicationContextHolder.context.resources.getString(R.string.ethernet_title)
+    override val title: String = context.resources.getString(R.string.ethernet_title)
 }
 
-class MobileModification : Modification(
+class MobileModification(context: AbstractLevelActivity) : Modification(
+        context = context,
+
         zeroLevelValueResource = R.dimen.mobile_zero_level_value,
         firstLevelValueResource = R.dimen.mobile_first_level_value,
         secondLevelValueResource = R.dimen.mobile_second_level_value,
@@ -69,13 +77,14 @@ class MobileModification : Modification(
         firstLevelUpgradeDescriptionResource = R.string.mobile_first_level_upgrade_description,
         secondLevelUpgradeDescriptionResource = R.string.mobile_second_level_upgrade_description) {
 
-    override val title: String = ApplicationContextHolder.context.resources.getString(R.string.mobile_title)
+    override val title: String = context.resources.getString(R.string.mobile_title)
 }
 
-class PropagationComponent(val wifi: Modification = WiFiModification(),
-                           val bluetooth: Modification = BluetoothModification(),
-                           val ethernet: Modification = EthernetModification(),
-                           val mobile: Modification = MobileModification()) : VirusComponent() {
+class PropagationComponent(val context: AbstractLevelActivity,
+                           val wifi: Modification = WiFiModification(context),
+                           val bluetooth: Modification = BluetoothModification(context),
+                           val ethernet: Modification = EthernetModification(context),
+                           val mobile: Modification = MobileModification(context)) : VirusComponent() {
     override fun synchronize() {
         wifi.synchronize()
         bluetooth.synchronize()
